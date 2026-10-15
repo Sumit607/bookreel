@@ -81,6 +81,10 @@ CHARACTERS = [
          role="Lives in the old neighborhood",
          bio="Runs on ziti and worry. Will call the chairman of the board herself if anyone gives her son trouble.",
          traits=["Worrier", "Feeds everyone"]),
+    dict(id="burnside", name="Bucky Burnside", short="Bucky", initials="BB", color="#7A3B2E", firstChapter=17,
+         role="Major customer",
+         bio="Big, white-haired and hard to please. His company stopped buying from the division after too many late deliveries.",
+         traits=["Big customer", "Remembers who delivers"]),
 ]
 
 # Chapter colours: tile/background, optional second gradient stop, foreground.

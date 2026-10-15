@@ -116,6 +116,17 @@ def tap_text(text, exact=False, wait=12):
     return check(False, f"could find and tap '{text}'")
 
 
+def scroll_to(text, exact=False, tries=8):
+    """Swipes up until the text is fully on screen, above the bottom navigation."""
+    for _ in range(tries):
+        b = find(text, exact)
+        if b and b[1] > int(H * 0.08) and b[3] < int(H * 0.86):
+            return b
+        adb("shell", "input", "swipe", str(W // 2), str(int(H * 0.75)), str(W // 2), str(int(H * 0.45)), "350")
+        time.sleep(0.9)
+    return None
+
+
 def wait_text(text, wait=12, exact=False):
     end = time.time() + wait
     while time.time() < end:
@@ -190,6 +201,22 @@ def read_chapter(ch, save_posts=(), extra=None):
     return ok
 
 
+ANSWERS = {
+    (1, 6): ("Put every available worker", "Same call as Bob Donovan", "poll shows feedback after an answer"),
+    (2, 7): ("Something else", "Hold that thought", "guess shows feedback after an answer"),
+    (8, 4): ("Put Herbie in front", "Alex’s call", "chapter 8 poll answers"),
+}
+
+
+def answer(ch, p):
+    a = ANSWERS.get((ch, p))
+    if not a:
+        return
+    if tap_text(a[0], wait=5):
+        check(wait_text(a[1], 5), a[2])
+        shot(f"c{ch:02d}_p{p:02d}_answered")
+
+
 def main():
     global W, H
     size = os.path.getsize(APK)
@@ -216,11 +243,17 @@ def main():
     adb("shell", "input", "swipe", str(W // 2), str(int(H * 0.8)), str(W // 2), str(int(H * 0.25)), "400")
     time.sleep(1)
     shot("01b_book_grid")
-    if tap_text("HERBIE", exact=True, wait=6):
+    hb = scroll_to("HERBIE", exact=True)
+    shot("01c_book_grid_lower")
+    if check(hb is not None, "locked chapter 8 tile is visible"):
+        tap((hb[0] + hb[2]) / 2, (hb[1] + hb[3]) / 2)
+        time.sleep(0.8)
         check(wait_text("Unlocks when you finish Chapter 7", 6), "locked chapter sheet explains the unlock")
         shot("02_locked_sheet")
         back()
-    adb("shell", "input", "swipe", str(W // 2), str(int(H * 0.3)), str(W // 2), str(int(H * 0.9)), "300")
+    for _ in range(6):
+        adb("shell", "input", "swipe", str(W // 2), str(int(H * 0.3)), str(W // 2), str(int(H * 0.9)), "250")
+        time.sleep(0.4)
     time.sleep(0.8)
 
     # Chapter 1 with a resume test after post 3
@@ -237,7 +270,7 @@ def main():
     tap_text("CONTINUE · CHAPTER 1 OF 20")
     check(counter(dump()) == 3, "resumes on post 3 after a force-stop")
     next_post(4)
-    read_chapter(1, save_posts=(4, 6))
+    read_chapter(1, save_posts=(4, 6), extra=answer)
 
     # Daily release: permission dialog, then read on anyway
     if tap_text("Release it to me tomorrow", wait=8):
@@ -249,7 +282,7 @@ def main():
     tap_text("Read Chapter 2 now")
 
     for ch in range(2, 21):
-        if not read_chapter(ch, save_posts=(4,) if ch in (3, 8, 15) else ()):
+        if not read_chapter(ch, save_posts=(4,) if ch in (3, 8, 15) else (), extra=answer):
             break
         if ch < 20:
             if not tap_text(f"Read Chapter {ch + 1} now", wait=8):
