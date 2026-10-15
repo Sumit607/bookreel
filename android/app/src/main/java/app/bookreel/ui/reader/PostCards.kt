@@ -409,7 +409,7 @@ private fun ChoiceCard(
                         .clip(RoundedCornerShape(12.dp))
                         .background(if (sel) Color(0xFF3A2A17) else Color(0xFF232A33))
                         .border(1.5.dp, if (sel) Pal.sodium else Pal.steel3, RoundedCornerShape(12.dp))
-                        .clickable(enabled = answer == null, role = Role.Button) { onAnswer(j) }
+                        .then(if (answer == null) Modifier.clickable(role = Role.Button) { onAnswer(j) } else Modifier)
                         .padding(horizontal = 12.dp, vertical = 11.dp),
                     verticalAlignment = Alignment.Top,
                 ) {
@@ -469,7 +469,7 @@ private fun CrossoffCard(post: CrossoffPost, crossed: List<Int>, onCross: (Int) 
                         style = handStyle(25f * s, FontWeight.SemiBold),
                         color = if (isX) Pal.padInk.copy(alpha = 0.5f) else Pal.padInk,
                         modifier = Modifier
-                            .clickable(enabled = !isX, role = Role.Button) { last = j; onCross(j) }
+                            .then(if (!isX) Modifier.clickable(role = Role.Button) { last = j; onCross(j) } else Modifier)
                             .drawWithContent {
                                 drawContent()
                                 if (frac > 0f) drawLine(Pal.padMargin, Offset(0f, size.height * 0.58f), Offset(size.width * frac, size.height * 0.58f), 3.dp.toPx(), StrokeCap.Round)
