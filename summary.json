@@ -1,0 +1,271 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "check": "APK installs"
+    },
+    {
+      "ok": true,
+      "check": "library screen shows"
+    },
+    {
+      "ok": true,
+      "check": "open The Goal"
+    },
+    {
+      "ok": true,
+      "check": "book page shows start button"
+    },
+    {
+      "ok": true,
+      "check": "locked chapter 8 tile is visible"
+    },
+    {
+      "ok": true,
+      "check": "locked chapter sheet explains the unlock"
+    },
+    {
+      "ok": true,
+      "check": "reader opens on post 1"
+    },
+    {
+      "ok": true,
+      "check": "library offers to continue after restart"
+    },
+    {
+      "ok": true,
+      "check": "resumes on post 3 after a force-stop"
+    },
+    {
+      "ok": true,
+      "check": "chapter 1 opened"
+    },
+    {
+      "ok": true,
+      "check": "saved post 1-4"
+    },
+    {
+      "ok": true,
+      "check": "saved post 1-6"
+    },
+    {
+      "ok": true,
+      "check": "poll shows feedback after an answer"
+    },
+    {
+      "ok": true,
+      "check": "chapter 1 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "daily release confirms the unlock time"
+    },
+    {
+      "ok": true,
+      "check": "chapter 2 opened"
+    },
+    {
+      "ok": true,
+      "check": "guess shows feedback after an answer"
+    },
+    {
+      "ok": true,
+      "check": "chapter 2 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 3 opened"
+    },
+    {
+      "ok": true,
+      "check": "saved post 3-4"
+    },
+    {
+      "ok": true,
+      "check": "chapter 3 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 4 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 4 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 5 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 5 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 6 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 6 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 7 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 7 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 8 opened"
+    },
+    {
+      "ok": true,
+      "check": "saved post 8-4"
+    },
+    {
+      "ok": true,
+      "check": "chapter 8 poll answers"
+    },
+    {
+      "ok": true,
+      "check": "chapter 8 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 9 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 9 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 10 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 10 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 11 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 11 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 12 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 12 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 13 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 13 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 14 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 14 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 15 opened"
+    },
+    {
+      "ok": true,
+      "check": "saved post 15-4"
+    },
+    {
+      "ok": true,
+      "check": "chapter 15 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 16 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 16 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 17 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 17 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 18 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 18 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 19 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 19 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "chapter 20 opened"
+    },
+    {
+      "ok": true,
+      "check": "chapter 20 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "book badge after chapter 20"
+    },
+    {
+      "ok": true,
+      "check": "notebook opens"
+    },
+    {
+      "ok": true,
+      "check": "notebook lists the 5 saved posts"
+    },
+    {
+      "ok": true,
+      "check": "profile opens"
+    },
+    {
+      "ok": true,
+      "check": "no crashes in the crash log"
+    }
+  ],
+  "failures": [],
+  "metrics": {
+    "apk_bytes": 1692325,
+    "screen": "1080x2400",
+    "cold_start_ms": [
+      2809,
+      2707,
+      2733
+    ],
+    "janky_frames": 287,
+    "janky_pct_emulator": 94.41,
+    "frames": 304,
+    "memory_pss_kb": 46902,
+    "seconds": 994
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="app.bookreel.RulesTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-15T14:16:48" hostname="runnervm8k3b6" time="0.019">
+  <properties/>
+  <testcase name="rereadingNeverAddsXpTwice" classname="app.bookreel.RulesTest" time="0.014"/>
+  <testcase name="dailyWaitsForReleaseTime" classname="app.bookreel.RulesTest" time="0.001"/>
+  <testcase name="releaseNeedsEightHoursGap" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="bingeOpensNextImmediately" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="skimmingGivesNoChapterXp" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="displayedStreakDropsToZeroAfterAMissedDay" classname="app.bookreel.RulesTest" time="0.001"/>
+  <testcase name="streakGrowsOnConsecutiveDaysAndResetsAfterAGap" classname="app.bookreel.RulesTest" time="0.001"/>
+  <testcase name="chapterTwoNeedsChapterOne" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="chapterOneIsAlwaysOpen" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="finishingTheBookAddsBookXp" classname="app.bookreel.RulesTest" time="0.001"/>
+  <testcase name="answerXpOncePerPost" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="releaseAfterMorningFinishIsSameEvening" classname="app.bookreel.RulesTest" time="0.0"/>
+  <testcase name="releaseAfterLateFinishIsTomorrowEvening" classname="app.bookreel.RulesTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
