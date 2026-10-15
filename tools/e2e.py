@@ -59,7 +59,7 @@ def shot(name):
             f.write(data)
 
 
-def dump():
+def _dump_once():
     for _ in range(5):
         out = adb("shell", "uiautomator", "dump", "/sdcard/ui.xml", timeout=45)
         if "dumped" in out.lower():
@@ -73,6 +73,28 @@ def dump():
                     pass
         time.sleep(1)
     return None
+
+
+def dump():
+    """UI hierarchy, after clearing any system 'isn't responding' dialog the emulator throws up."""
+    root = _dump_once()
+    for _ in range(3):
+        if root is None:
+            return root
+        texts = [(n.get("text", ""), bounds(n.get("bounds"))) for n in root.iter("node")]
+        if not any("isn't responding" in t or "isn’t responding" in t for t, _ in texts):
+            return root
+        target = next((b for t, b in texts if t == "Wait" and b), None)
+        title = next((t for t, _ in texts if "responding" in t), "")
+        log(f"dismissing a system dialog: {title}")
+        results.setdefault("system_dialogs", []).append(title)
+        if target:
+            tap((target[0] + target[2]) / 2, (target[1] + target[3]) / 2)
+        else:
+            adb("shell", "input", "keyevent", "4")
+        time.sleep(1.5)
+        root = _dump_once()
+    return root
 
 
 def bounds(s):
@@ -228,6 +250,11 @@ def main():
         return finish()
     W, H = screen_size()
     results["metrics"]["screen"] = f"{W}x{H}"
+    # The emulator's launcher sometimes stalls under software rendering; keep its ANR dialogs out of the way.
+    adb("shell", "settings", "put", "global", "hide_error_dialogs", "1")
+    adb("shell", "settings", "put", "secure", "anr_show_background", "0")
+    adb("shell", "input", "keyevent", "3")
+    time.sleep(8)
 
     starts = [cold_start() for _ in range(3)]
     results["metrics"]["cold_start_ms"] = starts
