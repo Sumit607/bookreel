@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A post card: story progress segments on top, headline bars below. Safe zone is the centre 66dp. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#F4A23C"
+        android:pathData="M40,29h28a5,5 0,0 1,5 5v40a5,5 0,0 1,-5 5h-28a5,5 0,0 1,-5 -5v-40a5,5 0,0 1,5 -5z" />
+    <path
+        android:fillColor="#17191C"
+        android:pathData="M40,34h8v2.5h-8z M50.5,34h8v2.5h-8z" />
+    <path
+        android:fillColor="#17191C"
+        android:fillAlpha="0.35"
+        android:pathData="M61,34h7v2.5h-7z" />
+    <path
+        android:fillColor="#17191C"
+        android:pathData="M40,47h22v5.5h-22z M40,55.5h28v5.5h-28z M40,64h16v5.5h-16z" />
+</vector>

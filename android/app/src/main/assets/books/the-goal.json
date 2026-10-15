@@ -1,0 +1,782 @@
+{
+ "schemaVersion": 1,
+ "id": "the-goal",
+ "packVersion": 1,
+ "title": "The Goal",
+ "authors": [
+  "Eliyahu M. Goldratt",
+  "Jeff Cox"
+ ],
+ "category": "Business",
+ "blurb": "A plant manager has three months to save his factory. A business novel about finding the one thing that holds a whole system back.",
+ "narrator": "alex",
+ "rights": {
+  "status": "private-test",
+  "source": "user-upload"
+ },
+ "characters": [
+  {
+   "id": "alex",
+   "name": "Alex Rogo",
+   "short": "Alex",
+   "initials": "AR",
+   "color": "#C9521C",
+   "firstChapter": 1,
+   "role": "Plant manager, Bearington",
+   "bio": "38, an engineer with an MBA, now running a factory in the town where he grew up. Works hard, sleeps little, and is starting to suspect the rulebook is wrong.",
+   "traits": [
+    "Narrator",
+    "Hometown boy",
+    "Out of time"
+   ]
+  },
+  {
+   "id": "peach",
+   "name": "Bill Peach",
+   "short": "Peach",
+   "initials": "BP",
+   "color": "#8E1F27",
+   "firstChapter": 1,
+   "role": "Division vice-president",
+   "bio": "Alex’s old mentor, the man who sent him back to get his MBA. Now the division is losing money, and Peach’s own job is on the line.",
+   "traits": [
+    "Crimson Mercedes",
+    "Plate: NUMBER 1",
+    "Wants shipments"
+   ]
+  },
+  {
+   "id": "bob",
+   "name": "Bob Donovan",
+   "short": "Bob",
+   "initials": "BD",
+   "color": "#3E6B4F",
+   "firstChapter": 1,
+   "role": "Production manager",
+   "bio": "Six-foot-four, nine years running production. If something can be done, it’s done by the next time you ask.",
+   "traits": [
+    "Ex-expediter",
+    "Gets it done",
+    "Skeptic"
+   ]
+  },
+  {
+   "id": "julie",
+   "name": "Julie Rogo",
+   "short": "Julie",
+   "initials": "JR",
+   "color": "#7A4F8F",
+   "firstChapter": 1,
+   "role": "Alex’s wife",
+   "bio": "Followed Alex’s career to a town where she has no friends. She sees less of him every week.",
+   "traits": [
+    "Not from here",
+    "Patience running out"
+   ]
+  },
+  {
+   "id": "jonah",
+   "name": "Jonah",
+   "short": "Jonah",
+   "initials": "J",
+   "color": "#2F5F8A",
+   "firstChapter": 2,
+   "role": "Physicist",
+   "bio": "Alex studied his mathematical models years ago. Now he studies how organizations really work, and he answers questions with questions.",
+   "traits": [
+    "Always catching a plane",
+    "Never gives the answer",
+    "Cigar"
+   ]
+  },
+  {
+   "id": "lou",
+   "name": "Lou",
+   "short": "Lou",
+   "initials": "L",
+   "color": "#59626E",
+   "firstChapter": 3,
+   "role": "Plant controller",
+   "bio": "Two years from retirement. Mild-mannered until someone tries to fool him with numbers.",
+   "traits": [
+    "Accountant",
+    "Bifocals",
+    "Straight shooter"
+   ]
+  },
+  {
+   "id": "stacey",
+   "name": "Stacey Potazenik",
+   "short": "Stacey",
+   "initials": "SP",
+   "color": "#A0522D",
+   "firstChapter": 4,
+   "role": "Inventory control",
+   "bio": "Tall, brisk and direct. Fights over-production every month and gets blamed for the inventory anyway.",
+   "traits": [
+    "Says what she sees",
+    "Hates surplus",
+    "Works late"
+   ]
+  },
+  {
+   "id": "dave",
+   "name": "Dave Rogo",
+   "short": "Dave",
+   "initials": "DR",
+   "color": "#3E5F2F",
+   "firstChapter": 6,
+   "role": "Alex’s son, Boy Scout",
+   "bio": "Packed his dad’s gear the night before and dragged him out of bed for the troop’s overnight hike.",
+   "traits": [
+    "Boy Scout",
+    "Asks good questions"
+   ]
+  },
+  {
+   "id": "herbie",
+   "name": "Herbie",
+   "short": "Herbie",
+   "initials": "H",
+   "color": "#B8860B",
+   "firstChapter": 6,
+   "role": "Boy Scout",
+   "bio": "The slowest walker in the troop, carrying a pack that clanks like a junkyard. The others tease him; he keeps trying to keep up.",
+   "traits": [
+    "Slowest walker",
+    "Heaviest pack",
+    "Always prepared"
+   ]
+  },
+  {
+   "id": "andy",
+   "name": "Andy",
+   "short": "Andy",
+   "initials": "A",
+   "color": "#2E7D7A",
+   "firstChapter": 7,
+   "role": "Boy Scout",
+   "bio": "First in line in the matchstick game, and the fastest walker in the troop.",
+   "traits": [
+    "Fast",
+    "First in line"
+   ]
+  },
+  {
+   "id": "evan",
+   "name": "Evan",
+   "short": "Evan",
+   "initials": "E",
+   "color": "#6B4E9B",
+   "firstChapter": 7,
+   "role": "Boy Scout",
+   "bio": "Last in line in the matchstick game, and first in line for washing dishes.",
+   "traits": [
+    "Last in line",
+    "Dish duty"
+   ]
+  },
+  {
+   "id": "ralph",
+   "name": "Ralph Nakamura",
+   "short": "Ralph",
+   "initials": "RN",
+   "color": "#2E7D7A",
+   "firstChapter": 9,
+   "role": "Data processing",
+   "bio": "Runs the plant’s computers. Quiet, careful, and usually ignored, until his numbers start answering real questions.",
+   "traits": [
+    "Computers",
+    "Quiet",
+    "Thinks it through"
+   ]
+  },
+  {
+   "id": "sharon",
+   "name": "Sharon Rogo",
+   "short": "Sharon",
+   "initials": "SR",
+   "color": "#C05A7A",
+   "firstChapter": 3,
+   "role": "Alex’s daughter",
+   "bio": "Second grader with straight A’s, who waits up by the window for her father.",
+   "traits": [
+    "Straight A’s",
+    "Notices everything"
+   ]
+  },
+  {
+   "id": "jons",
+   "name": "Johnny Jons",
+   "short": "Jons",
+   "initials": "JJ",
+   "color": "#8C6D1F",
+   "firstChapter": 16,
+   "role": "Marketing manager, division",
+   "bio": "Sells for the division and catches the blame when orders are late. Loves a good bet.",
+   "traits": [
+    "Sales",
+    "Wears Guccis",
+    "Wants proof"
+   ]
+  },
+  {
+   "id": "smyth",
+   "name": "Hilton Smyth",
+   "short": "Smyth",
+   "initials": "HS",
+   "color": "#4A4F57",
+   "firstChapter": 2,
+   "role": "Plant manager, rival",
+   "bio": "Always promoting his latest productivity program. His indicators look great; his bottom line does not.",
+   "traits": [
+    "Rival",
+    "Loves indicators"
+   ]
+  },
+  {
+   "id": "mother",
+   "name": "Alex’s mother",
+   "short": "Mom",
+   "initials": "M",
+   "color": "#9C6B4E",
+   "firstChapter": 4,
+   "role": "Lives in the old neighborhood",
+   "bio": "Runs on ziti and worry. Will call the chairman of the board herself if anyone gives her son trouble.",
+   "traits": [
+    "Worrier",
+    "Feeds everyone"
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "n": 1,
+   "title": "90 Days",
+   "hook": "Your boss is parked in your spot. Before your first coffee, your factory has 90 days to live.",
+   "bg": "#A8232C",
+   "fg": "#FFF3EC",
+   "minutes": 3,
+   "recap": [
+    "The Bearington plant is losing money and every order is late.",
+    "Peach’s deadline: three months, or the plant closes.",
+    "On paper everything looks fine. Nothing works."
+   ],
+   "posts": [
+    {
+     "id": "1-1",
+     "type": "hook",
+     "t": "Parked in your spot",
+     "kicker": "Bearington, 7:30 AM",
+     "head": "Your boss is parked in your spot.",
+     "sub": "Before your first coffee, your factory will have 90 days to live.",
+     "art": "parking"
+    },
+    {
+     "id": "1-2",
+     "type": "scene",
+     "t": "Meet Alex Rogo",
+     "label": "Meet Alex Rogo · Plant manager · 38",
+     "h": "The plant has gone quiet",
+     "text": "Alex gets in early every day to work before the phones start ringing. Not today. Four people rush him at the door: a supervisor, a union steward, a furious machinist and a foreman, all shouting at once. Behind them, nobody is working.",
+     "theme": "paper"
+    },
+    {
+     "id": "1-3",
+     "type": "artifact",
+     "t": "Order #41427",
+     "template": "ticket",
+     "label": "Customer order",
+     "number": "#41427",
+     "badge": "7 weeks\nlate",
+     "route": [
+      {
+       "text": "Parts made",
+       "state": "ok"
+      },
+      {
+       "text": "One sub-assembly part",
+       "state": "wait",
+       "note": "Still waiting its turn at an n/c machine"
+      },
+      {
+       "text": "Assembly",
+       "state": "stop"
+      },
+      {
+       "text": "Ship",
+       "state": "stop"
+      }
+     ],
+     "text": "Bill Peach, the division VP, arrived an hour earlier hunting this one late order. Every part was ready except one. Peach told the machinist to scrap a 90-minute setup for another ‘urgent’ job and run his part instead. The machinist refused. Peach threatened to fire him.",
+     "foot": "In this plant every order is urgent. So none of them ship on time."
+    },
+    {
+     "id": "1-4",
+     "type": "chat",
+     "t": "The ultimatum",
+     "label": "Alex’s office · Peach is sitting in Alex’s chair",
+     "msgs": [
+      {
+       "who": "peach",
+       "text": "Your plant is losing money, and it’s dragging the whole division down."
+      },
+      {
+       "who": "alex",
+       "text": "After the layoffs and the 20% cut you ordered, we’re lucky anything ships."
+      },
+      {
+       "who": "peach",
+       "text": "Look at your efficiencies. You have enough people. Use them."
+      },
+      {
+       "who": "alex",
+       "text": "Bill, I need time."
+      },
+      {
+       "who": "peach",
+       "text": "You have three months. Turn this plant around, or I recommend we close it."
+      }
+     ]
+    },
+    {
+     "id": "1-5",
+     "type": "twist",
+     "t": "The machine breaks",
+     "head": "Then the key machine breaks.",
+     "text": "Tony, the master machinist Peach yelled at, quits. Before he goes, he sets up the job he was told to run but leaves two adjusting nuts loose. The NCX-10, the plant’s most expensive machine and the only one of its kind, breaks down mid-run.",
+     "status": "NCX-10 · Down for repair"
+    },
+    {
+     "id": "1-6",
+     "type": "poll",
+     "t": "You decide: 41427",
+     "label": "You decide",
+     "q": "Order 41427 has to ship tonight. You’re Alex. What do you do?",
+     "options": [
+      {
+       "text": "Put every available worker on this one order. Forget the usual rules.",
+       "feedback": "Same call as Bob Donovan."
+      },
+      {
+       "text": "Stick to the schedule and protect the efficiency numbers.",
+       "feedback": "The rulebook agrees with you. But nothing in the normal schedule gets 41427 out tonight."
+      },
+      {
+       "text": "Call Peach and ask for one more day.",
+       "feedback": "Peach already promised the customer it ships today. That call would not go well."
+      }
+     ],
+     "reveal": "Bob Donovan, the production manager, pulled people from every department, ran overtime against policy and had parts carried by hand, one at a time. Just after 11 PM, the truck pulled away from the dock.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "1-7",
+     "type": "list",
+     "t": "The real price",
+     "take": "Rushing one order through cost a machinist, a repair bill, overtime and every other order.",
+     "label": "Shipped just after 11 PM",
+     "h": "What one late order cost",
+     "items": [
+      {
+       "text": "Master machinist",
+       "value": "Quit"
+      },
+      {
+       "text": "NCX-10 repair",
+       "value": "Billed"
+      },
+      {
+       "text": "NCX-10 downtime",
+       "value": "Hours"
+      },
+      {
+       "text": "Overtime",
+       "value": "Against policy"
+      },
+      {
+       "text": "Every other order",
+       "value": "Ignored"
+      }
+     ],
+     "total": "1 order shipped",
+     "text": "Over burgers and beer, Bob says he wishes they could move that fast every day. Alex says it would wreck their efficiency numbers. Keep this conversation in mind.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "1-8",
+     "type": "scene",
+     "t": "Julie",
+     "label": "Home · 6:30 PM",
+     "text": "Julie wants to go out to dinner. He has ten minutes. When he mentions the plant might close, she perks up: has he asked where they’d move next? She never wanted to live in his hometown. Driving back, he passes a dead factory with weeds in the lot. Two thousand jobs, gone. In three months that could be his plant.",
+     "theme": "night"
+    },
+    {
+     "id": "1-9",
+     "type": "list",
+     "t": "Something basic is wrong",
+     "label": "Alone in the corner office · late",
+     "h": "So what’s wrong?",
+     "items": [
+      {
+       "text": "Modern n/c machines",
+       "state": "ok"
+      },
+      {
+       "text": "Robots",
+       "state": "ok"
+      },
+      {
+       "text": "A computer system",
+       "state": "ok"
+      },
+      {
+       "text": "Good people, a workable union contract",
+       "state": "ok"
+      },
+      {
+       "text": "A market: competitors’ products are selling",
+       "state": "ok"
+      },
+      {
+       "text": "Profit",
+       "state": "no"
+      }
+     ],
+     "text": "He has everything a factory needs. Yet every order is late, the floor is buried in half-finished parts, and the plant loses money. Something basic is wrong, and he can’t see what.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "1-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Tomorrow at 8 AM sharp, Peach has summoned his plant managers to headquarters. Nobody is told why. And in Alex’s jacket pocket is a cigar he was handed two weeks ago at an airport gate. Alex doesn’t smoke."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Five Minutes at O’Hare",
+   "hook": "Five minutes in an airport. One question. Everything he believed about running a factory, wrong.",
+   "bg": "#22324A",
+   "bg2": "#0E141C",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "The robots made one department look efficient. The plant earned nothing more.",
+    "Busy is not the same as productive.",
+    "Jonah’s question: what is the goal?"
+   ],
+   "posts": [
+    {
+     "id": "2-1",
+     "type": "hook",
+     "t": "Five minutes",
+     "kicker": "O’Hare Airport, Chicago",
+     "head": "Five minutes. One question. He couldn’t answer it.",
+     "sub": "It turned out to be the only question that mattered.",
+     "art": "board"
+    },
+    {
+     "id": "2-2",
+     "type": "scene",
+     "t": "The rumor",
+     "label": "UniCo HQ · 15th floor · 7:50 AM",
+     "text": "In the parking garage, a colleague pulls Alex aside. The rumor: unless results improve by year end, the whole division gets sold, and Peach goes with it. Suddenly Peach’s rage makes sense. Upstairs the slides roll: first-quarter sales down 22%. Alex reaches for a pen to take notes. He pulls out a cigar instead.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-3",
+     "type": "scene",
+     "t": "The man in the lounge",
+     "label": "Flashback · two weeks earlier",
+     "h": "An old teacher",
+     "text": "Alex is between flights, on his way to speak on a panel about robots saving American factories. In a crowded airline lounge he spots a man in a sweater and a yarmulke, reading, cigar in hand. It’s Jonah, the physicist whose mathematical models Alex studied as a student.",
+     "theme": "flash"
+    },
+    {
+     "id": "2-4",
+     "type": "chat",
+     "t": "The robot question",
+     "label": "Airline lounge · O’Hare",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "My plant has robots. One department got 36% more productive!"
+      },
+      {
+       "who": "jonah",
+       "text": "So your plant makes 36% more money now?"
+      },
+      {
+       "who": "alex",
+       "text": "Well, no. It was just one department."
+      },
+      {
+       "who": "jonah",
+       "text": "Did you ship even one more product a day? Did your costs or your inventory go down?"
+      },
+      {
+       "who": "alex",
+       "text": "…I’d have to check. Probably not."
+      },
+      {
+       "who": "jonah",
+       "text": "Then the robots didn’t make you more productive."
+      }
+     ]
+    },
+    {
+     "id": "2-5",
+     "type": "list",
+     "t": "Jonah’s diagnosis",
+     "label": "Jonah’s diagnosis",
+     "h": "He’s never seen the plant. He describes it anyway.",
+     "items": [
+      {
+       "text": "Machines run nonstop to keep efficiency above 90%",
+       "state": "warn"
+      },
+      {
+       "text": "Inventory piling up everywhere",
+       "state": "warn"
+      },
+      {
+       "text": "Orders always late",
+       "state": "warn"
+      }
+     ],
+     "text": "Alex is stunned. How does he know? Jonah says the people reporting the numbers are honest. The measurements themselves are what mislead him.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "2-6",
+     "type": "myth",
+     "t": "Busy is not productive",
+     "take": "Productive means moving closer to the goal. Busy is not the same thing.",
+     "myth": "If every machine and every worker is busy, the factory is productive.",
+     "truth": "Productive means moving the company closer to its goal. Keeping everyone busy can move it further away."
+    },
+    {
+     "id": "2-7",
+     "type": "guess",
+     "t": "Your guess",
+     "label": "Jonah asks you",
+     "q": "What is the goal of a manufacturing company?",
+     "options": [
+      {
+       "text": "Produce products as efficiently as possible",
+       "feedback": "That was Alex’s first answer. Jonah said: wrong."
+      },
+      {
+       "text": "Gain power",
+       "feedback": "Alex tried this too. Jonah said not bad, but you don’t get power just by making things."
+      },
+      {
+       "text": "Win market share",
+       "feedback": "Alex’s last guess. Jonah only asked, ‘Is it?’"
+      },
+      {
+       "text": "Something else",
+       "feedback": "Interesting. Hold that thought."
+      }
+     ],
+     "reveal": "Jonah won’t tell him. He says Alex can work it out himself. The answer arrives in Chapter 3, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 3.",
+     "loopId": "goal"
+    },
+    {
+     "id": "2-8",
+     "type": "scene",
+     "t": "The race to the gate",
+     "label": "Concourse · final boarding",
+     "h": "Run",
+     "text": "They race through the terminal, through security, past gate after gate, Jonah firing questions the whole way. What does being productive mean? Productive toward what? At the aircraft door, with the flight attendant glaring, he still won’t give the answer. He hands Alex a cigar, steps on board, and is gone.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-9",
+     "type": "character",
+     "t": "Meet Jonah",
+     "charId": "jonah"
+    },
+    {
+     "id": "2-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Back in Peach’s meeting, twenty managers argue about productivity targets. Nobody has asked what the goal is. At the ten o’clock break, Alex packs his briefcase, walks to the elevator, and leaves his boss’s meeting."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "The Goal",
+   "hook": "He walked out of his boss’s meeting with a pizza and a six-pack. By the last beer, he’d found the answer.",
+   "bg": "#6FA6DA",
+   "bg2": "#8E7745",
+   "fg": "#14202C",
+   "minutes": 3,
+   "recap": [
+    "The goal of a business is to make money.",
+    "Measure it with net profit, ROI and cash flow, all rising together.",
+    "Unsolved: how does work on the floor connect to those numbers?"
+   ],
+   "posts": [
+    {
+     "id": "3-1",
+     "type": "hook",
+     "t": "Pizza, beer, hillside",
+     "kicker": "A hill above the plant, 1 PM",
+     "head": "He skipped his boss’s meeting for a pizza, a six-pack and a hillside.",
+     "sub": "By the last beer, he had the answer headquarters never asked for.",
+     "art": "hill"
+    },
+    {
+     "id": "3-2",
+     "type": "scene",
+     "t": "What is this place for?",
+     "label": "Looking down at the plant",
+     "h": "A gray box with no windows",
+     "text": "Down there sits a gray steel box. About 400 people are working inside. Trucks back up to one side carrying materials. Trucks leave the other side carrying products. He’s supposed to manage all of it. So what is it actually for?",
+     "theme": "paper"
+    },
+    {
+     "id": "3-3",
+     "type": "crossoff",
+     "t": "Cross them off",
+     "title": "What is the goal?",
+     "items": [
+      {
+       "text": "Buying materials cheaply",
+       "why": "Purchasing got great prices on a 32-month supply of copper wire. It sits in warehouses."
+      },
+      {
+       "text": "Providing jobs",
+       "why": "The plant has laid off hundreds already. Paying wages isn’t why it was built."
+      },
+      {
+       "text": "Making quality products",
+       "why": "Rolls-Royce made superb products and nearly went bankrupt."
+      },
+      {
+       "text": "Producing efficiently",
+       "why": "The VW Beetle was good and cheap to build. VW still stopped making it."
+      },
+      {
+       "text": "The latest technology",
+       "why": "If tech were the goal, R&D would run companies. It always sits off to the side."
+      },
+      {
+       "text": "Sales and market share",
+       "why": "Millions in finished goods sit unsold in his warehouses. And you can win market share while losing money."
+      }
+     ],
+     "answer": "Make money"
+    },
+    {
+     "id": "3-4",
+     "type": "idea",
+     "t": "The goal",
+     "take": "Everything else is a means. Making money is the goal.",
+     "label": "The answer",
+     "head": "The goal is to make money.",
+     "sub": "Quality, technology, efficiency, good people, market share: each one helps a company make money. None of them is the goal.",
+     "payoffLoopId": "goal",
+     "theme": "sodium"
+    },
+    {
+     "id": "3-5",
+     "type": "scene",
+     "t": "Busy, or productive?",
+     "label": "Back at the plant · 4:30 PM",
+     "h": "Look busy",
+     "text": "Alex catches three workers sharing a newspaper. He tells their supervisor to find them something to do. Minutes later they’re moving parts from one side of the aisle to the other. Then it hits him. They’re working now. Is any of it making the company money?",
+     "theme": "floor"
+    },
+    {
+     "id": "3-6",
+     "type": "chat",
+     "t": "Three numbers",
+     "label": "Alex’s office · after 5 PM",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "Say you’re rewriting the textbooks. What’s the minimum you’d need to know if we’re making money?"
+      },
+      {
+       "who": "lou",
+       "text": "Net profit. How much we made, in dollars."
+      },
+      {
+       "who": "lou",
+       "text": "But $10 million is great on one million invested, and lousy on a billion. So you need return on investment too."
+      },
+      {
+       "who": "lou",
+       "text": "And a profitable company can still go under if it runs out of cash. So, cash flow."
+      },
+      {
+       "who": "alex",
+       "text": "So all three have to go up."
+      },
+      {
+       "who": "lou",
+       "text": "Two years from retirement, and now this. Okay, Al. I’ll help."
+      }
+     ]
+    },
+    {
+     "id": "3-7",
+     "type": "idea",
+     "t": "The scoreboard",
+     "take": "Net profit, ROI and cash flow must all rise together.",
+     "label": "The scoreboard",
+     "head": "All three up. At the same time. Forever.",
+     "sub": "That’s what making money means. If one number rises while another falls, someone is playing games with the books.",
+     "visual": "meters",
+     "theme": "steel"
+    },
+    {
+     "id": "3-8",
+     "type": "compare",
+     "t": "The missing link",
+     "label": "The problem",
+     "h": "Two worlds that don’t connect",
+     "leftTitle": "On the floor",
+     "left": [
+      "Parts per hour",
+      "Hours worked",
+      "Efficiency",
+      "Orders filled"
+     ],
+     "rightTitle": "At headquarters",
+     "right": [
+      "Net profit",
+      "Return on investment",
+      "Cash flow"
+     ],
+     "text": "Eddie, the night-shift supervisor, measures his whole world in the left column. Headquarters measures the right one. Nobody can say how a shift on the floor moves the money.",
+     "mid": "?"
+    },
+    {
+     "id": "3-9",
+     "type": "scene",
+     "t": "Report card",
+     "label": "Home · past midnight",
+     "text": "He forgot to call home. Again. Their date night, missed. His daughter Sharon waited up to show him her report card: straight A’s. His kid is acing second grade while he’s failing at business. He thinks about calling a headhunter. Then he decides he won’t run.",
+     "extra": "reportcard",
+     "theme": "night"
+    },
+    {
+     "id": "3-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "No budget for consultants. No time to go back to school. Just his own eyes, ears and mind. Lying awake next to his sleeping wife, Alex decides he has to find Jonah again. He has no idea where Jonah is."
+    }
+   ]
+  }
+ ]
+}

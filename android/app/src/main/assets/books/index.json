@@ -1,0 +1,60 @@
+{
+  "books": [
+    {
+      "id": "the-goal",
+      "title": "The Goal",
+      "authors": ["Eliyahu M. Goldratt", "Jeff Cox"],
+      "category": "Business",
+      "blurb": "A plant manager has three months to save his factory. A business novel about finding the one thing that holds a whole system back.",
+      "hook": "Your boss is parked in your spot. Before your first coffee, your factory has 90 days to live.",
+      "status": "ready",
+      "file": "the-goal.json",
+      "minutes": 60,
+      "cover": { "bg": "#1B2026", "fg": "#F0ECE4", "motif": "factory", "tag": "Business" }
+    },
+    {
+      "id": "a-study-in-scarlet",
+      "title": "A Study in Scarlet",
+      "authors": ["Arthur Conan Doyle"],
+      "category": "Mystery",
+      "blurb": "The first Sherlock Holmes story: a doctor back from war, a strange new flatmate, and a murder in an empty London house.",
+      "hook": "A dead man in an empty house, a word scrawled in blood, and a stranger who reads your past at a glance.",
+      "status": "soon",
+      "minutes": 58,
+      "cover": { "bg": "#7E1D22", "fg": "#F6E7D6", "motif": "lens", "tag": "Mystery" }
+    },
+    {
+      "id": "pride-and-prejudice",
+      "title": "Pride and Prejudice",
+      "authors": ["Jane Austen"],
+      "category": "Classics",
+      "blurb": "Five sisters, one proud stranger and a first impression that turns out to be wrong.",
+      "hook": "He insults her at a dance. She spends the next year proving him wrong.",
+      "status": "soon",
+      "minutes": 64,
+      "cover": { "bg": "#A9B79A", "fg": "#1E2A1C", "motif": "diamond", "tag": "Classic" }
+    },
+    {
+      "id": "the-art-of-war",
+      "title": "The Art of War",
+      "authors": ["Sun Tzu"],
+      "category": "Strategy",
+      "blurb": "Thirteen short chapters on winning, written 2,500 years ago and still read by generals and CEOs.",
+      "hook": "The best way to win a war is to never have to fight it.",
+      "status": "soon",
+      "minutes": 41,
+      "cover": { "bg": "#121212", "fg": "#F2EDE4", "motif": "sun", "tag": "Strategy" }
+    },
+    {
+      "id": "frankenstein",
+      "title": "Frankenstein",
+      "authors": ["Mary Shelley"],
+      "category": "Thriller",
+      "blurb": "A young scientist gives life to a creature and then abandons it, with consequences that follow him across Europe.",
+      "hook": "He built a man out of the dead. Then he ran from what he made.",
+      "status": "soon",
+      "minutes": 61,
+      "cover": { "bg": "#173B3F", "fg": "#D9F2EE", "motif": "bolt", "tag": "Thriller" }
+    }
+  ]
+}

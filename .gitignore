@@ -1,0 +1,15 @@
+# Gradle / Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.kotlin/
+*.iml
+.idea/
+captures/
+# Test output
+out/
+results/
+# Python
+__pycache__/
+*.pyc
