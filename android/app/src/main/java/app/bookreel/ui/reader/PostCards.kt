@@ -57,12 +57,15 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.sp
 import app.bookreel.data.ArtifactPost
 import app.bookreel.data.CharacterPost
@@ -156,6 +159,29 @@ private fun CardFrame(
     }
 }
 
+/** Display headline that shrinks just enough for its widest word to fit on one line, so words never break. */
+@Composable
+private fun Headline(text: String, style: TextStyle, color: Color, modifier: Modifier = Modifier) {
+    BoxWithConstraints(modifier) {
+        val tm = rememberTextMeasurer()
+        val maxPx = if (constraints.hasBoundedWidth) constraints.maxWidth else 0
+        val fitted = remember(text, style, maxPx) {
+            val widest = text.split(' ', '\n').filter { it.isNotEmpty() }
+                .maxOfOrNull { tm.measure(it, style, softWrap = false, maxLines = 1).size.width } ?: 0
+            if (maxPx <= 0 || widest <= maxPx) {
+                style
+            } else {
+                val k = maxPx.toFloat() / widest * 0.97f
+                style.copy(
+                    fontSize = style.fontSize * k,
+                    lineHeight = if (style.lineHeight.isSpecified) style.lineHeight * k else style.lineHeight,
+                )
+            }
+        }
+        Text(text, style = fitted, color = color)
+    }
+}
+
 @Composable
 private fun Prose(text: String, color: Color, size: Float = 17f) {
     Text(text, style = bodyStyle(size, LocalPrefs.current.textScale), color = color)
@@ -163,7 +189,7 @@ private fun Prose(text: String, color: Color, size: Float = 17f) {
 
 @Composable
 private fun H3(text: String, color: Color, size: Float = 31f) {
-    Text(text.uppercase(), style = displayStyle(size, LocalPrefs.current.textScale, FontWeight.ExtraBold, 0.98f), color = color)
+    Headline(text.uppercase(), style = displayStyle(size, LocalPrefs.current.textScale, FontWeight.ExtraBold, 0.98f), color = color)
 }
 
 @Composable
@@ -227,7 +253,7 @@ private fun HookCard(post: HookPost, ch: Int, book: LoadedBook) {
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
             HookArt(post.art, post.artText, Modifier.fillMaxWidth().heightIn(max = 230.dp))
         }
-        Text(post.head.uppercase(), style = displayStyle(42f, s, lineHeight = 0.9f), color = Pal.onDark)
+        Headline(post.head.uppercase(), style = displayStyle(42f, s, lineHeight = 0.9f), color = Pal.onDark)
         Text(post.sub, style = bodyStyle(18f, s, italic = true, lineHeight = 1.4f), color = Pal.sodium)
         val reduce = LocalPrefs.current.reduceMotion
         val dx = if (reduce) 0f else {
@@ -370,7 +396,7 @@ private fun TwistCard(post: TwistPost) {
                 color = Pal.hazard,
                 modifier = Modifier.rotate(-3f).border(2.dp, Pal.hazard).padding(horizontal = 10.dp, vertical = 3.dp),
             )
-            Text(post.head.uppercase(), style = displayStyle(40f, s, lineHeight = 0.94f), color = Pal.onDark)
+            Headline(post.head.uppercase(), style = displayStyle(40f, s, lineHeight = 0.94f), color = Pal.onDark)
             Prose(post.text, Pal.onDark)
             val reduce = LocalPrefs.current.reduceMotion
             val a = if (reduce) 1f else {
@@ -397,7 +423,7 @@ private fun ChoiceCard(
 ) {
     val s = LocalPrefs.current.textScale
     CardFrame(themeOf("steel"), label, Arrangement.spacedBy(12.dp, Alignment.CenterVertically)) {
-        Text(q.uppercase(), style = displayStyle(29f, s, FontWeight.ExtraBold, 0.98f), color = Pal.onDark)
+        Headline(q.uppercase(), style = displayStyle(29f, s, FontWeight.ExtraBold, 0.98f), color = Pal.onDark)
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             options.forEachIndexed { j, o ->
                 val sel = answer == j
@@ -514,7 +540,7 @@ private fun MythCard(post: MythPost) {
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.weight(1f).fillMaxWidth().background(Color(0xFF2C1714)).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp, Alignment.CenterVertically)) {
             Tag("Myth", Pal.tagRed)
-            Text(
+            Headline(
                 post.myth.uppercase(),
                 style = displayStyle(28f, s, FontWeight.ExtraBold, 1.02f).copy(textDecoration = TextDecoration.LineThrough),
                 color = Color(0xFFF3E2DE),
@@ -522,7 +548,7 @@ private fun MythCard(post: MythPost) {
         }
         Column(Modifier.weight(1f).fillMaxWidth().background(Color(0xFF10261A)).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp, Alignment.CenterVertically)) {
             Tag("Truth", Pal.tagGreen)
-            Text(post.truth.uppercase(), style = displayStyle(28f, s, FontWeight.ExtraBold, 1.02f), color = Color(0xFFDDF0E3))
+            Headline(post.truth.uppercase(), style = displayStyle(28f, s, FontWeight.ExtraBold, 1.02f), color = Color(0xFFDDF0E3))
         }
     }
 }
@@ -546,7 +572,7 @@ private fun IdeaCard(post: IdeaPost, guess: String?) {
     val th = themeOf(post.theme)
     CardFrame(th, post.label, Arrangement.spacedBy(18.dp, Alignment.CenterVertically)) {
         if (post.visual == "meters") Meters(th.fg)
-        Text(post.head.uppercase(), style = displayStyle(if (post.visual == "meters") 40f else 54f, s, lineHeight = 0.9f), color = th.fg)
+        Headline(post.head.uppercase(), style = displayStyle(if (post.visual == "meters") 40f else 54f, s, lineHeight = 0.9f), color = th.fg)
         Text(post.sub, style = bodyStyle(17.5f, s, lineHeight = 1.5f), color = th.fg)
         if (guess != null) {
             Text(
@@ -595,7 +621,7 @@ private fun ListCard(post: ListPost) {
         CardFrame(th, null) {
             Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(6.dp)).background(Pal.ticket).padding(16.dp)) {
                 Label(post.label, Pal.ink)
-                Text(post.h.uppercase(), style = displayStyle(28f, s, lineHeight = 0.95f), color = Pal.ink, modifier = Modifier.padding(top = 4.dp, bottom = 12.dp))
+                Headline(post.h.uppercase(), style = displayStyle(28f, s, lineHeight = 0.95f), color = Pal.ink, modifier = Modifier.padding(top = 4.dp, bottom = 12.dp))
                 post.items.forEach { item ->
                     Row(Modifier.fillMaxWidth().padding(vertical = 3.5.dp), verticalAlignment = Alignment.Bottom) {
                         Text(item.text, style = monoStyle(12.5f, FontWeight.Normal, 0f), color = Pal.ink)
@@ -737,11 +763,11 @@ private fun CliffCard(post: CliffPost, book: LoadedBook, ch: Int, previewOnly: B
             ) {
                 if (next != null) {
                     Label("Next · Chapter ${pad2(next.n)}", Color.White)
-                    Text(next.title.uppercase(), style = displayStyle(28f, lineHeight = 0.95f), color = Color.White, modifier = Modifier.padding(vertical = 6.dp))
+                    Headline(next.title.uppercase(), style = displayStyle(28f, lineHeight = 0.95f), color = Color.White, modifier = Modifier.padding(vertical = 6.dp))
                     Text(next.hook, style = bodyStyle(15f, s, italic = true, lineHeight = 1.45f), color = Color.White.copy(alpha = 0.92f))
                 } else {
                     Label("Book complete", Color.White)
-                    Text("YOU FINISHED ${book.book.title.uppercase()}", style = displayStyle(28f, lineHeight = 0.95f), color = Color.White, modifier = Modifier.padding(vertical = 6.dp))
+                    Headline("YOU FINISHED ${book.book.title.uppercase()}", style = displayStyle(28f, lineHeight = 0.95f), color = Color.White, modifier = Modifier.padding(vertical = 6.dp))
                     Text("Finish to collect the book badge.", style = bodyStyle(15f, s, italic = true), color = Color.White.copy(alpha = 0.92f))
                 }
             }
