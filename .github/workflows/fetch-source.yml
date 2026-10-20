@@ -1,0 +1,43 @@
+name: Fetch public-domain source text
+
+# Downloads a public-domain book text (for example from Project Gutenberg) into
+# content/sources/ on the "sources" branch, so the content scripts can work from the exact text.
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Plain-text URL of a public-domain book
+        required: true
+      name:
+        description: File name to save it as, for example a-study-in-scarlet.txt
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and push to the sources branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ inputs.url }}
+          NAME: ${{ inputs.name }}
+        run: |
+          set -euo pipefail
+          case "$NAME" in *[!a-z0-9.-]*) echo "bad name"; exit 1;; esac
+          git clone -q --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+          cd repo
+          git fetch -q origin sources && git checkout -q sources || git checkout -q --orphan sources
+          git rm -rq --cached . 2>/dev/null || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name content -exec rm -rf {} +
+          mkdir -p content/sources
+          curl -fsSL "$URL" -o "content/sources/$NAME"
+          wc -w "content/sources/$NAME"
+          git config user.name "bookreel-ci"
+          git config user.email "ci@users.noreply.github.com"
+          git add content/sources
+          git commit -qm "Add source text $NAME" || echo "no change"
+          git push -q origin sources
