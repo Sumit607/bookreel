@@ -1,0 +1,3724 @@
+{
+ "schemaVersion": 1,
+ "id": "the-goal",
+ "packVersion": 1,
+ "title": "The Goal",
+ "authors": [
+  "Eliyahu M. Goldratt",
+  "Jeff Cox"
+ ],
+ "category": "Business",
+ "blurb": "A plant manager has three months to save his factory. A business novel about finding the one thing that holds a whole system back.",
+ "narrator": "alex",
+ "rights": {
+  "status": "private-test",
+  "source": "user-upload"
+ },
+ "characters": [
+  {
+   "id": "alex",
+   "name": "Alex Rogo",
+   "short": "Alex",
+   "initials": "AR",
+   "color": "#C9521C",
+   "firstChapter": 1,
+   "role": "Plant manager, Bearington",
+   "bio": "38, an engineer with an MBA, now running a factory in the town where he grew up. Works hard, sleeps little, and is starting to suspect the rulebook is wrong.",
+   "traits": [
+    "Narrator",
+    "Hometown boy",
+    "Out of time"
+   ]
+  },
+  {
+   "id": "peach",
+   "name": "Bill Peach",
+   "short": "Peach",
+   "initials": "BP",
+   "color": "#8E1F27",
+   "firstChapter": 1,
+   "role": "Division vice-president",
+   "bio": "Alex’s old mentor, the man who sent him back to get his MBA. Now the division is losing money, and Peach’s own job is on the line.",
+   "traits": [
+    "Crimson Mercedes",
+    "Plate: NUMBER 1",
+    "Wants shipments"
+   ]
+  },
+  {
+   "id": "bob",
+   "name": "Bob Donovan",
+   "short": "Bob",
+   "initials": "BD",
+   "color": "#3E6B4F",
+   "firstChapter": 1,
+   "role": "Production manager",
+   "bio": "Six-foot-four, nine years running production. If something can be done, it’s done by the next time you ask.",
+   "traits": [
+    "Ex-expediter",
+    "Gets it done",
+    "Skeptic"
+   ]
+  },
+  {
+   "id": "julie",
+   "name": "Julie Rogo",
+   "short": "Julie",
+   "initials": "JR",
+   "color": "#7A4F8F",
+   "firstChapter": 1,
+   "role": "Alex’s wife",
+   "bio": "Followed Alex’s career to a town where she has no friends. She sees less of him every week.",
+   "traits": [
+    "Not from here",
+    "Patience running out"
+   ]
+  },
+  {
+   "id": "jonah",
+   "name": "Jonah",
+   "short": "Jonah",
+   "initials": "J",
+   "color": "#2F5F8A",
+   "firstChapter": 2,
+   "role": "Physicist",
+   "bio": "Alex studied his mathematical models years ago. Now he studies how organizations really work, and he answers questions with questions.",
+   "traits": [
+    "Always catching a plane",
+    "Never gives the answer",
+    "Cigar"
+   ]
+  },
+  {
+   "id": "lou",
+   "name": "Lou",
+   "short": "Lou",
+   "initials": "L",
+   "color": "#59626E",
+   "firstChapter": 3,
+   "role": "Plant controller",
+   "bio": "Two years from retirement. Mild-mannered until someone tries to fool him with numbers.",
+   "traits": [
+    "Accountant",
+    "Bifocals",
+    "Straight shooter"
+   ]
+  },
+  {
+   "id": "stacey",
+   "name": "Stacey Potazenik",
+   "short": "Stacey",
+   "initials": "SP",
+   "color": "#A0522D",
+   "firstChapter": 4,
+   "role": "Inventory control",
+   "bio": "Tall, brisk and direct. Fights over-production every month and gets blamed for the inventory anyway.",
+   "traits": [
+    "Says what she sees",
+    "Hates surplus",
+    "Works late"
+   ]
+  },
+  {
+   "id": "dave",
+   "name": "Dave Rogo",
+   "short": "Dave",
+   "initials": "DR",
+   "color": "#3E5F2F",
+   "firstChapter": 6,
+   "role": "Alex’s son, Boy Scout",
+   "bio": "Packed his dad’s gear the night before and dragged him out of bed for the troop’s overnight hike.",
+   "traits": [
+    "Boy Scout",
+    "Asks good questions"
+   ]
+  },
+  {
+   "id": "herbie",
+   "name": "Herbie",
+   "short": "Herbie",
+   "initials": "H",
+   "color": "#B8860B",
+   "firstChapter": 6,
+   "role": "Boy Scout",
+   "bio": "The slowest walker in the troop, carrying a pack that clanks like a junkyard. The others tease him; he keeps trying to keep up.",
+   "traits": [
+    "Slowest walker",
+    "Heaviest pack",
+    "Always prepared"
+   ]
+  },
+  {
+   "id": "andy",
+   "name": "Andy",
+   "short": "Andy",
+   "initials": "A",
+   "color": "#2E7D7A",
+   "firstChapter": 7,
+   "role": "Boy Scout",
+   "bio": "First in line in the matchstick game, and the fastest walker in the troop.",
+   "traits": [
+    "Fast",
+    "First in line"
+   ]
+  },
+  {
+   "id": "evan",
+   "name": "Evan",
+   "short": "Evan",
+   "initials": "E",
+   "color": "#6B4E9B",
+   "firstChapter": 7,
+   "role": "Boy Scout",
+   "bio": "Last in line in the matchstick game, and first in line for washing dishes.",
+   "traits": [
+    "Last in line",
+    "Dish duty"
+   ]
+  },
+  {
+   "id": "ralph",
+   "name": "Ralph Nakamura",
+   "short": "Ralph",
+   "initials": "RN",
+   "color": "#2E7D7A",
+   "firstChapter": 9,
+   "role": "Data processing",
+   "bio": "Runs the plant’s computers. Quiet, careful, and usually ignored, until his numbers start answering real questions.",
+   "traits": [
+    "Computers",
+    "Quiet",
+    "Thinks it through"
+   ]
+  },
+  {
+   "id": "sharon",
+   "name": "Sharon Rogo",
+   "short": "Sharon",
+   "initials": "SR",
+   "color": "#C05A7A",
+   "firstChapter": 3,
+   "role": "Alex’s daughter",
+   "bio": "Second grader with straight A’s, who waits up by the window for her father.",
+   "traits": [
+    "Straight A’s",
+    "Notices everything"
+   ]
+  },
+  {
+   "id": "jons",
+   "name": "Johnny Jons",
+   "short": "Jons",
+   "initials": "JJ",
+   "color": "#8C6D1F",
+   "firstChapter": 16,
+   "role": "Marketing manager, division",
+   "bio": "Sells for the division and catches the blame when orders are late. Loves a good bet.",
+   "traits": [
+    "Sales",
+    "Wears Guccis",
+    "Wants proof"
+   ]
+  },
+  {
+   "id": "smyth",
+   "name": "Hilton Smyth",
+   "short": "Smyth",
+   "initials": "HS",
+   "color": "#4A4F57",
+   "firstChapter": 2,
+   "role": "Plant manager, rival",
+   "bio": "Always promoting his latest productivity program. His indicators look great; his bottom line does not.",
+   "traits": [
+    "Rival",
+    "Loves indicators"
+   ]
+  },
+  {
+   "id": "mother",
+   "name": "Alex’s mother",
+   "short": "Mom",
+   "initials": "M",
+   "color": "#9C6B4E",
+   "firstChapter": 4,
+   "role": "Lives in the old neighborhood",
+   "bio": "Runs on ziti and worry. Will call the chairman of the board herself if anyone gives her son trouble.",
+   "traits": [
+    "Worrier",
+    "Feeds everyone"
+   ]
+  },
+  {
+   "id": "burnside",
+   "name": "Bucky Burnside",
+   "short": "Bucky",
+   "initials": "BB",
+   "color": "#7A3B2E",
+   "firstChapter": 17,
+   "role": "Major customer",
+   "bio": "Big, white-haired and hard to please. His company stopped buying from the division after too many late deliveries.",
+   "traits": [
+    "Big customer",
+    "Remembers who delivers"
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "n": 1,
+   "title": "90 Days",
+   "hook": "Your boss is parked in your spot. Before your first coffee, your factory has 90 days to live.",
+   "bg": "#A8232C",
+   "fg": "#FFF3EC",
+   "minutes": 3,
+   "recap": [
+    "The Bearington plant is losing money and every order is late.",
+    "Peach’s deadline: three months, or the plant closes.",
+    "On paper everything looks fine. Nothing works."
+   ],
+   "posts": [
+    {
+     "id": "1-1",
+     "type": "hook",
+     "t": "Parked in your spot",
+     "kicker": "Bearington, 7:30 AM",
+     "head": "Your boss is parked in your spot.",
+     "sub": "Before your first coffee, your factory will have 90 days to live.",
+     "art": "parking"
+    },
+    {
+     "id": "1-2",
+     "type": "scene",
+     "t": "Meet Alex Rogo",
+     "label": "Meet Alex Rogo · Plant manager · 38",
+     "h": "The plant has gone quiet",
+     "text": "Alex gets in early every day to work before the phones start ringing. Not today. Four people rush him at the door: a supervisor, a union steward, a furious machinist and a foreman, all shouting at once. Behind them, nobody is working.",
+     "theme": "paper"
+    },
+    {
+     "id": "1-3",
+     "type": "artifact",
+     "t": "Order #41427",
+     "template": "ticket",
+     "label": "Customer order",
+     "number": "#41427",
+     "badge": "7 weeks\nlate",
+     "route": [
+      {
+       "text": "Parts made",
+       "state": "ok"
+      },
+      {
+       "text": "One sub-assembly part",
+       "state": "wait",
+       "note": "Still waiting its turn at an n/c machine"
+      },
+      {
+       "text": "Assembly",
+       "state": "stop"
+      },
+      {
+       "text": "Ship",
+       "state": "stop"
+      }
+     ],
+     "text": "Bill Peach, the division VP, arrived an hour earlier hunting this one late order. Every part was ready except one. Peach told the machinist to scrap a 90-minute setup for another ‘urgent’ job and run his part instead. The machinist refused. Peach threatened to fire him.",
+     "foot": "In this plant every order is urgent. So none of them ship on time."
+    },
+    {
+     "id": "1-4",
+     "type": "chat",
+     "t": "The ultimatum",
+     "label": "Alex’s office · Peach is sitting in Alex’s chair",
+     "msgs": [
+      {
+       "who": "peach",
+       "text": "Your plant is losing money, and it’s dragging the whole division down."
+      },
+      {
+       "who": "alex",
+       "text": "After the layoffs and the 20% cut you ordered, we’re lucky anything ships."
+      },
+      {
+       "who": "peach",
+       "text": "Look at your efficiencies. You have enough people. Use them."
+      },
+      {
+       "who": "alex",
+       "text": "Bill, I need time."
+      },
+      {
+       "who": "peach",
+       "text": "You have three months. Turn this plant around, or I recommend we close it."
+      }
+     ]
+    },
+    {
+     "id": "1-5",
+     "type": "twist",
+     "t": "The machine breaks",
+     "head": "Then the key machine breaks.",
+     "text": "Tony, the master machinist Peach yelled at, quits. Before he goes, he sets up the job he was told to run but leaves two adjusting nuts loose. The NCX-10, the plant’s most expensive machine and the only one of its kind, breaks down mid-run.",
+     "status": "NCX-10 · Down for repair"
+    },
+    {
+     "id": "1-6",
+     "type": "poll",
+     "t": "You decide: 41427",
+     "label": "You decide",
+     "q": "Order 41427 has to ship tonight. You’re Alex. What do you do?",
+     "options": [
+      {
+       "text": "Put every available worker on this one order. Forget the usual rules.",
+       "feedback": "Same call as Bob Donovan."
+      },
+      {
+       "text": "Stick to the schedule and protect the efficiency numbers.",
+       "feedback": "The rulebook agrees with you. But nothing in the normal schedule gets 41427 out tonight."
+      },
+      {
+       "text": "Call Peach and ask for one more day.",
+       "feedback": "Peach already promised the customer it ships today. That call would not go well."
+      }
+     ],
+     "reveal": "Bob Donovan, the production manager, pulled people from every department, ran overtime against policy and had parts carried by hand, one at a time. Just after 11 PM, the truck pulled away from the dock.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "1-7",
+     "type": "list",
+     "t": "The real price",
+     "take": "Rushing one order through cost a machinist, a repair bill, overtime and every other order.",
+     "label": "Shipped just after 11 PM",
+     "h": "What one late order cost",
+     "items": [
+      {
+       "text": "Master machinist",
+       "value": "Quit"
+      },
+      {
+       "text": "NCX-10 repair",
+       "value": "Billed"
+      },
+      {
+       "text": "NCX-10 downtime",
+       "value": "Hours"
+      },
+      {
+       "text": "Overtime",
+       "value": "Against policy"
+      },
+      {
+       "text": "Every other order",
+       "value": "Ignored"
+      }
+     ],
+     "total": "1 order shipped",
+     "text": "Over burgers and beer, Bob says he wishes they could move that fast every day. Alex says it would wreck their efficiency numbers. Keep this conversation in mind.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "1-8",
+     "type": "scene",
+     "t": "Julie",
+     "label": "Home · 6:30 PM",
+     "text": "Julie wants to go out to dinner. He has ten minutes. When he mentions the plant might close, she perks up: has he asked where they’d move next? She never wanted to live in his hometown. Driving back, he passes a dead factory with weeds in the lot. Two thousand jobs, gone. In three months that could be his plant.",
+     "theme": "night"
+    },
+    {
+     "id": "1-9",
+     "type": "list",
+     "t": "Something basic is wrong",
+     "label": "Alone in the corner office · late",
+     "h": "So what’s wrong?",
+     "items": [
+      {
+       "text": "Modern n/c machines",
+       "state": "ok"
+      },
+      {
+       "text": "Robots",
+       "state": "ok"
+      },
+      {
+       "text": "A computer system",
+       "state": "ok"
+      },
+      {
+       "text": "Good people, a workable union contract",
+       "state": "ok"
+      },
+      {
+       "text": "A market: competitors’ products are selling",
+       "state": "ok"
+      },
+      {
+       "text": "Profit",
+       "state": "no"
+      }
+     ],
+     "text": "He has everything a factory needs. Yet every order is late, the floor is buried in half-finished parts, and the plant loses money. Something basic is wrong, and he can’t see what.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "1-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Tomorrow at 8 AM sharp, Peach has summoned his plant managers to headquarters. Nobody is told why. And in Alex’s jacket pocket is a cigar he was handed two weeks ago at an airport gate. Alex doesn’t smoke."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Five Minutes at O’Hare",
+   "hook": "Five minutes in an airport. One question. Everything he believed about running a factory, wrong.",
+   "bg": "#22324A",
+   "bg2": "#0E141C",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "The robots made one department look efficient. The plant earned nothing more.",
+    "Busy is not the same as productive.",
+    "Jonah’s question: what is the goal?"
+   ],
+   "posts": [
+    {
+     "id": "2-1",
+     "type": "hook",
+     "t": "Five minutes",
+     "kicker": "O’Hare Airport, Chicago",
+     "head": "Five minutes. One question. He couldn’t answer it.",
+     "sub": "It turned out to be the only question that mattered.",
+     "art": "board"
+    },
+    {
+     "id": "2-2",
+     "type": "scene",
+     "t": "The rumor",
+     "label": "UniCo HQ · 15th floor · 7:50 AM",
+     "text": "In the parking garage, a colleague pulls Alex aside. The rumor: unless results improve by year end, the whole division gets sold, and Peach goes with it. Suddenly Peach’s rage makes sense. Upstairs the slides roll: first-quarter sales down 22%. Alex reaches for a pen to take notes. He pulls out a cigar instead.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-3",
+     "type": "scene",
+     "t": "The man in the lounge",
+     "label": "Flashback · two weeks earlier",
+     "h": "An old teacher",
+     "text": "Alex is between flights, on his way to speak on a panel about robots saving American factories. In a crowded airline lounge he spots a man in a sweater and a yarmulke, reading, cigar in hand. It’s Jonah, the physicist whose mathematical models Alex studied as a student.",
+     "theme": "flash"
+    },
+    {
+     "id": "2-4",
+     "type": "chat",
+     "t": "The robot question",
+     "label": "Airline lounge · O’Hare",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "My plant has robots. One department got 36% more productive!"
+      },
+      {
+       "who": "jonah",
+       "text": "So your plant makes 36% more money now?"
+      },
+      {
+       "who": "alex",
+       "text": "Well, no. It was just one department."
+      },
+      {
+       "who": "jonah",
+       "text": "Did you ship even one more product a day? Did your costs or your inventory go down?"
+      },
+      {
+       "who": "alex",
+       "text": "…I’d have to check. Probably not."
+      },
+      {
+       "who": "jonah",
+       "text": "Then the robots didn’t make you more productive."
+      }
+     ]
+    },
+    {
+     "id": "2-5",
+     "type": "list",
+     "t": "Jonah’s diagnosis",
+     "label": "Jonah’s diagnosis",
+     "h": "He’s never seen the plant. He describes it anyway.",
+     "items": [
+      {
+       "text": "Machines run nonstop to keep efficiency above 90%",
+       "state": "warn"
+      },
+      {
+       "text": "Inventory piling up everywhere",
+       "state": "warn"
+      },
+      {
+       "text": "Orders always late",
+       "state": "warn"
+      }
+     ],
+     "text": "Alex is stunned. How does he know? Jonah says the people reporting the numbers are honest. The measurements themselves are what mislead him.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "2-6",
+     "type": "myth",
+     "t": "Busy is not productive",
+     "take": "Productive means moving closer to the goal. Busy is not the same thing.",
+     "myth": "If every machine and every worker is busy, the factory is productive.",
+     "truth": "Productive means moving the company closer to its goal. Keeping everyone busy can move it further away."
+    },
+    {
+     "id": "2-7",
+     "type": "guess",
+     "t": "Your guess",
+     "label": "Jonah asks you",
+     "q": "What is the goal of a manufacturing company?",
+     "options": [
+      {
+       "text": "Produce products as efficiently as possible",
+       "feedback": "That was Alex’s first answer. Jonah said: wrong."
+      },
+      {
+       "text": "Gain power",
+       "feedback": "Alex tried this too. Jonah said not bad, but you don’t get power just by making things."
+      },
+      {
+       "text": "Win market share",
+       "feedback": "Alex’s last guess. Jonah only asked, ‘Is it?’"
+      },
+      {
+       "text": "Something else",
+       "feedback": "Interesting. Hold that thought."
+      }
+     ],
+     "reveal": "Jonah won’t tell him. He says Alex can work it out himself. The answer arrives in Chapter 3, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 3.",
+     "loopId": "goal"
+    },
+    {
+     "id": "2-8",
+     "type": "scene",
+     "t": "The race to the gate",
+     "label": "Concourse · final boarding",
+     "h": "Run",
+     "text": "They race through the terminal, through security, past gate after gate, Jonah firing questions the whole way. What does being productive mean? Productive toward what? At the aircraft door, with the flight attendant glaring, he still won’t give the answer. He hands Alex a cigar, steps on board, and is gone.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-9",
+     "type": "character",
+     "t": "Meet Jonah",
+     "charId": "jonah"
+    },
+    {
+     "id": "2-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Back in Peach’s meeting, twenty managers argue about productivity targets. Nobody has asked what the goal is. At the ten o’clock break, Alex packs his briefcase, walks to the elevator, and leaves his boss’s meeting."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "The Goal",
+   "hook": "He walked out of his boss’s meeting with a pizza and a six-pack. By the last beer, he’d found the answer.",
+   "bg": "#6FA6DA",
+   "bg2": "#8E7745",
+   "fg": "#14202C",
+   "minutes": 3,
+   "recap": [
+    "The goal of a business is to make money.",
+    "Measure it with net profit, ROI and cash flow, all rising together.",
+    "Unsolved: how does work on the floor connect to those numbers?"
+   ],
+   "posts": [
+    {
+     "id": "3-1",
+     "type": "hook",
+     "t": "Pizza, beer, hillside",
+     "kicker": "A hill above the plant, 1 PM",
+     "head": "He skipped his boss’s meeting for a pizza, a six-pack and a hillside.",
+     "sub": "By the last beer, he had the answer headquarters never asked for.",
+     "art": "hill"
+    },
+    {
+     "id": "3-2",
+     "type": "scene",
+     "t": "What is this place for?",
+     "label": "Looking down at the plant",
+     "h": "A gray box with no windows",
+     "text": "Down there sits a gray steel box. About 400 people are working inside. Trucks back up to one side carrying materials. Trucks leave the other side carrying products. He’s supposed to manage all of it. So what is it actually for?",
+     "theme": "paper"
+    },
+    {
+     "id": "3-3",
+     "type": "crossoff",
+     "t": "Cross them off",
+     "title": "What is the goal?",
+     "items": [
+      {
+       "text": "Buying materials cheaply",
+       "why": "Purchasing got great prices on a 32-month supply of copper wire. It sits in warehouses."
+      },
+      {
+       "text": "Providing jobs",
+       "why": "The plant has laid off hundreds already. Paying wages isn’t why it was built."
+      },
+      {
+       "text": "Making quality products",
+       "why": "Rolls-Royce made superb products and nearly went bankrupt."
+      },
+      {
+       "text": "Producing efficiently",
+       "why": "The VW Beetle was good and cheap to build. VW still stopped making it."
+      },
+      {
+       "text": "The latest technology",
+       "why": "If tech were the goal, R&D would run companies. It always sits off to the side."
+      },
+      {
+       "text": "Sales and market share",
+       "why": "Millions in finished goods sit unsold in his warehouses. And you can win market share while losing money."
+      }
+     ],
+     "answer": "Make money"
+    },
+    {
+     "id": "3-4",
+     "type": "idea",
+     "t": "The goal",
+     "take": "Everything else is a means. Making money is the goal.",
+     "label": "The answer",
+     "head": "The goal is to make money.",
+     "sub": "Quality, technology, efficiency, good people, market share: each one helps a company make money. None of them is the goal.",
+     "payoffLoopId": "goal",
+     "theme": "sodium"
+    },
+    {
+     "id": "3-5",
+     "type": "scene",
+     "t": "Busy, or productive?",
+     "label": "Back at the plant · 4:30 PM",
+     "h": "Look busy",
+     "text": "Alex catches three workers sharing a newspaper. He tells their supervisor to find them something to do. Minutes later they’re moving parts from one side of the aisle to the other. Then it hits him. They’re working now. Is any of it making the company money?",
+     "theme": "floor"
+    },
+    {
+     "id": "3-6",
+     "type": "chat",
+     "t": "Three numbers",
+     "label": "Alex’s office · after 5 PM",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "Say you’re rewriting the textbooks. What’s the minimum you’d need to know if we’re making money?"
+      },
+      {
+       "who": "lou",
+       "text": "Net profit. How much we made, in dollars."
+      },
+      {
+       "who": "lou",
+       "text": "But $10 million is great on one million invested, and lousy on a billion. So you need return on investment too."
+      },
+      {
+       "who": "lou",
+       "text": "And a profitable company can still go under if it runs out of cash. So, cash flow."
+      },
+      {
+       "who": "alex",
+       "text": "So all three have to go up."
+      },
+      {
+       "who": "lou",
+       "text": "Two years from retirement, and now this. Okay, Al. I’ll help."
+      }
+     ]
+    },
+    {
+     "id": "3-7",
+     "type": "idea",
+     "t": "The scoreboard",
+     "take": "Net profit, ROI and cash flow must all rise together.",
+     "label": "The scoreboard",
+     "head": "All three up. At the same time. Forever.",
+     "sub": "That’s what making money means. If one number rises while another falls, someone is playing games with the books.",
+     "visual": "meters",
+     "theme": "steel"
+    },
+    {
+     "id": "3-8",
+     "type": "compare",
+     "t": "The missing link",
+     "label": "The problem",
+     "h": "Two worlds that don’t connect",
+     "leftTitle": "On the floor",
+     "left": [
+      "Parts per hour",
+      "Hours worked",
+      "Efficiency",
+      "Orders filled"
+     ],
+     "rightTitle": "At headquarters",
+     "right": [
+      "Net profit",
+      "Return on investment",
+      "Cash flow"
+     ],
+     "text": "Eddie, the night-shift supervisor, measures his whole world in the left column. Headquarters measures the right one. Nobody can say how a shift on the floor moves the money.",
+     "mid": "?"
+    },
+    {
+     "id": "3-9",
+     "type": "scene",
+     "t": "Report card",
+     "label": "Home · past midnight",
+     "text": "He forgot to call home. Again. Their date night, missed. His daughter Sharon waited up to show him her report card: straight A’s. His kid is acing second grade while he’s failing at business. He thinks about calling a headhunter. Then he decides he won’t run.",
+     "extra": "reportcard",
+     "theme": "night"
+    },
+    {
+     "id": "3-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "No budget for consultants. No time to go back to school. Just his own eyes, ears and mind. Lying awake next to his sleeping wife, Alex decides he has to find Jonah again. He has no idea where Jonah is."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "The Midnight Call",
+   "hook": "A dusty attic, an old address book, and a 3 AM call to London.",
+   "bg": "#2B2440",
+   "bg2": "#121018",
+   "fg": "#F6C976",
+   "minutes": 3,
+   "recap": [
+    "Jonah’s three measures: throughput, inventory, operational expense.",
+    "The goal, restated: throughput up while inventory and operational expense go down.",
+    "The robots raised efficiency but piled up inventory and sold nothing more."
+   ],
+   "posts": [
+    {
+     "id": "4-1",
+     "type": "hook",
+     "t": "The 3 AM call",
+     "kicker": "Mom’s house, after midnight",
+     "head": "He searches his mother’s attic for one phone number.",
+     "sub": "At 3:45 AM, the old phone on the stairs rings. It’s London.",
+     "art": "clock",
+     "artText": "3:45 AM|LONDON"
+    },
+    {
+     "id": "4-2",
+     "type": "scene",
+     "t": "The address book",
+     "label": "His old neighborhood · 8 PM",
+     "h": "Where is Jonah?",
+     "text": "After a day lost to meetings, Alex remembers his college address book. It must be at his mother’s. She opens the door and assumes someone has died. Hours in the attic and the basement turn up model airplanes, old love letters and the story of Uncle Paul’s embezzlement. The book is in his old desk, top drawer.",
+     "theme": "night"
+    },
+    {
+     "id": "4-3",
+     "type": "scene",
+     "t": "The chase by phone",
+     "label": "The stairs · 1 AM to 3 AM",
+     "text": "He sits on the stairs with his mother’s ancient telephone and dials Israel, where it is already morning. A university friend gives him a number. That number gives him another. By three o’clock he knows where Jonah is: London. He leaves a message and dozes off next to the phone.",
+     "theme": "night"
+    },
+    {
+     "id": "4-4",
+     "type": "chat",
+     "t": "Jonah calls back",
+     "label": "The stairs · 3:45 AM",
+     "msgs": [
+      {
+       "who": "jonah",
+       "text": "Alex. I presume you have something to tell me."
+      },
+      {
+       "who": "alex",
+       "text": "The goal of a manufacturing company is to make money. Everything else is a means."
+      },
+      {
+       "who": "jonah",
+       "text": "Very good, Alex. Very good."
+      },
+      {
+       "who": "alex",
+       "text": "But down at the plant, profit and ROI tell me nothing about what happens on the floor."
+      },
+      {
+       "who": "jonah",
+       "text": "That’s why I use three different measurements. Write them down."
+      }
+     ]
+    },
+    {
+     "id": "4-5",
+     "type": "list",
+     "t": "Jonah’s three measurements",
+     "take": "Throughput = money from sales. Inventory = money tied up in things to sell. Operational expense = money spent turning inventory into throughput.",
+     "label": "Jonah’s three measurements",
+     "h": "Write these down",
+     "items": [
+      {
+       "text": "Throughput: the rate the system makes money through sales. Not production: sales.",
+       "state": "ok"
+      },
+      {
+       "text": "Inventory: all the money tied up in things the system intends to sell.",
+       "state": "ok"
+      },
+      {
+       "text": "Operational expense: all the money spent turning inventory into throughput.",
+       "state": "ok"
+      }
+     ],
+     "text": "Build something and fail to sell it, and it isn’t throughput. Jonah warns that the wording is precise: change one definition and you must change another.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "4-6",
+     "type": "poll",
+     "t": "You decide: the goal in three numbers",
+     "label": "You decide",
+     "q": "Jonah hangs up before saying how the goal fits his measures. Which way should each one move?",
+     "options": [
+      {
+       "text": "All three up",
+       "feedback": "Inventory and expense going up means more money stuck and spent."
+      },
+      {
+       "text": "Throughput up, inventory and operational expense down",
+       "feedback": "That’s the answer Alex reaches."
+      },
+      {
+       "text": "Throughput steady, everything else down",
+       "feedback": "Cutting alone can’t make a company grow."
+      }
+     ],
+     "reveal": "Driving home, Alex works it out: increase throughput while reducing inventory and operational expense, all at the same time. And Jonah’s three robot questions were exactly these measures in disguise.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "4-7",
+     "type": "idea",
+     "t": "The goal, in floor language",
+     "take": "The goal on the floor: raise throughput while cutting inventory and operational expense.",
+     "label": "The big idea",
+     "head": "Throughput up. Inventory down. Expense down.",
+     "sub": "It’s the same goal, making money, stated in terms a plant can act on every day. All three moves, at the same time.",
+     "theme": "sodium"
+    },
+    {
+     "id": "4-8",
+     "type": "character",
+     "t": "Meet Stacey",
+     "charId": "stacey"
+    },
+    {
+     "id": "4-9",
+     "type": "chat",
+     "t": "The robot post-mortem",
+     "label": "Lou’s office · 1 PM",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "When the robots came on line, did sales go up?"
+      },
+      {
+       "who": "lou",
+       "text": "Not even a blip. The only thing that went up is overdue shipments."
+      },
+      {
+       "who": "stacey",
+       "text": "The robots were at 30% efficiency, so we released more material to keep them busy. Now every month ends with a surplus."
+      },
+      {
+       "who": "bob",
+       "text": "We’ve got piles of some parts and none of the parts they go with."
+      },
+      {
+       "who": "alex",
+       "text": "We haven’t been managing according to the goal."
+      }
+     ]
+    },
+    {
+     "id": "4-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Alex has to explain to his staff why a physicist on the phone is about to change how they run the plant. Bob is skeptical. Lou wants proof. And before the day is out, Jonah will ask Alex to get on a plane that night."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Breakfast in New York",
+   "hook": "One hotel breakfast, and the idea of a perfectly balanced factory falls apart.",
+   "bg": "#CDB99A",
+   "bg2": "#7E6A50",
+   "fg": "#1E1710",
+   "minutes": 3,
+   "recap": [
+    "Every dollar is throughput, inventory or operational expense.",
+    "Keeping everyone busy is what piles up inventory.",
+    "Dependent events plus statistical fluctuations break the ‘balanced plant’."
+   ],
+   "posts": [
+    {
+     "id": "5-1",
+     "type": "hook",
+     "t": "Breakfast with Jonah",
+     "kicker": "New York, 7:10 AM",
+     "head": "One breakfast with Jonah turns everything Alex knows about efficiency upside down.",
+     "sub": "And it starts with a question about idle workers.",
+     "art": "skyline",
+     "artText": "7:10 AM"
+    },
+    {
+     "id": "5-2",
+     "type": "scene",
+     "t": "The whiteboard test",
+     "label": "Conference room · afternoon",
+     "h": "Why ‘sales’?",
+     "text": "Alex writes the three measurements on the whiteboard. Bob objects: why does throughput say sales? Marketing sells; they make things. Alex walks him to the window and points at the warehouses full of finished goods. Would the company survive just filling those? Bob gets it. Lou notices every definition is about money: coming in, stuck inside, going out.",
+     "theme": "paper"
+    },
+    {
+     "id": "5-3",
+     "type": "compare",
+     "t": "Two buckets",
+     "take": "Money you could sell back is inventory; money you spend to make sales is operational expense.",
+     "label": "Lou’s rule of thumb",
+     "h": "Everything fits in two buckets",
+     "leftTitle": "Inventory",
+     "left": [
+      "Parts and products",
+      "Machines, at resale value",
+      "The building itself",
+      "A patent you could license"
+     ],
+     "rightTitle": "Operational expense",
+     "right": [
+      "Every hour of every employee",
+      "Machine depreciation",
+      "Lubricating oil and scrap",
+      "Carrying cost of inventory"
+     ],
+     "text": "Money still inside the system that could be sold is inventory. Money spent turning it into sales is expense.",
+     "mid": "vs"
+    },
+    {
+     "id": "5-4",
+     "type": "scene",
+     "t": "No answer",
+     "label": "Home, then a hotel room",
+     "text": "Packing for the night flight, Alex gets no sympathy. Everything is for the job, Julie says, and the kids keep asking why he is like this. She might not be home when he calls. In New York he dials every fifteen minutes until two in the morning. Nobody picks up.",
+     "theme": "night"
+    },
+    {
+     "id": "5-5",
+     "type": "chat",
+     "t": "The deal",
+     "label": "Hotel restaurant · 7:15 AM",
+     "msgs": [
+      {
+       "who": "jonah",
+       "text": "I don’t have time to solve your problems. But I think you can solve them yourself. I’ll give you rules."
+      },
+      {
+       "who": "alex",
+       "text": "What will this cost me?"
+      },
+      {
+       "who": "jonah",
+       "text": "Pay me the value of what you learn. If the plant closes, you owe nothing."
+      },
+      {
+       "who": "jonah",
+       "text": "Now: a worker stands idle with nothing to do. Good or bad?"
+      },
+      {
+       "who": "alex",
+       "text": "Bad. Always. It’s waste."
+      },
+      {
+       "who": "jonah",
+       "text": "A plant where everybody is busy all the time is a very inefficient plant."
+      }
+     ]
+    },
+    {
+     "id": "5-6",
+     "type": "poll",
+     "t": "You decide: where inventory comes from",
+     "label": "Jonah asks",
+     "q": "Your floor is buried in excess inventory. Where did it come from?",
+     "options": [
+      {
+       "text": "The market changed",
+       "feedback": "Partly. But someone still had to make those parts."
+      },
+      {
+       "text": "Vendors sent bad batches",
+       "feedback": "That causes delays, not piles of extra parts."
+      },
+      {
+       "text": "People and machines kept busy making things nobody needed yet",
+       "feedback": "That’s Jonah’s point."
+      }
+     ],
+     "reveal": "Machines don’t run themselves. Excess inventory can only come from excess capacity kept busy. Jonah isn’t asking for layoffs; he is asking how Alex manages capacity.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "5-7",
+     "type": "myth",
+     "t": "The balanced plant",
+     "take": "A perfectly balanced plant is a plant heading for trouble.",
+     "myth": "The perfect plant is balanced: every machine’s capacity matches demand exactly.",
+     "truth": "Trim every resource to exactly match demand and the plant drifts toward bankruptcy."
+    },
+    {
+     "id": "5-8",
+     "type": "list",
+     "t": "Two forces",
+     "label": "Why balance fails",
+     "h": "Two forces in every plant",
+     "items": [
+      {
+       "text": "Dependent events: a step can’t start until the one before it is done.",
+       "state": "warn"
+      },
+      {
+       "text": "Statistical fluctuations: how long each step takes varies, like waiting for a waiter to bring the check.",
+       "state": "warn"
+      }
+     ],
+     "text": "Each one alone looks harmless. Jonah says the trouble is what they do together.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "5-9",
+     "type": "scene",
+     "t": "The limousine",
+     "label": "Hotel lobby · 8:15 AM",
+     "text": "Then Jonah stands up: clients are waiting. He tells Alex to call back once he can explain what those two forces together mean for his plant. Alex, fuming, pays and follows him out. A man in a pinstripe suit leads Jonah to a black limousine. Inside waits a silver-haired executive, talking about a meeting with the chairman and the board.",
+     "theme": "steel"
+    },
+    {
+     "id": "5-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Alex flies home with a riddle instead of answers. Dependent events. Statistical fluctuations. Together they do something to his plant, and he can’t see what. And there is a second question he can’t answer: where was Julie all night?"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Into the Woods",
+   "hook": "He promised his wife a great weekend. He’d already promised his son a Boy Scout hike.",
+   "bg": "#2F4A33",
+   "bg2": "#1C2E1F",
+   "fg": "#E9F2DF",
+   "minutes": 3,
+   "recap": [
+    "Julie and Alex make a deal: paperwork at home, evenings together.",
+    "On the hike, the line keeps stretching even at a steady average pace.",
+    "In a dependent line, delays pass down and speed can’t be stored up."
+   ],
+   "posts": [
+    {
+     "id": "6-1",
+     "type": "hook",
+     "t": "Two promises",
+     "kicker": "Saturday, 7 AM",
+     "head": "He promised his wife a great weekend. His son had other plans.",
+     "sub": "Fifteen Boy Scouts, a 10-mile trail, and a line that keeps stretching, just like his factory.",
+     "art": "trail"
+    },
+    {
+     "id": "6-2",
+     "type": "scene",
+     "t": "Julie",
+     "label": "Home · Friday afternoon",
+     "text": "Julie is home. She spent the night with an old friend two hours away and talked until it was too late to drive. His career always comes first, she says; even at home he isn’t really there. They make a deal: he’ll bring his paperwork home in the evenings so the family at least sees him. And this weekend, he’s all hers.",
+     "theme": "night"
+    },
+    {
+     "id": "6-3",
+     "type": "twist",
+     "t": "A scout in the doorway",
+     "head": "Saturday, 7 AM: a Boy Scout in the doorway.",
+     "text": "Davey is in full uniform. Dad promised to help the troopmaster on the overnight hike, remember? The gear is already packed. At the trailhead the troopmaster is out sick, the other parents drive off fast, and Alex is the only adult with fifteen boys and ten miles to Devil’s Gulch.",
+     "status": "Adults on the trail: 1"
+    },
+    {
+     "id": "6-4",
+     "type": "character",
+     "t": "Meet Herbie",
+     "charId": "herbie"
+    },
+    {
+     "id": "6-5",
+     "type": "scene",
+     "t": "The line stretches",
+     "label": "On the trail · morning",
+     "h": "Gaps that keep growing",
+     "text": "Alex walks at the back to watch everyone. Ron leads at a steady, average pace. Yet the column keeps stretching. Gaps open, then grow. Each time the line bunches behind Herbie on a hill, the front races half a mile ahead and the back has to run to catch up.",
+     "theme": "floor"
+    },
+    {
+     "id": "6-6",
+     "type": "poll",
+     "t": "You decide: the stretching line",
+     "label": "You decide",
+     "q": "Everyone walks at about the same average speed. Why does the line keep getting longer?",
+     "options": [
+      {
+       "text": "Some kids are lazy",
+       "feedback": "Nobody is slacking. Herbie is even running to keep up."
+      },
+      {
+       "text": "Slowdowns pile up, but nobody can go faster than the kid in front",
+       "feedback": "That’s what Alex works out."
+      },
+      {
+       "text": "The map is wrong",
+       "feedback": "The map is fine. Ron is right on pace."
+      }
+     ],
+     "reveal": "A kid can always slow down, but can only go as fast as the one ahead of him. So the slow moments add up instead of averaging out.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "6-7",
+     "type": "idea",
+     "t": "Fluctuations don’t average out",
+     "take": "In a dependent chain, delays accumulate; speed-ups are capped by the step ahead.",
+     "label": "The big idea",
+     "head": "Slowness piles up. Speed can’t.",
+     "sub": "When steps depend on each other, every delay passes down the line, but no one can make up time faster than the person ahead allows. That is dependent events plus statistical fluctuations.",
+     "theme": "steel"
+    },
+    {
+     "id": "6-8",
+     "type": "compare",
+     "t": "The hike is a factory",
+     "label": "The hike is a factory",
+     "h": "Same rules, different uniform",
+     "leftTitle": "On the trail",
+     "left": [
+      "Unwalked trail",
+      "Trail between Ron and Alex",
+      "Alex’s walking speed",
+      "Energy spent running to catch up"
+     ],
+     "rightTitle": "In the plant",
+     "right": [
+      "Raw materials",
+      "Inventory",
+      "Throughput",
+      "Operational expense"
+     ],
+     "text": "Inventory growing, throughput falling, expense rising: on the trail and in the plant.",
+     "mid": "="
+    },
+    {
+     "id": "6-9",
+     "type": "scene",
+     "t": "Lunch",
+     "label": "On the trail · noon",
+     "text": "Alex is about to decide it all averages out after all: the line in front of him has stopped stretching. Then he sees why. Ron isn’t walking anymore. He is standing at the side of the trail. It’s noon, the schedule says lunch, and they are still far short of the river where lunch was supposed to be.",
+     "theme": "steel"
+    },
+    {
+     "id": "6-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Over lunch, Alex grabs a box of matches, some mess-kit bowls and one die, and invents a game for the boys. He expects it to prove that a perfectly balanced line runs smoothly. It is about to prove the opposite."
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "The Matchstick Game",
+   "hook": "A bowl of matches and a single die explain why his plant is always late.",
+   "bg": "#6E5A2E",
+   "bg2": "#3E321A",
+   "fg": "#FFF1D0",
+   "minutes": 3,
+   "recap": [
+    "Alex models a perfectly balanced plant with matches, bowls and a die.",
+    "Twenty matches came out instead of thirty-five; inventory piled up inside.",
+    "In a dependent chain, fluctuations accumulate instead of averaging out."
+   ],
+   "posts": [
+    {
+     "id": "7-1",
+     "type": "hook",
+     "t": "The matchstick game",
+     "kicker": "Picnic area, noon",
+     "head": "Five boys, a box of matches and one die.",
+     "sub": "A game Alex invents to prove Jonah wrong ends up proving him right.",
+     "art": "dice"
+    },
+    {
+     "id": "7-2",
+     "type": "scene",
+     "t": "The perfect plant",
+     "label": "Lunch break",
+     "h": "A perfectly balanced line",
+     "text": "Maybe Jonah is simply wrong. If every station had exactly the capacity the market needs, wouldn’t the excess inventory vanish? Alex can’t clone fifteen identical scouts. But he can build a model: a row of bowls, a box of matches, and one die to decide how many matches each station can move.",
+     "theme": "paper"
+    },
+    {
+     "id": "7-3",
+     "type": "list",
+     "t": "The rules",
+     "label": "The rules",
+     "h": "How the game works",
+     "items": [
+      {
+       "text": "Five players, five bowls in a row: five dependent steps.",
+       "state": "ok"
+      },
+      {
+       "text": "Roll the die and move that many matches to the next bowl.",
+       "state": "ok"
+      },
+      {
+       "text": "You can only pass what is already in your bowl.",
+       "state": "ok"
+      },
+      {
+       "text": "The average roll is 3.5, so ten rounds should push 35 matches out.",
+       "state": "ok"
+      }
+     ],
+     "text": "Beat 3.5 a turn and you skip dishes tonight. Fall short and you scrub.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "7-4",
+     "type": "poll",
+     "t": "You decide: ten rounds",
+     "label": "You decide",
+     "q": "Every station is equal and the average roll is 3.5. After ten rounds, how many matches come out of the last bowl?",
+     "options": [
+      {
+       "text": "About 35",
+       "feedback": "That’s what the boys expected."
+      },
+      {
+       "text": "More than 35, thanks to lucky rolls",
+       "feedback": "Lucky rolls only help if there are matches to pass."
+      },
+      {
+       "text": "Far fewer than 35",
+       "feedback": "Right. Brace for dishes."
+      }
+     ],
+     "reveal": "Only 20. The front of the line met its quota. Dave and Evan at the end sank deeper below quota every round: starved of matches, then buried when a pile finally arrived.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "7-5",
+     "type": "chat",
+     "t": "Down the line",
+     "label": "The picnic table",
+     "msgs": [
+      {
+       "who": "evan",
+       "text": "Hey, keep those matches coming down here!"
+      },
+      {
+       "who": "andy",
+       "text": "I’m doing my job up here. What’s wrong with you guys?"
+      },
+      {
+       "who": "dave",
+       "text": "I finally get some matches and I roll a one."
+      },
+      {
+       "who": "evan",
+       "text": "If I wash dishes because you didn’t give me matches…"
+      },
+      {
+       "who": "alex",
+       "text": "Evan, I’d start warming up on the spaghetti pot."
+      }
+     ]
+    },
+    {
+     "id": "7-6",
+     "type": "list",
+     "t": "The score sheet",
+     "take": "Balanced line, average 3.5 a turn: only 20 of 35 matches came out.",
+     "label": "Mr. Rogo’s score sheet",
+     "h": "Ten rounds, by the numbers",
+     "items": [
+      {
+       "text": "Expected out the end",
+       "value": "35"
+      },
+      {
+       "text": "Actually out the end",
+       "value": "20"
+      },
+      {
+       "text": "Andy, first in line",
+       "value": "Above quota"
+      },
+      {
+       "text": "Evan, last in line",
+       "value": "Far below"
+      },
+      {
+       "text": "Matches stuck in bowls",
+       "value": "Piling up"
+      }
+     ],
+     "total": "Throughput down",
+     "text": "A perfectly balanced system, and it still failed its customers.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "7-7",
+     "type": "myth",
+     "t": "Luck evens out",
+     "myth": "Lucky and unlucky streaks cancel out over time.",
+     "truth": "In a chain of dependent steps, losses pile up downstream and upstream gains go to waste."
+    },
+    {
+     "id": "7-8",
+     "type": "idea",
+     "t": "Inventory moves in waves",
+     "take": "In a dependent chain, inventory moves in waves and the end of the line falls behind.",
+     "label": "Why balance fails",
+     "head": "Inventory moves in waves.",
+     "sub": "Matches don’t flow; they bunch up in one bowl, then flood the next. The further down the line, the bigger the swings, and the further behind schedule the whole system falls.",
+     "theme": "sodium"
+    },
+    {
+     "id": "7-9",
+     "type": "scene",
+     "t": "Sounds familiar",
+     "label": "Alex, at the table",
+     "text": "Half the orders late. Delivery dates nobody can promise. Customers losing faith. Alex looks at the chart and recognizes his own plant. The boys play twenty more rounds; the chart plunges deeper and deeper. Then it is time to hit the trail again, and Herbie is still at the back.",
+     "theme": "floor"
+    },
+    {
+     "id": "7-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Back on the trail, the column stretches faster than ever, and they are hours behind schedule. Alex looks at Herbie, the slowest kid in the woods, and has an idea that sounds completely backwards."
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "Herbie",
+   "hook": "Halfway through the hike they’re crawling at one mile an hour. So Alex puts the slowest kid in front.",
+   "bg": "#3E5F2F",
+   "bg2": "#22381A",
+   "fg": "#F2F7E8",
+   "minutes": 3,
+   "recap": [
+    "The troop can move no faster than its slowest walker.",
+    "Alex puts Herbie in front, and nobody passes anybody.",
+    "Lighten Herbie’s pack and the whole troop doubles its speed."
+   ],
+   "posts": [
+    {
+     "id": "8-1",
+     "type": "hook",
+     "t": "Herbie leads",
+     "kicker": "The trail, 2:30 PM",
+     "head": "Halfway there, and the troop is moving at one mile an hour.",
+     "sub": "So Alex puts the slowest kid in the woods at the front of the line.",
+     "art": "trail",
+     "artText": "1 MILE AN HOUR"
+    },
+    {
+     "id": "8-2",
+     "type": "scene",
+     "t": "Stuck behind Herbie",
+     "label": "Back of the line",
+     "h": "No reserve",
+     "text": "Walking at the back, Alex works out why the matchstick plant failed: there was no reserve. When a station fell behind, it had no spare capacity to catch up, so every shortfall became the next station’s starting point. Up ahead, the gaps are widening again. The boys have quietly reshuffled the line, and Alex finds himself stuck behind one kid. Herbie.",
+     "theme": "paper"
+    },
+    {
+     "id": "8-3",
+     "type": "idea",
+     "t": "Herbie sets the pace",
+     "take": "A chain of dependent steps moves at the speed of its slowest step.",
+     "label": "The insight",
+     "head": "The troop is only as fast as Herbie.",
+     "sub": "It doesn’t matter how fast the leader walks. The troop arrives when its slowest walker arrives. Herbie’s pace is the troop’s throughput; the stretched-out line is its inventory.",
+     "theme": "sodium"
+    },
+    {
+     "id": "8-4",
+     "type": "poll",
+     "t": "You decide: the slow kid",
+     "label": "You decide",
+     "q": "Herbie is the slowest walker, and the whole troop is waiting on him. You’re Alex. What do you do?",
+     "options": [
+      {
+       "text": "Keep him at the back so he slows nobody down",
+       "feedback": "That’s where he was. The line stretched for a mile."
+      },
+      {
+       "text": "Tell everyone to hurry up",
+       "feedback": "The gaps close for a few minutes, then open again."
+      },
+      {
+       "text": "Put Herbie in front and let nobody pass",
+       "feedback": "That’s Alex’s call."
+      }
+     ],
+     "reveal": "Alex takes Herbie by the hand and leads him past the whole column until the order is reversed. New rule: nobody passes anybody. The fast kids groan. But the gaps close and stay closed.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "8-5",
+     "type": "chat",
+     "t": "Can’t he go faster?",
+     "label": "The trail, Herbie in front",
+     "msgs": [
+      {
+       "who": "andy",
+       "text": "You want HIM to lead? He’s the slowest one!"
+      },
+      {
+       "who": "alex",
+       "text": "Exactly. Everybody keeps up with the kid in front. Nobody passes."
+      },
+      {
+       "who": "evan",
+       "text": "Mr. Rogo, I’m falling asleep back here."
+      },
+      {
+       "who": "alex",
+       "text": "Want to go faster? Then figure out how Herbie can go faster."
+      },
+      {
+       "who": "dave",
+       "text": "Hey, Herbie, what’s in your pack?"
+      },
+      {
+       "who": "herbie",
+       "text": "None of your business!"
+      }
+     ]
+    },
+    {
+     "id": "8-6",
+     "type": "list",
+     "t": "Herbie’s pack",
+     "take": "The fix wasn’t speeding up the fast kids. It was taking weight off the slowest one.",
+     "label": "Alex opens it",
+     "h": "What the slowest kid was carrying",
+     "items": [
+      {
+       "text": "Six-pack of soda",
+       "value": "Shared out"
+      },
+      {
+       "text": "Cans of spaghetti",
+       "value": "Shared out"
+      },
+      {
+       "text": "Candy, pickles, tuna",
+       "value": "Shared out"
+      },
+      {
+       "text": "Raincoat, boots, tent stakes",
+       "value": "Shared out"
+      },
+      {
+       "text": "Steel shovel",
+       "value": "Alex"
+      },
+      {
+       "text": "Large iron skillet",
+       "value": "Andy"
+      }
+     ],
+     "total": "Herbie: light pack",
+     "text": "‘We’re supposed to be prepared,’ Herbie says. Alex, the biggest, takes most of it. Herbie goes back to the front.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "8-7",
+     "type": "twist",
+     "t": "Double speed",
+     "head": "Twice as fast. Still together.",
+     "text": "Freed of the weight, Herbie practically flies. The troop moves at double its old speed and no gap opens. They reach Devil’s Gulch at five: about four miles in two hours, after crawling at one mile an hour all day.",
+     "status": "Inventory down · Throughput up"
+    },
+    {
+     "id": "8-8",
+     "type": "myth",
+     "t": "Everyone at full speed",
+     "take": "Speeding up anyone but the slowest step just builds inventory.",
+     "myth": "If every person goes as fast as they can, the group goes as fast as it can.",
+     "truth": "A fast walker up front only stretches the line. The group’s speed is its slowest member’s speed, so the only speed-up that counts is his."
+    },
+    {
+     "id": "8-9",
+     "type": "scene",
+     "t": "Proud",
+     "label": "Devil’s Gulch · that night",
+     "text": "The wilderness turns out to overlook a shopping center. Herbie asks if it has a Burger King. Dave and Evan cook the spaghetti. Later, in their tent, Dave goes quiet, then says he was really proud of his dad today: the way he figured it out, kept everyone together, and put Herbie in front.",
+     "theme": "night"
+    },
+    {
+     "id": "8-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Sunday, 4:30 PM. Father and son pull into the driveway, sunburned and pleased with themselves. Julie’s car is gone. Inside, a closet door in the bedroom is standing open."
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Last in Line",
+   "hook": "Julie leaves a note. His rival gets promoted over him. And a ten-dollar bet proves Jonah right on the factory floor.",
+   "bg": "#3A3340",
+   "bg2": "#1C1820",
+   "fg": "#EDE6F2",
+   "minutes": 3,
+   "recap": [
+    "Julie leaves: she is tired of always coming last for Alex.",
+    "Hilton Smyth becomes division productivity manager.",
+    "A rush job proves it: the robot finished 10 pieces short of 100."
+   ],
+   "posts": [
+    {
+     "id": "9-1",
+     "type": "hook",
+     "t": "The empty closet",
+     "kicker": "Sunday, 4:30 PM",
+     "head": "Most of her clothes are gone. There’s an envelope on the kitchen table.",
+     "sub": "And on Monday, a robot loses him a ten-dollar bet and wins him an argument.",
+     "art": "house"
+    },
+    {
+     "id": "9-2",
+     "type": "scene",
+     "t": "The note",
+     "label": "The bedroom",
+     "h": "Last in line",
+     "text": "Julie’s note is short. She is tired of always coming last for him, and she has decided he won’t change. She is going away for a while to think. She is sorry; she knows he’s busy. And she has left Sharon with his mother. He has spent the weekend learning what happens to whoever is last in line.",
+     "theme": "night"
+    },
+    {
+     "id": "9-3",
+     "type": "chat",
+     "t": "Is she mad at me?",
+     "label": "The car, driving home from Grandma’s",
+     "msgs": [
+      {
+       "who": "sharon",
+       "text": "Is Mommy still mad at me?"
+      },
+      {
+       "who": "alex",
+       "text": "Mad at you? She isn’t mad at you."
+      },
+      {
+       "who": "sharon",
+       "text": "Yes she is. She wouldn’t talk to me."
+      },
+      {
+       "who": "alex",
+       "text": "Sharon, you didn’t do anything wrong."
+      },
+      {
+       "who": "sharon",
+       "text": "Then why?"
+      }
+     ]
+    },
+    {
+     "id": "9-4",
+     "type": "scene",
+     "t": "Monday",
+     "label": "Monday, 9:15 AM",
+     "h": "A disaster",
+     "text": "Dave tries pancakes; they end up on the floor. Sharon says she’s too sick for school. Alex gets to work late, and Hilton Smyth is on the phone: Bearington owes his plant 100 sub-assemblies. All 100 by tonight, not 99, or he calls Peach. And maybe, Smyth adds sweetly, Alex should read his mail.",
+     "theme": "steel"
+    },
+    {
+     "id": "9-5",
+     "type": "twist",
+     "t": "Read your mail",
+     "head": "His rival just got promoted.",
+     "text": "A memo from Peach: Hilton Smyth is the new division productivity manager. Every plant manager now reports to him on a dotted line, with special attention to cost reduction.",
+     "status": "Effective Friday"
+    },
+    {
+     "id": "9-6",
+     "type": "list",
+     "t": "The staff meeting",
+     "label": "Conference room · two hours of diagrams",
+     "h": "Alex explains the hike. The verdict:",
+     "items": [
+      {
+       "text": "Stacey: a glimmer of understanding",
+       "state": "ok"
+      },
+      {
+       "text": "Bob: on the fence. Robots don’t fluctuate.",
+       "state": "warn"
+      },
+      {
+       "text": "Ralph: not sure what he’s hearing",
+       "state": "warn"
+      },
+      {
+       "text": "Lou: you learned this from kids on a hike?",
+       "state": "no"
+      }
+     ],
+     "text": "One sympathizer, one undecided, one bewildered, one skeptic. Then Smyth’s rush job gives Alex an idea: let the plant prove it.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "9-7",
+     "type": "poll",
+     "t": "The ten-dollar bet",
+     "label": "You decide",
+     "q": "Pete’s department makes about 25 parts an hour, noon to four. The robot welds exactly 25 an hour, one to five. Smyth needs 100 on the five o’clock truck. Do they make it?",
+     "options": [
+      {
+       "text": "Yes. Both run at 25 an hour.",
+       "feedback": "Bob took that side of the bet."
+      },
+      {
+       "text": "Yes, if Pete’s people hustle at the end",
+       "feedback": "They did hustle. It wasn’t enough."
+      },
+      {
+       "text": "No",
+       "feedback": "That’s Alex’s ten dollars."
+      }
+     ],
+     "reveal": "Pete’s crew finishes all 100 by four and walks out cheering, ‘We beat the robot!’ At five past five, the robot is still welding. The truck leaves without them.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "9-8",
+     "type": "list",
+     "t": "The two logs",
+     "take": "Pete made 100 on average. The robot could only weld what reached it: 90.",
+     "label": "Pete’s log + the robot’s log",
+     "h": "Hour by hour",
+     "items": [
+      {
+       "text": "Pete, noon–1",
+       "value": "19"
+      },
+      {
+       "text": "Pete, 1–2",
+       "value": "21"
+      },
+      {
+       "text": "Pete, 2–3",
+       "value": "28"
+      },
+      {
+       "text": "Pete, 3–4",
+       "value": "32"
+      },
+      {
+       "text": "Robot, can weld",
+       "value": "25 an hour max"
+      },
+      {
+       "text": "Robot, actually welded",
+       "value": "19 + 21 + 25 + 25"
+      }
+     ],
+     "total": "90 of 100",
+     "text": "Every slow hour upstream passed straight to the robot. Pete’s fast hours were capped at 25. Pete was never more than 10 behind. They ended exactly 10 short.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "9-9",
+     "type": "idea",
+     "t": "The worst delay wins",
+     "take": "In a dependent chain, the biggest upstream shortfall caps what comes out the end.",
+     "label": "The lesson",
+     "head": "Upstream’s worst slump becomes downstream’s starting line.",
+     "sub": "Fluctuations don’t cancel out in a chain; the step after can’t recover what it never received. And Pete’s people felt like heroes for a job that didn’t ship. The incentives reward the wrong thing.",
+     "theme": "sodium"
+    },
+    {
+     "id": "9-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Tuesday morning the staff stop doubting and start asking: how do you control a plant with fifty million variables? They call Jonah. On a ten-minute break from a lecture, he gives them one word to hunt for. Then he hangs up."
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Hello, Herbie",
+   "hook": "They went looking for the factory’s Herbie. They found two, stuck in the middle of the line.",
+   "bg": "#B6A3E8",
+   "bg2": "#6F5FA8",
+   "fg": "#1B1530",
+   "minutes": 3,
+   "recap": [
+    "A bottleneck: any resource whose capacity is equal to or less than the demand on it.",
+    "Balance the flow through the plant with demand, not the capacity.",
+    "Two bottlenecks found: the NCX-10 and heat-treat. They can’t be moved or bought around."
+   ],
+   "posts": [
+    {
+     "id": "10-1",
+     "type": "hook",
+     "t": "Two Herbies",
+     "kicker": "Ten weeks left",
+     "head": "They went looking for the factory’s Herbie.",
+     "sub": "They found two, stuck in the middle of the line, and no money to fix either.",
+     "art": "machine",
+     "artText": "NCX-10|BOTTLENECK"
+    },
+    {
+     "id": "10-2",
+     "type": "scene",
+     "t": "Mommy called",
+     "label": "Home · evening",
+     "text": "Sharon meets him at the door, beaming: Mommy called. She told the kids she loves them and will be away for a while. Davey asked for a number. She wouldn’t give one. At dinner, Alex’s mother, who has moved in with half her kitchen, tells Depression stories about how lucky they are to have food.",
+     "theme": "night"
+    },
+    {
+     "id": "10-3",
+     "type": "chat",
+     "t": "The speakerphone",
+     "label": "Alex’s office · Jonah on a ten-minute break",
+     "msgs": [
+      {
+       "who": "jonah",
+       "text": "A bottleneck is any resource whose capacity is equal to or less than the demand placed on it."
+      },
+      {
+       "who": "stacey",
+       "text": "So where does market demand come in?"
+      },
+      {
+       "who": "jonah",
+       "text": "Don’t balance capacity with demand. Balance the flow of product with demand."
+      },
+      {
+       "who": "bob",
+       "text": "I thought bottlenecks were bad."
+      },
+      {
+       "who": "jonah",
+       "text": "They’re a reality. Use them to control the flow. Do you have any?"
+      },
+      {
+       "who": "alex",
+       "text": "We don’t know."
+      },
+      {
+       "who": "jonah",
+       "text": "Then find out. Call me when you know."
+      }
+     ]
+    },
+    {
+     "id": "10-4",
+     "type": "myth",
+     "t": "Balance the plant",
+     "take": "Balance flow, not capacity.",
+     "myth": "A well-run plant matches every resource’s capacity to demand, so nothing sits idle.",
+     "truth": "Balance the flow through the bottleneck with demand. Everything else needs spare capacity to absorb fluctuations."
+    },
+    {
+     "id": "10-5",
+     "type": "poll",
+     "t": "Find Herbie fast",
+     "label": "You decide",
+     "q": "Ralph’s data is a mess: the routings list machines the plant sold a year ago. Checking everything could take months. They have ten weeks. How do you find the bottleneck fast?",
+     "options": [
+      {
+       "text": "Fix the database first, then calculate",
+       "feedback": "Garbage in, garbage out, and months of it."
+      },
+      {
+       "text": "Ask the people who chase late parts",
+       "feedback": "Stacey’s idea. Good one."
+      },
+      {
+       "text": "Look for the biggest pile of waiting work",
+       "feedback": "Alex’s idea. On the trail, gaps were inventory."
+      }
+     ],
+     "reveal": "They use every shortcut: Bob’s twenty years of hunches, the expediters’ list of parts they’re always chasing, and the biggest pile of work-in-process in the plant. Ralph checks the shortlist against the data.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "10-6",
+     "type": "twist",
+     "t": "Hello, Herbie",
+     "head": "Herbie is the best machine in the plant.",
+     "text": "The NCX-10: the plant’s most efficient machine, with weeks of backlog stacked around it. Expediters are always waiting on it. Its operator wears earplugs to block out the complaints. And training a new setup person takes six months.",
+     "status": "NCX-10 · Bottleneck"
+    },
+    {
+     "id": "10-7",
+     "type": "compare",
+     "t": "Faster, and less",
+     "label": "Why the best machine is the bottleneck",
+     "h": "Cheaper per part. Less in total.",
+     "leftTitle": "The old way",
+     "left": [
+      "3 machine types",
+      "10 machines",
+      "14 minutes a part",
+      "A machinist on each"
+     ],
+     "rightTitle": "The NCX-10",
+     "right": [
+      "1 machine",
+      "Only one",
+      "10 minutes a part",
+      "Two setup people"
+     ],
+     "text": "Ten old machines working side by side out-produced one fast machine. The NCX-10 won on cost per part and lost on capacity.",
+     "mid": "?"
+    },
+    {
+     "id": "10-8",
+     "type": "scene",
+     "t": "Herbie number two",
+     "label": "Heat-treat",
+     "h": "Hot, ugly, indispensable",
+     "text": "Two grimy furnaces at 1,500 degrees, cooking parts for six to sixteen hours a batch. They often run half empty, because expediters keep demanding a handful of parts for one shipment. A request for a third furnace was killed years ago for ‘low efficiencies.’ The staff are blunt: they can’t move either bottleneck to the front, and there is no money to buy around them.",
+     "theme": "floor"
+    },
+    {
+     "id": "10-9",
+     "type": "guess",
+     "t": "Your guess",
+     "label": "No money, no time",
+     "q": "Two bottlenecks stuck mid-line, and no budget for new machines. What would you do?",
+     "options": [
+      {
+       "text": "Ask headquarters for a second NCX-10 anyway",
+       "feedback": "Lou: for a plant losing money, in this year? Out of our minds."
+      },
+      {
+       "text": "Rearrange the plant to put them first",
+       "feedback": "Already ruled out. The sequence can’t change."
+      },
+      {
+       "text": "Find capacity hidden in the bottlenecks themselves",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "Accept it. The plant can’t be saved",
+       "feedback": "That’s how the staff feels tonight."
+      }
+     ],
+     "reveal": "Jonah thinks there’s a way, and he is changing planes to show them. The answer arrives in Chapter 11.",
+     "hint": "Pick your answer. We’ll keep it for later.",
+     "loopId": "capacity"
+    },
+    {
+     "id": "10-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "On the phone from Boston, Jonah says there are only two ways his ideas fail: no demand, or a manager who has decided not to change. Then he asks a strange question. Does Bearington have an airport?"
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "The $2,735 Hour",
+   "hook": "The plant’s most precious machine is idle. Jonah does the math: every hour like this costs $2,735.",
+   "bg": "#E0611C",
+   "bg2": "#8A3510",
+   "fg": "#1A0E06",
+   "minutes": 3,
+   "recap": [
+    "An hour lost at a bottleneck is an hour lost for the entire plant.",
+    "The true cost of a bottleneck hour: the plant’s total expense divided by the bottleneck’s hours.",
+    "Don’t buy capacity; stop wasting it, and move work off the bottlenecks."
+   ],
+   "posts": [
+    {
+     "id": "11-1",
+     "type": "hook",
+     "t": "The idle machine",
+     "kicker": "Second shift, 8:10 PM",
+     "head": "The plant’s most precious machine is standing idle.",
+     "sub": "Jonah takes one look and asks a question that costs $2,735 an hour.",
+     "art": "clock",
+     "artText": "8:10 PM|NCX-10 IDLE"
+    },
+    {
+     "id": "11-2",
+     "type": "scene",
+     "t": "Make them go faster",
+     "label": "Dinner, before the airport",
+     "text": "Alex explains to the kids: the plant has two Herbies, stuck in the middle of the line. ‘So make them go faster,’ says Sharon. Dave remembers the hike: when Dad took Herbie’s pack, he flew. ‘It’s not that simple,’ Alex says. His mother has advice too: keep after them and make sure they don’t waste any more time.",
+     "theme": "night"
+    },
+    {
+     "id": "11-3",
+     "type": "chat",
+     "t": "Why isn’t it running?",
+     "label": "The NCX-10 · second shift",
+     "msgs": [
+      {
+       "who": "jonah",
+       "text": "This is your bottleneck. Why isn’t it working right now?"
+      },
+      {
+       "who": "bob",
+       "text": "Setup crew went on break ten minutes ago. Back in twenty."
+      },
+      {
+       "who": "jonah",
+       "text": "On a non-bottleneck, who cares when breaks happen? On a bottleneck, it’s the opposite."
+      },
+      {
+       "who": "ralph",
+       "text": "It has about 585 hours a month available."
+      },
+      {
+       "who": "jonah",
+       "text": "And demand is even higher. Lose an hour here and the whole plant loses it. Forever."
+      }
+     ]
+    },
+    {
+     "id": "11-4",
+     "type": "twist",
+     "t": "Sold for floor space",
+     "head": "The backup machines are gone.",
+     "text": "Jonah asks: the older machines the NCX-10 replaced, are they still around? One whole class of them was sold off, to free floor space for a new pen to store inventory.",
+     "status": "No backup"
+    },
+    {
+     "id": "11-5",
+     "type": "poll",
+     "t": "What is the pile worth?",
+     "label": "You decide",
+     "q": "About a thousand parts sit waiting for heat-treat. Lou guesses $10–15 thousand in materials. What is that pile really worth?",
+     "options": [
+      {
+       "text": "About $15,000: the cost of the parts",
+       "feedback": "Lou’s answer, and Stacey’s."
+      },
+      {
+       "text": "About $20,000 with materials and labor",
+       "feedback": "Still thinking like an accountant."
+      },
+      {
+       "text": "About a million dollars",
+       "feedback": "That’s Jonah’s number."
+      }
+     ],
+     "reveal": "Each part lets them finish and ship a product that sells for about $1,000. A thousand parts: a million dollars, if they get through heat-treat before customers give up and go elsewhere.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "11-6",
+     "type": "myth",
+     "t": "Inspect at the end",
+     "take": "Make sure a bottleneck only ever works on good parts.",
+     "myth": "Check quality just before final assembly, where you can see the whole product.",
+     "truth": "Inspect before the bottleneck. Scrap a part there and you lose a part. Scrap it afterwards and you lose bottleneck time you can never get back."
+    },
+    {
+     "id": "11-7",
+     "type": "list",
+     "t": "The real hourly rate",
+     "take": "An hour lost at a bottleneck costs what an hour of the entire plant costs.",
+     "label": "Lou’s calculator",
+     "h": "What an hour of the NCX-10 costs",
+     "items": [
+      {
+       "text": "Standard cost, NCX-10",
+       "value": "$32.50"
+      },
+      {
+       "text": "Standard cost, heat-treat",
+       "value": "$21"
+      },
+      {
+       "text": "Plant operating expense",
+       "value": "$1.6M a month"
+      },
+      {
+       "text": "NCX-10 hours available",
+       "value": "585 a month"
+      }
+     ],
+     "total": "$2,735 an hour",
+     "text": "The plant produces what its bottleneck produces. So an idle bottleneck hour idles the whole plant: total expense divided by bottleneck hours.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "11-8",
+     "type": "idea",
+     "t": "Hidden capacity",
+     "take": "Increase bottleneck capacity by not wasting it and by offloading it.",
+     "label": "The answer",
+     "head": "Don’t buy capacity. Stop wasting it.",
+     "sub": "The capacity is already there, leaking away. Every bottleneck hour spent on the right part is an hour the whole plant earns. Protect those hours, and move work off the bottlenecks wherever you can.",
+     "payoffLoopId": "capacity",
+     "theme": "sodium"
+    },
+    {
+     "id": "11-9",
+     "type": "list",
+     "t": "Jonah’s list",
+     "label": "Before Jonah leaves",
+     "h": "How to stop wasting a bottleneck",
+     "items": [
+      {
+       "text": "No idle breaks: someone always runs it",
+       "state": "ok"
+      },
+      {
+       "text": "Inspect quality in front of it",
+       "state": "ok"
+      },
+      {
+       "text": "Only parts for orders due now, not months from now",
+       "state": "ok"
+      },
+      {
+       "text": "Parts that don’t need it go elsewhere",
+       "state": "ok"
+      },
+      {
+       "text": "Other machines or outside vendors take some load",
+       "state": "ok"
+      }
+     ],
+     "text": "Building stock you can’t sell for months trades today’s cash for future cash. This plant can’t afford that.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "11-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "At breakfast, Sharon mentions something she heard behind Mom’s voice on the phone: violins, the sleepy music Grandpa Barnett always plays. Julie’s parents swore they hadn’t heard from her."
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Red Tags",
+   "hook": "They gave the bottleneck a priority list. It stopped dead. The fix is a sticky label in two colors.",
+   "bg": "#5A3E6B",
+   "bg2": "#2A1D33",
+   "fg": "#F4EAF8",
+   "minutes": 3,
+   "recap": [
+    "Bottlenecks now work only on overdue orders, most overdue first.",
+    "Red tags mark bottleneck parts; everyone works on red before green.",
+    "Alex finds Julie at her parents’ house. She agrees to a date."
+   ],
+   "posts": [
+    {
+     "id": "12-1",
+     "type": "hook",
+     "t": "Red and green",
+     "kicker": "The NCX-10, early afternoon",
+     "head": "They gave the bottleneck a priority list. It stopped dead.",
+     "sub": "The fix turns out to be a label in two colors.",
+     "art": "machine",
+     "artText": "NCX-10|IDLE"
+    },
+    {
+     "id": "12-2",
+     "type": "scene",
+     "t": "Forest Grove",
+     "label": "Julie’s parents’ house · sunset",
+     "text": "Julie’s mother finally admits it on the phone: Julie is there, and won’t talk to him. That evening Alex drives to Forest Grove. Her Accord sits in the driveway. Ada locks the screen door and threatens to call the police. ‘Then I’ll wait in my car,’ he says. ‘You don’t own the street.’ Forty-five minutes later, Julie walks out.",
+     "theme": "night"
+    },
+    {
+     "id": "12-3",
+     "type": "chat",
+     "t": "Once around the block",
+     "label": "The sidewalk, at dusk",
+     "msgs": [
+      {
+       "who": "julie",
+       "text": "I don’t know if I want to be married to you anymore."
+      },
+      {
+       "who": "alex",
+       "text": "So do you want a divorce?"
+      },
+      {
+       "who": "julie",
+       "text": "I don’t know yet. Everyone except me knows what I should do."
+      },
+      {
+       "who": "alex",
+       "text": "Come home. I promise we can make it better."
+      },
+      {
+       "who": "julie",
+       "text": "I’ve heard too many promises, Al."
+      },
+      {
+       "who": "alex",
+       "text": "You know, I do happen to love you."
+      }
+     ]
+    },
+    {
+     "id": "12-4",
+     "type": "list",
+     "t": "The first moves",
+     "label": "Staff meeting · 10 AM",
+     "h": "Start with what’s fast",
+     "items": [
+      {
+       "text": "Quality inspector in front of the bottlenecks, by tonight",
+       "state": "ok"
+      },
+      {
+       "text": "New break rules so the bottlenecks never stop (union permitting)",
+       "state": "ok"
+      },
+      {
+       "text": "Late orders first: two weeks late beats one week late",
+       "state": "ok"
+      },
+      {
+       "text": "Bottlenecks work only on parts for those late orders",
+       "state": "ok"
+      }
+     ],
+     "text": "Lou rechecked overnight: only 80% of products pass through a bottleneck, so the real cost is $2,188 an hour, not $2,735. ‘Still an eye-opener,’ he admits.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "12-5",
+     "type": "scene",
+     "t": "The list",
+     "label": "Next morning · conference room",
+     "h": "67 late orders",
+     "text": "Stacey and Ralph worked most of the night. There are 67 overdue orders; the worst is 58 days late. About 90% need parts from a bottleneck. The supervisors of heat-treat and the NCX-10 get one instruction: start at the top of the list and work down. Nothing else. Stacey makes Alex promise not to bend it for marketing.",
+     "theme": "steel"
+    },
+    {
+     "id": "12-6",
+     "type": "poll",
+     "t": "You decide: part three",
+     "label": "You decide",
+     "q": "The NCX-10 crew finishes the first two jobs on the list. The material for the third is nowhere to be found. What should they do?",
+     "options": [
+      {
+       "text": "Wait for it. The list says in order.",
+       "feedback": "That’s what they did. The NCX-10 sat idle."
+      },
+      {
+       "text": "Skip to the next job they have material for",
+       "feedback": "What Alex meant. Nobody said it."
+      },
+      {
+       "text": "Run whatever is handy to stay busy",
+       "feedback": "That’s how the plant got here."
+      }
+     ],
+     "reveal": "They waited. The missing parts had been sitting for a week at a lathe, where the foreman was busy with a long run of ordinary parts. To him the small bottleneck batch looked unimportant. Nobody had told him otherwise.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "12-7",
+     "type": "idea",
+     "t": "Rules worth breaking",
+     "take": "A worker who can’t tell urgent from routine will stay busy on the wrong thing.",
+     "label": "The lesson",
+     "head": "Busy and helpful are not the same.",
+     "sub": "The lathe foreman was doing his job: stay busy, never break a long run. That rule just held up a shipment. ‘I had to break all the rules,’ says Bob. ‘Then the rules had to be broken,’ says Alex.",
+     "theme": "sodium"
+    },
+    {
+     "id": "12-8",
+     "type": "compare",
+     "t": "Two colors",
+     "label": "The new system",
+     "h": "Every batch gets a tag",
+     "leftTitle": "Red",
+     "left": [
+      "Goes through a bottleneck",
+      "Work on it right away",
+      "Break a setup for it"
+     ],
+     "rightTitle": "Green",
+     "right": [
+      "Everything else",
+      "Only when no red is waiting",
+      "Lowest number first"
+     ],
+     "text": "Every shift gets a fifteen-minute briefing, with an hourglass to explain why, and a new plant newsletter to follow up.",
+     "mid": "vs"
+    },
+    {
+     "id": "12-9",
+     "type": "scene",
+     "t": "Small victories",
+     "label": "Friday · then Saturday, 7:29 PM",
+     "text": "The union calls: go ahead with the new break rules, no challenge. And on Saturday at 7:29, a washed and waxed Mazda pulls into the Barnetts’ driveway. Alex has flowers and new clothes. ‘Well, don’t you look nice,’ says Julie. He jokes that he’ll have her home by ten. ‘Good,’ says her mother. ‘We’ll be waiting.’",
+     "theme": "night"
+    },
+    {
+     "id": "12-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "A week later, the shipments are better. Alex isn’t satisfied. Then Bob calls, sounding like a kid on Christmas morning: meet me on the receiving dock. Something big is arriving under a tarp."
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "title": "The Zmegma",
+   "hook": "Bob whips a tarp off a machine older than anyone in the room. It might save the plant.",
+   "bg": "#5E6873",
+   "bg2": "#2B3138",
+   "fg": "#F0F2F4",
+   "minutes": 3,
+   "recap": [
+    "Red tags work: twelve of the most overdue orders ship in a week.",
+    "Old machines and dedicated crews add capacity to the bottlenecks.",
+    "Slowing some non-bottlenecks removes 20% of the furnace load."
+   ],
+   "posts": [
+    {
+     "id": "13-1",
+     "type": "hook",
+     "t": "Ta-da!",
+     "kicker": "The receiving dock",
+     "head": "Bob whips the tarp off and shouts, ‘Ta-da!’",
+     "sub": "Underneath is a machine older than anyone in the room. It might just save the plant.",
+     "art": "machine",
+     "artText": "ZMEGMA|RUNNING"
+    },
+    {
+     "id": "13-2",
+     "type": "list",
+     "t": "Week one",
+     "take": "The bottleneck-first system worked in week one, but not fast enough.",
+     "label": "Ralph’s printout",
+     "h": "One week of red tags",
+     "items": [
+      {
+       "text": "Overdue orders shipped",
+       "value": "12"
+      },
+      {
+       "text": "Taken from the top of the list",
+       "value": "All 12"
+      },
+      {
+       "text": "Worst overdue order",
+       "value": "58 → 44 days"
+      },
+      {
+       "text": "Bad parts caught before the NCX-10",
+       "value": "5%"
+      },
+      {
+       "text": "Bad parts caught before heat-treat",
+       "value": "7%"
+      }
+     ],
+     "total": "Walking, not jogging",
+     "text": "‘It isn’t enough,’ Alex says. ‘We shouldn’t have any late orders.’ He wants plans to offload the bottlenecks by Wednesday.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "13-3",
+     "type": "scene",
+     "t": "Treat it like gold",
+     "label": "Alex’s office",
+     "h": "Yellow tape",
+     "text": "A part leaving a bottleneck looks almost identical to one going in. But one has used up irreplaceable bottleneck time. The communications manager has an idea: a strip of yellow tape on the red tag after the bottleneck. It tells everyone on sight to treat that part like gold. Quality starts writing special procedures for those parts.",
+     "theme": "paper"
+    },
+    {
+     "id": "13-4",
+     "type": "chat",
+     "t": "Ta-da!",
+     "label": "The receiving dock",
+     "msgs": [
+      {
+       "who": "bob",
+       "text": "It’s a Zmegma! They don’t build ’em like this anymore."
+      },
+      {
+       "who": "alex",
+       "text": "Glad to hear it. That was state of the art around 1942."
+      },
+      {
+       "who": "bob",
+       "text": "With a Screwmeister and that machine in the corner, it does everything the NCX-10 does."
+      },
+      {
+       "who": "alex",
+       "text": "The kind we sold to make room for inventory?"
+      },
+      {
+       "who": "bob",
+       "text": "Yep. A buddy at our South End plant gave us one. Cost: the truck rental."
+      },
+      {
+       "who": "alex",
+       "text": "Does it still work?"
+      }
+     ]
+    },
+    {
+     "id": "13-5",
+     "type": "poll",
+     "t": "Where did the time go?",
+     "label": "You decide",
+     "q": "Ralph’s math says the bottlenecks made enough parts for 18 to 20 shipments last week. They shipped 12. The NCX-10 numbers check out. What’s wrong?",
+     "options": [
+      {
+       "text": "Ralph’s math is off",
+       "feedback": "He checked twice."
+      },
+      {
+       "text": "Finished parts are sitting in the furnace",
+       "feedback": "Ralph caught it with a stopwatch."
+      },
+      {
+       "text": "Too many defects",
+       "feedback": "Quality now catches those before the bottleneck."
+      }
+     ],
+     "reveal": "Ralph timed a heat himself. Parts due out at 3 PM were still inside at 5:30; they came out around eight. The helpers had been sent to other jobs. Down there, that happens all the time.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "13-6",
+     "type": "list",
+     "t": "Bob’s four moves",
+     "label": "Wednesday staff meeting",
+     "h": "Find the capacity, then the people",
+     "items": [
+      {
+       "text": "A machinist and helper stationed at the NCX-10, all three shifts",
+       "state": "ok"
+      },
+      {
+       "text": "A foreman and two helpers at the furnaces, all three shifts",
+       "state": "ok"
+      },
+      {
+       "text": "Zmegma and two old machines, one shift a day: +18% NCX-10 output",
+       "state": "ok"
+      },
+      {
+       "text": "Surplus heat-treat work sent to a vendor across town",
+       "state": "ok"
+      }
+     ],
+     "text": "There’s a hiring freeze. So they take people from non-bottlenecks, which have spare capacity by definition. ‘From now on,’ says Alex, ‘only our best people work on the bottlenecks.’",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "13-7",
+     "type": "scene",
+     "t": "Third shift",
+     "label": "Heat-treat · 6 AM",
+     "h": "Mike Haley’s stacks",
+     "text": "Mike Haley, the third-shift foreman, is pushing 10% more through the furnaces than anyone. His helpers pre-sort parts into stacks by temperature, so a furnace that needs only fifty parts for one late order gets topped up with other parts that run at the same heat. His next idea: tables that roll in and out on a forklift, so a load change takes minutes instead of an hour. Alex moves him to day shift to write it all down.",
+     "theme": "floor"
+    },
+    {
+     "id": "13-8",
+     "type": "twist",
+     "t": "Self-inflicted",
+     "head": "Some of those parts never needed heat-treat.",
+     "text": "Five years ago, someone sped up three non-bottleneck machines by cutting deeper on each pass. That made the metal brittle, so the parts needed heat-treat. Slow those machines back down and about 20% of the furnace load disappears. No engineering approval needed; the plant made the change itself.",
+     "status": "Heat-treat load −20%"
+    },
+    {
+     "id": "13-9",
+     "type": "myth",
+     "t": "Max out every machine",
+     "take": "Local efficiency on a non-bottleneck can steal capacity from the bottleneck.",
+     "myth": "Every machine should run as efficiently as it possibly can.",
+     "truth": "Making three non-bottlenecks ‘efficient’ created a fifth of the work on a bottleneck. Slow them down and the whole plant goes faster."
+    },
+    {
+     "id": "13-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "A Friday afternoon, a few weeks later. Something goes BAM off the ceiling tiles of Alex’s office. It’s a champagne cork, and half the plant is crowding through his door."
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "title": "Champagne",
+   "hook": "The best month in the plant’s history. A midnight misunderstanding. And a new problem nobody saw coming.",
+   "bg": "#1F3B57",
+   "bg2": "#0E1C2A",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "Record month: 57 orders, about $3 million, inventory down 12%.",
+    "Julie misreads a late night; Stacey sets it straight.",
+    "Ordinary green-tag parts start going missing at assembly."
+   ],
+   "posts": [
+    {
+     "id": "14-1",
+     "type": "hook",
+     "t": "A plant record",
+     "kicker": "Friday afternoon",
+     "head": "BAM. A champagne cork ricochets off his ceiling.",
+     "sub": "The best month in the plant’s history, and a night that could end his marriage.",
+     "art": "stamp",
+     "artText": "RECORD|57 ORDERS SHIPPED"
+    },
+    {
+     "id": "14-2",
+     "type": "list",
+     "t": "The record",
+     "take": "Shipments nearly doubled while inventory fell.",
+     "label": "Lou checked the books",
+     "h": "Best month ever",
+     "items": [
+      {
+       "text": "Old record, orders in a month",
+       "value": "31"
+      },
+      {
+       "text": "Old record, value",
+       "value": "≈ $2M"
+      },
+      {
+       "text": "This month, orders",
+       "value": "57"
+      },
+      {
+       "text": "This month, value",
+       "value": "≈ $3M"
+      },
+      {
+       "text": "Work-in-process",
+       "value": "−12%"
+      }
+     ],
+     "total": "New plant record",
+     "text": "‘Then let’s drink to making money,’ says Alex. Bob’s champagne comes by the case and, in Stacey’s words, is industrial strength.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "14-3",
+     "type": "chat",
+     "t": "A different kind of call",
+     "label": "Fran’s desk",
+     "msgs": [
+      {
+       "who": "peach",
+       "text": "I was just talking to Johnny Jons."
+      },
+      {
+       "who": "alex",
+       "text": "What’s the problem?"
+      },
+      {
+       "who": "peach",
+       "text": "No problem. He’s happy. You’ve been coming through on a lot of late orders."
+      },
+      {
+       "who": "peach",
+       "text": "I’m always on your case when things go wrong, Al. So: thanks, from me and Jons."
+      },
+      {
+       "who": "alex",
+       "text": "Thanks, Bill. Thanks for calling."
+      }
+     ]
+    },
+    {
+     "id": "14-4",
+     "type": "scene",
+     "t": "1:30 AM",
+     "label": "Alex’s front door",
+     "text": "The party moves to dinner, then a bar. Stacey, on club soda for hours, drives Alex home. At the door he goes to shake her hand, trips over the step, and they both end up on the floor, laughing so hard they cry. Then the lights come on.",
+     "theme": "night"
+    },
+    {
+     "id": "14-5",
+     "type": "twist",
+     "t": "The lights come on",
+     "head": "Julie.",
+     "text": "She drove over on impulse because she missed him and the kids, then waited six hours with his mother. Now she finds him drunk on the floor, laughing with a woman she has never met. She reverses out of the garage at thirty miles an hour.",
+     "status": "Gone again"
+    },
+    {
+     "id": "14-6",
+     "type": "scene",
+     "t": "Stacey’s bad news",
+     "label": "Monday morning",
+     "h": "Sixteen green tags",
+     "text": "Stacey offers to call Julie and explain. Then she shows Alex something worse. An order of 200 units needed 172 different parts; 17 were missing. Only one had a red tag, and it came out of heat-treat on time. The other sixteen were ordinary green-tag parts, and they still haven’t shown up. Vendors aren’t the problem. It’s inside the plant.",
+     "theme": "steel"
+    },
+    {
+     "id": "14-7",
+     "type": "guess",
+     "t": "Your guess",
+     "label": "Something’s wrong",
+     "q": "Bottleneck parts now arrive on time. Ordinary parts don’t. What’s going on?",
+     "options": [
+      {
+       "text": "Higher sales have created new bottlenecks",
+       "feedback": "Stacey’s theory. Sounds right."
+      },
+      {
+       "text": "Suppliers are shipping late",
+       "feedback": "Stacey already checked. They aren’t."
+      },
+      {
+       "text": "The red-tag priority system itself",
+       "feedback": "Interesting. Hold that thought."
+      },
+      {
+       "text": "People are slacking off",
+       "feedback": "Nobody on the floor is idle."
+      }
+     ],
+     "reveal": "On the phone, Jonah asks Alex to list everything they’ve changed. He stops at one item: ‘New priority system?’ Then he says he had better come have another look. The answer arrives in Chapter 15.",
+     "hint": "Pick your answer. We’ll keep it for later.",
+     "loopId": "spread"
+    },
+    {
+     "id": "14-8",
+     "type": "scene",
+     "t": "Room to walk",
+     "label": "The floor",
+     "text": "A month ago, the aisles were canyons of half-finished parts. Last week, for the first time since he came to this plant, Alex walked to the assembly line without turning sideways. He took it as a good sign.",
+     "theme": "floor"
+    },
+    {
+     "id": "14-9",
+     "type": "chat",
+     "t": "Friends again",
+     "label": "Home · that night",
+     "msgs": [
+      {
+       "who": "julie",
+       "text": "I owe you an apology. Stacey called me. I completely misunderstood."
+      },
+      {
+       "who": "alex",
+       "text": "There’s been a lot of misunderstanding between us lately."
+      },
+      {
+       "who": "julie",
+       "text": "I drove down thinking you’d be glad to see me."
+      },
+      {
+       "who": "alex",
+       "text": "I would have been, if you’d stayed. Friends again?"
+      },
+      {
+       "who": "julie",
+       "text": "Yes. When will I see you?"
+      }
+     ]
+    },
+    {
+     "id": "14-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Next morning, Jonah walks out of Gate Two again. Within an hour he is kneeling on the factory floor with a piece of chalk, about to explain why their best idea created their newest problem."
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "title": "Drum and Rope",
+   "hook": "The plant’s new bottleneck isn’t a bottleneck. And a second-grader works out the fix at the kitchen table.",
+   "bg": "#2E9C5A",
+   "bg2": "#14512D",
+   "fg": "#06190D",
+   "minutes": 3,
+   "recap": [
+    "A non-bottleneck’s useful work is set by the bottleneck, not by its own capacity.",
+    "Activating a resource is not the same as utilizing it.",
+    "Release material only at the pace the bottlenecks can use it."
+   ],
+   "posts": [
+    {
+     "id": "15-1",
+     "type": "hook",
+     "t": "Chalk on the floor",
+     "kicker": "The milling machines",
+     "head": "Their newest bottleneck isn’t a bottleneck. They built it.",
+     "sub": "Jonah explains with chalk on the floor. A second-grader finishes the job at the kitchen table.",
+     "art": "drum"
+    },
+    {
+     "id": "15-2",
+     "type": "scene",
+     "t": "Green tags, waiting",
+     "label": "The milling machines · 10:30 AM",
+     "h": "Following the rules",
+     "text": "Thirty parts are missing. Most of them are right here, under green tags, untouched for two or three weeks. The foreman shrugs: he’s following the rules. Red first. And 75 to 80% of everything that reaches heat-treat or the NCX-10 passes through his machines first. The red parts never stop coming, so the green ones never get a turn.",
+     "theme": "paper"
+    },
+    {
+     "id": "15-3",
+     "type": "chat",
+     "t": "Expedite?",
+     "label": "Beside the stacks",
+     "msgs": [
+      {
+       "who": "bob",
+       "text": "So what now? Switch the missing parts to red?"
+      },
+      {
+       "who": "alex",
+       "text": "I guess the only answer is to expedite."
+      },
+      {
+       "who": "jonah",
+       "text": "Expedite now and you’ll be expediting forever. Come look at your bottleneck."
+      },
+      {
+       "who": "ralph",
+       "text": "How do we even get to it?"
+      },
+      {
+       "who": "jonah",
+       "text": "A month of work, I’d guess, and every piece with a red tag. Why is it all here?"
+      }
+     ]
+    },
+    {
+     "id": "15-4",
+     "type": "compare",
+     "t": "X and Y",
+     "label": "Jonah’s chalk diagrams",
+     "h": "Bottleneck X, non-bottleneck Y",
+     "leftTitle": "Y feeds X",
+     "left": [
+      "Y needs 450 of its 600 hours",
+      "Run it all 600 anyway",
+      "The extra piles up at X"
+     ],
+     "rightTitle": "Y skips X",
+     "right": [
+      "Y’s parts wait for X’s parts",
+      "Or become finished goods",
+      "That nobody has ordered"
+     ],
+     "text": "In every combination, Y never sets throughput. Running it beyond what X or the market can absorb makes one thing: inventory.",
+     "mid": "?"
+    },
+    {
+     "id": "15-5",
+     "type": "idea",
+     "t": "Self-made bottleneck",
+     "take": "Releasing material to keep everyone busy can create a bottleneck that wasn’t there.",
+     "label": "The answer",
+     "head": "You turned the milling machines into a bottleneck.",
+     "sub": "Every time a non-bottleneck ran out of work, more material went onto the floor. Throughput only rose 20%; the flood of releases is what swamped the mills. The red parts took every hour, and the green ones waited.",
+     "payoffLoopId": "spread",
+     "theme": "sodium"
+    },
+    {
+     "id": "15-6",
+     "type": "myth",
+     "t": "Running means productive",
+     "take": "Activating a resource and utilizing it are not the same thing.",
+     "myth": "A machine that’s running is a machine that’s being productive.",
+     "truth": "Activating a resource just means switching it on. Utilizing it means work that moves the plant toward the goal. A system of local optimums is not an optimum system."
+    },
+    {
+     "id": "15-7",
+     "type": "poll",
+     "t": "The kitchen-table problem",
+     "label": "Sharon and Dave’s puzzle",
+     "q": "Herbie is stuck in the middle of the line and can’t move. The kids ahead of him keep walking faster, and the line spreads out. How do you keep it together?",
+     "options": [
+      {
+       "text": "A drummer, and Herbie beats the drum",
+       "feedback": "Sharon’s answer, like a parade."
+      },
+      {
+       "text": "Tie everyone together with one rope",
+       "feedback": "Dave’s answer, like mountain climbers."
+      },
+      {
+       "text": "Just keep the front kid from outpacing Herbie",
+       "feedback": "The simplest version of both."
+      }
+     ],
+     "reveal": "Both kids were close. You don’t need everyone in step, or everyone tied. Just keep the kid at the front from walking faster than Herbie. Their prize? Sharon asks for one thing: get Mom to come home.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "15-8",
+     "type": "list",
+     "t": "The drum sets the pace",
+     "label": "Ralph’s idea",
+     "h": "Let the bottleneck call for material",
+     "items": [
+      {
+       "text": "Ralph can predict weeks ahead what each bottleneck will work on",
+       "state": "ok"
+      },
+      {
+       "text": "Material takes about two weeks to reach a bottleneck",
+       "state": "ok"
+      },
+      {
+       "text": "Release red material only as fast as the bottleneck uses it",
+       "state": "ok"
+      },
+      {
+       "text": "Keep about three days of work waiting in front of it",
+       "state": "ok"
+      },
+      {
+       "text": "Time every other release backwards from assembly",
+       "state": "ok"
+      }
+     ],
+     "text": "The bottlenecks now decide when material enters the plant. It works like putting Herbie at the front, without moving a single machine.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "15-9",
+     "type": "scene",
+     "t": "Damn the efficiencies",
+     "label": "Next morning",
+     "text": "Bob raises a red flag: if they hold material back, people will be idle and efficiencies will drop, right before Peach decides the plant’s fate. Stacey answers: a person already on the payroll costs nothing extra standing still; excess inventory ties up real money. Alex decides. They go ahead, and if efficiencies drop, let them.",
+     "theme": "paper"
+    },
+    {
+     "id": "15-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "End of May, headquarters. The division’s numbers man announces that Bearington alone kept the division from a seventh straight monthly loss. Alex waits for Peach’s reaction. Peach says two words. Then he says something much harder."
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "title": "Four Weeks",
+   "hook": "The best report in the division earns two words from Peach, and a demand for 15% more.",
+   "bg": "#8C2F39",
+   "bg2": "#3F1419",
+   "fg": "#FFEDEE",
+   "minutes": 3,
+   "recap": [
+    "Bearington gives the division its first operating profit of the year.",
+    "Peach wants 15% more on the bottom line, and the overdue backlog is gone.",
+    "Jonah: halve batch sizes. Lead times shrink from months to weeks."
+   ],
+   "posts": [
+    {
+     "id": "16-1",
+     "type": "hook",
+     "t": "Fifteen percent",
+     "kicker": "Headquarters, end of May",
+     "head": "The best report in the division. Peach says ‘good job’ and asks for 15% more.",
+     "sub": "Then Jonah calls from Singapore with an idea that seems to make everything cost more.",
+     "art": "skyline",
+     "artText": "HQ · END OF MAY"
+    },
+    {
+     "id": "16-2",
+     "type": "scene",
+     "t": "Good job",
+     "label": "15th floor · monthly review",
+     "text": "The division’s numbers man says it plainly: without Bearington, the division would have lost money for a seventh straight month. Ralph’s new system now predicts each shipment to within a day. The overdue backlog is gone. Peach, with Smyth whispering at his side, says only, ‘Good job.’ Alex decides not to tell him everything yet. They have broken too many rules.",
+     "theme": "steel"
+    },
+    {
+     "id": "16-3",
+     "type": "chat",
+     "t": "The deal",
+     "label": "Peach’s office, door closed",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "So when are you going to let us off the hook?"
+      },
+      {
+       "who": "peach",
+       "text": "What makes you think I’m going to? You had a huge backlog. Shipping it was inevitable."
+      },
+      {
+       "who": "alex",
+       "text": "If we improve again next month, will you hold off on closing us?"
+      },
+      {
+       "who": "peach",
+       "text": "Give me fifteen percent more on the bottom line than this month."
+      },
+      {
+       "who": "alex",
+       "text": "I think we can do that."
+      },
+      {
+       "who": "peach",
+       "text": "Then keep delivering it, and Bearington stays open."
+      }
+     ]
+    },
+    {
+     "id": "16-4",
+     "type": "twist",
+     "t": "Eighty miles an hour",
+     "head": "He just promised orders he doesn’t have.",
+     "text": "Speeding home, it hits him. Last month looked great because they finally shipped the overdue backlog. That’s gone now, and new orders are going out much faster than they come in. Where will an extra 15% come from?",
+     "status": "Backlog: zero"
+    },
+    {
+     "id": "16-5",
+     "type": "scene",
+     "t": "A dumb question",
+     "label": "A park bench by the river",
+     "text": "Julie says she’s still afraid that if she comes home, the same fights will start within a week. Alex asks what their marriage is supposed to be for. ‘When you’re married, you’re just married,’ she says. ‘There is no goal.’ They walk back like two icebergs. Then she runs after his car: Saturday? ‘We’ll keep trying until we get it right.’",
+     "theme": "night"
+    },
+    {
+     "id": "16-6",
+     "type": "list",
+     "t": "Where the time goes",
+     "take": "Most of a part’s time in a plant is spent waiting, and the bottlenecks set that waiting.",
+     "label": "Jonah, calling from Singapore",
+     "h": "A part’s life inside the plant",
+     "items": [
+      {
+       "text": "Setup: the machine gets ready",
+       "value": "Small"
+      },
+      {
+       "text": "Process: the actual work",
+       "value": "Small"
+      },
+      {
+       "text": "Queue: waiting for a busy machine",
+       "value": "Big at bottlenecks"
+      },
+      {
+       "text": "Wait: waiting for another part",
+       "value": "Big at assembly"
+      }
+     ],
+     "total": "Mostly sitting",
+     "text": "Jonah’s next step: cut batch sizes in half on non-bottlenecks. Half the batch, roughly half the sitting.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "16-7",
+     "type": "poll",
+     "t": "You decide: more setups",
+     "label": "You decide",
+     "q": "Half-size batches mean twice as many setups. Bob protests: setups cost money. What do you tell him?",
+     "options": [
+      {
+       "text": "He’s right. Keep the big batches.",
+       "feedback": "On paper, yes. In cash, no."
+      },
+      {
+       "text": "Halve batches only on the bottlenecks",
+       "feedback": "Backwards. Bottleneck time is the precious kind."
+      },
+      {
+       "text": "Extra setups on non-bottlenecks are free",
+       "feedback": "That’s the argument Alex makes."
+      }
+     ],
+     "reveal": "Jonah’s rule: an hour saved at a non-bottleneck is a mirage. Material is now held back, so non-bottlenecks have idle time. Extra setups just use some of it. Nobody is hired. Nothing extra is spent.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "16-8",
+     "type": "idea",
+     "t": "Speed sells",
+     "take": "Smaller batches shrink lead time, and short lead time wins business.",
+     "label": "The payoff",
+     "head": "Half the batch, half the wait.",
+     "sub": "Lead time was three to four months; the new priorities cut it to about two. Halve the batches and it could be four weeks. Customers get orders sooner, and sales can promise what competitors can’t.",
+     "theme": "sodium"
+    },
+    {
+     "id": "16-9",
+     "type": "chat",
+     "t": "The Gucci bet",
+     "label": "Johnny Jons’ office",
+     "msgs": [
+      {
+       "who": "jons",
+       "text": "Four weeks? Last winter we promised four months and took six!"
+      },
+      {
+       "who": "alex",
+       "text": "Get me ten orders and I’ll prove it."
+      },
+      {
+       "who": "jons",
+       "text": "And what happens to our credibility if you can’t?"
+      },
+      {
+       "who": "alex",
+       "text": "If I miss four weeks, I’ll buy you a new pair of Guccis."
+      },
+      {
+       "who": "jons",
+       "text": "Deal. We’ll offer six weeks. Ship in under five and I’ll buy YOU shoes."
+      }
+     ]
+    },
+    {
+     "id": "16-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "4:20 AM. In a nightmare, Peach chases him through the aisles in his crimson Mercedes, yelling that the bottom line isn’t good enough. Alex wakes next to Julie. New orders are coming in. But one number has gone the wrong way."
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "title": "A Thousand Model 12s",
+   "hook": "A thousand units in two weeks, a million dollars, and an order a competitor sat on for five months.",
+   "bg": "#C0392B",
+   "bg2": "#5E1A13",
+   "fg": "#FFF2EE",
+   "minutes": 3,
+   "recap": [
+    "Smaller batches: efficiencies up and inventory at its lowest ever.",
+    "On paper, more setups make each part look more expensive.",
+    "Burnside wants 1,000 units in two weeks. Alex offers 250 a week, and wins."
+   ],
+   "posts": [
+    {
+     "id": "17-1",
+     "type": "hook",
+     "t": "A thousand units",
+     "kicker": "A call from Johnny Jons",
+     "head": "A thousand units. Two weeks. A million dollars.",
+     "sub": "An order a competitor sat on for five months, for a customer who swore off Bearington.",
+     "art": "stamp",
+     "artText": "1,000 UNITS|DUE IN TWO WEEKS"
+    },
+    {
+     "id": "17-2",
+     "type": "scene",
+     "t": "4:20 AM",
+     "label": "The house in Bearington",
+     "text": "With the kids at Julie’s parents, the two of them had the empty house to themselves: wine, cheese, a loaf of bread. Now Alex stands at the dark window, wide awake. Most of yesterday’s staff meeting was good news. One part wasn’t.",
+     "theme": "night"
+    },
+    {
+     "id": "17-3",
+     "type": "list",
+     "t": "The good news",
+     "label": "Yesterday’s staff meeting",
+     "h": "Two weeks of smaller batches",
+     "items": [
+      {
+       "text": "About half a dozen new orders since the Gucci bet",
+       "state": "ok"
+      },
+      {
+       "text": "Efficiencies went up, not down",
+       "state": "ok"
+      },
+      {
+       "text": "Inventory at its lowest ever, half its old size",
+       "state": "ok"
+      },
+      {
+       "text": "Idle time comes in ten-minute pieces, not two-hour ones",
+       "state": "ok"
+      }
+     ],
+     "text": "Smaller batches move to the next station sooner, so fewer machines sit starved waiting for a huge batch to finish.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "17-4",
+     "type": "chat",
+     "t": "Tell me about it",
+     "label": "The living room · 5 AM",
+     "msgs": [
+      {
+       "who": "julie",
+       "text": "How come you’re out here in the dark?"
+      },
+      {
+       "who": "alex",
+       "text": "Our cost measurements."
+      },
+      {
+       "who": "julie",
+       "text": "I thought everything was getting better."
+      },
+      {
+       "who": "alex",
+       "text": "It is. Politically it’s bad. Financially it doesn’t make a bit of difference."
+      },
+      {
+       "who": "julie",
+       "text": "Then tell me about it."
+      }
+     ]
+    },
+    {
+     "id": "17-5",
+     "type": "list",
+     "t": "The bad news",
+     "take": "Cost accounting assumes every worker is always busy, so extra setups look like extra cost.",
+     "label": "A pencil and paper at dawn",
+     "h": "Why parts look more expensive",
+     "items": [
+      {
+       "text": "Setup for a batch",
+       "value": "120 min"
+      },
+      {
+       "text": "Process time per part",
+       "value": "5 min"
+      },
+      {
+       "text": "Batch of 100: setup per part",
+       "value": "1.2 min"
+      },
+      {
+       "text": "Batch of 50: setup per part",
+       "value": "2.4 min"
+      },
+      {
+       "text": "Labor per part, on paper",
+       "value": "6.2 → 7.4 min"
+      }
+     ],
+     "total": "Cost looks up",
+     "text": "Overhead is calculated from labor, so it rises on paper too. In reality nobody was hired and nothing extra was spent. More product now shares the same costs, so real cost per part went down.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "17-6",
+     "type": "poll",
+     "t": "Lou’s offer",
+     "label": "You decide",
+     "q": "Lou can calculate costs from the last two months instead of the last twelve. It’s more realistic, but it breaks accounting policy, and headquarters would catch it if they looked. Do it?",
+     "options": [
+      {
+       "text": "Yes. It buys time.",
+       "feedback": "That’s Alex’s call."
+      },
+      {
+       "text": "No. Report by the book.",
+       "feedback": "Then Peach sees costs rising. Hot water either way."
+      }
+     ],
+     "reveal": "Alex takes the risk. ‘Remember, if we get caught…’ Lou warns. Alex says he’ll practice his tap dancing. Then Fran buzzes: Johnny Jons is on the line.",
+     "hint": "Pick one. Then see what Alex did."
+    },
+    {
+     "id": "17-7",
+     "type": "chat",
+     "t": "Bucky’s back",
+     "label": "Phone · Johnny Jons",
+     "msgs": [
+      {
+       "who": "jons",
+       "text": "Remember our dear friend Bucky Burnside? He wants a thousand Model 12s."
+      },
+      {
+       "who": "alex",
+       "text": "Terrific!"
+      },
+      {
+       "who": "jons",
+       "text": "By the end of the month. We have fifty in the warehouse."
+      },
+      {
+       "who": "alex",
+       "text": "That’s two weeks."
+      },
+      {
+       "who": "jons",
+       "text": "Our biggest competitor had the order five months and can’t deliver. Come through and we could be their preferred supplier."
+      }
+     ]
+    },
+    {
+     "id": "17-8",
+     "type": "scene",
+     "t": "Making it fit",
+     "label": "Alex’s office · all morning",
+     "h": "No customer left behind",
+     "text": "Ralph: the bottlenecks can make parts for about 100 units a day, but only if every other customer waits. No. So: halve the batch sizes again. Hold orders scheduled to ship early until their due dates. Stacey finds the control modules in California, four to six weeks out, so they ask for weekly shipments by air freight. On a million-dollar sale, freight is small change.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-9",
+     "type": "idea",
+     "t": "Ship it in pieces",
+     "take": "Splitting a big order into regular smaller shipments can make the impossible deliverable.",
+     "label": "The offer",
+     "head": "250 a week beats 1,000 at once.",
+     "sub": "Starting two weeks after the order: 250 units a week for four weeks. Nobody else’s order slips. Burnside not only accepts, he likes the smaller shipments better.",
+     "theme": "sodium"
+    },
+    {
+     "id": "17-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "That evening Jons shouts down the phone: we got it! A million dollars rings up in Alex’s other ear. The first 250 ship in two weeks. At headquarters, though, someone is about to look very closely at Lou’s numbers."
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "title": "The Helicopter",
+   "hook": "An audit wipes out his best number. Then a helicopter lands on the front lawn.",
+   "bg": "#2B3A4A",
+   "bg2": "#121A22",
+   "fg": "#E6EEF6",
+   "minutes": 3,
+   "recap": [
+    "The month comes in at 17%: inventory down 60%, throughput doubled.",
+    "An audit restores the old cost rules: on paper, only 12.8%.",
+    "Burnside flies in to thank everyone. Alex and Julie decide to marry again."
+   ],
+   "posts": [
+    {
+     "id": "18-1",
+     "type": "hook",
+     "t": "Wuppa-wuppa-wuppa",
+     "kicker": "The front lawn",
+     "head": "The audit wiped out his best number. Then a helicopter landed on the lawn.",
+     "sub": "Out stepped the toughest customer in the business.",
+     "art": "bars",
+     "artText": "+17%"
+    },
+    {
+     "id": "18-2",
+     "type": "list",
+     "t": "Did we make 15%?",
+     "take": "Seventeen percent: more than Peach asked for.",
+     "label": "Lou, late to the staff meeting",
+     "h": "The second quarter",
+     "items": [
+      {
+       "text": "Bottom line vs last month",
+       "value": "+17%"
+      },
+      {
+       "text": "Inventory vs three months ago",
+       "value": "≈40%"
+      },
+      {
+       "text": "Throughput",
+       "value": "Doubled"
+      },
+      {
+       "text": "Burnside shipments",
+       "value": "On time"
+      }
+     ],
+     "total": "Solidly in the black",
+     "text": "Two letters arrive from Peach: congratulations on Burnside, and notice of a formal plant review at headquarters.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "18-3",
+     "type": "scene",
+     "t": "Lights, camera, nothing",
+     "label": "C-aisle · while Alex is away",
+     "h": "The idle robot",
+     "text": "Hilton Smyth shows up with a TV crew to film a video about robot productivity. One problem: the robot has nothing to do. No inventory anywhere near it. Bob spends an hour hunting for parts it can stack. Meanwhile a bored Smyth wanders the floor, asking a lot of questions about batch sizes.",
+     "theme": "floor"
+    },
+    {
+     "id": "18-4",
+     "type": "twist",
+     "t": "The audit",
+     "head": "17% becomes 12.8%.",
+     "text": "Two days later, auditors from the division take over the conference room. They find the changed cost base within hours. ‘Highly irregular.’ Recalculated by the old standards, costs appear to rise, and the gain shrinks to 12.8%. Peach says nothing.",
+     "status": "Short of the promise"
+    },
+    {
+     "id": "18-5",
+     "type": "scene",
+     "t": "Who’s in the helicopter?",
+     "label": "Alex’s office · early afternoon",
+     "text": "A red and white helicopter settles on the lawn. Out climbs Johnny Jons, and a huge, white-haired man with a swagger: Bucky Burnside. Alex sprints to Stacey: was the last shipment on time? Yes. He finds Bob in the men’s room: any quality problems? None. ‘Clockwork.’ Then what is Burnside doing here?",
+     "theme": "steel"
+    },
+    {
+     "id": "18-6",
+     "type": "chat",
+     "t": "Every hand",
+     "label": "The plant floor",
+     "msgs": [
+      {
+       "who": "burnside",
+       "text": "Rogo! I came to shake the hand of every employee in your plant."
+      },
+      {
+       "who": "burnside",
+       "text": "The other outfit sat on our order five months. Your people did it in five weeks. Must have been an incredible effort!"
+      },
+      {
+       "who": "alex",
+       "text": "We just did our best."
+      },
+      {
+       "who": "burnside",
+       "text": "Won’t hurt your efficiency, will it?"
+      },
+      {
+       "who": "alex",
+       "text": "Not one bit. Go right ahead."
+      }
+     ]
+    },
+    {
+     "id": "18-7",
+     "type": "poll",
+     "t": "Did they pull out all the stops?",
+     "label": "You decide",
+     "q": "Burnside thinks the plant moved heaven and earth. Did it?",
+     "options": [
+      {
+       "text": "Yes: overtime, expediters, everything",
+       "feedback": "That’s what Jons told Burnside over lunch."
+      },
+      {
+       "text": "No: it was an ordinary few weeks",
+       "feedback": "Right."
+      }
+     ],
+     "reveal": "No extra effort at all. Just the new way of running the plant. ‘Shhh,’ whispers Jons. ‘Don’t let Burnside know.’ Burnside wants a long-term contract: 10,000 Model 12s a year. And Jons owes Alex a pair of shoes.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "18-8",
+     "type": "idea",
+     "t": "A plant that delivers",
+     "take": "Reliable, short lead times turned the plant into marketing’s best argument.",
+     "label": "The turnaround",
+     "head": "On-time delivery is a sales weapon.",
+     "sub": "Jons is planning a campaign for everything Bearington makes: the one plant in the division that ships quality on time. Two workers watch Burnside go by. ‘Guess we must’ve done something right.’",
+     "theme": "sodium"
+    },
+    {
+     "id": "18-9",
+     "type": "scene",
+     "t": "The bench by the river",
+     "label": "Forest Grove · the night before the review",
+     "text": "Julie says she finally understands why she hasn’t wanted to come home: apart, they’ve spent more time together than they did under one roof. Flowers. Walks. Attention. She wants more of him, not less. They promise to talk every evening again, the way they used to, and to see things from each other’s side.",
+     "theme": "night"
+    },
+    {
+     "id": "18-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "‘So… you want to get married?’ ‘I’ll try anything twice.’ Vegas, tomorrow night. But first, the plant review at ten. Alex walks in to find Peach’s chair empty, and Hilton Smyth at the head of the table."
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "title": "Gold Mine",
+   "hook": "Peach’s chair is empty and Hilton Smyth is the judge. By lunch, Alex has a job he never asked for.",
+   "bg": "#F2C200",
+   "bg2": "#8A6E00",
+   "fg": "#17191C",
+   "minutes": 3,
+   "recap": [
+    "At the review, Smyth insists rising product costs mean falling profits.",
+    "Peach keeps the plant open and makes Alex head of the division.",
+    "Jonah won’t come to help. First, Alex must work out what a manager needs to learn."
+   ],
+   "posts": [
+    {
+     "id": "19-1",
+     "type": "hook",
+     "t": "The review",
+     "kicker": "Headquarters, 10 AM",
+     "head": "Peach’s chair is empty. Hilton Smyth is running the review.",
+     "sub": "By lunchtime, Alex walks out with the biggest surprise of his career.",
+     "art": "clock",
+     "artText": "10:00 AM|THE REVIEW"
+    },
+    {
+     "id": "19-2",
+     "type": "chat",
+     "t": "Is the goal to reduce costs?",
+     "label": "15th floor · conference room",
+     "msgs": [
+      {
+       "who": "smyth",
+       "text": "I’d particularly like to know why you aren’t following proper procedures for batch quantities."
+      },
+      {
+       "who": "alex",
+       "text": "First a question. Is the goal of this division to reduce costs?"
+      },
+      {
+       "who": "smyth",
+       "text": "Of course it is."
+      },
+      {
+       "who": "alex",
+       "text": "No. The goal is to make money. Agreed?"
+      },
+      {
+       "who": "alex",
+       "text": "Whatever our costs look like by the standard measurements, my plant has never been in a better position to make money."
+      }
+     ]
+    },
+    {
+     "id": "19-3",
+     "type": "compare",
+     "t": "Two rulebooks",
+     "label": "An hour and a half later",
+     "h": "Same plant. Opposite conclusions.",
+     "leftTitle": "Smyth’s rules",
+     "left": [
+      "Balance capacity with demand",
+      "A busy worker is a productive worker",
+      "An hour saved anywhere is saved",
+      "Costs up means profits down"
+     ],
+     "rightTitle": "Alex’s rules",
+     "right": [
+      "Balance flow with demand",
+      "The bottleneck decides useful work",
+      "An hour saved at a non-bottleneck is a mirage",
+      "Judge by the bottom line"
+     ],
+     "text": "Smyth isn’t moved. Costs per product went up, so profits must go down. That is what his report to Peach will say.",
+     "mid": "vs"
+    },
+    {
+     "id": "19-4",
+     "type": "scene",
+     "t": "The corner office",
+     "label": "Peach’s office",
+     "text": "Alex doesn’t take the elevator. He walks to Peach’s office. ‘Go right in,’ says his secretary. ‘He’s waiting for you.’ Peach calls in Smyth, the division controller and Johnny Jons. Smyth wants Alex called to order. The controller points out the plant turned losses into profits and released cash. Jons says it’s the only plant that delivers miracles. ‘Miracles exist only in fairy tales,’ sniffs Smyth.",
+     "theme": "steel"
+    },
+    {
+     "id": "19-5",
+     "type": "poll",
+     "t": "The verdict",
+     "label": "You decide",
+     "q": "Rising product costs on one side. Profits, cash and delighted customers on the other. What does Peach decide?",
+     "options": [
+      {
+       "text": "Close it. The costs are rising.",
+       "feedback": "Smyth would like that."
+      },
+      {
+       "text": "Keep it open, under Smyth’s supervision",
+       "feedback": "Not quite."
+      },
+      {
+       "text": "Something nobody in the room expects",
+       "feedback": "Right."
+      }
+     ],
+     "reveal": "‘Do you think we’re such bad managers that we’d close a gold mine?’ Then the real news: Peach, the controller and Jons are moving up to run the group. Their choice to take over the division: Alex Rogo.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "19-6",
+     "type": "chat",
+     "t": "Can’t you come?",
+     "label": "Phone · Jonah in New York",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "All this time I was trying to save one plant. Now I’ll have three. Can’t you come and help?"
+      },
+      {
+       "who": "jonah",
+       "text": "As your responsibility grows, you should rely more on yourself. My coming now would increase the dependency."
+      },
+      {
+       "who": "alex",
+       "text": "Then teach me how to manage. A plant, a division, any organization."
+      },
+      {
+       "who": "jonah",
+       "text": "Good. First assignment: work out what techniques effective management needs. Call me when you know."
+      }
+     ]
+    },
+    {
+     "id": "19-7",
+     "type": "scene",
+     "t": "A toast",
+     "label": "A restaurant · that evening",
+     "text": "Alex tries to give Jonah all the credit. Julie won’t have it: nobody handed him answers, he sweated for them. Then she asks the real question. If the answers are just common sense, why couldn’t they see them alone? Alex’s best guess: common sense gets buried under common practice. Jonah’s questions peel the practice away.",
+     "theme": "night"
+    },
+    {
+     "id": "19-8",
+     "type": "twist",
+     "t": "Hidden profit",
+     "head": "They made more money than the books said.",
+     "text": "Lou finds a bigger distortion. Inventory is counted as an asset at full production cost, so draining half the work-in-process showed up as a loss. Real net profit: over 20% in each of the last three months. He told the division controller, not Alex. That’s why the controller was so supportive.",
+     "status": "Real profit: 20%+"
+    },
+    {
+     "id": "19-9",
+     "type": "list",
+     "t": "Everyone has a dream",
+     "label": "Alex’s office · the next day",
+     "h": "The team, after Alex",
+     "items": [
+      {
+       "text": "Lou: joins the division to build measurements that make sense",
+       "state": "ok"
+      },
+      {
+       "text": "Bob: stays as plant manager, to engineer sales like Burnside’s",
+       "state": "ok"
+      },
+      {
+       "text": "Stacey: production manager, watching the buffers for holes",
+       "state": "ok"
+      },
+      {
+       "text": "Ralph: systems that answer the questions people actually ask",
+       "state": "ok"
+      }
+     ],
+     "text": "Each of them knows exactly what they want to build. Alex has only Jonah’s question.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "19-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Two months left. Every afternoon, Alex asks his team to help him answer Jonah’s question. He begins innocently: what should a new division manager do first? Their answer covers a whiteboard in colored circles and leads absolutely nowhere."
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "title": "Your Own Jonah",
+   "hook": "How do you find the weakest link in an entire company? They write down what they did, and discover what they forgot.",
+   "bg": "#17191C",
+   "bg2": "#3A2410",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "Five steps: identify, exploit, subordinate, elevate, and never let inertia become the constraint.",
+    "Spare capacity is protection, and also an opportunity to sell.",
+    "A manager must answer three questions: what to change, what to change to, how to cause the change."
+   ],
+   "posts": [
+    {
+     "id": "20-1",
+     "type": "hook",
+     "t": "The weakest link",
+     "kicker": "The last afternoons at Bearington",
+     "head": "How do you find the weakest link in a whole company?",
+     "sub": "The team writes down what they actually did. Then they discover what they forgot.",
+     "art": "chain"
+    },
+    {
+     "id": "20-2",
+     "type": "scene",
+     "t": "Colored circles",
+     "label": "The conference room",
+     "h": "Fact finding",
+     "text": "Collect all the facts first, the team suggests. Alex fills the whiteboard with colored circles, stars and squares. Sort them by color? By size? By shape? ‘I’d rather throw darts,’ says Bob. Ralph tells the story of Mendeleev, who found the order hidden in the chemical elements and predicted ones nobody had found. Sorting by any convenient label just produces thick reports.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-3",
+     "type": "compare",
+     "t": "Two worlds",
+     "label": "Lou’s discovery",
+     "h": "From the cost world to the throughput world",
+     "leftTitle": "Cost world",
+     "left": [
+      "Every link matters, like a chain’s weight",
+      "Cost first, throughput second",
+      "Inventory counted as an asset"
+     ],
+     "rightTitle": "Throughput world",
+     "right": [
+      "The weakest link sets the strength",
+      "Throughput first, inventory second",
+      "Operating expense last"
+     ],
+     "text": "Their own numbers prove it: throughput and inventory moved by tens of percent, operating expense by less than 2%.",
+     "mid": "?"
+    },
+    {
+     "id": "20-4",
+     "type": "list",
+     "t": "The five steps",
+     "take": "Identify, exploit, subordinate, elevate, repeat, and beware inertia.",
+     "label": "Written on the whiteboard",
+     "h": "The process they had been following",
+     "items": [
+      {
+       "text": "1. IDENTIFY the system’s constraint(s)",
+       "state": "ok"
+      },
+      {
+       "text": "2. Decide how to EXPLOIT them",
+       "state": "ok"
+      },
+      {
+       "text": "3. SUBORDINATE everything else to that decision",
+       "state": "ok"
+      },
+      {
+       "text": "4. ELEVATE the constraint(s)",
+       "state": "ok"
+      },
+      {
+       "text": "5. If a constraint breaks, go back to step 1. Don’t let INERTIA become the constraint.",
+       "state": "warn"
+      }
+     ],
+     "text": "Furnaces and the NCX-10; no idle breaks; red tags and timed releases; the Zmegma. Each step matches something they did.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "20-5",
+     "type": "twist",
+     "t": "Inertia",
+     "head": "Their own fixes had become the constraint.",
+     "text": "With work now released at the right pace, the red tags only made some machines delay green parts. And when bottleneck load dropped, Stacey kept the bottlenecks busy building stock nobody had ordered: a fifth of their load. Their newest habits had gone stale in under a month.",
+     "status": "20% spare capacity"
+    },
+    {
+     "id": "20-6",
+     "type": "poll",
+     "t": "The French order",
+     "label": "You decide",
+     "q": "A French buyer offers $701 for the Model 12. The list price is $992; materials cost $334. Jons says it’s below cost: forget it. You have spare capacity. Take it?",
+     "options": [
+      {
+       "text": "No. It’s below product cost.",
+       "feedback": "That’s Jons’ answer."
+      },
+      {
+       "text": "Yes. It’s far above material cost.",
+       "feedback": "That’s Alex’s answer."
+      }
+     ],
+     "reveal": "With spare capacity, the only extra cost is materials and freight, so each unit adds hundreds of dollars to profit. To avoid a price war, Alex competes on speed instead: delivery in three weeks, where Europe waits eight to twelve. Seven-figure profit.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "20-7",
+     "type": "scene",
+     "t": "Murphy strikes back",
+     "label": "Two weeks later",
+     "text": "Twelve work centers on overtime. Orders starting to slip. The bottlenecks starve, then get flooded. The cause: after any breakdown, upstream machines must feed the bottleneck and rebuild its buffer at the same time. The new orders ate the spare capacity that made that possible. Bob takes charge: bigger buffers, weekend work, four-week quotes. The baton has passed.",
+     "theme": "floor"
+    },
+    {
+     "id": "20-8",
+     "type": "idea",
+     "t": "Spare capacity is protection",
+     "take": "Buffers and spare capacity trade off; without either, the bottleneck starves.",
+     "label": "The lesson",
+     "head": "Non-bottlenecks need spare capacity.",
+     "sub": "Less buffer in front of a bottleneck needs more spare capacity upstream, and the reverse. A plant with no idle capacity anywhere can’t even keep its bottleneck busy.",
+     "theme": "sodium"
+    },
+    {
+     "id": "20-9",
+     "type": "chat",
+     "t": "Three questions",
+     "label": "Driving back from headquarters",
+     "msgs": [
+      {
+       "who": "alex",
+       "text": "In the division the constraints aren’t machines. They’re policies. Even in our plant, they were."
+      },
+      {
+       "who": "lou",
+       "text": "Then we need a way to find the core problem. And then what to replace it with."
+      },
+      {
+       "who": "alex",
+       "text": "And how to make the change happen. What to change, what to change to, how to cause the change."
+      },
+      {
+       "who": "lou",
+       "text": "We should and can be our own Jonahs."
+      },
+      {
+       "who": "lou",
+       "text": "Alex, I’m proud to work for you."
+      }
+     ]
+    },
+    {
+     "id": "20-10",
+     "type": "cliffhanger",
+     "t": "The end",
+     "text": "Alex finally knows what to ask Jonah to teach him: not answers, but the thinking processes to find the core problem, design a solution that works, and bring people along. The plant is saved. The real lesson is the one he’ll keep using."
+    }
+   ]
+  }
+ ]
+}

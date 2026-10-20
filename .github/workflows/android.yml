@@ -1,8 +1,14 @@
 name: Android build and test
 
+# The web app on Vercel is the main delivery now; the Android build runs only when Android code changes,
+# or by hand from the Actions tab.
 on:
   push:
     branches: [main]
+    paths:
+      - "android/**"
+      - "tools/e2e.py"
+      - ".github/workflows/android.yml"
   workflow_dispatch:
 
 permissions:

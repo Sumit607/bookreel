@@ -1,0 +1,14 @@
+import { chromium } from "playwright";
+const out = process.argv[2];
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ viewport: { width: 412, height: 915 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const page = await ctx.newPage();
+const errors = [];
+page.on("pageerror", (e) => errors.push(e.message));
+page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
+await page.goto("http://localhost:4173/");
+await page.waitForSelector(".bgrid");
+await page.waitForTimeout(600);
+await page.screenshot({ path: out + "/w-library.png" });
+console.log("errors:", errors);
+await browser.close();

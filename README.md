@@ -33,3 +33,16 @@ Do not distribute an APK that contains it. Public builds may only ship public-do
 
 The release build is signed with a development key committed in `android/app/dev-signing.jks` so that
 every CI build installs over the previous one. Replace it with a secret upload key before any store release.
+
+## Web app (Vercel)
+
+`web/` is the same app as a fast web app (PWA) that installs to the home screen. Vercel deploys it from this
+repo on every push to `main` (project root `web/`).
+
+- `web/public/` is served as static files; `web/api/` holds two small functions.
+- Private packs (The Goal) are never static files: they sit in `web/api/_private/` and `/api/pack` serves them
+  only to a browser that has entered the passcode (`/api/unlock`). The passcode is the `BOOKREEL_PASSCODE`
+  environment variable on Vercel and is not stored in this repo.
+- After changing content: `python3 content/src/build.py && python3 tools/build_web.py`.
+- Test locally: `BOOKREEL_PASSCODE=test node tools/serve.mjs 4173`, then
+  `cd tools/web-test && npm install && node e2e.mjs http://localhost:4173 test out`.
