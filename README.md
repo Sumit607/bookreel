@@ -47,7 +47,7 @@ repo on every push to `main` (project root `web/`).
 - Private packs (The Goal) are never static files: they sit in `web/api/_private/` and `/api/pack` serves them
   only to a browser that has entered the passcode (`/api/unlock`). The passcode is the `BOOKREEL_PASSCODE`
   environment variable on Vercel and is not stored in this repo.
-- **Discover and Convert:** `/api/catalog` (Project Gutenberg's catalogue via Gutendex), `/api/book` (a book's plain
+- **Discover and Convert:** `/api/catalog` (Project Gutenberg's own OPDS catalogue: search, topics, book details), `/api/book` (a book's plain
   text, licence header removed) and `/api/convert` (plan + one call per chapter on the Gemini free tier, checked against
   the 20 × 10 rules). Downloads and finished Bookreels live in the phone's IndexedDB; nothing is uploaded. Converting
   needs the passcode cookie and the `GEMINI_API_KEY` environment variable on Vercel.

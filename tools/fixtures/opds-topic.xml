@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:relevance="http://a9.com/-/opensearch/extensions/relevance/1.0/">
+<id>https://www.gutenberg.org/ebooks/search.opds/?query=s.detective%20l.en&amp;sort_order=downloads</id>
+<updated>2026-10-21T17:10:59Z</updated>
+<title>Project Gutenberg eBooks</title>
+<author><name>Project Gutenberg</name><uri>https://www.gutenberg.org</uri></author>
+<link rel="self" title="This Page" type="application/atom+xml;profile=opds-catalog" href="/ebooks/search.opds/?query=s.detective%20l.en&amp;sort_order=downloads"/>
+<link rel="next" title="Next Page" type="application/atom+xml;profile=opds-catalog" href="/ebooks/search.opds/?query=s.detective%20l.en&amp;sort_order=downloads&amp;start_index=26"/>
+<opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+<opensearch:startIndex>1</opensearch:startIndex>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/search.opds/?query=s.detective%20l.en&amp;sort_order=title</id>
+<title>Sort Alphabetically by Title</title>
+<content type="text"></content>
+<link type="application/atom+xml;profile=opds-catalog" rel="http://opds-spec.org/sort/new" href="/ebooks/search.opds/?query=s.detective%20l.en&amp;sort_order=title"/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/1661.opds</id>
+<title>The Adventures of Sherlock Holmes</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/1661.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/2554.opds</id>
+<title>Crime and Punishment</title>
+<content type="text">Fyodor Dostoyevsky</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/2554.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/244.opds</id>
+<title>A Study in Scarlet</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/244.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/2852.opds</id>
+<title>The Hound of the Baskervilles</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/2852.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/2097.opds</id>
+<title>The Sign of the Four</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/2097.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/834.opds</id>
+<title>The Memoirs of Sherlock Holmes</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/834.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/108.opds</id>
+<title>The Return of Sherlock Holmes</title>
+<content type="text">Arthur Conan Doyle</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/108.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/155.opds</id>
+<title>The Moonstone</title>
+<content type="text">Wilkie Collins</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/155.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/6133.opds</id>
+<title>The Extraordinary Adventures of Arsène Lupin, Gentleman-Burglar</title>
+<content type="text">Maurice Leblanc</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/6133.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+</feed>

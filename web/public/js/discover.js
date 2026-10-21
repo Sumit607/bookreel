@@ -140,20 +140,24 @@ export function gbScreen(gid) {
     setTimeout(() => fetchOne(gid), 0);
     return `<div class="pad16"><div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button><span>Project Gutenberg #${esc(gid)}</span></div><div class="center muted" style="padding:48px 0">Loading…</div></div>`;
   }
+  if (b && !b.detail && !detailAsked.has(+gid)) setTimeout(() => fetchOne(gid), 0);
   const title = (b ? b.title : item.title).split(/[;:]/)[0];
   const a = b ? b.authors[0] : null;
-  const years = a && (a.birth || a.death) ? ` · ${a.birth ?? "?"}–${a.death ?? ""}` : "";
-  const subjects = b ? b.subjects : item.subjects || [];
+  const yr = (n) => (n == null ? "" : n < 0 ? `${-n} BC` : String(n));
+  const years = a && (a.birth != null || a.death != null) ? ` · ${yr(a.birth) || "?"}–${yr(a.death)}` : "";
+  const subjects = (b && b.subjects.length ? b.subjects : item?.subjects) || [];
   const coverUrl = b ? b.cover : item.cover;
+  const dl = b && b.downloads ? `<div><span>LAST 30 DAYS</span><b>${compactCount(b.downloads)} downloads</b></div>` : `<div><span>PRICE</span><b>Free</b></div>`;
   return `<div class="pad16 gb">
     <div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button><span class="lbl muted">Project Gutenberg #${esc(gid)}</span></div>
     <div class="gb-cover">${drawnCover(title, +gid, coverUrl ? `<img src="${esc(coverUrl)}" alt="" onerror="this.remove()">` : "")}</div>
     <h1 class="gb-t hl">${up(title)}</h1>
-    <div class="muted center">${esc(a ? a.name : (item.authors[0] || "Unknown author"))}${esc(years)}</div>
+    <div class="muted center">${esc(a ? a.name : (item?.authors[0] || "Unknown author"))}${esc(years)}</div>
     ${subjects.length ? `<div class="gb-subj">${subjects.map((s) => `<span>${esc(s)}</span>`).join("")}</div>` : ""}
-    <div class="gb-facts"><div><span>LANGUAGE</span><b>${b && b.languages.includes("en") ? "English" : esc((b?.languages || ["en"])[0])}</b></div>
-      <div><span>RIGHTS</span><b>Public domain</b></div><div><span>${b ? "LAST 30 DAYS" : "SAVED"}</span><b>${b ? `${compactCount(b.downloads)} downloads` : "On this phone"}</b></div></div>
+    <div class="gb-facts"><div><span>LANGUAGE</span><b>${!b || b.languages.includes("en") ? "English" : esc(b.languages[0])}</b></div>
+      <div><span>RIGHTS</span><b>Public domain</b></div>${b ? dl : `<div><span>SAVED</span><b>On this phone</b></div>`}</div>
     ${actions(pgId(gid), { gid: +gid, title, book: b })}
+    ${b && b.summary ? `<div class="gb-sum"><div class="lbl muted">ABOUT THIS BOOK</div><p>${esc(b.summary)}</p><span class="fine">Summary from Project Gutenberg.</span></div>` : ""}
   </div>`;
 }
 
@@ -303,13 +307,23 @@ export function sheetBody(s) {
 
 // ------------------------------------------------------------------ actions
 
+const detailAsked = new Set();
+/** Full details of one book (subjects, downloads, summary); the search lists only carry title and author. */
 async function fetchOne(gid) {
+  gid = +gid;
+  if (detailAsked.has(gid)) return;
+  detailAsked.add(gid);
   try {
     const r = await fetch(`/api/catalog?ids=${encodeURIComponent(gid)}`);
     const data = await r.json();
-    (data.books || []).forEach((b) => known.set(b.id, b));
-  } catch (e) { /* offline */ }
-  app.render();
+    if (!r.ok) throw new Error(data.error);
+    (data.books || []).forEach((b) => known.set(b.id, { ...(known.get(b.id) || {}), ...b }));
+  } catch (e) {
+    setTimeout(() => detailAsked.delete(gid), 30000); // allow another try later, without a retry loop now
+    if (!known.has(gid)) known.set(gid, { id: gid, title: `Book #${gid}`, authors: [], subjects: [], languages: ["en"], downloads: null, cover: null, detail: false });
+  }
+  const r = app.route();
+  if (r.name === "gb" && +r.gid === gid) app.render();
 }
 
 async function download(gid) {

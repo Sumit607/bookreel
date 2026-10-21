@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:relevance="http://a9.com/-/opensearch/extensions/relevance/1.0/">
+<id>https://www.gutenberg.org/ebooks/search.opds/?query=drac%20l.en&amp;sort_order=downloads</id>
+<updated>2026-10-21T17:10:59Z</updated>
+<title>Project Gutenberg eBooks</title>
+<author><name>Project Gutenberg</name><uri>https://www.gutenberg.org</uri></author>
+<link rel="self" title="This Page" type="application/atom+xml;profile=opds-catalog" href="/ebooks/search.opds/?query=drac%20l.en&amp;sort_order=downloads"/>
+<opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+<opensearch:startIndex>1</opensearch:startIndex>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/search.opds/?query=drac%20l.en&amp;sort_order=title</id>
+<title>Sort Alphabetically by Title</title>
+<content type="text"></content>
+<link type="application/atom+xml;profile=opds-catalog" rel="http://opds-spec.org/sort/new" href="/ebooks/search.opds/?query=drac%20l.en&amp;sort_order=title"/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/345.opds</id>
+<title>Dracula</title>
+<content type="text">Bram Stoker</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/345.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/5197.opds</id>
+<title>My Life — Volume 1</title>
+<content type="text">Richard Wagner</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/5197.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/45839.opds</id>
+<title>Dracula</title>
+<content type="text">Bram Stoker</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/45839.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/10150.opds</id>
+<title>Dracula's Guest</title>
+<content type="text">Bram Stoker</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/10150.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/49507.opds</id>
+<title>Siegfried &amp; The Twilight of the Gods
+The Ring of the Nibelung, vol. 2</title>
+<content type="text">Richard Wagner</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/49507.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+<entry>
+<updated>2026-10-21T17:10:59Z</updated>
+<id>https://www.gutenberg.org/ebooks/28312.opds</id>
+<title>Atheism in Pagan Antiquity</title>
+<content type="text">A. B. Drachmann</content>
+<link type="application/atom+xml;profile=opds-catalog" rel="subsection" href="/ebooks/28312.opds"/>
+<link type="image/png" rel="http://opds-spec.org/image/thumbnail" href="data:image/png;base64,iVBORw0KGgo="/>
+</entry>
+</feed>
