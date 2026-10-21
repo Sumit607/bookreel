@@ -28,6 +28,9 @@ const PATHS = {
   medal: "M12 9a5.5 5.5 0 1 0 .01 0zM8.6 3.5l2.1 5.9M15.4 3.5l-2.1 5.9",
   calendar: "M4.5 6h15v14h-15zM4.5 10h15M8.5 3.5v4M15.5 3.5v4",
   download: "M12 4v11M7 10l5 5 5-5M5 20h14",
+  compass: "M12 3a9 9 0 1 0 .01 0zM15.5 8.5l-2 5-5 2 2-5z",
+  file: "M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V7zM14 3v4h4M12 11v6M9 14h6",
+  clock: "M12 3a9 9 0 1 0 .01 0zM12 7.5V12l3 2",
 };
 const FILLED = new Set(["play"]);
 

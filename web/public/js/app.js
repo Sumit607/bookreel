@@ -2,8 +2,9 @@
 import * as R from "./rules.js";
 import { esc, pad2, icon, compactCount } from "./util.js";
 import { renderCard } from "./cards.js";
+import * as D from "./discover.js";
 
-const VERSION = "web 0.2.0";
+const VERSION = "web 0.3.0";
 const STORE_KEY = "bookreel-state-v1";
 const CATEGORIES = ["All", "Business", "Classics", "Mystery", "Strategy", "Thriller"];
 const app = document.getElementById("app");
@@ -114,6 +115,10 @@ function parseRoute() {
   if (p[0] === "book" && p[1]) return { name: "book", id: p[1] };
   if (p[0] === "read" && p[1]) return { name: "read", id: p[1], ch: +p[2] || 1, post: q.has("p") ? +q.get("p") : null, preview: q.get("preview") === "1" };
   if (p[0] === "done" && p[1]) return { name: "done", id: p[1], ch: +p[2] || 1 };
+  if (p[0] === "discover") return { name: "discover" };
+  if (p[0] === "gb" && p[1]) return { name: "gb", gid: p[1] };
+  if (p[0] === "mine" && p[1]) return { name: "mine", id: p[1] };
+  if (p[0] === "convert" && p[1]) return { name: "convert", id: p[1] };
   return { name: "library" };
 }
 let route = parseRoute();
@@ -176,6 +181,10 @@ function render() {
     case "book": html = bookScreen(route.id); break;
     case "read": html = readerShell(route); break;
     case "done": html = completeScreen(route); break;
+    case "discover": html = D.discoverScreen(); break;
+    case "gb": html = D.gbScreen(route.gid); break;
+    case "mine": html = D.mineScreen(route.id); break;
+    case "convert": html = D.convertScreen(route.id); break;
     default: html = libraryScreen();
   }
   app.innerHTML = immersive ? html : `<main class="screen">${html}</main>${bottomNav()}`;
@@ -187,9 +196,9 @@ function render() {
 }
 
 function bottomNav() {
-  const tab = route.name === "notebook" ? 1 : route.name === "profile" ? 2 : 0;
-  const item = (i, label, ic, hash) => `<a class="nav-i${tab === i ? " on" : ""}" href="${hash}" data-nav="${hash}">${icon(ic, { size: 25 })}<span>${label}</span></a>`;
-  return `<nav class="bnav">${item(0, "Library", "home", "#/")}${item(1, "Notebook", "bookmark", "#/notebook")}${item(2, "Profile", "person", "#/profile")}</nav>`;
+  const tab = route.name === "notebook" ? 2 : route.name === "profile" ? 3 : ["discover", "gb", "mine", "convert"].includes(route.name) ? 1 : 0;
+  const item = (i, label, ic, hash) => `<a class="nav-i${tab === i ? " on" : ""}" href="${hash}" data-nav="${hash}"${tab === i ? ' aria-current="page"' : ""}>${icon(ic, { size: 25 })}<span>${label}</span></a>`;
+  return `<nav class="bnav">${item(0, "Library", "home", "#/")}${item(1, "Discover", "compass", "#/discover")}${item(2, "Notebook", "bookmark", "#/notebook")}${item(3, "Profile", "person", "#/profile")}</nav>`;
 }
 
 /** Shrinks display headlines just enough for their widest word to fit, so words never break mid-word. */
@@ -244,15 +253,18 @@ function libraryScreen() {
     <div class="chips" role="tablist">${CATEGORIES.map((c) => `<button class="chip${c === category ? " on" : ""}" data-act="cat" data-cat="${c}" role="tab" aria-selected="${c === category}">${c}</button>`).join("")}</div>
     ${continueCard()}
     <div id="grid">${bookGrid()}</div>
-    <p class="fine">Free classics are open to everyone. The Goal is private: it opens only with your passcode.</p>
+    ${D.shelf()}
+    <p class="fine">Free classics are open to everyone. The Goal is private: it opens only with your passcode. Books you download and convert stay on this phone.</p>
   </div>`;
 }
 function bookGrid() {
-  const books = filteredBooks();
+  // A "coming soon" classic the reader has already made into their own Bookreel is shown once, as theirs.
+  const mine = new Set(INDEX.books.filter((b) => b.access === "local").map((b) => b.title.toLowerCase()));
+  const books = filteredBooks().filter((b) => b.status === "ready" || !mine.has(b.title.toLowerCase()));
   const cards = books.map((m) => {
     const ready = m.status === "ready";
     const locked = PRIVATE_LOCKED.has(m.id);
-    const tag = !ready ? "Coming soon" : locked ? "Private" : m.cover.tag;
+    const tag = !ready ? "Coming soon" : locked ? "Private" : m.access === "local" ? "Yours" : m.cover.tag;
     return `<button class="bcard" data-act="book" data-id="${m.id}">${cover(m)}<span class="btag">${locked ? icon("lock", { size: 11 }) : ""}${up(tag)}</span>
       <span class="bhook">${esc(m.hook)}</span><span class="bmeta">${ready ? `20 ch · ${m.minutes} min` : "Coming soon"}</span></button>`;
   }).join("");
@@ -818,7 +830,7 @@ function sheetBody(s) {
         <button class="btn primary wide" type="submit">${s.busy ? "Checking…" : "Unlock"}</button></form>
         <button class="btn secondary wide" data-act="sheet-close">Not now</button>`;
     }
-    default: return "";
+    default: return D.sheetBody(s);
   }
 }
 
@@ -860,9 +872,9 @@ function openChapter(bookId, ch, post = null, fromSheet = false) {
   else go(hash);
 }
 
-function setMode(bookId, m) {
+function setMode(bookId, m, silent = false) {
   update((s) => ({ ...s, modes: { ...s.modes, [bookId]: m } }));
-  toast(m === R.DAILY ? `Daily mode: one chapter a day at ${R.hourLabel(S.settings.releaseHour)}` : "Binge mode: next chapter opens right away");
+  if (!silent) toast(m === R.DAILY ? `Daily mode: one chapter a day at ${R.hourLabel(S.settings.releaseHour)}` : "Binge mode: next chapter opens right away");
 }
 
 document.addEventListener("click", (e) => {
@@ -926,11 +938,12 @@ document.addEventListener("click", (e) => {
       return openChapter(d.id, +d.ch);
     }
     case "preview": return openChapter(d.id, +d.ch, null, true);
-    default:
+    default: D.onAct(d.act, d, t);
   }
 });
 
 document.addEventListener("submit", (e) => {
+  if (D.onSubmit(e)) return;
   const f = e.target.closest("[data-form=pass]");
   if (!f) return;
   e.preventDefault();
@@ -939,10 +952,13 @@ document.addEventListener("submit", (e) => {
 });
 
 document.addEventListener("input", (e) => {
+  if (D.onInput(e)) return;
   if (e.target.id !== "q") return;
   query = e.target.value;
   document.getElementById("grid").innerHTML = bookGrid();
 });
+
+document.addEventListener("change", (e) => { D.onChange(e); });
 
 // Clicks inside the sheet that target reader-scoped actions (none) are handled above; reader actions are handled by the reader.
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sheet) closeSheet(); });
@@ -951,7 +967,14 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sheet) c
 
 applyPrefs();
 app.innerHTML = `<div class="boot"><div class="logo">book<span>reel</span></div></div>`;
-dataReady = loadData().then(() => {
+dataReady = loadData().then(async () => {
+  try {
+    await D.init({
+      route: () => route, render, go, replace, toast, openSheet, closeSheet, sheet: () => sheet, BOOKS, INDEX: () => INDEX,
+      setMode: (id, m) => setMode(id, m === "daily" ? R.DAILY : R.BINGE, true),
+      onUnlocked: () => Promise.all(INDEX.books.filter((b) => b.access === "private" && b.status === "ready").map(loadBook)),
+    });
+  } catch (e) { console.warn("Discover could not start", e); }
   render();
   document.documentElement.classList.add("ready");
   document.fonts?.ready.then(() => fitHeadlines(app));
@@ -962,4 +985,4 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
 }
 
 // Exposed for tests.
-window.__bookreel = { get state() { return S; }, books: BOOKS, index: () => INDEX, version: VERSION, ready: () => dataReady };
+window.__bookreel = { get state() { return S; }, books: BOOKS, index: () => INDEX, version: VERSION, ready: () => dataReady, discover: D };

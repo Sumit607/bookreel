@@ -1,5 +1,6 @@
 // Local stand-in for Vercel: serves web/public and runs web/api/*.js handlers. For tests only.
 // Usage: BOOKREEL_PASSCODE=... node tools/serve.mjs [port]
+// Offline test mode (no Gemini, Gutendex or Gutenberg): GEMINI_MOCK=1 CATALOG_FIXTURES=tools/fixtures BOOK_FIXTURES=tools/fixtures
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
@@ -9,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const require = createRequire(import.meta.url);
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "web");
 const PUB = path.join(ROOT, "public");
-const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8", ".woff2": "font/woff2", ".png": "image/png", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8", ".woff2": "font/woff2", ".png": "image/png", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".mjs": "text/javascript; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
 const port = +(process.argv[2] || 4173);
 
 http.createServer(async (req, res) => {

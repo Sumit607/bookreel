@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "public",
+  "functions": {
+    "api/convert.js": { "maxDuration": 300 }
+  },
   "redirects": [
     { "source": "/apk", "destination": "https://github.com/Sumit607/bookreel/releases/latest/download/bookreel.apk", "permanent": false }
   ],

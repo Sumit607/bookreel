@@ -47,6 +47,12 @@ repo on every push to `main` (project root `web/`).
 - Private packs (The Goal) are never static files: they sit in `web/api/_private/` and `/api/pack` serves them
   only to a browser that has entered the passcode (`/api/unlock`). The passcode is the `BOOKREEL_PASSCODE`
   environment variable on Vercel and is not stored in this repo.
+- **Discover and Convert:** `/api/catalog` (Project Gutenberg's catalogue via Gutendex), `/api/book` (a book's plain
+  text, licence header removed) and `/api/convert` (plan + one call per chapter on the Gemini free tier, checked against
+  the 20 × 10 rules). Downloads and finished Bookreels live in the phone's IndexedDB; nothing is uploaded. Converting
+  needs the passcode cookie and the `GEMINI_API_KEY` environment variable on Vercel.
+- Offline test of Discover/Convert: start the server with `GEMINI_MOCK=1 GEMINI_MOCK_429=1 CATALOG_FIXTURES=tools/fixtures
+  BOOK_FIXTURES=tools/fixtures`, then `node tools/web-test/discover.mjs http://localhost:4173 test out`.
 - After changing content: `python3 content/src/build.py && python3 tools/build_web.py`.
 - Test locally: `BOOKREEL_PASSCODE=test node tools/serve.mjs 4173`, then
   `cd tools/web-test && npm install && node e2e.mjs http://localhost:4173 test out`.

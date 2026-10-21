@@ -1,0 +1,63 @@
+{
+ "count": 2,
+ "next": null,
+ "previous": null,
+ "results": [
+  {
+   "id": 1661,
+   "title": "The Adventures of Sherlock Holmes",
+   "authors": [
+    {
+     "name": "Doyle, Arthur Conan",
+     "birth_year": 1859,
+     "death_year": 1930
+    }
+   ],
+   "subjects": [
+    "Detective and mystery stories, English",
+    "Holmes, Sherlock (Fictitious character) -- Fiction"
+   ],
+   "bookshelves": [],
+   "languages": [
+    "en"
+   ],
+   "copyright": false,
+   "media_type": "Text",
+   "formats": {
+    "text/html": "https://www.gutenberg.org/ebooks/1661.html.images",
+    "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/1661.txt.utf-8",
+    "image/jpeg": "https://www.gutenberg.org/cache/epub/1661/pg1661.cover.medium.jpg"
+   },
+   "download_count": 35000
+  },
+  {
+   "id": 84,
+   "title": "Frankenstein; Or, The Modern Prometheus",
+   "authors": [
+    {
+     "name": "Shelley, Mary Wollstonecraft",
+     "birth_year": 1797,
+     "death_year": 1851
+    }
+   ],
+   "subjects": [
+    "Frankenstein's monster (Fictitious character) -- Fiction",
+    "Gothic fiction",
+    "Horror tales",
+    "Science fiction"
+   ],
+   "bookshelves": [],
+   "languages": [
+    "en"
+   ],
+   "copyright": false,
+   "media_type": "Text",
+   "formats": {
+    "text/html": "https://www.gutenberg.org/ebooks/84.html.images",
+    "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/84.txt.utf-8",
+    "image/jpeg": "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg"
+   },
+   "download_count": 98000
+  }
+ ]
+}
