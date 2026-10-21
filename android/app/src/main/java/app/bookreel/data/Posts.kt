@@ -60,7 +60,7 @@ data class PollPost(
 data class GuessPost(
     override val id: String, override val t: String, override val take: String? = null,
     val label: String, val q: String, val options: List<Option>, val reveal: String, val hint: String,
-    val loopId: String,
+    val loopId: String, val revealLabel: String? = null,
 ) : Post
 
 @Serializable

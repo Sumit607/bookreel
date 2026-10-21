@@ -221,7 +221,7 @@ fun PostCard(
         is CharacterPost -> CharacterCard(post, book)
         is TwistPost -> TwistCard(post)
         is PollPost -> ChoiceCard(post.label, post.q, post.options, post.reveal, post.hint, "What happened", state.answers[Rules.postKey(book.id, post.id)]) { vm.answer(book.id, ch, index, it) }
-        is GuessPost -> ChoiceCard(post.label, post.q, post.options, post.reveal, post.hint, "What Jonah said".takeIf { book.id == "the-goal" && ch == 2 } ?: "The answer, for now", state.answers[Rules.postKey(book.id, post.id)]) { vm.answer(book.id, ch, index, it) }
+        is GuessPost -> ChoiceCard(post.label, post.q, post.options, post.reveal, post.hint, post.revealLabel ?: "What Jonah said".takeIf { book.id == "the-goal" && ch == 2 } ?: "The answer, for now", state.answers[Rules.postKey(book.id, post.id)]) { vm.answer(book.id, ch, index, it) }
         is CrossoffPost -> CrossoffCard(post, state.crossed[Rules.postKey(book.id, post.id)].orEmpty()) { vm.crossOff(book.id, post.id, it, post.items.size) }
         is MythPost -> MythCard(post)
         is IdeaPost -> IdeaCard(post, post.payoffLoopId?.let { state.guesses[Rules.postKey(book.id, it)] })

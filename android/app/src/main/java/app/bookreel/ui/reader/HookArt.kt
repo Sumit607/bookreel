@@ -27,6 +27,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -35,6 +36,7 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
@@ -69,9 +71,9 @@ private fun DrawScope.virtual(block: DrawScope.() -> Unit) {
     withTransform({ translate(ox, oy); scale(s, s, Offset.Zero) }) { block() }
 }
 
-private fun DrawScope.label(tm: TextMeasurer, text: String, x: Float, y: Float, size: Float, color: Color, mono: Boolean = true, weight: FontWeight = FontWeight.Medium, center: Boolean = true) {
+private fun DrawScope.label(tm: TextMeasurer, text: String, x: Float, y: Float, size: Float, color: Color, mono: Boolean = true, weight: FontWeight = FontWeight.Medium, center: Boolean = true, family: FontFamily? = null) {
     val style = TextStyle(
-        fontFamily = if (mono) Fonts.mono else Fonts.display, fontWeight = weight,
+        fontFamily = family ?: if (mono) Fonts.mono else Fonts.display, fontWeight = weight,
         fontSize = size.toSp(), color = color, textAlign = TextAlign.Center,
     )
     val layout = tm.measure(text, style)
@@ -97,6 +99,16 @@ private fun DrawScope.drawArt(art: String, text: String?, tm: TextMeasurer) {
         "drum" -> drum(tm)
         "bars" -> bars(tm, parts.getOrNull(0) ?: "")
         "chain" -> chain(tm, parts.getOrNull(0) ?: "")
+        "lens" -> lens(tm, parts.getOrNull(0) ?: "")
+        "fog" -> fog(tm, parts.getOrNull(0) ?: "")
+        "door" -> door(tm, parts.getOrNull(0)?.ifEmpty { null } ?: "221B", parts.getOrNull(1) ?: "")
+        "desert" -> desert(tm, parts.getOrNull(0) ?: "")
+        "countdown" -> countdown(tm, parts.getOrNull(0)?.ifEmpty { null } ?: "29", parts.getOrNull(1) ?: "")
+        "pills" -> pills(tm, parts.getOrNull(0) ?: "")
+        "ring" -> ring(tm, parts.getOrNull(0) ?: "")
+        "cab" -> cab(tm, parts.getOrNull(0) ?: "")
+        "lab" -> lab(tm, parts.getOrNull(0) ?: "")
+        "peaks" -> peaks(tm, parts.getOrNull(0) ?: "", parts.getOrNull(1) == "night")
         else -> stamp(tm, parts.getOrNull(0) ?: "BOOKREEL", parts.getOrNull(1) ?: "")
     }
 }
@@ -304,6 +316,183 @@ private fun DrawScope.chain(tm: TextMeasurer, caption: String) {
     drawLine(Pal.tagRed, Offset(196f, 72f), Offset(204f, 86f), 2f)
     drawLine(Pal.tagRed, Offset(208f, 104f), Offset(214f, 118f), 2f)
     label(tm, if (caption.isNotEmpty()) caption else "THE WEAKEST LINK", 160f, 150f, 12f, Pal.sodium, weight = FontWeight.SemiBold)
+}
+
+// ======== Mystery set (A Study in Scarlet and other classics). Same drawings as web/public/js/art.js.
+
+private fun DrawScope.bg(colors: List<Color>, y1: Float = 0f, y2: Float = VH) =
+    drawRoundRect(Brush.verticalGradient(colors, y1, y2), Offset.Zero, Size(VW, VH), CornerRadius(12f, 12f))
+
+private fun DrawScope.ellipse(color: Color, cx: Float, cy: Float, rx: Float, ry: Float) =
+    drawOval(color, Offset(cx - rx, cy - ry), Size(rx * 2, ry * 2))
+
+private fun DrawScope.caption(tm: TextMeasurer, text: String, x: Float, y: Float, size: Float, color: Color, center: Boolean = false) {
+    if (text.isNotEmpty()) label(tm, text, x, y, size, color, weight = FontWeight.SemiBold, center = center)
+}
+
+// ---- A magnifying glass over a word written on a wall.
+private fun DrawScope.lens(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFF3A0F14), Color(0xFF1A0709)))
+    var y = 18f
+    while (y < VH) { drawLine(Color(0x12F6E7D6), Offset(20f, y), Offset(300f, y), 1f); y += 22f }
+    rotate(-6f, Offset(120f, 100f)) {
+        val layout = tm.measure("RACHE", TextStyle(fontFamily = Fonts.hand, fontWeight = FontWeight.Bold, fontSize = 44f.toSp(), color = Color(0xFFC21F2B)))
+        drawText(layout, topLeft = Offset(70f, 110f - layout.firstBaseline))
+    }
+    drawCircle(Color(0x0FF6E7D6), 48f, Offset(200f, 86f))
+    drawCircle(Color(0xFFE9D9C2), 48f, Offset(200f, 86f), style = Stroke(7f))
+    drawLine(Color(0xFF8B5A2B), Offset(232f, 122f), Offset(272f, 166f), 11f, StrokeCap.Round)
+    caption(tm, caption, 24f, 24f, 11f, Color(0xFFF6E7D6))
+}
+
+// ---- A gas lamp in London fog.
+private fun DrawScope.fog(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFF2C3440), Color(0xFF59606A), Color(0xFFA7A9A3)))
+    listOf(20f to 70f, 70f to 96f, 118f to 60f, 160f to 110f, 214f to 80f, 262f to 100f).forEach { (x, h) -> rr(Color(0xFF20262E), x, VH - h, 42f, h) }
+    rr(Color(0xFF20262E), 140f, 40f, 6f, 110f)
+    drawCircle(Color(0xFFF6C976), 9f, Offset(143f, 36f))
+    drawCircle(Color(0x40F6C976), 30f, Offset(143f, 36f))
+    for (i in 0 until 4) ellipse(Color(0x33D9DCDF), 60f + i * 70f, 150f - (i % 2) * 14f, 80f, 12f)
+    caption(tm, caption, 24f, 24f, 11f, Color(0xFFF0ECE4))
+}
+
+// ---- A front door between two lit windows.
+private fun DrawScope.door(tm: TextMeasurer, number: String, caption: String) {
+    rr(Color(0xFF1C2A24), 0f, 0f, VW, VH, 12f)
+    rr(Color(0xFF3B2A20), 0f, 166f, VW, 24f)
+    rr(Color(0xFF14201B), 110f, 22f, 100f, 144f, 4f)
+    rr(Color(0xFF0F1813), 122f, 34f, 76f, 60f, 3f)
+    rr(Color(0xFF0F1813), 122f, 102f, 76f, 58f, 3f)
+    drawCircle(Color(0xFFC9A24A), 5f, Offset(190f, 104f))
+    rr(Color(0xFFC9A24A), 140f, 6f, 40f, 14f, 3f)
+    label(tm, number, 160f, 13f, 10f, Pal.ink, weight = FontWeight.SemiBold)
+    rr(Pal.lamp, 40f, 40f, 44f, 56f, 3f)
+    rr(Pal.lamp, 236f, 40f, 44f, 56f, 3f)
+    drawLine(Color(0xFF1C2A24), Offset(62f, 40f), Offset(62f, 96f), 2f)
+    drawLine(Color(0xFF1C2A24), Offset(258f, 40f), Offset(258f, 96f), 2f)
+    caption(tm, caption, 160f, 178f, 11f, Color(0xFFE9E4D8), center = true)
+}
+
+// ---- A salt desert under a hard sun.
+private fun DrawScope.desert(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFFF0B35A), Color(0xFFE9D3A2)), 0f, 120f)
+    drawCircle(Color(0xFFFFF3D0), 24f, Offset(250f, 44f))
+    drawPath(Path().apply {
+        moveTo(0f, 108f); lineTo(60f, 70f); lineTo(110f, 96f); lineTo(170f, 52f); lineTo(230f, 92f); lineTo(280f, 66f); lineTo(320f, 88f)
+        lineTo(320f, VH); lineTo(0f, VH); close()
+    }, Color(0xFFB98A5A))
+    drawPath(Path().apply { moveTo(0f, 132f); cubicTo(80f, 118f, 200f, 140f, 320f, 124f); lineTo(320f, VH); lineTo(0f, VH); close() }, Color(0xFFE8DCC4))
+    rr(Color(0xFF6B5A48), 92f, 140f, 3f, 18f)
+    rr(Color(0xFF6B5A48), 104f, 140f, 3f, 18f)
+    drawPath(Path().apply { moveTo(86f, 140f); lineTo(113f, 140f); lineTo(100f, 128f); close() }, Color(0xFF6B5A48))
+    drawCircle(Color(0xFF3A2E24), 4f, Offset(210f, 150f))
+    drawCircle(Color(0xFF3A2E24), 2.5f, Offset(222f, 154f))
+    caption(tm, caption, 24f, 24f, 11f, Color(0xFF3A2E24))
+}
+
+// ---- A number chalked on a wooden wall.
+private fun DrawScope.countdown(tm: TextMeasurer, num: String, caption: String) {
+    rr(Color(0xFF3A2B1F), 0f, 0f, VW, VH, 12f)
+    var x = 0f
+    while (x < VW) { rr(Color(0xFF33251A), x, 0f, 2f, VH); x += 26f }
+    label(tm, num, 160f, 104f, 96f, Color(0xFFE9D9C2), weight = FontWeight.Bold, family = Fonts.hand)
+    caption(tm, caption, 160f, 170f, 11f, Color(0xFFE9D9C2), center = true)
+}
+
+// ---- A box with two identical pills.
+private fun DrawScope.pills(tm: TextMeasurer, caption: String) {
+    rr(Color(0xFF14181D), 0f, 0f, VW, VH, 12f)
+    ellipse(Color(0xFF0C0F12), 160f, 132f, 96f, 20f)
+    rr(Color(0xFFE9E4D8), 98f, 70f, 124f, 52f, 8f)
+    rr(Color(0xFFC9C2B2), 98f, 70f, 124f, 14f, 8f)
+    drawCircle(Color(0xFFF0ECE4), 13f, Offset(136f, 102f))
+    drawCircle(Color(0xFFD7D0C0), 13f, Offset(184f, 102f))
+    label(tm, "?", 136f, 102f, 14f, Color(0xFF7E1D22), weight = FontWeight.SemiBold)
+    label(tm, "?", 184f, 102f, 14f, Color(0xFF7E1D22), weight = FontWeight.SemiBold)
+    caption(tm, caption, 160f, 34f, 12f, Color(0xFFF6E7D6), center = true)
+}
+
+// ---- A woman's gold wedding ring.
+private fun DrawScope.ring(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFF241A1E), Color(0xFF120D10)))
+    drawOval(Color(0xFFE2B65A), Offset(114f, 58f), Size(92f, 80f), style = Stroke(12f))
+    drawOval(Color(0xFFFFF0B3), Offset(114f, 58f), Size(92f, 80f), style = Stroke(2f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 18f))))
+    drawPath(Path().apply { moveTo(126f, 82f); quadraticTo(160f, 60f, 194f, 82f) }, Color(0xB3FFF7D6), style = Stroke(3f, cap = StrokeCap.Round))
+    caption(tm, caption, 160f, 168f, 12f, Color(0xFFF6E7D6), center = true)
+}
+
+// ---- A horse-drawn cab at night.
+private fun DrawScope.cab(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFF1E2733), Color(0xFF0E1218)))
+    rr(Color(0xFF2B2F35), 0f, 150f, VW, 40f)
+    rr(Color(0xFF2E1B12), 120f, 78f, 108f, 64f, 8f)
+    rr(Color(0xFF40281A), 128f, 86f, 46f, 32f, 4f)
+    rr(Color(0x99F6C976), 182f, 88f, 36f, 26f, 4f)
+    drawCircle(Color(0xFFB8A27A), 18f, Offset(146f, 148f), style = Stroke(5f))
+    drawCircle(Color(0xFFB8A27A), 18f, Offset(210f, 148f), style = Stroke(5f))
+    rr(Color(0xFF2E1B12), 92f, 50f, 22f, 10f, 3f)
+    drawLine(Color(0xFF2E1B12), Offset(103f, 60f), Offset(128f, 86f), 4f)
+    drawPath(Path().apply { moveTo(24f, 110f); cubicTo(40f, 92f, 60f, 92f, 80f, 104f); lineTo(92f, 130f); lineTo(24f, 130f); close() }, Color(0xFF3A2E24))
+    drawCircle(Color(0xFF3A2E24), 10f, Offset(62f, 92f))
+    caption(tm, caption, 24f, 24f, 11f, Color(0xFFE9E4D8))
+}
+
+// ---- A chemistry bench: test tubes and a flask over a burner.
+private fun DrawScope.lab(tm: TextMeasurer, caption: String) {
+    bg(listOf(Color(0xFF1F3A3A), Color(0xFF0E1E1E)))
+    rr(Color(0xFF3B2A20), 0f, 150f, VW, 40f)
+    rr(Color(0xFF2A1D16), 0f, 150f, VW, 5f)
+    rr(Color(0xFF6B4A33), 40f, 120f, 120f, 8f, 2f)
+    rr(Color(0xFF6B4A33), 46f, 128f, 6f, 22f)
+    rr(Color(0xFF6B4A33), 148f, 128f, 6f, 22f)
+    listOf(Color(0xFFC21F2B) to 0.55f, Color(0xFFE9E4D8) to 0.25f, Color(0xFF7FC8B8) to 0.4f, Color(0xFFE2B65A) to 0.6f).forEachIndexed { i, (c, f) ->
+        val x = 56f + i * 24f
+        rr(Color(0x55CFE7E3), x, 66f, 14f, 58f, 7f)
+        rr(c, x + 2f, 66f + 56f * (1 - f), 10f, 56f * f, 5f)
+    }
+    val flask = Path().apply { moveTo(222f, 70f); lineTo(222f, 96f); lineTo(198f, 136f); lineTo(268f, 136f); lineTo(244f, 96f); lineTo(244f, 70f); close() }
+    drawPath(flask, Color(0x33CFE7E3))
+    drawPath(Path().apply { moveTo(206f, 124f); lineTo(260f, 124f); lineTo(268f, 136f); lineTo(198f, 136f); close() }, Color(0xD9C21F2B))
+    drawPath(flask, Color(0xFFCFE7E3), style = Stroke(2.5f))
+    rr(Color(0xFFCFE7E3), 218f, 64f, 30f, 6f, 2f)
+    rr(Color(0xFF59606A), 214f, 140f, 38f, 10f, 2f)
+    drawPath(Path().apply { moveTo(233f, 150f); cubicTo(226f, 158f, 240f, 160f, 233f, 168f); cubicTo(246f, 160f, 236f, 156f, 233f, 150f); close() }, Color(0xFF6FB6FF))
+    listOf(Triple(230f, 112f, 3f), Triple(238f, 104f, 2f), Triple(226f, 98f, 2.5f)).forEach { (x, y, r) -> drawCircle(Color(0xCCF6E7D6), r, Offset(x, y)) }
+    caption(tm, caption, 24f, 28f, 12f, Color(0xFFCFF2E8))
+}
+
+// ---- Mountains over a valley: wheat fields by day, a pass under the stars by night.
+private fun DrawScope.peaks(tm: TextMeasurer, caption: String, night: Boolean) {
+    bg(if (night) listOf(Color(0xFF0E1C2A), Color(0xFF1F3B57)) else listOf(Color(0xFF8FB8DE), Color(0xFFD6E6F0)), 0f, 120f)
+    if (night) {
+        listOf(30f to 20f, 70f to 44f, 120f to 16f, 180f to 30f, 250f to 18f, 292f to 50f, 210f to 60f, 150f to 52f).forEach { (x, y) -> drawCircle(Color(0xCCFFFFFF), 1.3f, Offset(x, y)) }
+        drawCircle(Color(0xFFE6EEF6), 12f, Offset(262f, 34f))
+        drawCircle(Color(0xFF0E1C2A), 11f, Offset(268f, 30f))
+    } else {
+        drawCircle(Color(0xFFFFF3D0), 18f, Offset(268f, 40f))
+    }
+    drawPath(Path().apply {
+        moveTo(0f, 132f); lineTo(52f, 70f); lineTo(84f, 100f); lineTo(132f, 40f); lineTo(176f, 96f); lineTo(214f, 60f); lineTo(262f, 110f); lineTo(320f, 74f)
+        lineTo(320f, VH); lineTo(0f, VH); close()
+    }, if (night) Color(0xFF16283A) else Color(0xFF5E7A8E))
+    drawPath(Path().apply { moveTo(132f, 40f); lineTo(146f, 58f); lineTo(138f, 56f); lineTo(128f, 64f); lineTo(120f, 54f); close() }, Color(0xFFE6EEF6))
+    drawPath(Path().apply { moveTo(214f, 60f); lineTo(226f, 74f); lineTo(216f, 72f); lineTo(206f, 76f); close() }, Color(0xFFE6EEF6))
+    drawPath(Path().apply { moveTo(0f, 150f); cubicTo(70f, 130f, 150f, 160f, 320f, 136f); lineTo(320f, VH); lineTo(0f, VH); close() }, if (night) Color(0xFF0B1520) else Color(0xFF4E7A5C))
+    if (night) {
+        drawPath(Path().apply { moveTo(300f, 190f); cubicTo(250f, 166f, 210f, 160f, 176f, 146f) }, Color(0xFF3A5470),
+            style = Stroke(5f, cap = StrokeCap.Round, pathEffect = PathEffect.dashPathEffect(floatArrayOf(2f, 9f))))
+    } else {
+        drawPath(Path().apply { moveTo(0f, 166f); cubicTo(60f, 156f, 120f, 162f, 170f, 154f); lineTo(170f, VH); lineTo(0f, VH); close() }, Color(0xFFD9B95C))
+        drawPath(Path().apply { moveTo(170f, 154f); cubicTo(220f, 148f, 270f, 152f, 320f, 146f); lineTo(320f, VH); lineTo(170f, VH); close() }, Color(0xFF6E9A5A))
+        for (i in 0 until 12) {
+            val x = 10f + i * 14f
+            val dy = (i % 3) * 4f
+            drawLine(Color(0xFFB8963F), Offset(x, 172f + dy), Offset(x + 4f, 164f + dy), 2f, StrokeCap.Round)
+        }
+        rr(Color(0xFF7A4E2E), 236f, 150f, 26f, 16f, 2f)
+        drawPath(Path().apply { moveTo(232f, 151f); lineTo(249f, 140f); lineTo(266f, 151f); close() }, Color(0xFF5A3622))
+    }
+    caption(tm, caption, 24f, if (night) 176f else 26f, 12f, if (night) Color(0xFFE6EEF6) else Color(0xFF0F1A14))
 }
 
 // ---- 2. Split-flap departure board with animated letters.

@@ -15,9 +15,10 @@ Plan, requirements and roadmap: see the "Bookreel PRD & Build Plan" doc.
 
 ## Getting the APK
 
-Every push to `main` builds and tests the app. Tested builds are attached to **Releases** as
-`bookreel-v0.1.<run>.apk`. Open the release on your phone, download the APK and install it
-(allow "Install unknown apps" for your browser once).
+Open **https://bookreel-sand.vercel.app/apk** on the phone: it always downloads the newest tested APK
+(allow "Install unknown apps" for your browser once). Every push that changes the app or its books builds
+and tests it; only a fully green run publishes a Release (`bookreel-v0.1.<run>.apk`, plus `bookreel.apk`,
+which is what the link fetches).
 
 ## Building locally
 

@@ -1,13 +1,12 @@
 name: Android build and test
 
-# The web app on Vercel is the main delivery now; the Android build runs only when Android code changes
-# (not when book content changes), or by hand from the Actions tab.
+# Builds and tests the APK when the Android app or its bundled books change, or by hand from the Actions tab.
+# Each green run publishes a Release; bookreel-sand.vercel.app/apk always points at the newest one.
 on:
   push:
     branches: [main]
     paths:
       - "android/**"
-      - "!android/app/src/main/assets/books/**"
       - "tools/e2e.py"
       - ".github/workflows/android.yml"
   workflow_dispatch:
@@ -109,7 +108,8 @@ jobs:
         run: |
           TAG="v0.1.${GITHUB_RUN_NUMBER}"
           cp android/app/build/outputs/apk/release/app-release.apk "bookreel-${TAG}.apk"
-          gh release create "$TAG" "bookreel-${TAG}.apk" \
+          cp android/app/build/outputs/apk/release/app-release.apk bookreel.apk
+          gh release create "$TAG" "bookreel-${TAG}.apk" bookreel.apk \
             --title "Bookreel ${TAG}" \
             --notes "Tested build from CI run ${GITHUB_RUN_NUMBER}. Install on Android 8.0 or newer. Contains The Goal for private testing only." \
-            --prerelease
+            --latest

@@ -192,7 +192,7 @@ def cold_start():
     return int(m.group(1)) if m else None
 
 
-def read_chapter(ch, save_posts=(), extra=None):
+def read_chapter(ch, save_posts=(), extra=None, prefix="c", book=""):
     """Read posts 1..10 of the open chapter, screenshot each, then finish it."""
     c = None
     end = time.time() + 15
@@ -200,11 +200,11 @@ def read_chapter(ch, save_posts=(), extra=None):
         c = counter(dump())
         if c is None:
             time.sleep(0.8)
-    if not check(c is not None, f"chapter {ch} opened"):
+    if not check(c is not None, f"{book}chapter {ch} opened"):
         return False
     for p in range(c, 11):
         time.sleep(0.4)
-        shot(f"c{ch:02d}_p{p:02d}")
+        shot(f"{prefix}{ch:02d}_p{p:02d}")
         if p in save_posts:
             if tap_text("Save to notebook", wait=5):
                 check(wait_text("Saved to your notebook", 5), f"saved post {ch}-{p}")
@@ -217,9 +217,9 @@ def read_chapter(ch, save_posts=(), extra=None):
     if not tap_text(label, wait=8):
         return False
     ok = wait_text("SHIPPED", 10) or wait_text("FINISHED", 5)
-    check(ok, f"chapter {ch} complete screen")
+    check(ok, f"{book}chapter {ch} complete screen")
     time.sleep(0.8)
-    shot(f"c{ch:02d}_done")
+    shot(f"{prefix}{ch:02d}_done")
     return ok
 
 
@@ -228,6 +228,19 @@ ANSWERS = {
     (2, 7): ("Something else", "Hold that thought", "guess shows feedback after an answer"),
     (8, 4): ("Put Herbie in front", "Alex’s call", "chapter 8 poll answers"),
 }
+
+
+SCARLET_ANSWERS = {
+    (1, 5): ("Find cheaper rooms in London", "That’s Watson’s choice", "Scarlet poll shows feedback after an answer"),
+    (2, 5): ("He read it in Watson’s face", "Hold that thought", "Scarlet guess shows feedback after an answer"),
+}
+
+
+def scarlet_answer(ch, p):
+    a = SCARLET_ANSWERS.get((ch, p))
+    if a and tap_text(a[0], wait=5):
+        check(wait_text(a[1], 5), a[2])
+        shot(f"s{ch:02d}_p{p:02d}_answered")
 
 
 def answer(ch, p):
@@ -334,6 +347,17 @@ def main():
     time.sleep(1)
     shot("11_library_dark")
 
+    # Second book: A Study in Scarlet, chapters 1-2 (its own hook art, a poll and a guess)
+    sb = scroll_to("A STUDY IN SCARLET", exact=True)
+    if check(sb is not None, "A Study in Scarlet is in the library"):
+        tap((sb[0] + sb[2]) / 2, (sb[1] + sb[3]) / 2)
+    check(wait_text("Start Chapter 1", 10), "Scarlet book page shows start button")
+    shot("12_scarlet_book")
+    tap_text("Start Chapter 1")
+    if read_chapter(1, extra=scarlet_answer, prefix="s", book="Scarlet "):
+        if tap_text("Read Chapter 2 now", wait=8):
+            read_chapter(2, extra=scarlet_answer, prefix="s", book="Scarlet ")
+
     # Health
     crash = adb("logcat", "-d", "-b", "crash")
     check(PKG not in crash, "no crashes in the crash log")
@@ -392,8 +416,8 @@ def contact_sheets():
     os.rmdir(SHOTS) if not os.listdir(SHOTS) else None
     sheets = os.path.join(OUT, "sheets")
     os.makedirs(sheets, exist_ok=True)
-    for ch in range(1, 21):
-        group = [thumbs[n] for n in sorted(thumbs) if n.startswith(f"c{ch:02d}_")]
+    for key in [f"c{ch:02d}" for ch in range(1, 21)] + ["s01", "s02"]:
+        group = [thumbs[n] for n in sorted(thumbs) if n.startswith(f"{key}_")]
         if not group:
             continue
         tw, th = 270, int(group[0].height * 270 / group[0].width)
@@ -402,7 +426,8 @@ def contact_sheets():
         sheet = Image.new("RGB", (cols * tw, rows * th), (20, 20, 20))
         for i, im in enumerate(group):
             sheet.paste(im.resize((tw, th)), ((i % cols) * tw, (i // cols) * th))
-        sheet.save(os.path.join(sheets, f"chapter-{ch:02d}.jpg"), quality=82)
+        name = f"chapter-{key[1:]}" if key[0] == "c" else f"scarlet-chapter-{key[1:]}"
+        sheet.save(os.path.join(sheets, f"{name}.jpg"), quality=82)
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  if (url.origin !== location.origin) return;
+  if (url.origin !== location.origin || url.pathname === "/apk") return;
   if (req.mode === "navigate" || url.pathname.startsWith("/books/") || url.pathname.startsWith("/api/")) {
     e.respondWith(networkFirst(req));
   } else {

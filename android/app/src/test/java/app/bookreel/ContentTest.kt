@@ -21,7 +21,8 @@ import java.io.File
 class ContentTest {
     private val json = Json { ignoreUnknownKeys = true; isLenient = true }
     private val dir = File("src/main/assets/books")
-    private val knownArt = setOf("parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain")
+    private val knownArt = setOf("parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain",
+        "lens", "fog", "door", "desert", "countdown", "pills", "ring", "cab", "lab", "peaks")
 
     @Test fun indexParsesAndReadyBooksHaveFiles() {
         val index = json.decodeFromString(BookIndex.serializer(), File(dir, "index.json").readText())
