@@ -245,6 +245,48 @@ function cab(caption) {
   return svg(g.def, b, "A horse-drawn cab at night");
 }
 
+function lab(caption) {
+  const g = vgrad(["#1F3A3A", "#0E1E1E"]);
+  let b = rr(`url(#${g.id})`, 0, 0, 320, 190, 12) + rr("#3B2A20", 0, 150, 320, 40) + rr("#2A1D16", 0, 150, 320, 5);
+  // test-tube rack
+  b += rr("#6B4A33", 40, 120, 120, 8, 2) + rr("#6B4A33", 46, 128, 6, 22) + rr("#6B4A33", 148, 128, 6, 22);
+  [["#C21F2B", 0.55], ["#E9E4D8", 0.25], ["#7FC8B8", 0.4], ["#E2B65A", 0.6]].forEach(([c, f], i) => {
+    const x = 56 + i * 24;
+    b += rr("#CFE7E355", x, 66, 14, 58, 7) + rr(c, x + 2, 66 + 56 * (1 - f), 10, 56 * f, 5);
+  });
+  // flask over a burner
+  b += `<path d="M222 70V96L198 136H268L244 96V70Z" fill="#CFE7E333" stroke="#CFE7E3" stroke-width="2.5"/>`;
+  b += `<path d="M206 124L260 124L268 136H198Z" fill="#C21F2B" opacity=".85"/>`;
+  b += rr("#CFE7E3", 218, 64, 30, 6, 2) + rr("#59606A", 214, 140, 38, 10, 2);
+  b += `<path d="M233 150C226 158 240 160 233 168C246 160 236 156 233 150Z" fill="#6FB6FF"/>`;
+  for (const [x, y, r] of [[230, 112, 3], [238, 104, 2], [226, 98, 2.5]]) b += `<circle cx="${x}" cy="${y}" r="${r}" fill="#F6E7D6" opacity=".8"/>`;
+  if (caption) b += label(caption, 24, 28, 12, "#CFF2E8", { weight: 600, anchor: "start" });
+  return svg(g.def, b, "A chemistry bench with test tubes and a flask");
+}
+
+function peaks(caption, mode) {
+  const night = mode === "night";
+  const g = vgrad(night ? ["#0E1C2A", "#1F3B57"] : ["#8FB8DE", "#D6E6F0"], 0, 120);
+  let b = rr(`url(#${g.id})`, 0, 0, 320, 190, 12);
+  if (night) {
+    for (const [x, y] of [[30, 20], [70, 44], [120, 16], [180, 30], [250, 18], [292, 50], [210, 60], [150, 52]]) b += circle("#FFFFFFCC", 1.3, x, y);
+    b += circle("#E6EEF6", 12, 262, 34) + circle("#0E1C2A", 11, 268, 30);
+  } else {
+    b += circle("#FFF3D0", 18, 268, 40);
+  }
+  b += `<path d="M0 132L52 70L84 100L132 40L176 96L214 60L262 110L320 74V190H0Z" fill="${night ? "#16283A" : "#5E7A8E"}"/>`;
+  b += `<path d="M132 40L146 58L138 56L128 64L120 54Z" fill="#E6EEF6"/><path d="M214 60L226 74L216 72L206 76Z" fill="#E6EEF6"/>`;
+  b += `<path d="M0 150C70 130 150 160 320 136V190H0Z" fill="${night ? "#0B1520" : "#4E7A5C"}"/>`;
+  if (night) b += `<path d="M300 190C250 166 210 160 176 146" fill="none" stroke="#3A5470" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 9"/>`;
+  else {
+    b += `<path d="M0 166C60 156 120 162 170 154V190H0Z" fill="#D9B95C"/><path d="M170 154C220 148 270 152 320 146V190H170Z" fill="#6E9A5A"/>`;
+    for (let i = 0; i < 12; i++) b += line("#B8963F", 10 + i * 14, 172 + (i % 3) * 4, 14 + i * 14, 164 + (i % 3) * 4, 2, "round");
+    b += rr("#7A4E2E", 236, 150, 26, 16, 2) + `<path d="M232 151L249 140L266 151Z" fill="#5A3622"/>`;
+  }
+  if (caption) b += label(caption, 24, night ? 176 : 26, 12, night ? "#E6EEF6" : "#0F1A14", { weight: 600, anchor: "start" });
+  return svg(g.def, b, night ? "A mountain pass at night" : "Mountains above a green valley");
+}
+
 /** Split-flap departure board; the letters animate when its card becomes visible. */
 function board(text) {
   const rows = text ? text.split("|") : ["NEW YORK", "FINAL CALL", "HOUSTON", "BOARDING", "ATLANTA", "ON TIME"];
@@ -279,8 +321,10 @@ export function hookArt(art, text) {
     case "pills": return pills(p[0] || "");
     case "ring": return ring(p[0] || "");
     case "cab": return cab(p[0] || "");
+    case "lab": return lab(p[0] || "");
+    case "peaks": return peaks(p[0] || "", p[1] || "day");
     default: return stamp(p[0] || "BOOKREEL", p[1] || "");
   }
 }
 
-export const ART_KEYS = ["parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain", "lens", "fog", "door", "desert", "countdown", "pills", "ring", "cab"];
+export const ART_KEYS = ["parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain", "lens", "fog", "door", "desert", "countdown", "pills", "ring", "cab", "lab", "peaks"];

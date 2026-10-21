@@ -76,6 +76,12 @@ const ANSWERS = {
   "the-goal:1:6": ["Put every available worker", "Same call as Bob Donovan", "poll shows feedback after an answer"],
   "the-goal:2:7": ["Something else", "Hold that thought", "guess shows feedback after an answer"],
   "the-goal:8:4": ["Put Herbie in front", "That’s Alex’s call", "chapter 8 poll answers"],
+  "a-study-in-scarlet:1:5": ["Find cheaper rooms in London", "That’s Watson’s choice", "Scarlet poll shows feedback after an answer"],
+  "a-study-in-scarlet:2:5": ["He read it in Watson’s face", "Hold that thought", "Scarlet guess shows feedback after an answer"],
+};
+// Guess loops: the payoff post shows the reader's earlier answer.
+const PAYOFFS = {
+  "a-study-in-scarlet:4:6": ["Your guess earlier: He read it in Watson’s face", "Scarlet payoff in chapter 4 shows the chapter 2 guess"],
 };
 
 async function readChapter(bookId, ch, total, { saves = [], first = 1 } = {}) {
@@ -95,6 +101,8 @@ async function readChapter(bookId, ch, total, { saves = [], first = 1 } = {}) {
       check(await visible(a[1], 3000), a[2]);
       await shot(`${bookId}-c${String(ch).padStart(2, "0")}-p${String(p).padStart(2, "0")}-answered`);
     }
+    const pay = PAYOFFS[`${bookId}:${ch}:${p}`];
+    if (pay) check(await visible(pay[0], 3000), pay[1]);
     if (p < 10 && !(await nextPost(p + 1))) return false;
   }
   const label = ch === total ? "Finish the book" : "Finish chapter";

@@ -37,8 +37,8 @@ def poll(t, label, q, options, reveal, hint="Pick one to see what actually happe
     return _p("poll", t, take, label=label, q=q, options=options, reveal=reveal, hint=hint)
 
 
-def guess(t, label, q, options, reveal, loop_id, hint="Pick your answer. We’ll keep it for later.", take=None):
-    return _p("guess", t, take, label=label, q=q, options=options, reveal=reveal, hint=hint, loopId=loop_id)
+def guess(t, label, q, options, reveal, loop_id, hint="Pick your answer. We’ll keep it for later.", reveal_label=None, take=None):
+    return _p("guess", t, take, label=label, q=q, options=options, reveal=reveal, hint=hint, loopId=loop_id, revealLabel=reveal_label)
 
 
 def crossoff(t, title, items, answer, note="", take=None):

@@ -22,7 +22,7 @@ Every push to `main` builds and tests the app. Tested builds are attached to **R
 ## Building locally
 
 ```
-python3 content/src/build.py          # regenerate the-goal.json and validate it
+python3 content/src/build.py          # regenerate every book pack and validate it (or pass a book id)
 cd android && ./gradlew assembleRelease
 ```
 
@@ -30,6 +30,9 @@ cd android && ./gradlew assembleRelease
 
 The Goal is copyrighted. Its pack is marked `private-test` and is for the owner's personal testing only.
 Do not distribute an APK that contains it. Public builds may only ship public-domain or licensed books.
+
+A Study in Scarlet (Arthur Conan Doyle, 1887) is in the public domain. Its pack is our own retelling, checked
+against the Project Gutenberg text (ebook #244), and is served to everyone.
 
 The release build is signed with a development key committed in `android/app/dev-signing.jks` so that
 every CI build installs over the previous one. Replace it with a secret upload key before any store release.

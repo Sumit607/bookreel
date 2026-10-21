@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Builds android/app/src/main/assets/books/the-goal.json from the chapter sources and validates it.
+"""Builds the book packs in android/app/src/main/assets/books/ from the chapter sources and validates them.
 
-Run: python3 content/src/build.py
+Run: python3 content/src/build.py [book-id ...]   (no ids = every book)
+Then: python3 tools/build_web.py
 """
 import importlib
 import json
@@ -11,11 +12,15 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from the_goal_meta import BOOK, CHARACTERS, COLORS  # noqa: E402
 
-OUT = os.path.join(HERE, "..", "..", "android", "app", "src", "main", "assets", "books", "the-goal.json")
-MODULES = ["ch01_03", "ch04_07", "ch08_11", "ch12_15", "ch16_20"]
-ART = {"parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain"}
+OUT_DIR = os.path.join(HERE, "..", "..", "android", "app", "src", "main", "assets", "books")
+BOOKS = {
+    "the-goal": ("the_goal_meta", ["ch01_03", "ch04_07", "ch08_11", "ch12_15", "ch16_20"]),
+    "a-study-in-scarlet": ("scarlet_meta", ["scarlet_01_04", "scarlet_05_08", "scarlet_09_12", "scarlet_13_16", "scarlet_17_20"]),
+}
+# Hook art keys the web app can draw (web/public/js/art.js). Android falls back to a stamp for newer keys.
+ART = {"parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain",
+       "lens", "fog", "door", "desert", "countdown", "pills", "ring", "cab", "lab", "peaks"}
 INTERACTIVE = {"poll", "guess", "crossoff"}
 
 
@@ -46,9 +51,9 @@ def reading_text(p):
     return ""
 
 
-def collect():
+def collect(modules):
     chapters = []
-    for m in MODULES:
+    for m in modules:
         try:
             mod = importlib.import_module(m)
         except ModuleNotFoundError:
@@ -60,9 +65,9 @@ def collect():
     return chapters
 
 
-def validate(chapters):
+def validate(chapters, characters):
     problems = []
-    chars = {c["id"] for c in CHARACTERS}
+    chars = {c["id"] for c in characters}
     loops, payoffs = {}, {}
     for ch in chapters:
         n = ch["n"]
@@ -102,10 +107,12 @@ def validate(chapters):
     return problems
 
 
-def main():
-    chapters = collect()
+def build(book_id):
+    meta_name, modules = BOOKS[book_id]
+    meta = importlib.import_module(meta_name)
+    chapters = collect(modules)
     for ch in chapters:
-        bg, bg2, fg = COLORS[ch["n"]]
+        bg, bg2, fg = meta.COLORS[ch["n"]]
         ch["bg"], ch["fg"] = bg, fg
         if bg2:
             ch["bg2"] = bg2
@@ -114,19 +121,25 @@ def main():
             p["id"] = f"{ch['n']}-{i + 1}"
             # id first for readability
             ch["posts"][i] = {"id": p.pop("id"), **p}
-    book = dict(BOOK)
-    book["characters"] = CHARACTERS
+    book = dict(meta.BOOK)
+    book["characters"] = meta.CHARACTERS
     book["chapters"] = [{k: ch[k] for k in ("n", "title", "hook", "bg", "bg2", "fg", "minutes", "recap", "posts") if k in ch} for ch in chapters]
-    problems = validate(chapters)
-    with open(OUT, "w", encoding="utf-8") as f:
+    problems = validate(chapters, meta.CHARACTERS)
+    out = os.path.join(OUT_DIR, book_id + ".json")
+    with open(out, "w", encoding="utf-8") as f:
         json.dump(book, f, ensure_ascii=False, indent=1)
     words = sum(len(reading_text(p).split()) for ch in chapters for p in ch["posts"])
-    print(f"{len(chapters)} chapters, {sum(len(c['posts']) for c in chapters)} posts, {words} words -> {os.path.relpath(OUT)}")
+    print(f"{book_id}: {len(chapters)} chapters, {sum(len(c['posts']) for c in chapters)} posts, {words} words -> {os.path.relpath(out)}")
     if len(chapters) != 20:
         problems.append(f"{len(chapters)} of 20 chapters written")
     for p in problems:
-        print("PROBLEM:", p)
-    return 1 if problems else 0
+        print(f"PROBLEM [{book_id}]:", p)
+    return len(problems)
+
+
+def main():
+    ids = sys.argv[1:] or list(BOOKS)
+    return 1 if sum(build(i) for i in ids) else 0
 
 
 if __name__ == "__main__":

@@ -19,8 +19,9 @@
       "category": "Mystery",
       "blurb": "The first Sherlock Holmes story: a doctor back from war, a strange new flatmate, and a murder in an empty London house.",
       "hook": "A dead man in an empty house, a word scrawled in blood, and a stranger who reads your past at a glance.",
-      "status": "soon",
-      "minutes": 58,
+      "status": "ready",
+      "file": "a-study-in-scarlet.json",
+      "minutes": 54,
       "cover": { "bg": "#7E1D22", "fg": "#F6E7D6", "motif": "lens", "tag": "Mystery" }
     },
     {

@@ -1,0 +1,3345 @@
+{
+ "schemaVersion": 1,
+ "id": "a-study-in-scarlet",
+ "packVersion": 1,
+ "title": "A Study in Scarlet",
+ "authors": [
+  "Arthur Conan Doyle"
+ ],
+ "category": "Mystery",
+ "blurb": "The first Sherlock Holmes story: a doctor back from war, a strange new flatmate, and a murder in an empty London house.",
+ "narrator": "watson",
+ "rights": {
+  "status": "public-domain",
+  "source": "Project Gutenberg #244",
+  "year": 1887
+ },
+ "characters": [
+  {
+   "id": "watson",
+   "name": "Dr John H. Watson",
+   "short": "Watson",
+   "initials": "JW",
+   "color": "#6B5B3A",
+   "firstChapter": 1,
+   "role": "Army doctor, invalided home",
+   "bio": "Wounded in Afghanistan and sent home to recover. Short of money, short of friends, and about to share rooms with the strangest man in London.",
+   "traits": [
+    "Narrator",
+    "Army surgeon",
+    "Bad shoulder"
+   ]
+  },
+  {
+   "id": "stamford",
+   "name": "Stamford",
+   "short": "Stamford",
+   "initials": "S",
+   "color": "#7A6A55",
+   "firstChapter": 1,
+   "role": "Old hospital colleague",
+   "bio": "Worked under Watson at Barts years ago. A friendly face in a city of strangers, and the man who makes the introduction.",
+   "traits": [
+    "Barts",
+    "Matchmaker"
+   ]
+  },
+  {
+   "id": "holmes",
+   "name": "Sherlock Holmes",
+   "short": "Holmes",
+   "initials": "SH",
+   "color": "#7E1D22",
+   "firstChapter": 2,
+   "role": "Consulting detective",
+   "bio": "Works at strange hours in a hospital chemistry lab, knows every kind of mud and cigar ash, and has never bothered to learn that the Earth goes round the Sun.",
+   "traits": [
+    "Chemist",
+    "Violinist",
+    "Reads people"
+   ]
+  },
+  {
+   "id": "lestrade",
+   "name": "Inspector Lestrade",
+   "short": "Lestrade",
+   "initials": "L",
+   "color": "#4A4F57",
+   "firstChapter": 3,
+   "role": "Scotland Yard",
+   "bio": "Small, sallow and sharp-eyed. Brings Holmes his hardest cases, and keeps the credit for himself.",
+   "traits": [
+    "Scotland Yard",
+    "Rival of Gregson"
+   ]
+  },
+  {
+   "id": "gregson",
+   "name": "Tobias Gregson",
+   "short": "Gregson",
+   "initials": "TG",
+   "color": "#2F5F8A",
+   "firstChapter": 4,
+   "role": "Scotland Yard",
+   "bio": "Tall, pale and flaxen-haired. Holmes calls him the smartest of the Yard men. He and Lestrade are jealous of each other.",
+   "traits": [
+    "Scotland Yard",
+    "Rival of Lestrade",
+    "Confident"
+   ]
+  },
+  {
+   "id": "rance",
+   "name": "Constable John Rance",
+   "short": "Rance",
+   "initials": "JR",
+   "color": "#3E5F2F",
+   "firstChapter": 7,
+   "role": "The constable who found the body",
+   "bio": "Walks the Brixton Road beat at night. Saw a light in an empty house at two in the morning and went in.",
+   "traits": [
+    "Night beat",
+    "Found the body"
+   ]
+  },
+  {
+   "id": "oldwoman",
+   "name": "The old woman",
+   "short": "Old woman",
+   "initials": "OW",
+   "color": "#8C6D1F",
+   "firstChapter": 8,
+   "role": "Answers the ring advertisement",
+   "bio": "Wrinkled, bent and very polite. Says the lost ring belongs to her daughter Sally.",
+   "traits": [
+    "Calls herself Mrs Sawyer",
+    "Very convincing"
+   ]
+  },
+  {
+   "id": "wiggins",
+   "name": "Wiggins",
+   "short": "Wiggins",
+   "initials": "W",
+   "color": "#A0522D",
+   "firstChapter": 9,
+   "role": "Leader of the Baker Street Irregulars",
+   "bio": "Head of a gang of ragged street boys who can go anywhere, see everything and hear everyone. Holmes pays a shilling a day.",
+   "traits": [
+    "Street boy",
+    "Irregulars",
+    "Unstoppable"
+   ]
+  },
+  {
+   "id": "charpentier",
+   "name": "Madame Charpentier",
+   "short": "Mme Charpentier",
+   "initials": "MC",
+   "color": "#7A4F8F",
+   "firstChapter": 10,
+   "role": "Landlady, Camberwell",
+   "bio": "Ran the boarding house where the two Americans stayed for three weeks. Hiding something, and very frightened.",
+   "traits": [
+    "Boarding house",
+    "Protects her children"
+   ]
+  },
+  {
+   "id": "drebber",
+   "name": "Enoch J. Drebber",
+   "short": "Drebber",
+   "initials": "ED",
+   "color": "#59626E",
+   "firstChapter": 5,
+   "role": "The dead man",
+   "bio": "An American from Cleveland, Ohio, found in an empty house with a look of horror on his face and no wound on his body.",
+   "traits": [
+    "Cleveland, Ohio",
+    "Rich",
+    "Drinks"
+   ]
+  },
+  {
+   "id": "stangerson",
+   "name": "Joseph Stangerson",
+   "short": "Stangerson",
+   "initials": "JS",
+   "color": "#3A3340",
+   "firstChapter": 6,
+   "role": "Drebber’s secretary",
+   "bio": "Drebber’s travelling companion and secretary. Missing since the night of the murder.",
+   "traits": [
+    "Secretary",
+    "Missing"
+   ]
+  },
+  {
+   "id": "hope",
+   "name": "Jefferson Hope",
+   "short": "Hope",
+   "initials": "JH",
+   "color": "#9C3B1E",
+   "firstChapter": 12,
+   "role": "Cabman",
+   "bio": "Big, weathered and strong, with a voice from the American West. Has been following two men for years.",
+   "traits": [
+    "Cabman",
+    "Hunter",
+    "Patient"
+   ]
+  },
+  {
+   "id": "ferrier",
+   "name": "John Ferrier",
+   "short": "Ferrier",
+   "initials": "JF",
+   "color": "#8E6B3E",
+   "firstChapter": 13,
+   "role": "Lost in the desert",
+   "bio": "A tough, gaunt pioneer, the last survivor of his wagon party except one little girl. He has decided she will not die.",
+   "traits": [
+    "Pioneer",
+    "Stubborn",
+    "Loving father"
+   ]
+  },
+  {
+   "id": "lucy",
+   "name": "Lucy Ferrier",
+   "short": "Lucy",
+   "initials": "LF",
+   "color": "#C05A7A",
+   "firstChapter": 13,
+   "role": "Ferrier’s adopted daughter",
+   "bio": "Five years old when Ferrier carries her out of the desert. She grows up to be the brightest thing in the valley.",
+   "traits": [
+    "Brave",
+    "The flower of Utah"
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "n": 1,
+   "title": "Home from the War",
+   "hook": "A bullet at Maiwand sent him home with nothing. A tap on the shoulder in a London bar changed everything.",
+   "bg": "#6B5B3A",
+   "bg2": "#3A3020",
+   "fg": "#F6EBD2",
+   "minutes": 3,
+   "recap": [
+    "Watson is wounded at Maiwand and sent home sick.",
+    "Broke in London, he needs cheap rooms to share.",
+    "Stamford knows a man: brilliant, odd, and named Sherlock Holmes."
+   ],
+   "posts": [
+    {
+     "id": "1-1",
+     "type": "hook",
+     "t": "Invalided home",
+     "kicker": "Afghanistan, 1880",
+     "head": "A bullet sent him home with nothing.",
+     "sub": "Then a chance meeting in a London bar handed him a flatmate, and a whole new life.",
+     "art": "stamp",
+     "artText": "INVALIDED|HOME FROM AFGHANISTAN"
+    },
+    {
+     "id": "1-2",
+     "type": "scene",
+     "t": "Meet Dr Watson",
+     "label": "Meet John H. Watson · Army surgeon",
+     "h": "Struck at Maiwand",
+     "text": "He trained as a doctor in London, joined the army as an assistant surgeon and was sent to the Second Afghan War. At the battle of Maiwand a bullet smashed his shoulder. His orderly, Murray, threw him across a packhorse and got him back to British lines alive.",
+     "theme": "paper"
+    },
+    {
+     "id": "1-3",
+     "type": "twist",
+     "t": "Then the fever",
+     "head": "Then the fever came.",
+     "text": "Recovering in hospital at Peshawar, he caught enteric fever, typhoid, and nearly died. A medical board shipped him home on the troopship Orontes. He landed at Portsmouth with his health in ruins and nine months to repair it.",
+     "status": "Health · Wrecked"
+    },
+    {
+     "id": "1-4",
+     "type": "scene",
+     "t": "Adrift in London",
+     "label": "London",
+     "h": "Money running out",
+     "text": "No family, no friends, and an army pension of eleven shillings and sixpence a day. Watson drifts to London, which he calls the great cesspool of the Empire, and lives in a hotel in the Strand, spending far more than he has. Soon the sums stop adding up.",
+     "theme": "night"
+    },
+    {
+     "id": "1-5",
+     "type": "poll",
+     "t": "You decide: Watson",
+     "label": "You decide",
+     "q": "You’re Watson: broke, alone and living in a hotel. What now?",
+     "options": [
+      {
+       "text": "Move to a cheap village in the country",
+       "feedback": "Watson considered exactly that. Then his luck changed."
+      },
+      {
+       "text": "Find cheaper rooms in London, and share them",
+       "feedback": "That’s Watson’s choice. And that same day, he meets an old friend."
+      },
+      {
+       "text": "Go back to the army as soon as possible",
+       "feedback": "His health won’t allow it. The medical board has already sent him home."
+      }
+     ],
+     "reveal": "He decides to find cheaper rooms. That very day, standing at the Criterion Bar, he feels a tap on his shoulder.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "1-6",
+     "type": "chat",
+     "t": "The Criterion Bar",
+     "label": "The Criterion Bar · Piccadilly",
+     "msgs": [
+      {
+       "who": "stamford",
+       "text": "Watson? You’re as thin as a rail and brown as a nut. What happened to you?"
+      },
+      {
+       "who": "watson",
+       "text": "Afghanistan. Now I’m hunting for rooms I can actually afford."
+      },
+      {
+       "who": "stamford",
+       "text": "Funny. You’re the second person to say that to me today."
+      },
+      {
+       "who": "watson",
+       "text": "Who was the first?"
+      },
+      {
+       "who": "stamford",
+       "text": "A fellow in the chemistry lab at the hospital. He’s found nice rooms and can’t afford them alone."
+      },
+      {
+       "who": "watson",
+       "text": "Then I’m his man. I’d rather have company than live alone."
+      },
+      {
+       "who": "stamford",
+       "text": "You don’t know Sherlock Holmes yet. You might not want him as a constant companion."
+      }
+     ]
+    },
+    {
+     "id": "1-7",
+     "type": "list",
+     "t": "Stamford’s warning",
+     "label": "Over lunch",
+     "h": "Your future flatmate, according to Stamford",
+     "items": [
+      {
+       "text": "A little odd in his ideas",
+       "state": "warn"
+      },
+      {
+       "text": "A first-class chemist",
+       "state": "ok"
+      },
+      {
+       "text": "Never took a proper medical course",
+       "state": "warn"
+      },
+      {
+       "text": "Knows strange things that would astonish his professors",
+       "state": "warn"
+      },
+      {
+       "text": "Beats dead bodies with a stick",
+       "state": "no"
+      }
+     ],
+     "text": "The stick is for science: he wants to know how far bruises can form after death. Stamford says he is a decent fellow, just a bit too cold-blooded about it.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "1-8",
+     "type": "myth",
+     "t": "Watson the bumbler",
+     "take": "The real Watson is a tough, sharp war veteran.",
+     "myth": "Watson is a slow-witted, bumbling sidekick.",
+     "truth": "In the books he is a war surgeon who survived a battle and a fever. The bumbling Watson mostly comes from films made decades later."
+    },
+    {
+     "id": "1-9",
+     "type": "character",
+     "t": "Meet Watson",
+     "charId": "watson"
+    },
+    {
+     "id": "1-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Stamford leads him to the old hospital, up a bleak stone staircase and down a long whitewashed corridor to a lab full of bottles and flickering burners. One man is bent over a table. He looks up, and shouts with joy: “I’ve found it! I’ve found it!”"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "I’ve Found It!",
+   "hook": "He’d known Watson for four seconds when he said it: “You have been in Afghanistan, I perceive.”",
+   "bg": "#1F3A3A",
+   "bg2": "#0E1E1E",
+   "fg": "#CFF2E8",
+   "minutes": 3,
+   "recap": [
+    "Holmes has invented a test that finds even tiny bloodstains.",
+    "He knew Watson had been in Afghanistan without being told.",
+    "They confess their worst habits and agree to share rooms."
+   ],
+   "posts": [
+    {
+     "id": "2-1",
+     "type": "hook",
+     "t": "Four seconds",
+     "kicker": "St Bartholomew’s Hospital · the lab",
+     "head": "“You have been in Afghanistan, I perceive.”",
+     "sub": "He’d known Watson for about four seconds. Nobody had told him a thing.",
+     "art": "lab",
+     "artText": "I’VE FOUND IT!"
+    },
+    {
+     "id": "2-2",
+     "type": "scene",
+     "t": "The discovery",
+     "label": "The chemical laboratory",
+     "h": "A test for blood",
+     "text": "Holmes has just found a chemical that reacts to blood and nothing else, even in the tiniest stain. Old brown marks have always been a problem in court: are they blood, mud, rust or fruit juice? Men have walked free over that question. His test would settle it in a minute.",
+     "theme": "paper"
+    },
+    {
+     "id": "2-3",
+     "type": "chat",
+     "t": "The proof",
+     "label": "Holmes, to his new acquaintance",
+     "msgs": [
+      {
+       "who": "holmes",
+       "text": "Let me show you. I need some fresh blood."
+      },
+      {
+       "who": "holmes",
+       "text": "One drop of mine, in a litre of water. You can’t even see it. Now a few white crystals…"
+      },
+      {
+       "who": "watson",
+       "text": "It’s turned a dull mahogany colour!"
+      },
+      {
+       "who": "holmes",
+       "text": "Ha! If this test had existed, a dozen men walking free today would have hanged long ago."
+      },
+      {
+       "who": "stamford",
+       "text": "You’re a walking calendar of crime. You should start a paper: the Police News of the Past."
+      },
+      {
+       "who": "holmes",
+       "text": "Excuse the plaster on my finger. I dabble with poisons a good deal."
+      }
+     ]
+    },
+    {
+     "id": "2-4",
+     "type": "character",
+     "t": "Meet Holmes",
+     "charId": "holmes"
+    },
+    {
+     "id": "2-5",
+     "type": "guess",
+     "t": "How did he know?",
+     "label": "Your guess",
+     "q": "Holmes said Watson had been in Afghanistan. Nobody told him. How did he know?",
+     "options": [
+      {
+       "text": "Stamford told him beforehand",
+       "feedback": "Stamford swears he said nothing."
+      },
+      {
+       "text": "He read it in Watson’s face, tan and arm",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "He’d seen Watson’s name in an army list",
+       "feedback": "Clever, but no."
+      },
+      {
+       "text": "A lucky guess",
+       "feedback": "Holmes never guesses. Or so he says."
+      }
+     ],
+     "reveal": "Watson asks. Holmes only chuckles to himself and changes the subject. The answer comes in Chapter 4, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 4.",
+     "loopId": "afghan",
+     "revealLabel": "What Holmes said"
+    },
+    {
+     "id": "2-6",
+     "type": "chat",
+     "t": "Confessions",
+     "label": "Before they sign anything",
+     "msgs": [
+      {
+       "who": "holmes",
+       "text": "We’d better know the worst of each other. I smoke strong tobacco, and I do experiments with chemicals."
+      },
+      {
+       "who": "holmes",
+       "text": "Sometimes I get low and don’t open my mouth for days. Just leave me alone and I’ll come round. Your turn."
+      },
+      {
+       "who": "watson",
+       "text": "I keep a bull pup. Noise and rows upset me, because my nerves are shaken. I get up at ungodly hours. And I’m extremely lazy."
+      },
+      {
+       "who": "holmes",
+       "text": "Does violin playing count as a row?"
+      },
+      {
+       "who": "watson",
+       "text": "That depends on the player."
+      },
+      {
+       "who": "holmes",
+       "text": "Then I think we may consider it settled."
+      }
+     ]
+    },
+    {
+     "id": "2-7",
+     "type": "myth",
+     "t": "Elementary",
+     "take": "“Elementary, my dear Watson” isn’t in Doyle.",
+     "myth": "Holmes says “Elementary, my dear Watson.”",
+     "truth": "Not in this book, and not in any Doyle story in exactly those words. The famous line grew up later, in plays, films and radio."
+    },
+    {
+     "id": "2-8",
+     "type": "idea",
+     "t": "Stamford’s bet",
+     "label": "Stamford’s warning",
+     "head": "You can’t study him. He studies you.",
+     "sub": "Stamford tells Watson he’ll find Holmes a knotty problem, and bets he’ll learn more about Watson than Watson ever learns about him.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-9",
+     "type": "scene",
+     "t": "A deal in five minutes",
+     "label": "Leaving the hospital",
+     "h": "Settled",
+     "text": "They agree to meet at noon the next day to look at the rooms. Holmes goes straight back to his chemicals. Watson walks out into the street with a flatmate he knows almost nothing about: a man who studies blood, beats corpses, and reads strangers at a glance.",
+     "theme": "steel"
+    },
+    {
+     "id": "2-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Outside, Watson stops. “How on earth did he know I’d been in Afghanistan?” Stamford just smiles. “That’s his little peculiarity,” he says. “A great many people have wanted to know how he finds things out.”"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "221B",
+   "hook": "His brilliant new flatmate has never heard that the Earth goes round the Sun.",
+   "bg": "#7E1D22",
+   "bg2": "#3F0C10",
+   "fg": "#F6E7D6",
+   "minutes": 3,
+   "recap": [
+    "Holmes only keeps knowledge that is useful for his work.",
+    "Watson’s list of his skills makes no sense as a career.",
+    "Strange visitors keep arriving to ask Holmes for help."
+   ],
+   "posts": [
+    {
+     "id": "3-1",
+     "type": "hook",
+     "t": "221B Baker Street",
+     "kicker": "221B Baker Street",
+     "head": "His flatmate doesn’t know the Earth goes round the Sun.",
+     "sub": "Yet he can tell London mud apart at a glance.",
+     "art": "door",
+     "artText": "221B|BAKER STREET"
+    },
+    {
+     "id": "3-2",
+     "type": "scene",
+     "t": "The rooms",
+     "label": "221B Baker Street",
+     "h": "Home",
+     "text": "Two comfortable bedrooms and one large, airy sitting room with two broad windows. Split two ways, the rent is easy. Watson moves in that evening. Holmes arrives the next morning with several boxes and suitcases. Neither man knows much about the other.",
+     "theme": "paper"
+    },
+    {
+     "id": "3-3",
+     "type": "scene",
+     "t": "Odd habits",
+     "label": "The first weeks",
+     "text": "Holmes is quiet and regular: in bed by ten, out before Watson wakes. Some days he works in the lab, some days he walks for hours through the roughest parts of London. Then, for days at a time, he lies on the sofa, barely speaking, staring at nothing.",
+     "theme": "steel"
+    },
+    {
+     "id": "3-4",
+     "type": "chat",
+     "t": "The solar system",
+     "label": "Breakfast",
+     "msgs": [
+      {
+       "who": "watson",
+       "text": "You honestly didn’t know the Earth goes round the Sun?"
+      },
+      {
+       "who": "holmes",
+       "text": "Now that I do, I’ll do my best to forget it."
+      },
+      {
+       "who": "watson",
+       "text": "Forget it?"
+      },
+      {
+       "who": "holmes",
+       "text": "A brain is like an empty attic. Fill it with junk and the useful things get crowded out. I only keep what helps my work."
+      },
+      {
+       "who": "watson",
+       "text": "But it’s the solar system!"
+      },
+      {
+       "who": "holmes",
+       "text": "What does it matter to me? If we went round the Moon, it wouldn’t make a pennyworth of difference to my work."
+      }
+     ]
+    },
+    {
+     "id": "3-5",
+     "type": "idea",
+     "t": "The brain attic",
+     "take": "Holmes only stores what he can use.",
+     "label": "Holmes’s rule",
+     "head": "Your brain is an attic. Choose what goes in.",
+     "sub": "Holmes believes memory has walls. Every useless fact you store pushes out a useful one. So he keeps only what serves his work, and throws the rest away, even astronomy.",
+     "theme": "sodium"
+    },
+    {
+     "id": "3-6",
+     "type": "list",
+     "t": "His limits",
+     "label": "Watson’s secret list",
+     "h": "Sherlock Holmes: his limits",
+     "items": [
+      {
+       "text": "Literature: nil",
+       "state": "no"
+      },
+      {
+       "text": "Philosophy: nil",
+       "state": "no"
+      },
+      {
+       "text": "Astronomy: nil",
+       "state": "no"
+      },
+      {
+       "text": "Politics: feeble",
+       "state": "warn"
+      },
+      {
+       "text": "Botany: knows his poisons",
+       "state": "warn"
+      },
+      {
+       "text": "Geology: names London mud by sight",
+       "state": "ok"
+      },
+      {
+       "text": "Chemistry: profound",
+       "state": "ok"
+      },
+      {
+       "text": "Anatomy: accurate, unsystematic",
+       "state": "warn"
+      },
+      {
+       "text": "Crime stories: knows them all",
+       "state": "ok"
+      },
+      {
+       "text": "Violin, boxing, swordplay, British law",
+       "state": "ok"
+      }
+     ],
+     "text": "Watson gives up and throws the list in the fire. What job could possibly need exactly these skills?",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "3-7",
+     "type": "scene",
+     "t": "The violin",
+     "label": "Evenings",
+     "text": "He plays beautifully when asked. Alone, he leans back with the violin across his knee and scrapes at it: sad chords, wild ones, now and then something cheerful. Afterwards, as if to apologise, he plays a run of Watson’s favourite pieces.",
+     "theme": "night"
+    },
+    {
+     "id": "3-8",
+     "type": "scene",
+     "t": "Strange visitors",
+     "label": "Visitors",
+     "h": "Who are all these people?",
+     "text": "A small, sallow, sharp-eyed man called Lestrade drops in three or four times a week. A fashionable young woman stays half an hour. A grey-haired, shabby, flustered man. An old woman in slippers. A railway porter in uniform. Each time, Holmes asks for the sitting room, and Watson goes to his bedroom.",
+     "theme": "paper"
+    },
+    {
+     "id": "3-9",
+     "type": "guess",
+     "t": "What’s his job?",
+     "label": "Your guess",
+     "q": "Strange visitors, strange knowledge, strange hours. What does Holmes do for a living?",
+     "options": [
+      {
+       "text": "A doctor with unusual patients",
+       "feedback": "He’s no doctor, though he knows his anatomy."
+      },
+      {
+       "text": "A police detective",
+       "feedback": "Close. But the police come to him, not the other way round."
+      },
+      {
+       "text": "A chemist doing private research",
+       "feedback": "Chemistry is his hobby, not his living."
+      },
+      {
+       "text": "Something entirely new",
+       "feedback": "Hold that thought."
+      }
+     ],
+     "reveal": "Watson is too polite to ask outright. Holmes will tell him in Chapter 4. Your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 4.",
+     "loopId": "job",
+     "revealLabel": "For now"
+    },
+    {
+     "id": "3-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "On the 4th of March, Watson gets up early. Holmes is still at breakfast. Watson picks up a magazine, where one article has been marked in pencil. It is called “The Book of Life”, and it claims a trained observer can read any stranger’s whole life at a glance. Watson thinks it is utter nonsense."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "The Book of Life",
+   "hook": "Watson calls the article rubbish. The man who wrote it is sitting across the breakfast table.",
+   "bg": "#2B2440",
+   "bg2": "#121018",
+   "fg": "#F6C976",
+   "minutes": 3,
+   "recap": [
+    "Holmes is a consulting detective, maybe the only one in the world.",
+    "He read Watson’s past from his tan, his face and his arm.",
+    "Gregson writes: a dead man, blood everywhere, and no wound."
+   ],
+   "posts": [
+    {
+     "id": "4-1",
+     "type": "hook",
+     "t": "The Book of Life",
+     "kicker": "221B · breakfast, March 4th",
+     "head": "The man who wrote that nonsense is sitting opposite him.",
+     "sub": "And he’s about to explain exactly how he read Watson’s life in a second.",
+     "art": "chain",
+     "artText": "ALL LIFE IS A GREAT CHAIN"
+    },
+    {
+     "id": "4-2",
+     "type": "scene",
+     "t": "The article",
+     "label": "The magazine article",
+     "h": "From a drop of water",
+     "text": "From a single drop of water, it says, a logician could deduce an Atlantic or a Niagara without seeing either. All life is a great chain: see one link and you can work out the rest. Look at a man’s fingernails, sleeve, boots, trouser knees and hands, and his trade will be obvious.",
+     "theme": "paper"
+    },
+    {
+     "id": "4-3",
+     "type": "chat",
+     "t": "Twaddle",
+     "label": "Watson slaps the magazine down",
+     "msgs": [
+      {
+       "who": "watson",
+       "text": "What ineffable twaddle! I never read such rubbish in my life."
+      },
+      {
+       "who": "holmes",
+       "text": "What is it?"
+      },
+      {
+       "who": "watson",
+       "text": "This article. Some armchair theorist who’s never left his study."
+      },
+      {
+       "who": "holmes",
+       "text": "I wrote it."
+      },
+      {
+       "who": "watson",
+       "text": "You?"
+      },
+      {
+       "who": "holmes",
+       "text": "I have a knack for observation and deduction. It’s how I earn my living."
+      },
+      {
+       "who": "watson",
+       "text": "And how is that?"
+      },
+      {
+       "who": "holmes",
+       "text": "I’m a consulting detective. I suppose I’m the only one in the world."
+      }
+     ]
+    },
+    {
+     "id": "4-4",
+     "type": "idea",
+     "t": "A consulting detective",
+     "label": "The answer",
+     "head": "A consulting detective. The only one.",
+     "sub": "When the police are stuck, they come to him. Lestrade is one of them. Holmes listens, sorts the clues and puts them on the right scent. Most cases he solves without leaving the room.",
+     "payoffLoopId": "job",
+     "theme": "sodium"
+    },
+    {
+     "id": "4-5",
+     "type": "list",
+     "t": "Afghanistan, explained",
+     "label": "How he knew · in under a second",
+     "h": "His train of thought",
+     "items": [
+      {
+       "text": "Medical look, military bearing: an army doctor",
+       "state": "ok"
+      },
+      {
+       "text": "Dark face, pale wrists: just back from the tropics",
+       "state": "ok"
+      },
+      {
+       "text": "Haggard face: hardship and sickness",
+       "state": "ok"
+      },
+      {
+       "text": "Holds his left arm stiffly: wounded",
+       "state": "ok"
+      },
+      {
+       "text": "Tropics, army doctor, wound: Afghanistan",
+       "state": "ok"
+      }
+     ],
+     "text": "Holmes says the steps ran through his mind so fast he wasn’t even aware of them.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "4-6",
+     "type": "idea",
+     "t": "He noticed",
+     "take": "Observation first, then deduction.",
+     "label": "The answer",
+     "head": "He didn’t guess. He noticed.",
+     "sub": "Every clue was in plain sight: tan, wrists, face, arm. Holmes simply looked, and put the links of the chain together.",
+     "payoffLoopId": "afghan",
+     "theme": "sodium"
+    },
+    {
+     "id": "4-7",
+     "type": "myth",
+     "t": "The first detective",
+     "myth": "Sherlock Holmes was the first great fictional detective.",
+     "truth": "Edgar Allan Poe’s Dupin came over forty years earlier, in 1841, and Gaboriau’s Lecoq in the 1860s. Holmes calls Dupin very inferior and Lecoq a bungler. Watson thinks he’s conceited."
+    },
+    {
+     "id": "4-8",
+     "type": "poll",
+     "t": "The man across the street",
+     "label": "Your turn",
+     "q": "A big, plainly dressed man is crossing the street, checking door numbers, a blue envelope in his hand. Holmes says he can name his old trade. Can you?",
+     "options": [
+      {
+       "text": "A postman",
+       "feedback": "Not a postman, though he is delivering a letter."
+      },
+      {
+       "text": "A retired sergeant of the Royal Marines",
+       "feedback": "That’s exactly what Holmes said."
+      },
+      {
+       "text": "A plain-clothes policeman",
+       "feedback": "Reasonable, but no."
+      }
+     ],
+     "reveal": "He knocks and hands Holmes a letter. Watson asks him his trade. “Commissionaire, sir,” he says. “Before that, sergeant, Royal Marine Light Infantry.”",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "4-9",
+     "type": "scene",
+     "t": "Anchor and whiskers",
+     "label": "How he knew",
+     "h": "Anchor, whiskers, bearing",
+     "text": "A big blue anchor tattooed on the back of his hand: the sea. A soldier’s bearing and regulation side-whiskers: a marine. A touch of self-importance and an air of command: a sergeant. Watson is amazed. Holmes pretends it was nothing, and opens the letter.",
+     "theme": "steel"
+    },
+    {
+     "id": "4-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Holmes tosses the letter across the table. “Read that,” he says. It is from Tobias Gregson of Scotland Yard. A man has been found dead in an empty house off the Brixton Road. There is blood in the room. There is no wound on the body."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Lauriston Gardens",
+   "hook": "A dead man in an empty house. Blood all round him. Not a scratch on his body.",
+   "bg": "#59606A",
+   "bg2": "#2C3440",
+   "fg": "#F0ECE4",
+   "minutes": 3,
+   "recap": [
+    "The dead man is Enoch J. Drebber of Cleveland, Ohio.",
+    "No wound, no robbery, and a look of horror on his face.",
+    "A woman’s wedding ring falls from his clothes."
+   ],
+   "posts": [
+    {
+     "id": "5-1",
+     "type": "hook",
+     "t": "No wound",
+     "kicker": "3 Lauriston Gardens, off the Brixton Road",
+     "head": "A dead man in an empty house. Not a scratch on him.",
+     "sub": "Scotland Yard is baffled. Holmes isn’t sure he can be bothered.",
+     "art": "fog",
+     "artText": "BRIXTON ROAD"
+    },
+    {
+     "id": "5-2",
+     "type": "artifact",
+     "t": "Gregson’s letter",
+     "template": "ticket",
+     "label": "Case file · from Gregson’s letter",
+     "number": "No. 3",
+     "badge": "NO\nWOUND",
+     "route": [
+      {
+       "text": "Light in an empty house, 2 AM",
+       "state": "ok"
+      },
+      {
+       "text": "Body of a well-dressed man",
+       "state": "ok"
+      },
+      {
+       "text": "Cards: Enoch J. Drebber, Cleveland, Ohio",
+       "state": "ok"
+      },
+      {
+       "text": "Robbery",
+       "state": "stop",
+       "note": "Nothing taken"
+      },
+      {
+       "text": "Cause of death",
+       "state": "wait",
+       "note": "Unknown"
+      }
+     ],
+     "text": "The constable on the beat saw a light in a house that had stood empty for months, went in, and found the body. There is blood in the room and none on the man. Gregson has left everything untouched and begs for Holmes’s opinion.",
+     "foot": "If Holmes can’t come, Gregson will send full details, and would value his opinion."
+    },
+    {
+     "id": "5-3",
+     "type": "chat",
+     "t": "Lazy",
+     "label": "221B · the letter on the table",
+     "msgs": [
+      {
+       "who": "watson",
+       "text": "Shouldn’t we go at once? Shall I call you a cab?"
+      },
+      {
+       "who": "holmes",
+       "text": "I’m not sure I’ll go. I’m the laziest devil alive, when the mood is on me."
+      },
+      {
+       "who": "watson",
+       "text": "But this is the chance you’ve been waiting for!"
+      },
+      {
+       "who": "holmes",
+       "text": "And if I solve it, Gregson and Lestrade will pocket all the credit. That comes of being unofficial."
+      },
+      {
+       "who": "holmes",
+       "text": "Still, I may have some fun with them. Get your hat!"
+      }
+     ]
+    },
+    {
+     "id": "5-4",
+     "type": "idea",
+     "t": "No data yet",
+     "take": "It is a mistake to theorise before you have the evidence.",
+     "label": "In the cab · Holmes’s rule",
+     "head": "Don’t theorise before you have the facts.",
+     "sub": "All the way there Holmes chatters about violins: Cremona, Stradivarius, Amati. Watson asks why he isn’t thinking about the case. No data yet, says Holmes. A theory formed too early bends every new fact to fit it.",
+     "theme": "sodium"
+    },
+    {
+     "id": "5-5",
+     "type": "poll",
+     "t": "First move",
+     "label": "You decide",
+     "q": "You arrive. The path to the door is muddy and trampled. A constable stands at the gate. What’s your first move?",
+     "options": [
+      {
+       "text": "Go straight inside to the body",
+       "feedback": "That’s what Watson expected him to do."
+      },
+      {
+       "text": "Study the path and the grass beside it first",
+       "feedback": "That’s Holmes."
+      },
+      {
+       "text": "Question the constable at the gate",
+       "feedback": "Useful, but Holmes saves that for later."
+      }
+     ],
+     "reveal": "Holmes strolls up and down the pavement, gazing at the sky, the houses opposite, the railings. Then he walks slowly along the strip of grass beside the path, eyes on the ground. Twice he stops. Once he smiles.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "5-6",
+     "type": "scene",
+     "t": "A herd of buffaloes",
+     "label": "The front door",
+     "h": "Too late for the path",
+     "text": "Gregson meets them, proud that nothing has been touched. Holmes points at the path. “Except that,” he says. “If a herd of buffaloes had passed along there, it couldn’t be more of a mess.” Lestrade is here too. Holmes asks if either of them came in a cab. Neither did.",
+     "theme": "paper"
+    },
+    {
+     "id": "5-7",
+     "type": "scene",
+     "t": "The body",
+     "label": "The front room",
+     "h": "Horror, and hatred",
+     "text": "A bare, dusty room, the wallpaper peeling in strips. On the floor lies a man of about forty-three, well dressed, with curly black hair and a short beard. His hands are clenched, his legs twisted. His face shows horror, and hatred, worse than anything Watson saw in battle. Blood is spattered round him. There is no wound.",
+     "theme": "night"
+    },
+    {
+     "id": "5-8",
+     "type": "character",
+     "t": "Who is he?",
+     "charId": "drebber"
+    },
+    {
+     "id": "5-9",
+     "type": "twist",
+     "t": "The ring",
+     "head": "Then something falls out.",
+     "text": "Holmes sniffs the dead man’s lips and glances at the soles of his patent-leather boots. When the police lift the body, a small object rolls tinkling across the floor. It is a woman’s wedding ring.",
+     "status": "Evidence · A woman’s ring"
+    },
+    {
+     "id": "5-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Holmes turns the ring over in his fingers. “This complicates matters,” Gregson groans. “Heaven knows they were complicated enough before.” Then Lestrade, who has been searching the far corner of the room, gives a shout. He has found something written on the wall."
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Rache",
+   "hook": "Written in blood on the wall: RACHE. Scotland Yard has a theory. Holmes laughs out loud.",
+   "bg": "#A8232C",
+   "bg2": "#4A0C12",
+   "fg": "#FFF3EC",
+   "minutes": 3,
+   "recap": [
+    "RACHE is German for revenge, says Holmes, not “Rachel”.",
+    "Holmes describes the killer without having seen him.",
+    "Drebber died of poison, he says, and walks out."
+   ],
+   "posts": [
+    {
+     "id": "6-1",
+     "type": "hook",
+     "t": "RACHE",
+     "kicker": "The front room, Lauriston Gardens",
+     "head": "Written on the wall in blood: RACHE.",
+     "sub": "Scotland Yard has a theory. Holmes bursts out laughing.",
+     "art": "lens"
+    },
+    {
+     "id": "6-2",
+     "type": "scene",
+     "t": "The writing",
+     "label": "A dark corner",
+     "h": "Blood-red letters",
+     "text": "In the darkest corner, where a strip of wallpaper has peeled away, one word has been scrawled in blood on the bare plaster: RACHE. A burnt-down candle stands on the mantelpiece nearby. It must have been the only light in the room when the word was written.",
+     "theme": "paper"
+    },
+    {
+     "id": "6-3",
+     "type": "poll",
+     "t": "What does it mean?",
+     "label": "You decide",
+     "q": "RACHE. What does it mean?",
+     "options": [
+      {
+       "text": "“Rachel”: the writer was interrupted",
+       "feedback": "That’s Lestrade’s theory, and he’s very proud of it."
+      },
+      {
+       "text": "German for “revenge”",
+       "feedback": "That’s Holmes’s reading."
+      },
+      {
+       "text": "Nothing. It’s there to mislead the police",
+       "feedback": "Keep that idea in your pocket."
+      }
+     ],
+     "reveal": "Lestrade is sure a woman named Rachel is involved, and the killer was disturbed before he could finish. Holmes laughs. Then he gets to work.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "6-4",
+     "type": "compare",
+     "t": "Rachel, or revenge?",
+     "label": "Two theories",
+     "h": "Rachel, or revenge?",
+     "leftTitle": "Lestrade",
+     "left": [
+      "A woman’s name",
+      "Writer was interrupted",
+      "Find Rachel"
+     ],
+     "rightTitle": "Holmes",
+     "right": [
+      "A German word",
+      "It means revenge",
+      "Written by a fake"
+     ],
+     "text": "The A is printed in the German style, Holmes notes. A real German would write in ordinary Latin letters. This was someone pretending to be German, and overdoing it.",
+     "mid": "?"
+    },
+    {
+     "id": "6-5",
+     "type": "list",
+     "t": "In his pockets",
+     "label": "Gregson’s inventory",
+     "h": "What the dead man carried",
+     "items": [
+      {
+       "text": "Watch, by Barraud of London",
+       "value": "Gold"
+      },
+      {
+       "text": "Heavy Albert chain",
+       "value": "Gold"
+      },
+      {
+       "text": "Ring, masonic design",
+       "value": "Gold"
+      },
+      {
+       "text": "Bulldog-head pin",
+       "value": "Ruby eyes"
+      },
+      {
+       "text": "Cards: Enoch J. Drebber",
+       "value": "Russian leather case"
+      },
+      {
+       "text": "Loose money",
+       "value": "£7 13s"
+      },
+      {
+       "text": "The Decameron, signed Joseph Stangerson",
+       "value": "Pocket book"
+      },
+      {
+       "text": "Letters from a steamship line",
+       "value": "2"
+      }
+     ],
+     "total": "Nothing stolen",
+     "text": "The letters are about boats from Liverpool, one to Drebber, one to Stangerson, care of the American Exchange in the Strand.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "6-6",
+     "type": "scene",
+     "t": "Twenty minutes",
+     "label": "Holmes at work",
+     "h": "Like a foxhound",
+     "text": "Out come a tape measure and a big round magnifying glass. For twenty minutes Holmes crawls about the floor like a foxhound on a scent, muttering, measuring gaps between marks no one else can see, scooping a little grey dust into an envelope. He studies RACHE letter by letter. Then he puts it all away, satisfied.",
+     "theme": "steel"
+    },
+    {
+     "id": "6-7",
+     "type": "list",
+     "t": "The killer, unseen",
+     "label": "Holmes, to two stunned detectives",
+     "h": "The killer, sight unseen",
+     "items": [
+      {
+       "text": "A man over six feet tall, in the prime of life",
+       "state": "ok"
+      },
+      {
+       "text": "Small feet for his height, square-toed boots",
+       "state": "ok"
+      },
+      {
+       "text": "Smoked a Trichinopoly cigar",
+       "state": "ok"
+      },
+      {
+       "text": "Came with his victim in a four-wheeled cab",
+       "state": "ok"
+      },
+      {
+       "text": "Horse had three old shoes and one new one",
+       "state": "ok"
+      },
+      {
+       "text": "Probably a red, florid face",
+       "state": "warn"
+      },
+      {
+       "text": "Long nails on his right hand",
+       "state": "warn"
+      }
+     ],
+     "text": "Lestrade and Gregson exchange a doubtful smile.",
+     "style": "check",
+     "theme": "steel"
+    },
+    {
+     "id": "6-8",
+     "type": "chat",
+     "t": "Parting shots",
+     "label": "At the door",
+     "msgs": [
+      {
+       "who": "lestrade",
+       "text": "If this man was murdered, how was it done?"
+      },
+      {
+       "who": "holmes",
+       "text": "Poison."
+      },
+      {
+       "who": "holmes",
+       "text": "One more thing, Lestrade. “Rache” is German for “revenge”. So don’t waste your time looking for Miss Rachel."
+      }
+     ]
+    },
+    {
+     "id": "6-9",
+     "type": "guess",
+     "t": "How tall?",
+     "label": "Your guess",
+     "q": "Holmes says the killer is over six feet tall. He never saw him. How can he know?",
+     "options": [
+      {
+       "text": "From the writing on the wall",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "From his footprints",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "From a witness",
+       "feedback": "There’s no witness. Not yet."
+      },
+      {
+       "text": "Pure guesswork",
+       "feedback": "Holmes never guesses."
+      }
+     ],
+     "reveal": "Holmes won’t explain in front of the police. The answer comes in Chapter 7, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 7.",
+     "loopId": "height"
+    },
+    {
+     "id": "6-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Holmes asks who found the body. Constable John Rance, off duty now, at 46 Audley Court, Kennington Park Gate. “Come along, Doctor,” Holmes says. “We’ll go and look him up.” Behind them, Lestrade and Gregson are still smirking."
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "What the Constable Saw",
+   "hook": "The constable held the killer by the arm at 2 AM. Then he let him go.",
+   "bg": "#1A1830",
+   "bg2": "#0B0A18",
+   "fg": "#F6C976",
+   "minutes": 3,
+   "recap": [
+    "Holmes explains the cab tracks, the stride and the cigar ash.",
+    "Rance found the body, then helped a drunk man to his feet.",
+    "The drunk was the killer, back for the ring."
+   ],
+   "posts": [
+    {
+     "id": "7-1",
+     "type": "hook",
+     "t": "2 AM",
+     "kicker": "Brixton Road, 2 AM",
+     "head": "The constable held the killer by the arm. Then he let him go.",
+     "sub": "He thought the man was just a drunk.",
+     "art": "clock",
+     "artText": "2:00 AM|BRIXTON ROAD"
+    },
+    {
+     "id": "7-2",
+     "type": "scene",
+     "t": "The ruts by the kerb",
+     "label": "In the cab · Holmes explains",
+     "h": "A cab in the night",
+     "text": "As they arrived, he saw two deep wheel ruts close to the kerb. It hadn’t rained for a week until last night, so the cab came during the night. One hoof print was sharper than the other three: a new shoe. And it wasn’t the police: Gregson and Lestrade came on foot.",
+     "theme": "paper"
+    },
+    {
+     "id": "7-3",
+     "type": "scene",
+     "t": "Two pairs of boots",
+     "label": "What the floor said",
+     "text": "Two men walked up the path together, perhaps arm in arm. One wore fancy patent-leather boots: the dead man. One wore square-toed boots. Inside, Square-toes paced up and down, faster and faster, his strides growing longer as he grew more excited. He talked; the other listened. Then it happened.",
+     "theme": "steel"
+    },
+    {
+     "id": "7-4",
+     "type": "idea",
+     "t": "Stride and eye level",
+     "take": "Stride and eye level give away height.",
+     "label": "The answer",
+     "head": "His stride, and his eye level.",
+     "sub": "The length of a man’s stride gives away his height. And people write on walls at about eye level. RACHE was just over six feet from the floor.",
+     "payoffLoopId": "height",
+     "theme": "sodium"
+    },
+    {
+     "id": "7-5",
+     "type": "scene",
+     "t": "Ash and nails",
+     "label": "The small things",
+     "h": "A monograph on ash",
+     "text": "The ash on the floor was dark and flaky: a Trichinopoly cigar. Holmes has made a study of tobacco ash, and written a little monograph on it. He can name any brand at a glance. The long nails? The plaster under RACHE was slightly scratched.",
+     "theme": "paper"
+    },
+    {
+     "id": "7-6",
+     "type": "chat",
+     "t": "Audley Court",
+     "label": "46 Audley Court · Rance, half asleep",
+     "msgs": [
+      {
+       "who": "rance",
+       "text": "About two, I saw a light in number 3. It’s been empty for ages. Inside, a candle and that poor fellow."
+      },
+      {
+       "who": "holmes",
+       "text": "Then you walked round the room, knelt by the body, and tried the kitchen door."
+      },
+      {
+       "who": "rance",
+       "text": "How do you know that? Were you hiding there?"
+      },
+      {
+       "who": "holmes",
+       "text": "Don’t arrest me. I’m one of the hounds, not the wolf. Then?"
+      },
+      {
+       "who": "rance",
+       "text": "Outside, only a drunk, singing, propped on the railings. Tall, red face, muffled up."
+      },
+      {
+       "who": "holmes",
+       "text": "Did he have a whip in his hand?"
+      },
+      {
+       "who": "rance",
+       "text": "A whip? No."
+      }
+     ]
+    },
+    {
+     "id": "7-7",
+     "type": "poll",
+     "t": "The drunk",
+     "label": "You decide",
+     "q": "Who was the drunk man by the railings?",
+     "options": [
+      {
+       "text": "Just a drunk, nothing more",
+       "feedback": "That’s what Rance thought."
+      },
+      {
+       "text": "The murderer, back for the ring",
+       "feedback": "That’s Holmes’s view."
+      },
+      {
+       "text": "A witness who saw the killer",
+       "feedback": "Not quite."
+      }
+     ],
+     "reveal": "Holmes is sure: the drunk was the killer. He came back for the ring. And why ask about a whip? A cabman carries one.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "7-8",
+     "type": "scene",
+     "t": "Never a sergeant",
+     "label": "Holmes, to Rance",
+     "text": "Holmes gives him half a sovereign and tells him he will never rise in the force. That head of his should be for use as well as ornament. He could have earned his sergeant’s stripes last night. The man he held up by the arm holds the key to the whole mystery.",
+     "theme": "night"
+    },
+    {
+     "id": "7-9",
+     "type": "idea",
+     "t": "A study in scarlet",
+     "take": "The scarlet thread of murder runs through the colourless skein of life.",
+     "label": "The title",
+     "head": "A study in scarlet.",
+     "sub": "That’s what Holmes calls the case: the scarlet thread of murder running through the colourless skein of life. Their job is to unravel it, isolate it and expose every inch.",
+     "theme": "steel"
+    },
+    {
+     "id": "7-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "In the cab home, Holmes is delighted. “The ring, man, the ring. That’s what he came back for,” he says. “If we have no other way of catching him, we can always bait our line with the ring.”"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "The Bait",
+   "hook": "Found: one gold wedding ring. Apply to Dr Watson, 221B Baker Street.",
+   "bg": "#C9A24A",
+   "bg2": "#7A5E1F",
+   "fg": "#1A1306",
+   "minutes": 3,
+   "recap": [
+    "Holmes advertises the ring in Watson’s name, with a copy as bait.",
+    "A very old woman comes to claim it for her daughter Sally.",
+    "Holmes follows her into the night."
+   ],
+   "posts": [
+    {
+     "id": "8-1",
+     "type": "hook",
+     "t": "Found: one ring",
+     "kicker": "Every evening paper",
+     "head": "Found: one gold wedding ring. Apply to Dr Watson.",
+     "sub": "Holmes has used Watson’s name to bait a killer. Then he told him to load his revolver.",
+     "art": "stamp",
+     "artText": "FOUND|GOLD RING · BRIXTON ROAD"
+    },
+    {
+     "id": "8-2",
+     "type": "scene",
+     "t": "Darwin and the violin",
+     "label": "Afternoon",
+     "text": "Holmes spends the afternoon at a concert hearing the violinist Norman Neruda, and comes home talking about Darwin. Music, he says, came before speech, which may be why it stirs something so deep in us. Watson can’t stop thinking about the dead man’s face.",
+     "theme": "night"
+    },
+    {
+     "id": "8-3",
+     "type": "scene",
+     "t": "The advertisement",
+     "label": "Every paper, this evening",
+     "h": "FOUND",
+     "text": "“In Brixton Road, this morning, a plain gold wedding ring, found in the roadway between the White Hart Tavern and Holland Grove. Apply Dr. Watson, 221B, Baker Street, between eight and nine this evening.”",
+     "foot": "Holmes used Watson’s name. His own might be recognised.",
+     "theme": "paper"
+    },
+    {
+     "id": "8-4",
+     "type": "chat",
+     "t": "Why will he come?",
+     "label": "221B · 7:45 PM",
+     "msgs": [
+      {
+       "who": "watson",
+       "text": "Won’t the killer smell a trap?"
+      },
+      {
+       "who": "holmes",
+       "text": "He’ll risk anything for that ring. He dropped it stooping over the body, and when he came back the police were there."
+      },
+      {
+       "who": "holmes",
+       "text": "Now he’ll think he lost it in the road. He’ll be watching the papers."
+      },
+      {
+       "who": "watson",
+       "text": "And the ring?"
+      },
+      {
+       "who": "holmes",
+       "text": "I bought one that will pass. Now clean and load your old service revolver. He’s a desperate man."
+      }
+     ]
+    },
+    {
+     "id": "8-5",
+     "type": "scene",
+     "t": "Eight o’clock",
+     "label": "221B · 8 PM",
+     "text": "Holmes reads an old Latin book by the fire. Watson sits with the revolver in his pocket. The bell rings sharply. Slow, shuffling footsteps on the stairs. Watson’s hand tightens on the gun. The door opens, and in hobbles a very old woman, bent and wrinkled, blinking at the light.",
+     "theme": "night"
+    },
+    {
+     "id": "8-6",
+     "type": "chat",
+     "t": "Sally’s ring",
+     "label": "The old woman",
+     "msgs": [
+      {
+       "who": "oldwoman",
+       "text": "Bless you, gentlemen, it’s my girl Sally’s ring. Married a year ago to Tom Dennis, a ship’s steward."
+      },
+      {
+       "who": "oldwoman",
+       "text": "She went to the circus last night. If Tom finds out she lost it, after he’s been drinking, heaven knows what he’ll do."
+      },
+      {
+       "who": "watson",
+       "text": "Is this the one?"
+      },
+      {
+       "who": "oldwoman",
+       "text": "Oh, that’s it! Sally will be a glad woman tonight."
+      },
+      {
+       "who": "watson",
+       "text": "And your address?"
+      },
+      {
+       "who": "oldwoman",
+       "text": "13 Duncan Street, Houndsditch. A weary way from here."
+      },
+      {
+       "who": "holmes",
+       "text": "The Brixton Road doesn’t lie between any circus and Houndsditch."
+      }
+     ]
+    },
+    {
+     "id": "8-7",
+     "type": "character",
+     "t": "Meet the old woman",
+     "charId": "oldwoman"
+    },
+    {
+     "id": "8-8",
+     "type": "guess",
+     "t": "Who is she?",
+     "label": "Your guess",
+     "q": "Holmes grabs his coat and slips out after her. Who is the old woman really?",
+     "options": [
+      {
+       "text": "Sally’s mother, telling the truth",
+       "feedback": "Possible."
+      },
+      {
+       "text": "A friend of the killer’s, sent for the ring",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "The killer himself, in disguise",
+       "feedback": "Bold. Hold that thought."
+      },
+      {
+       "text": "A thief who spotted the advert",
+       "feedback": "Hmm."
+      }
+     ],
+     "reveal": "Holmes follows her into the dark street. The answer comes in Chapter 9, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 9.",
+     "loopId": "oldwoman",
+     "revealLabel": "For now"
+    },
+    {
+     "id": "8-9",
+     "type": "scene",
+     "t": "Waiting up",
+     "label": "221B · nearly midnight",
+     "text": "Watson waits, reading a French novel, as the clock ticks past ten, then eleven. He hears the landlady go to bed. It’s nearly twelve when the latch clicks and Holmes walks in. Watson can’t tell whether he looks annoyed or amused.",
+     "theme": "night"
+    },
+    {
+     "id": "8-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Amusement wins. Holmes drops into his armchair and bursts out laughing. “I wouldn’t have Scotland Yard hear this for the world,” he says. “I’ve teased them so much they’d never let me forget it. I can laugh, though. I know I’ll get even with him in the end.”"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "We Were the Old Women",
+   "hook": "A frail old woman got into a cab. When it stopped, the cab was empty.",
+   "bg": "#22324A",
+   "bg2": "#0E141C",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "The old woman vanished from a moving cab; her address was fake.",
+    "She was really a young man, and a brilliant actor.",
+    "Holmes sends street boys out, and Gregson claims an arrest."
+   ],
+   "posts": [
+    {
+     "id": "9-1",
+     "type": "hook",
+     "t": "The empty cab",
+     "kicker": "Houndsditch, 11 PM",
+     "head": "She got into a cab. When it stopped, the cab was empty.",
+     "sub": "A frail old woman had jumped from a moving cab and vanished.",
+     "art": "cab",
+     "artText": "EMPTY"
+    },
+    {
+     "id": "9-2",
+     "type": "scene",
+     "t": "The chase",
+     "label": "Holmes’s story",
+     "h": "Hanging on behind",
+     "text": "She hobbled down the street and hailed a cab. Holmes heard her give the Houndsditch address, then hung on to the back as it drove off. At Duncan Street he hopped down early and strolled up as the driver climbed down and opened the door. Nobody got out. The cab was empty, and the driver was swearing about his fare.",
+     "theme": "night"
+    },
+    {
+     "id": "9-3",
+     "type": "twist",
+     "t": "Number 13",
+     "head": "The address was fake too.",
+     "text": "13 Duncan Street belongs to a respectable paperhanger named Keswick. Nobody there has ever heard of a Sawyer or a Dennis. Sally, Tom the steward, the circus: all invented.",
+     "status": "Lead · Dead end"
+    },
+    {
+     "id": "9-4",
+     "type": "idea",
+     "t": "A young man",
+     "take": "The killer has a clever friend.",
+     "label": "The answer",
+     "head": "The old woman was a young man.",
+     "sub": "Only someone young and quick could leap from a moving cab without the driver or Holmes seeing. And a superb actor. “We were the old women to be so taken in,” Holmes admits.",
+     "payoffLoopId": "oldwoman",
+     "theme": "sodium"
+    },
+    {
+     "id": "9-5",
+     "type": "scene",
+     "t": "The morning papers",
+     "label": "Next morning’s papers",
+     "h": "Everyone has a theory",
+     "text": "The Daily Telegraph blames foreign revolutionaries: RACHE is German, after all. The Standard blames the government. The Daily News mentions Drebber’s secretary, Mr Stangerson, now missing. All agree on one thing: Lestrade and Gregson are on the case. “Whatever happens,” Holmes says, “they’ll score.”",
+     "theme": "paper"
+    },
+    {
+     "id": "9-6",
+     "type": "crossoff",
+     "t": "Cross off the theories",
+     "title": "Who killed Drebber?",
+     "items": [
+      {
+       "text": "Foreign revolutionaries",
+       "why": "RACHE looks German, but Holmes thinks the German letters were faked."
+      },
+      {
+       "text": "The government’s fault",
+       "why": "The Standard’s favourite. Not a single clue points there."
+      },
+      {
+       "text": "A robbery gone wrong",
+       "why": "Gold watch, chain, rings and cash were all left on the body."
+      },
+      {
+       "text": "A woman named Rachel",
+       "why": "Lestrade’s Rachel doesn’t exist."
+      }
+     ],
+     "answer": "A private revenge"
+    },
+    {
+     "id": "9-7",
+     "type": "scene",
+     "t": "The Irregulars",
+     "label": "A clatter on the stairs",
+     "h": "The Baker Street Irregulars",
+     "text": "Half a dozen of the dirtiest, most ragged street boys Watson has ever seen burst into the room. “The Baker Street division of the detective police force,” Holmes announces. Their leader, Wiggins, reports no luck yet. Holmes pays each a shilling and sends them out again. One of those boys, he says, is worth a dozen policemen.",
+     "theme": "floor"
+    },
+    {
+     "id": "9-8",
+     "type": "character",
+     "t": "Meet Wiggins",
+     "charId": "wiggins"
+    },
+    {
+     "id": "9-9",
+     "type": "poll",
+     "t": "What are they after?",
+     "label": "You decide",
+     "q": "Holmes won’t say what the boys are hunting. What would you send a gang of street boys to find?",
+     "options": [
+      {
+       "text": "The old woman",
+       "feedback": "Not a bad idea."
+      },
+      {
+       "text": "A particular cab and its driver",
+       "feedback": "Hold on to that."
+      },
+      {
+       "text": "Mr Stangerson",
+       "feedback": "Scotland Yard is already after him."
+      }
+     ],
+     "reveal": "Holmes keeps it to himself. They go everywhere, see everything and overhear everyone, is all he says. In Chapter 12 you’ll see what they found.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "9-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "From the window, Watson sees Gregson racing up the street. He takes the steps three at a time, bursts into the room and pumps Holmes’s hand. “Congratulate me!” he cries. “I have made the whole thing as clear as day.”"
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Gregson’s Arrest",
+   "hook": "Scotland Yard has its man: a young naval officer with a stick. Then Lestrade walks in.",
+   "bg": "#6E5A2E",
+   "bg2": "#3E321A",
+   "fg": "#FFF1D0",
+   "minutes": 3,
+   "recap": [
+    "Gregson traced Drebber to a boarding house in Camberwell.",
+    "He arrested the landlady’s son Arthur, who chased Drebber with a stick.",
+    "Lestrade arrives: Stangerson has been murdered too."
+   ],
+   "posts": [
+    {
+     "id": "10-1",
+     "type": "hook",
+     "t": "An arrest",
+     "kicker": "Camberwell",
+     "head": "Scotland Yard has its man: a young naval officer.",
+     "sub": "Gregson is so pleased he can’t sit still. Then Lestrade walks in with news.",
+     "art": "house"
+    },
+    {
+     "id": "10-2",
+     "type": "chat",
+     "t": "How I did it",
+     "label": "Gregson, very pleased with himself",
+     "msgs": [
+      {
+       "who": "gregson",
+       "text": "The dead man’s hat. The maker’s name was inside: John Underwood and Sons, Camberwell Road."
+      },
+      {
+       "who": "gregson",
+       "text": "They’d sent it to a Mr Drebber at Charpentier’s boarding house, Torquay Terrace."
+      },
+      {
+       "who": "holmes",
+       "text": "Smart. Very smart."
+      },
+      {
+       "who": "gregson",
+       "text": "I went straight round. Madame Charpentier was pale and upset. Her daughter’s eyes were red from crying."
+      },
+      {
+       "who": "gregson",
+       "text": "You know the feeling, Mr Holmes, when you hit the right scent? A thrill in the nerves."
+      }
+     ]
+    },
+    {
+     "id": "10-3",
+     "type": "scene",
+     "t": "A bad guest",
+     "label": "Madame Charpentier’s story",
+     "h": "Three weeks of trouble",
+     "text": "Drebber and his secretary Stangerson lodged with her for three weeks. Stangerson was quiet. Drebber drank, was rude to the maids and pestered her daughter Alice. She gave them notice. On the night of the murder they left at eight to catch a train to Liverpool.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-4",
+     "type": "twist",
+     "t": "He came back",
+     "head": "Then Drebber came back.",
+     "text": "Not long after, he barged in, drunk, and tried to make Alice run away with him. Her brother Arthur, a sub-lieutenant in the navy home on leave, walked in. Drebber fled. Arthur grabbed a stick and followed him into the street.",
+     "status": "Suspect · Arthur Charpentier"
+    },
+    {
+     "id": "10-5",
+     "type": "character",
+     "t": "Meet Madame Charpentier",
+     "charId": "charpentier"
+    },
+    {
+     "id": "10-6",
+     "type": "compare",
+     "t": "Gregson’s theory",
+     "label": "Gregson’s theory",
+     "h": "Case closed?",
+     "leftTitle": "What Gregson thinks",
+     "left": [
+      "Arthur followed Drebber",
+      "Hit him in the stomach with the stick",
+      "Killed him without leaving a mark",
+      "Dragged him into the empty house"
+     ],
+     "rightTitle": "What still needs explaining",
+     "right": [
+      "The poison",
+      "The ring",
+      "RACHE",
+      "The blood"
+     ],
+     "text": "Gregson says the candle, the blood, the ring and the writing were tricks to throw the police off. Holmes says, very kindly, that Gregson is coming along. “We shall make something of you yet.”",
+     "mid": "?"
+    },
+    {
+     "id": "10-7",
+     "type": "poll",
+     "t": "Did Arthur do it?",
+     "label": "You’re the jury",
+     "q": "Did Arthur Charpentier kill Drebber?",
+     "options": [
+      {
+       "text": "Yes: motive, opportunity and a stick",
+       "feedback": "Gregson agrees with you."
+      },
+      {
+       "text": "No: a stick can’t explain poison or RACHE",
+       "feedback": "Holmes would agree."
+      },
+      {
+       "text": "Can’t say yet",
+       "feedback": "Very Holmes of you."
+      }
+     ],
+     "reveal": "Arthur says he lost Drebber in the street and walked about with an old shipmate. Gregson doesn’t believe a word. Holmes says nothing at all.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "10-8",
+     "type": "scene",
+     "t": "Lestrade",
+     "label": "A knock at the door",
+     "text": "As Gregson finishes, Lestrade comes in. His usual swagger is gone. He is pale and rattled, his clothes untidy, twisting his hat in his hands. Gregson, sure of his triumph, can’t resist teasing him about the missing secretary.",
+     "theme": "steel"
+    },
+    {
+     "id": "10-9",
+     "type": "chat",
+     "t": "News",
+     "label": "221B · a moment later",
+     "msgs": [
+      {
+       "who": "gregson",
+       "text": "Ah, Lestrade. Did you find the secretary, Stangerson?"
+      },
+      {
+       "who": "lestrade",
+       "text": "I found him."
+      },
+      {
+       "who": "gregson",
+       "text": "And?"
+      },
+      {
+       "who": "lestrade",
+       "text": "Mr Joseph Stangerson was murdered at Halliday’s Private Hotel at about six o’clock this morning."
+      }
+     ]
+    },
+    {
+     "id": "10-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Gregson’s face falls. At six this morning Arthur Charpentier was locked in a cell. Whoever killed Stangerson is still out there, and so is whoever killed Drebber. Holmes, alone of the four of them, looks pleased."
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Two Pills",
+   "hook": "Two pills that look the same. One does nothing. One kills a dog in a heartbeat.",
+   "bg": "#2E3A30",
+   "bg2": "#141C16",
+   "fg": "#E9F2DF",
+   "minutes": 3,
+   "recap": [
+    "Stangerson was stabbed at dawn, and RACHE was written again.",
+    "A pillbox in his room held two identical pills.",
+    "One was harmless. The other killed the dog instantly."
+   ],
+   "posts": [
+    {
+     "id": "11-1",
+     "type": "hook",
+     "t": "Two pills",
+     "kicker": "221B Baker Street",
+     "head": "Two pills. One does nothing. One kills.",
+     "sub": "Holmes tests them on the landlady’s dying dog.",
+     "art": "pills",
+     "artText": "ONE OF THESE KILLS"
+    },
+    {
+     "id": "11-2",
+     "type": "scene",
+     "t": "Halliday’s",
+     "label": "Lestrade’s story",
+     "h": "Blood under the door",
+     "text": "Lestrade checked the hotels near Euston station and found Stangerson registered at Halliday’s Private Hotel. The boots took him upstairs. A thin line of blood had crept out from under the door. They broke it open. Stangerson lay by the window in his nightdress, stabbed deep in the left side. His limbs were already cold.",
+     "theme": "night"
+    },
+    {
+     "id": "11-3",
+     "type": "twist",
+     "t": "Again",
+     "head": "Above the body, the same word.",
+     "text": "Written on the wall in blood: RACHE. And a milk boy passing behind the hotel at dawn saw a man climb down a ladder from that window. He thought it was a carpenter. Tall, red-faced, in a long brown coat.",
+     "status": "Killer · Still free"
+    },
+    {
+     "id": "11-4",
+     "type": "list",
+     "t": "Stangerson’s room",
+     "label": "What Lestrade found",
+     "h": "In the room",
+     "items": [
+      {
+       "text": "Purse",
+       "value": "£80"
+      },
+      {
+       "text": "Telegram from Cleveland",
+       "value": "“J. H. is in Europe”"
+      },
+      {
+       "text": "Novel, pipe, glass of water",
+       "value": "On the table"
+      },
+      {
+       "text": "Small ointment box",
+       "value": "2 pills"
+      }
+     ],
+     "total": "Nothing stolen",
+     "text": "The telegram is a month old and unsigned. The pills are small, round, pearl grey and almost transparent.",
+     "style": "receipt",
+     "theme": "steel"
+    },
+    {
+     "id": "11-5",
+     "type": "guess",
+     "t": "Why two?",
+     "label": "Your guess",
+     "q": "Why would a killer carry two pills that look the same, one harmless and one deadly?",
+     "options": [
+      {
+       "text": "To confuse the police",
+       "feedback": "Possible."
+      },
+      {
+       "text": "To let fate decide who dies",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "One is the antidote",
+       "feedback": "Clever. Hold that thought."
+      },
+      {
+       "text": "He couldn’t tell them apart himself",
+       "feedback": "Hmm."
+      }
+     ],
+     "reveal": "Holmes won’t say. The answer comes much later, in Chapter 19, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 19.",
+     "loopId": "choice"
+    },
+    {
+     "id": "11-6",
+     "type": "scene",
+     "t": "The terrier",
+     "label": "A test",
+     "h": "The landlady’s dog",
+     "text": "The landlady has an old terrier, sick for a long time; she’d asked for it to be put out of its pain. Holmes cuts one pill in half, dissolves it in water, adds milk, and sets the saucer in front of the dog. It laps it up. Everyone watches.",
+     "theme": "paper"
+    },
+    {
+     "id": "11-7",
+     "type": "scene",
+     "t": "Nothing",
+     "label": "Five minutes later",
+     "text": "Nothing happens. The dog lies on its cushion, breathing. Holmes checks his watch, then again. His face falls. He paces, drumming his fingers. Gregson and Lestrade smirk. Has the great detective finally got it wrong?",
+     "theme": "steel"
+    },
+    {
+     "id": "11-8",
+     "type": "twist",
+     "t": "The second pill",
+     "head": "Then he tries the other pill.",
+     "text": "It can’t be coincidence, he mutters. Then his face lights up. He dissolves the second pill, adds milk, sets it down. The moment the dog’s tongue touches it, the animal shudders and drops dead, as if struck by lightning.",
+     "status": "Pill 2 · Deadly"
+    },
+    {
+     "id": "11-9",
+     "type": "idea",
+     "t": "More faith",
+     "take": "A fact that breaks your theory usually has another meaning.",
+     "label": "Holmes’s lesson",
+     "head": "If a fact seems to break the chain, look again.",
+     "sub": "When the first pill did nothing, Holmes nearly doubted his whole theory. Instead he decided the fact must mean something else. It did. One pill was harmless, one was deadly.",
+     "theme": "sodium"
+    },
+    {
+     "id": "11-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Lestrade and Gregson demand the killer’s name. Holmes refuses: he’ll have him before they can blunder. Then a knock, and Wiggins puts his grubby head round the door. “Please, sir,” he says, “I have the cab downstairs.”"
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Your Cab, Sir",
+   "hook": "The killer walked up the stairs to help with the luggage. Holmes had handcuffs in a drawer.",
+   "bg": "#8C2F39",
+   "bg2": "#3F1419",
+   "fg": "#FFEDEE",
+   "minutes": 3,
+   "recap": [
+    "Holmes asked the cabman up to help with a trunk.",
+    "He snapped on the handcuffs: Jefferson Hope, the murderer.",
+    "It took four men to hold him."
+   ],
+   "posts": [
+    {
+     "id": "12-1",
+     "type": "hook",
+     "t": "The cabman",
+     "kicker": "221B Baker Street",
+     "head": "The killer walked up the stairs to help with the luggage.",
+     "sub": "Holmes had a pair of handcuffs in a drawer.",
+     "art": "stamp",
+     "artText": "CAUGHT|221B BAKER STREET"
+    },
+    {
+     "id": "12-2",
+     "type": "chat",
+     "t": "Who is it?",
+     "label": "221B · the dog still on the floor",
+     "msgs": [
+      {
+       "who": "gregson",
+       "text": "Enough games, Mr Holmes. Who killed them?"
+      },
+      {
+       "who": "lestrade",
+       "text": "You say you know. Give us the name."
+      },
+      {
+       "who": "holmes",
+       "text": "Say his name and he’ll be warned. He’s clever and desperate, and he has friends, as we’ve seen."
+      },
+      {
+       "who": "holmes",
+       "text": "I’ll put him in your hands myself. Soon."
+      }
+     ]
+    },
+    {
+     "id": "12-3",
+     "type": "poll",
+     "t": "Who did it?",
+     "label": "Last chance",
+     "q": "Who killed Drebber and Stangerson?",
+     "options": [
+      {
+       "text": "Arthur Charpentier",
+       "feedback": "He was in a cell when Stangerson died."
+      },
+      {
+       "text": "Stangerson killed Drebber; someone else killed him",
+       "feedback": "That was Lestrade’s idea, until this morning."
+      },
+      {
+       "text": "The ‘old woman’",
+       "feedback": "Close in spirit."
+      },
+      {
+       "text": "A man who drives a cab",
+       "feedback": "Watch."
+      }
+     ],
+     "reveal": "Holmes doesn’t answer. He opens a drawer and takes out a pair of handcuffs.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "12-4",
+     "type": "scene",
+     "t": "The handcuffs",
+     "label": "Holmes, to Lestrade",
+     "h": "See how the spring works",
+     "text": "He holds up the cuffs. “Why doesn’t Scotland Yard use this pattern? See how nicely the spring works.” Then, to Wiggins: “Ask the cabman to come up and help with my box.” Holmes kneels over a small trunk, busy with its strap, as heavy footsteps come up the stairs.",
+     "theme": "paper"
+    },
+    {
+     "id": "12-5",
+     "type": "scene",
+     "t": "Click",
+     "label": "The cabman",
+     "text": "A big, sullen, red-faced man in a cabman’s coat walks in and bends down to help. Click. The cuffs snap shut on his wrists. Holmes springs to his feet, eyes blazing. “Gentlemen,” he says, “let me introduce you to Mr Jefferson Hope, the murderer of Enoch Drebber and of Joseph Stangerson.”",
+     "theme": "night"
+    },
+    {
+     "id": "12-6",
+     "type": "twist",
+     "t": "The fight",
+     "head": "Then he explodes.",
+     "text": "Hope wrenches free and hurls himself at the window, smashing glass and frame. They drag him back. It takes all four of them, Watson included, to pin him down, and he throws them off again and again before he finally stops struggling.",
+     "status": "Hope · In handcuffs"
+    },
+    {
+     "id": "12-7",
+     "type": "character",
+     "t": "Meet Jefferson Hope",
+     "charId": "hope"
+    },
+    {
+     "id": "12-8",
+     "type": "compare",
+     "t": "Scorecard",
+     "label": "Scorecard",
+     "h": "Who got it right?",
+     "leftTitle": "Scotland Yard",
+     "left": [
+      "Gregson arrested Arthur",
+      "Lestrade suspected Stangerson",
+      "Both ignored the cab"
+     ],
+     "rightTitle": "Holmes",
+     "right": [
+      "Read the cab tracks",
+      "Sent boys round the cab yards",
+      "Let the killer drive to his door"
+     ],
+     "text": "How did Holmes know the name, Jefferson Hope? He promises to explain everything, at the very end.",
+     "mid": "?"
+    },
+    {
+     "id": "12-9",
+     "type": "myth",
+     "t": "The deerstalker",
+     "take": "The deerstalker came from the illustrators, not from Doyle.",
+     "myth": "Holmes always wears a deerstalker cap and a cape.",
+     "truth": "Doyle never puts one on him in this book. The cap came from magazine illustrations a few years later, then the stage and films made it famous."
+    },
+    {
+     "id": "12-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Hope sits quietly now, breathing hard, almost relieved. He will talk. But first the book does something strange: it leaves London behind and jumps back decades, across an ocean, to a burning salt desert in the heart of North America."
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "title": "The Great Alkali Plain",
+   "hook": "Twenty-one people set out across the desert. Two are left: a dying man and a five-year-old girl.",
+   "bg": "#E0A15A",
+   "bg2": "#9A5B22",
+   "fg": "#1E140A",
+   "minutes": 3,
+   "recap": [
+    "1847: John Ferrier and little Lucy are the last of their party.",
+    "A huge Mormon caravan finds them, and saves them on one condition.",
+    "Ferrier joins the faith and adopts Lucy as his daughter."
+   ],
+   "posts": [
+    {
+     "id": "13-1",
+     "type": "hook",
+     "t": "Two left",
+     "kicker": "North America, 1847",
+     "head": "Twenty-one set out across the desert. Two are left.",
+     "sub": "A dying man and a five-year-old girl, waiting for the buzzards.",
+     "art": "desert",
+     "artText": "THE GREAT ALKALI PLAIN"
+    },
+    {
+     "id": "13-2",
+     "type": "scene",
+     "t": "The desert",
+     "label": "The heart of the continent",
+     "h": "A land of silence",
+     "text": "Between the Sierra Nevada and Nebraska lies a vast waste of salt, sand and rock. Nothing lives there for long: no birds, no animals, no water. Along the old trail, bleached bones lie scattered in the sun, of oxen, of horses, and of men.",
+     "theme": "paper"
+    },
+    {
+     "id": "13-3",
+     "type": "scene",
+     "t": "John Ferrier",
+     "label": "On a high ridge",
+     "h": "The last two",
+     "text": "A gaunt man sits on a rock, his hair and beard streaked with white, his eyes burning in a starved face. In his arms is a large bundle. Inside it, a little girl. They are all that’s left of a wagon party of twenty-one. Thirst killed the rest. He has no water and no strength to walk on.",
+     "theme": "paper"
+    },
+    {
+     "id": "13-4",
+     "type": "chat",
+     "t": "Lucy",
+     "label": "The ridge · late afternoon",
+     "msgs": [
+      {
+       "who": "lucy",
+       "text": "Where’s Mother? You said she’d gone away. She didn’t even say goodbye."
+      },
+      {
+       "who": "ferrier",
+       "text": "She’s gone, dearie. You’ll see her again before long."
+      },
+      {
+       "who": "lucy",
+       "text": "Are we going to die too?"
+      },
+      {
+       "who": "ferrier",
+       "text": "I guess we are."
+      },
+      {
+       "who": "lucy",
+       "text": "Did God make this country?"
+      },
+      {
+       "who": "ferrier",
+       "text": "Of course He did."
+      },
+      {
+       "who": "lucy",
+       "text": "He did the country back home much better. He forgot the water and the trees here."
+      }
+     ]
+    },
+    {
+     "id": "13-5",
+     "type": "scene",
+     "t": "The prayer",
+     "label": "Sunset",
+     "text": "They kneel together on the rock, his rough voice and her clear one praying side by side. Then they lie down, the child curled against his chest, and fall asleep. High above, three buzzards wheel slowly closer.",
+     "theme": "night"
+    },
+    {
+     "id": "13-6",
+     "type": "twist",
+     "t": "The caravan",
+     "head": "Then a cloud of dust appears on the horizon.",
+     "text": "It grows into a vast caravan: wagons, riders, women, children and cattle, stretching for miles across the plain. Scouts spot the two sleepers. Ferrier wakes to find a ring of strangers looking down at him.",
+     "status": "Rescue · On conditions"
+    },
+    {
+     "id": "13-7",
+     "type": "poll",
+     "t": "On their terms",
+     "label": "You decide",
+     "q": "The leaders will save you, but only if you join their faith. You’re Ferrier, with a dying child. What do you say?",
+     "options": [
+      {
+       "text": "Yes, on any terms",
+       "feedback": "That’s Ferrier’s answer, almost word for word."
+      },
+      {
+       "text": "No, and walk on alone",
+       "feedback": "You and the child would not survive the day."
+      },
+      {
+       "text": "Yes, but only for the girl’s sake",
+       "feedback": "In the end it comes to the same thing."
+      }
+     ],
+     "reveal": "They are the Mormon pioneers, heading west to build a new home. Ferrier accepts. They ride on in the wagon of an elder named Stangerson. From now on the girl is Lucy Ferrier, his daughter.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "13-8",
+     "type": "myth",
+     "t": "Doyle’s Utah",
+     "take": "Part Two is a thriller, not history.",
+     "myth": "Part Two is an accurate picture of early Utah.",
+     "truth": "It’s Victorian melodrama. Historians, and the Church of Jesus Christ of Latter-day Saints, have long criticised Doyle’s sinister portrait as sensational and unfair. Enjoy it as a thriller, not as history."
+    },
+    {
+     "id": "13-9",
+     "type": "character",
+     "t": "Meet John Ferrier",
+     "charId": "ferrier"
+    },
+    {
+     "id": "13-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "The caravan reaches the valley of the Great Salt Lake and starts to build a city. Years pass. The girl from the desert grows up. Then, one summer’s day in the middle of town, her horse panics in a herd of long-horned cattle."
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "title": "The Flower of Utah",
+   "hook": "Her horse panicked in a herd of wild-eyed cattle. A young stranger grabbed the bridle.",
+   "bg": "#8FB8DE",
+   "bg2": "#4E7A5C",
+   "fg": "#0F1A14",
+   "minutes": 3,
+   "recap": [
+    "Ferrier grows rich but never marries.",
+    "Jefferson Hope saves Lucy from a herd of cattle and falls for her.",
+    "He leaves for two months in the mines, promising to return."
+   ],
+   "posts": [
+    {
+     "id": "14-1",
+     "type": "hook",
+     "t": "The bridle",
+     "kicker": "Salt Lake City, years later",
+     "head": "Her horse panicked in a herd of wild-eyed cattle.",
+     "sub": "A young stranger grabbed the bridle. Nothing was the same after.",
+     "art": "peaks",
+     "artText": "THE FLOWER OF UTAH|day"
+    },
+    {
+     "id": "14-2",
+     "type": "scene",
+     "t": "Ferrier prospers",
+     "label": "The years pass",
+     "h": "Rich, and single",
+     "text": "Ferrier is a hard worker and a shrewd farmer. His land thrives until he is one of the richest men in the valley. Yet in a community where leading men take several wives, he never marries at all. He gives no reason. People notice.",
+     "theme": "paper"
+    },
+    {
+     "id": "14-3",
+     "type": "character",
+     "t": "Meet Lucy",
+     "charId": "lucy"
+    },
+    {
+     "id": "14-4",
+     "type": "scene",
+     "t": "Lucy grows up",
+     "label": "Lucy",
+     "text": "She grows tall and strong in the mountain air, riding her father’s horses like a born Westerner. Travellers on the trail remember the girl among the wheat fields long after they’ve moved on. People call her the flower of Utah.",
+     "theme": "sodium"
+    },
+    {
+     "id": "14-5",
+     "type": "twist",
+     "t": "The herd",
+     "head": "Her horse bolts into the herd.",
+     "text": "On an errand into the city, Lucy rides straight into a herd of long-horned cattle. A horn jabs her horse’s side. It rears and plunges, mad with fear. She clings on, but one slip would mean being trampled. Then a strong brown hand grabs the bridle and forces a way out.",
+     "status": "Lucy · Safe"
+    },
+    {
+     "id": "14-6",
+     "type": "chat",
+     "t": "The stranger",
+     "label": "The edge of the herd",
+     "msgs": [
+      {
+       "who": "hope",
+       "text": "I hope you’re not hurt, miss."
+      },
+      {
+       "who": "lucy",
+       "text": "Just scared. Who’d have thought Poncho would be frightened of a lot of cows?"
+      },
+      {
+       "who": "hope",
+       "text": "Thank God you kept your seat. You’re John Ferrier’s girl, aren’t you?"
+      },
+      {
+       "who": "lucy",
+       "text": "I am."
+      },
+      {
+       "who": "hope",
+       "text": "Ask him if he remembers the Jefferson Hopes of St. Louis. My father and he were good friends."
+      },
+      {
+       "who": "lucy",
+       "text": "Better come and ask him yourself."
+      }
+     ]
+    },
+    {
+     "id": "14-7",
+     "type": "scene",
+     "t": "Jefferson Hope",
+     "label": "The young hunter",
+     "h": "A silver prospector",
+     "text": "He’s a tall, rugged young hunter and silver prospector, working the Nevada mountains with his partners. He visits the farm again and again. Ferrier likes him. Lucy likes him much more. Before he leaves for the mines, he asks her to marry him, and she says yes.",
+     "theme": "paper"
+    },
+    {
+     "id": "14-8",
+     "type": "chat",
+     "t": "The promise",
+     "label": "The farm gate",
+     "msgs": [
+      {
+       "who": "hope",
+       "text": "I’m off to Nevada for two months. When I come back, I’ll come for you. Will you be ready?"
+      },
+      {
+       "who": "lucy",
+       "text": "And Father?"
+      },
+      {
+       "who": "hope",
+       "text": "He’s given his consent, if the mines pay. I’ve no fear on that score."
+      },
+      {
+       "who": "lucy",
+       "text": "Then it’s settled."
+      },
+      {
+       "who": "hope",
+       "text": "Goodbye, my darling. In two months you’ll see me."
+      }
+     ]
+    },
+    {
+     "id": "14-9",
+     "type": "guess",
+     "t": "Will he make it?",
+     "label": "Your guess",
+     "q": "Hope will be gone two months in the mountains. Will he make it back in time?",
+     "options": [
+      {
+       "text": "Yes, right on time",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "Yes, but only just",
+       "feedback": "Hold that thought."
+      },
+      {
+       "text": "No, he’s too late",
+       "feedback": "Hold that thought."
+      }
+     ],
+     "reveal": "He rides off up the canyon without looking back. The answer comes in Chapter 16, and your guess is saved.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 16.",
+     "loopId": "return"
+    },
+    {
+     "id": "14-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Three weeks later, Ferrier sees a visitor coming up the path to the farm: the most powerful man in Utah. He has come to talk about Lucy."
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "title": "Thirty Days",
+   "hook": "The order: your daughter marries one of ours, and she has a month to choose.",
+   "bg": "#5A3E6B",
+   "bg2": "#2A1D33",
+   "fg": "#F4EAF8",
+   "minutes": 3,
+   "recap": [
+    "Lucy must marry young Drebber or young Stangerson.",
+    "Ferrier throws both suitors out of his house.",
+    "He sends for Hope, and a warning appears on his bed."
+   ],
+   "posts": [
+    {
+     "id": "15-1",
+     "type": "hook",
+     "t": "A month",
+     "kicker": "Ferrier’s farm",
+     "head": "The order: your daughter marries one of ours. She has a month.",
+     "sub": "Two young men are already waiting to court her.",
+     "art": "countdown",
+     "artText": "30|DAYS TO CHOOSE"
+    },
+    {
+     "id": "15-2",
+     "type": "scene",
+     "t": "The visit",
+     "label": "In Doyle’s story",
+     "h": "A visit from the top",
+     "text": "Brigham Young himself, as Doyle writes him, walks into the farmhouse. He reminds Ferrier who saved him in the desert. Then the charges: Ferrier has never married, and Lucy must not marry outside the faith. She will choose between the sons of two elders, Stangerson and Drebber.",
+     "theme": "steel"
+    },
+    {
+     "id": "15-3",
+     "type": "twist",
+     "t": "The suitors",
+     "head": "The two suitors are names you know.",
+     "text": "Young Drebber and young Stangerson: the same two men who, years from now, will die in London. Stangerson already has four wives. Drebber has seven. Both want Lucy, and her father’s farm.",
+     "status": "Suitors · Drebber, Stangerson"
+    },
+    {
+     "id": "15-4",
+     "type": "chat",
+     "t": "Courting",
+     "label": "Ferrier’s parlour",
+     "msgs": [
+      {
+       "who": "stangerson",
+       "text": "Our fathers sent us. I have only four wives and Brother Drebber has seven, so my claim is the stronger."
+      },
+      {
+       "who": "drebber",
+       "text": "It’s not how many wives we have, but how many we can keep. My father has given me his mills. I’m the richer man."
+      },
+      {
+       "who": "stangerson",
+       "text": "When my father goes, I get his tanning yard and leather factory. And I’m higher in the Church."
+      },
+      {
+       "who": "ferrier",
+       "text": "There are two ways out of this room: the door, and the window. Which do you care to use?"
+      }
+     ]
+    },
+    {
+     "id": "15-5",
+     "type": "character",
+     "t": "Meet Stangerson",
+     "charId": "stangerson"
+    },
+    {
+     "id": "15-6",
+     "type": "scene",
+     "t": "The danger",
+     "label": "What Ferrier knows",
+     "h": "People disappear",
+     "text": "He has lived in the valley long enough. In Doyle’s telling, people who defy the leaders vanish. Their bodies turn up in the mountains, or never at all. The book calls the secret killers the Danites, the Avenging Angels.",
+     "theme": "night"
+    },
+    {
+     "id": "15-7",
+     "type": "list",
+     "t": "Ferrier’s position",
+     "label": "Taking stock",
+     "h": "What he has, and what he doesn’t",
+     "items": [
+      {
+       "text": "A rich farm",
+       "state": "ok"
+      },
+      {
+       "text": "A daughter who loves him",
+       "state": "ok"
+      },
+      {
+       "text": "Friends who’d stand by him",
+       "state": "no"
+      },
+      {
+       "text": "Any way past the watchers",
+       "state": "no"
+      },
+      {
+       "text": "One young man in the mountains who might help",
+       "state": "warn"
+      }
+     ],
+     "text": "And a month.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "15-8",
+     "type": "poll",
+     "t": "Obey or defy?",
+     "label": "You decide",
+     "q": "You’re Ferrier. Obey the order, or defy it?",
+     "options": [
+      {
+       "text": "Obey: Lucy marries one of them",
+       "feedback": "Ferrier would rather die."
+      },
+      {
+       "text": "Stall for time and send for Hope",
+       "feedback": "That’s his plan."
+      },
+      {
+       "text": "Run tonight, alone",
+       "feedback": "Without help they’d never get past the watchers."
+      }
+     ],
+     "reveal": "He sends word to Jefferson Hope in the Nevada mountains, by a man heading that way, telling him to come quickly. Then he waits.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "15-9",
+     "type": "idea",
+     "t": "Part Two answers Part One",
+     "label": "The point",
+     "head": "Every clue in London leads back here.",
+     "sub": "The ring, the pills, the word on the wall, the two dead Americans: Part Two is the story behind all of it. It starts in this farmhouse.",
+     "theme": "steel"
+    },
+    {
+     "id": "15-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Next morning Ferrier finds a square of paper pinned to his blanket, right over his chest. Printed in bold, straggling letters: “Twenty-nine days are given you for amendment, and then—” Nobody came in. The doors and windows were all locked."
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "title": "29, 28, 27…",
+   "hook": "Every morning, a new number. 29. 28. 27. Nobody ever sees who leaves them.",
+   "bg": "#3A2B1F",
+   "bg2": "#1C140D",
+   "fg": "#E9D9C2",
+   "minutes": 3,
+   "recap": [
+    "A countdown appears each day, on ceilings, doors and walls.",
+    "On the night of the 2, someone scratches at the door.",
+    "It’s Jefferson Hope. They plan to run that night."
+   ],
+   "posts": [
+    {
+     "id": "16-1",
+     "type": "hook",
+     "t": "The countdown",
+     "kicker": "Every morning",
+     "head": "Every morning, a new number. 29. 28. 27.",
+     "sub": "Nobody ever sees who leaves them.",
+     "art": "countdown",
+     "artText": "29|DAYS LEFT"
+    },
+    {
+     "id": "16-2",
+     "type": "scene",
+     "t": "28",
+     "label": "Breakfast",
+     "text": "Next morning, Lucy gives a cry and points up. In the centre of the ceiling, scrawled with a burnt stick: 28. She doesn’t understand. Her father does. That night he sits up with his gun. He sees nothing and hears nothing. In the morning, a great 27 is painted on the outside of the door.",
+     "theme": "night"
+    },
+    {
+     "id": "16-3",
+     "type": "list",
+     "t": "Days left",
+     "label": "Where the numbers appeared",
+     "h": "Days left",
+     "items": [
+      {
+       "text": "29: a note pinned to his blanket",
+       "state": "warn"
+      },
+      {
+       "text": "28: burnt on the ceiling",
+       "state": "warn"
+      },
+      {
+       "text": "27: painted on the door",
+       "state": "warn"
+      },
+      {
+       "text": "Then on walls, floors, the garden gate",
+       "state": "warn"
+      },
+      {
+       "text": "Never a sign of who did it",
+       "state": "no"
+      }
+     ],
+     "text": "Each day the number drops, and he can’t stop it. No word has come from Hope.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "16-4",
+     "type": "scene",
+     "t": "Ferrier breaks",
+     "label": "The weeks go by",
+     "h": "Waiting",
+     "text": "His old strength drains away. He grows haggard. His one hope is the young hunter in the Nevada mountains. Every time hooves sound on the road, he rushes to the gate. Every time, it’s a stranger.",
+     "theme": "paper"
+    },
+    {
+     "id": "16-5",
+     "type": "scene",
+     "t": "The night of the 2",
+     "label": "The last night",
+     "text": "The number 2 appears on the wall. Tomorrow is the last day. Ferrier sits up alone, his gun across his knees, ready to fight to the end. Then, in the silence, he hears a soft scratching at the front door.",
+     "theme": "night"
+    },
+    {
+     "id": "16-6",
+     "type": "poll",
+     "t": "Who’s there?",
+     "label": "You decide",
+     "q": "Someone is scratching at the door in the middle of the night. Who?",
+     "options": [
+      {
+       "text": "One of the secret killers, early",
+       "feedback": "Ferrier fears exactly that."
+      },
+      {
+       "text": "Drebber, come to claim Lucy",
+       "feedback": "Not his style."
+      },
+      {
+       "text": "Jefferson Hope",
+       "feedback": "Watch."
+      }
+     ],
+     "reveal": "Ferrier flings open the door. Nobody. Then he looks down. Flat on his face in the dirt, a man is wriggling into the hall like a snake. It’s Jefferson Hope.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "16-7",
+     "type": "idea",
+     "t": "He kept his word",
+     "label": "The answer",
+     "head": "He came back, with a day to spare.",
+     "sub": "Hope rode hard from the mountains as soon as the message reached him. He crawled past the watchers around the house on his belly to get inside.",
+     "payoffLoopId": "return",
+     "theme": "sodium"
+    },
+    {
+     "id": "16-8",
+     "type": "chat",
+     "t": "The plan",
+     "label": "The dark kitchen",
+     "msgs": [
+      {
+       "who": "hope",
+       "text": "Give me something to eat. I haven’t had time to eat for two days."
+      },
+      {
+       "who": "ferrier",
+       "text": "How did you get in? The house is watched."
+      },
+      {
+       "who": "hope",
+       "text": "They watch the front and back. They’re not sharp enough to catch a Washoe hunter."
+      },
+      {
+       "who": "hope",
+       "text": "I have a mule and two horses waiting in the Eagle Ravine. We leave tonight."
+      },
+      {
+       "who": "ferrier",
+       "text": "And everything I own?"
+      },
+      {
+       "who": "hope",
+       "text": "Take what money you can carry. Leave the rest."
+      }
+     ]
+    },
+    {
+     "id": "16-9",
+     "type": "scene",
+     "t": "Packing",
+     "label": "After midnight",
+     "text": "Lucy packs a small bundle. Ferrier gathers his gold and notes. Hope fills a jar with water and a bag with food. They speak in whispers. Nobody lights a lamp. Outside, the watchers keep their places, waiting for morning.",
+     "theme": "steel"
+    },
+    {
+     "id": "16-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "The three of them slip out through a side window into the fields, crouching low, and creep toward the dark mountains. Behind them, the farmhouse where Lucy grew up stands empty, the number 2 still on its wall."
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "title": "Nine to Seven",
+   "hook": "One wrong word to the sentry and they’re dead. Hope overheard the password. He has one chance.",
+   "bg": "#1F3B57",
+   "bg2": "#0E1C2A",
+   "fg": "#E6EEF6",
+   "minutes": 3,
+   "recap": [
+    "Hope works out the sentry’s password and gets them through the pass.",
+    "On the second day he goes hunting and gets lost.",
+    "He returns to an empty camp and John Ferrier’s grave."
+   ],
+   "posts": [
+    {
+     "id": "17-1",
+     "type": "hook",
+     "t": "The password",
+     "kicker": "Midnight, the mountain pass",
+     "head": "One wrong word to the sentry, and they’re dead.",
+     "sub": "Hope overheard the password. He has one chance to use it.",
+     "art": "peaks",
+     "artText": "NINE TO SEVEN|night"
+    },
+    {
+     "id": "17-2",
+     "type": "scene",
+     "t": "Through the fields",
+     "label": "Midnight",
+     "h": "An owl hoots",
+     "text": "Bent double, they creep across the fields toward the road. Suddenly Hope pulls them down into the shadows. An owl hoots close by. Another answers. Two men step out of the dark, a few yards away, and speak in low voices.",
+     "theme": "night"
+    },
+    {
+     "id": "17-3",
+     "type": "compare",
+     "t": "The password",
+     "label": "Overheard",
+     "h": "Get it right, or die",
+     "leftTitle": "The two watchers",
+     "left": [
+      "Call: Nine to seven",
+      "Reply: Seven to five"
+     ],
+     "rightTitle": "The sentry at the pass",
+     "right": [
+      "Call: Nine from seven",
+      "Reply: ?"
+     ],
+     "text": "Hope hears the watchers swap their password before they part. Hours later, high on the pass, the sentry’s challenge is slightly different. He has a second to work out the pattern.",
+     "mid": "?"
+    },
+    {
+     "id": "17-4",
+     "type": "scene",
+     "t": "The pass",
+     "label": "The Eagle Ravine",
+     "text": "They reach the ravine where the mule and horses wait, and ride up a narrow, rocky trail: a black cliff on one side, a drop on the other. Near the top, a single sentry stands against the stars. “Who goes there?” Travellers for Nevada, says Hope. With whose permission? Ferrier answers in the elders’ name.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-5",
+     "type": "poll",
+     "t": "The sentry",
+     "label": "You decide",
+     "q": "The sentry raises his gun and calls: “Nine from seven!” You’re Hope. What do you answer?",
+     "options": [
+      {
+       "text": "“Seven from five”",
+       "feedback": "Right. That’s Hope’s answer, given instantly."
+      },
+      {
+       "text": "“Nine to seven”",
+       "feedback": "That’s the watchers’ call, not a reply. He’d fire."
+      },
+      {
+       "text": "Stay silent and ride on",
+       "feedback": "He’d fire."
+      }
+     ],
+     "reveal": "“Seven from five,” says Hope at once. “Pass, and the Lord go with you,” says the voice above. Beyond him, the trail opens out. They’re through.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "17-6",
+     "type": "scene",
+     "t": "Free",
+     "label": "The next day",
+     "h": "Thirty miles",
+     "text": "They ride all day through the gorges, more than thirty miles from their enemies by nightfall. They sleep huddled for warmth, and are moving again before dawn. By the middle of the second day, their food is gone.",
+     "theme": "paper"
+    },
+    {
+     "id": "17-7",
+     "type": "twist",
+     "t": "The empty camp",
+     "head": "He came back to an empty camp.",
+     "text": "Hope builds a fire for Lucy and her father and goes hunting. He shoots a bighorn sheep, then loses his way in the ravines. He is gone nearly five hours. When he finds the camp at last, the fire is ashes. Nobody answers his shout.",
+     "status": "Lucy · Gone"
+    },
+    {
+     "id": "17-8",
+     "type": "scene",
+     "t": "The grave",
+     "label": "Near the ashes",
+     "h": "One grave",
+     "text": "A heap of fresh earth, a stick planted in it, a paper in its cleft fork: JOHN FERRIER, FORMERLY OF SALT LAKE CITY. Died August 4th, 1860. Hope looks for a second grave. There isn’t one. They have taken Lucy back, to marry her to one of them.",
+     "theme": "night"
+    },
+    {
+     "id": "17-9",
+     "type": "idea",
+     "t": "A vow",
+     "label": "A vow",
+     "head": "If he can’t save her, he’ll avenge her.",
+     "sub": "Standing by the grave, Hope makes up his mind. Whatever happens to Lucy now, he will spend the rest of his life making the men who did this pay.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "He cooks a little of the meat, though he can barely swallow. Then, exhausted, he turns and starts back on foot through the mountains, toward Salt Lake City: the very place he has just risked everything to escape."
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "title": "The Avenging Angel",
+   "hook": "He walked into the house of mourning and took the ring off her finger. Then he vanished for years.",
+   "bg": "#241A1E",
+   "bg2": "#120D10",
+   "fg": "#E2B65A",
+   "minutes": 3,
+   "recap": [
+    "Lucy was married to Drebber and died within a month.",
+    "Hope took her wedding ring: the ring from Lauriston Gardens.",
+    "He chased Drebber and Stangerson across America and Europe to London."
+   ],
+   "posts": [
+    {
+     "id": "18-1",
+     "type": "hook",
+     "t": "The ring",
+     "kicker": "Salt Lake City",
+     "head": "He walked into the house of mourning and took the ring off her finger.",
+     "sub": "Then he vanished for years.",
+     "art": "ring",
+     "artText": "SHE SHALL NOT BE BURIED IN THAT"
+    },
+    {
+     "id": "18-2",
+     "type": "scene",
+     "t": "A frightened friend",
+     "label": "Outside the city",
+     "text": "Near the city Hope meets a man he once did a good turn. The man is terrified to be seen with him: Hope is a hunted man now, wanted for helping the Ferriers escape. But he answers Hope’s one question, about Lucy.",
+     "theme": "steel"
+    },
+    {
+     "id": "18-3",
+     "type": "twist",
+     "t": "Married",
+     "head": "Married yesterday.",
+     "text": "Lucy was married yesterday to young Drebber. Stangerson, who shot her father, said that gave him the better claim. Drebber’s side was stronger, and won. That’s what the flags on the Endowment House are for. She looks, the man says, more like a ghost than a woman.",
+     "status": "Lucy · Mrs Drebber"
+    },
+    {
+     "id": "18-4",
+     "type": "scene",
+     "t": "She dies",
+     "label": "Within a month",
+     "text": "Lucy never lifts her head again. She pines away and dies within a month. Drebber, who married her mostly for her father’s property, barely pretends to grieve. His other wives sit up with her body through the night.",
+     "theme": "night"
+    },
+    {
+     "id": "18-5",
+     "type": "scene",
+     "t": "Dawn",
+     "label": "The night before the burial",
+     "h": "A stranger at the door",
+     "text": "In the early hours the door bursts open. A wild, weather-beaten man in ragged clothes strides in. He doesn’t look at the women. He bends over Lucy and kisses her cold forehead. Then he lifts her hand and pulls off the wedding ring. “She shall not be buried in that,” he says, and he is gone.",
+     "theme": "paper"
+    },
+    {
+     "id": "18-6",
+     "type": "idea",
+     "t": "Remember this?",
+     "take": "The ring in London was Lucy’s.",
+     "label": "Remember this?",
+     "head": "The ring from Lauriston Gardens.",
+     "sub": "The woman’s wedding ring that fell from the dead man in London was Lucy’s. Hope carried it for years, to show Drebber at the very end.",
+     "theme": "sodium"
+    },
+    {
+     "id": "18-7",
+     "type": "scene",
+     "t": "In the mountains",
+     "label": "The months after",
+     "h": "Shots in the dark",
+     "text": "For months Hope lives wild in the mountains. A bullet whistles through Stangerson’s window. A boulder crashes down beside Drebber on a cliff path. The two stop going out alone. Then Hope’s money runs out, and he goes to work in the Nevada mines, where for years he can’t get away.",
+     "theme": "paper"
+    },
+    {
+     "id": "18-8",
+     "type": "crossoff",
+     "t": "The long hunt",
+     "title": "Where are they now?",
+     "items": [
+      {
+       "text": "Salt Lake City",
+       "why": "After a split in the church, they left Utah for good."
+      },
+      {
+       "text": "Cleveland, Ohio",
+       "why": "Drebber saw Hope from a window and had him locked up for weeks."
+      },
+      {
+       "text": "St. Petersburg",
+       "why": "Gone to Paris by the time he arrived."
+      },
+      {
+       "text": "Paris",
+       "why": "Gone to Copenhagen."
+      },
+      {
+       "text": "Copenhagen",
+       "why": "A few days too late, again."
+      }
+     ],
+     "answer": "London"
+    },
+    {
+     "id": "18-9",
+     "type": "scene",
+     "t": "London",
+     "label": "The last city",
+     "h": "A cabman",
+     "text": "His black hair has turned grey. His money is almost gone. In London he takes a job driving a cab: it lets him go anywhere without being noticed, and follow two men for weeks without them ever looking twice at the driver.",
+     "theme": "night"
+    },
+    {
+     "id": "18-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "Back in London, in handcuffs at the police station, Hope asks for the doctor to put a hand on his chest. Watson does, and feels something under his palm that makes him go cold."
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "title": "The Choice",
+   "hook": "One pill is harmless. One kills. He made his enemy choose, and took the other himself.",
+   "bg": "#7E1D22",
+   "bg2": "#2A0A0D",
+   "fg": "#F6E7D6",
+   "minutes": 3,
+   "recap": [
+    "Hope has an aneurysm and wants his story told before he dies.",
+    "He offered Drebber a choice of two pills; Drebber took the poison.",
+    "RACHE was a false trail; Stangerson died fighting."
+   ],
+   "posts": [
+    {
+     "id": "19-1",
+     "type": "hook",
+     "t": "The choice",
+     "kicker": "The police station",
+     "head": "One pill is harmless. One kills. He let fate choose.",
+     "sub": "Jefferson Hope’s confession.",
+     "art": "pills",
+     "artText": "CHOOSE"
+    },
+    {
+     "id": "19-2",
+     "type": "scene",
+     "t": "The aneurysm",
+     "label": "Watson examines him",
+     "h": "A heart about to burst",
+     "text": "Under Watson’s hand, Hope’s chest throbs and whirs like a badly built engine. An aortic aneurysm. It could burst any day. Hope knows. That is why he wants to tell his story now. He doesn’t want to be remembered as a common cut-throat.",
+     "theme": "steel"
+    },
+    {
+     "id": "19-3",
+     "type": "scene",
+     "t": "The pills",
+     "label": "Years earlier, in America",
+     "h": "Where the poison came from",
+     "text": "He once swept floors in a laboratory at York College. A professor showed his class an alkaloid taken from a South American arrow poison, so strong a grain meant instant death. Hope stole a little and made it into pills, each paired with an identical harmless one.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-4",
+     "type": "scene",
+     "t": "The night",
+     "label": "The night they left for Liverpool",
+     "text": "Drebber, thrown out of the boarding house, climbed into Hope’s cab drunk and told him to drive to Halliday’s Private Hotel. He stopped on the way at a gin palace. When he came out, nearly helpless, Hope drove him to the empty house in Lauriston Gardens. Hope had a key: a man viewing houses on the Brixton Road had dropped it.",
+     "theme": "night"
+    },
+    {
+     "id": "19-5",
+     "type": "chat",
+     "t": "Choose",
+     "label": "The front room, Lauriston Gardens",
+     "msgs": [
+      {
+       "who": "hope",
+       "text": "Look at me, Enoch Drebber. Do you know who I am?"
+      },
+      {
+       "who": "drebber",
+       "text": "…You."
+      },
+      {
+       "who": "hope",
+       "text": "I’ve chased you from Salt Lake City to St. Petersburg, and you always got away. Now it ends."
+      },
+      {
+       "who": "hope",
+       "text": "Here are two pills. Death in one, life in the other. You choose. I’ll take what you leave."
+      },
+      {
+       "who": "drebber",
+       "text": "Mercy! For God’s sake, mercy!"
+      },
+      {
+       "who": "hope",
+       "text": "Was there any mercy for Lucy? Choose and swallow."
+      }
+     ]
+    },
+    {
+     "id": "19-6",
+     "type": "idea",
+     "t": "Let fate judge",
+     "take": "Hope let chance decide who died.",
+     "label": "The answer",
+     "head": "He let fate be the judge.",
+     "sub": "Hope didn’t want to murder a helpless man. So he offered a choice: one pill each, death in one, life in the other. Drebber chose. He chose the poison.",
+     "payoffLoopId": "choice",
+     "theme": "sodium"
+    },
+    {
+     "id": "19-7",
+     "type": "twist",
+     "t": "The nosebleed",
+     "head": "Then his nose began to bleed.",
+     "text": "Drebber died with a look of horror. In the excitement Hope’s nose gushed blood. On a whim he wrote RACHE on the wall with it, remembering a German found murdered in New York under that word. The papers had blamed secret societies then. They’d blame them now.",
+     "status": "RACHE · A false trail"
+    },
+    {
+     "id": "19-8",
+     "type": "scene",
+     "t": "The ring, and Stangerson",
+     "label": "The rest of it",
+     "h": "Back for the ring",
+     "text": "Driving off, he found Lucy’s ring was gone. He went back and walked straight into a constable, so he played the helpless drunk. Stangerson hid in his hotel, so at dawn Hope climbed a ladder to his window and offered him the same choice. Stangerson flew at his throat. Hope stabbed him to the heart in self-defence.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-9",
+     "type": "poll",
+     "t": "Justice?",
+     "label": "You decide",
+     "q": "Hope calls it justice, not murder. Do you agree?",
+     "options": [
+      {
+       "text": "Yes: they killed Lucy and her father",
+       "feedback": "Many readers agree. Doyle clearly wants you to feel for him."
+      },
+      {
+       "text": "No: revenge is still murder",
+       "feedback": "The law would agree with you."
+      },
+      {
+       "text": "Somewhere in between",
+       "feedback": "That’s about where Watson seems to land."
+      }
+     ],
+     "reveal": "Even the hard men from Scotland Yard listen in silence. Watson writes that Hope told it so calmly and so clearly that it was impossible to doubt a word.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "19-10",
+     "type": "cliffhanger",
+     "t": "To be continued",
+     "text": "One question is left. Who was the old woman who came for the ring? Hope only smiles. He’ll tell his own secrets, he says, but he won’t get other people into trouble. The inspector sets the trial for Thursday. Hope will never get there."
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "title": "Reasoning Backwards",
+   "hook": "Holmes solved the case. The newspapers gave all the credit to Scotland Yard.",
+   "bg": "#17191C",
+   "bg2": "#3A2410",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "Hope dies before his trial, with a calm smile.",
+    "Holmes reasoned backwards from the body to the cab and the name.",
+    "Scotland Yard gets the credit. Watson promises to tell the truth."
+   ],
+   "posts": [
+    {
+     "id": "20-1",
+     "type": "hook",
+     "t": "Case closed",
+     "kicker": "Baker Street, the next evening",
+     "head": "He solved the case. The papers credited Scotland Yard.",
+     "sub": "Holmes just laughed.",
+     "art": "door",
+     "artText": "221B|CASE CLOSED"
+    },
+    {
+     "id": "20-2",
+     "type": "scene",
+     "t": "Hope’s last night",
+     "label": "That night",
+     "h": "Before the trial",
+     "text": "The trial never comes. That night the aneurysm bursts. In the morning the guards find Hope stretched on the floor of his cell, with a calm smile on his face, as if at the end he could look back on a useful life and work well done.",
+     "theme": "night"
+    },
+    {
+     "id": "20-3",
+     "type": "idea",
+     "t": "Reasoning backwards",
+     "take": "Start from the result and work back to the causes.",
+     "label": "Holmes explains",
+     "head": "Reason backwards.",
+     "sub": "Describe a chain of events, and most people can tell you what happens next. Few can be handed the result and work out, step by step, what led to it. That, Holmes says, is the whole art.",
+     "theme": "sodium"
+    },
+    {
+     "id": "20-4",
+     "type": "list",
+     "t": "Back to the cab",
+     "label": "Holmes, walking Watson through it",
+     "h": "From the body back to the cab",
+     "items": [
+      {
+       "text": "Wheel ruts at the kerb: a cab came in the night",
+       "state": "ok"
+      },
+      {
+       "text": "No wound, sour smell on the lips: poison",
+       "state": "ok"
+      },
+      {
+       "text": "Blood but no wound: the killer’s nosebleed, a red-faced man",
+       "state": "ok"
+      },
+      {
+       "text": "Nothing stolen, a woman’s ring: a private revenge",
+       "state": "ok"
+      },
+      {
+       "text": "Who can follow a man all over London? A cabman",
+       "state": "ok"
+      }
+     ],
+     "text": "So Holmes sent the Irregulars to every cab yard in London to find a driver named Jefferson Hope.",
+     "style": "check",
+     "theme": "paper"
+    },
+    {
+     "id": "20-5",
+     "type": "chat",
+     "t": "One question",
+     "label": "221B · after dinner",
+     "msgs": [
+      {
+       "who": "watson",
+       "text": "But how did you know the name?"
+      },
+      {
+       "who": "holmes",
+       "text": "Gregson asked Cleveland for anything useful. I asked about one thing only: Drebber’s marriage."
+      },
+      {
+       "who": "holmes",
+       "text": "The answer: Drebber had already asked for police protection against an old rival in love, Jefferson Hope, now in Europe."
+      },
+      {
+       "who": "watson",
+       "text": "And the cab?"
+      },
+      {
+       "who": "holmes",
+       "text": "The man who walked in with Drebber had driven him there. Who else could it be?"
+      }
+     ]
+    },
+    {
+     "id": "20-6",
+     "type": "poll",
+     "t": "Who gets the credit?",
+     "label": "You decide",
+     "q": "Who will the newspapers credit for catching the killer?",
+     "options": [
+      {
+       "text": "Sherlock Holmes",
+       "feedback": "You’d think so."
+      },
+      {
+       "text": "Lestrade and Gregson",
+       "feedback": "Exactly. Holmes predicted it in Chapter 5."
+      },
+      {
+       "text": "Nobody: the killer died first",
+       "feedback": "Not quite."
+      }
+     ],
+     "reveal": "The Echo praises the well-known Scotland Yard officials, Messrs. Lestrade and Gregson. A certain Mr Sherlock Holmes, it adds, an amateur, may in time learn something from such teachers.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "20-7",
+     "type": "idea",
+     "t": "What people believe",
+     "label": "Holmes’s view",
+     "head": "It’s not what you do. It’s what people believe you did.",
+     "sub": "Holmes laughs it off. Watson is furious on his behalf, and promises to publish the real story from his journal. This book is that story.",
+     "theme": "steel"
+    },
+    {
+     "id": "20-8",
+     "type": "myth",
+     "t": "An instant hit",
+     "myth": "Sherlock Holmes was an instant sensation.",
+     "truth": "Not quite. Doyle sold this story outright for £25, and it made little splash when it appeared in 1887. Holmes only became a sensation a few years later, with the short stories in The Strand Magazine."
+    },
+    {
+     "id": "20-9",
+     "type": "scene",
+     "t": "The miser",
+     "label": "The last word",
+     "h": "The Roman miser",
+     "text": "Until the public knows, Watson says, Holmes will have to be content like the Roman miser in Horace’s poem, who said: the people hiss at me, but I applaud myself at home, when I count the money in my chest.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-10",
+     "type": "cliffhanger",
+     "t": "The end",
+     "text": "A doctor home from the war found a home, a friend and a purpose. A detective found his chronicler. Holmes and Watson return in The Sign of Four, where Watson meets the woman he will marry. Your saved posts are waiting in your notebook."
+    }
+   ]
+  }
+ ]
+}
