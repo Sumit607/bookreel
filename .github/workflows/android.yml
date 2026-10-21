@@ -86,6 +86,8 @@ jobs:
           cp -r android/app/build/reports/tests results/unit-test-report 2>/dev/null || true
           cp -r android/app/build/test-results results/unit-test-xml 2>/dev/null || true
           echo "run=${GITHUB_RUN_NUMBER} sha=${GITHUB_SHA} status=${{ job.status }}" > results/RUN.txt
+          # Tell Vercel not to try deploying this results-only branch.
+          mkdir -p results/web && printf '{"git":{"deploymentEnabled":false}}\n' > results/web/vercel.json
           cd results
           git init -q
           git checkout -q -b ci-results
