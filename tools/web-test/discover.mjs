@@ -106,6 +106,8 @@ const pack = await page.evaluate((i) => { const b = window.__bookreel.books[i]; 
 check(pack && pack.n === 20, "the Bookreel has 20 chapters");
 check(pack && pack.posts.every((n) => n === 10), "every chapter has 10 posts");
 check(pack && pack.first.every((t) => t === "hook") && pack.last.every((t) => t === "cliffhanger"), "every chapter opens with a hook and ends on a cliffhanger");
+// Keep the generated Bookreel for a human read-through of its quality.
+fs.writeFileSync(path.join(OUT, "pack.json"), JSON.stringify(await page.evaluate((i) => window.__bookreel.books[i], id), null, 1));
 
 // ------------------------------------------------------------------ read it
 await tap('[data-act="open-book"]');
