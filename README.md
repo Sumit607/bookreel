@@ -29,8 +29,9 @@ cd android && ./gradlew assembleRelease
 
 ## Content rights
 
-The Goal is copyrighted. Its pack is marked `private-test` and is for the owner's personal testing only.
-Do not distribute an APK that contains it. Public builds may only ship public-domain or licensed books.
+The Goal is copyrighted. Its pack is marked `private-test`: Bookreel is a personal app for its owner, so The Goal
+opens without a passcode, but it must not be shared or published. Public builds may only ship public-domain or
+licensed books.
 
 A Study in Scarlet (Arthur Conan Doyle, 1887) is in the public domain. Its pack is our own retelling, checked
 against the Project Gutenberg text (ebook #244), and is served to everyone.
@@ -43,16 +44,15 @@ every CI build installs over the previous one. Replace it with a secret upload k
 `web/` is the same app as a fast web app (PWA) that installs to the home screen. Vercel deploys it from this
 repo on every push to `main` (project root `web/`).
 
-- `web/public/` is served as static files; `web/api/` holds two small functions.
-- Private packs (The Goal) are never static files: they sit in `web/api/_private/` and `/api/pack` serves them
-  only to a browser that has entered the passcode (`/api/unlock`). The passcode is the `BOOKREEL_PASSCODE`
-  environment variable on Vercel and is not stored in this repo.
+- `web/public/` is served as static files, books included; `web/api/` holds the Discover and Convert functions.
+- There are no passcodes: the app has one reader, and every book opens directly.
 - **Discover and Convert:** `/api/catalog` (Project Gutenberg's own OPDS catalogue: search, topics, book details), `/api/book` (a book's plain
   text, licence header removed) and `/api/convert` (plan + one call per chapter on the Gemini free tier, checked against
   the 20 × 10 rules). Downloads and finished Bookreels live in the phone's IndexedDB; nothing is uploaded. Converting
-  needs the passcode cookie and the `GEMINI_API_KEY` environment variable on Vercel.
+  needs the `GEMINI_API_KEY` environment variable on Vercel (a key from its own AI Studio project, so the quota is
+  not shared with other apps) and refuses requests from other websites.
 - Offline test of Discover/Convert: start the server with `GEMINI_MOCK=1 GEMINI_MOCK_429=1 CATALOG_FIXTURES=tools/fixtures
-  BOOK_FIXTURES=tools/fixtures`, then `node tools/web-test/discover.mjs http://localhost:4173 test out`.
+  BOOK_FIXTURES=tools/fixtures`, then `node tools/web-test/discover.mjs http://localhost:4173 out`.
 - After changing content: `python3 content/src/build.py && python3 tools/build_web.py`.
-- Test locally: `BOOKREEL_PASSCODE=test node tools/serve.mjs 4173`, then
-  `cd tools/web-test && npm install && node e2e.mjs http://localhost:4173 test out`.
+- Test locally: `node tools/serve.mjs 4173`, then
+  `cd tools/web-test && npm install && node e2e.mjs http://localhost:4173 out`.

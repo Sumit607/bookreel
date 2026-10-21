@@ -13,7 +13,7 @@ const known = new Map(); // Gutenberg id → catalogue entry
 let q = "";
 let topic = "";
 let items = new Map(); // item id → saved item
-let status = { ready: null, unlocked: null };
+let status = { ready: null };
 const downloading = new Set();
 let searchTimer = 0;
 
@@ -48,7 +48,7 @@ async function addToLibrary(item) {
 }
 
 async function loadStatus() {
-  try { status = await (await fetch("/api/convert", { credentials: "same-origin", cache: "no-store" })).json(); } catch (e) { status = { ready: null, unlocked: null }; }
+  try { status = await (await fetch("/api/convert", { credentials: "same-origin", cache: "no-store" })).json(); } catch (e) { status = { ready: null }; }
   return status;
 }
 
@@ -285,7 +285,6 @@ export function sheetBody(s) {
   const item = items.get(s.id);
   if (!item) return "";
   const notReady = status.ready === false;
-  const needsCode = status.ready !== false && status.unlocked === false;
   const bars = (n, cls) => `<div class="cv-bars">${Array.from({ length: n }, (_, i) => `<i class="${cls(i)}"></i>`).join("")}</div>`;
   const minutes = Math.max(5, Math.round((20 * 24 + 40) / 60));
   return `<div class="lbl muted">MAKE IT A BOOKREEL</div><h2 class="s-title hl">${up(`${item.title.split(/[;:]/)[0]} in 20 chapters`)}</h2>
@@ -298,10 +297,7 @@ export function sheetBody(s) {
     <p class="cv-time">${icon("clock", { size: 16 })} About ${minutes}–${minutes + 5} minutes. Keep Bookreel open while it works.</p>
     <p class="muted mono">The text is sent to Google’s Gemini to write the posts. The finished Bookreel stays on this phone.</p>
     ${notReady ? `<div class="gb-err">Converting isn’t switched on yet: the Gemini key hasn’t been added.</div>` : ""}
-    ${needsCode ? `<form class="pass" data-form="unlock-convert" data-id="${esc(s.id)}"><input name="code" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode" required>
-        <div class="pass-err" role="alert">${s.error ? esc(s.error) : "Converting uses your free Gemini quota, so it needs your passcode once."}</div>
-        <button class="btn primary wide" type="submit">${s.busy ? "Checking…" : "Unlock and start"}</button></form>`
-      : `<button class="btn primary wide" data-act="convert-go" data-id="${esc(s.id)}" ${notReady ? "disabled" : ""}>Start converting</button>`}
+    <button class="btn primary wide" data-act="convert-go" data-id="${esc(s.id)}" ${notReady ? "disabled" : ""}>Start converting</button>
     <button class="btn secondary wide" data-act="sheet-close">Not now</button>`;
 }
 
@@ -426,25 +422,8 @@ async function go(id, mode) {
   if (item && item.status === "ready") {
     await addToLibrary(item);
     app.toast("Your Bookreel is ready");
-  } else {
-    const job = C.currentJob();
-    if (job && job.reason === "passcode") { status.unlocked = false; openConvertSheet(id); }
   }
   app.render();
-}
-
-async function unlockAndGo(id, code) {
-  app.openSheet({ ...app.sheet(), busy: true });
-  try {
-    const r = await fetch("/api/unlock", { method: "POST", headers: { "content-type": "application/json" }, credentials: "same-origin", body: JSON.stringify({ code }) });
-    if (!r.ok) return app.openSheet({ ...app.sheet(), busy: false, error: "That passcode didn’t work. Check it and try again." });
-    status.unlocked = true;
-    app.onUnlocked();
-    const mode = document.querySelector("input[name=cvmode]:checked")?.value;
-    return go(id, mode);
-  } catch (e) {
-    return app.openSheet({ ...app.sheet(), busy: false, error: "Couldn’t reach the server. Check your connection." });
-  }
 }
 
 /** Handles Discover's buttons. Returns true when the action was ours. */
@@ -511,15 +490,6 @@ export function onChange(e) {
     return true;
   }
   return false;
-}
-
-export function onSubmit(e) {
-  const f = e.target.closest("[data-form=unlock-convert]");
-  if (!f) return false;
-  e.preventDefault();
-  const code = String(new FormData(f).get("code") || "").trim();
-  if (code) unlockAndGo(f.dataset.id, code);
-  return true;
 }
 
 export const hasItems = () => items.size > 0;

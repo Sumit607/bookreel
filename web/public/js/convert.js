@@ -125,6 +125,14 @@ async function waitFor(seconds) {
   emit();
 }
 
+/** Local clock time of the next midnight in California, when Gemini's free daily quota resets (12:30 or 1:30 pm in India). */
+export function quotaResetTime(from = new Date()) {
+  const hourInLA = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23" });
+  let t = Math.ceil(from.getTime() / 3600000) * 3600000;
+  for (let i = 0; i < 26 && +hourInLA.format(new Date(t)) !== 0; i++) t += 3600000;
+  return new Date(t).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
+
 async function call(body) {
   for (let attempt = 0; attempt < 6; attempt++) {
     if (job.cancelled) throw new Stop("cancelled");
@@ -137,8 +145,7 @@ async function call(body) {
     }
     if (r.ok) return r.json();
     const data = await r.json().catch(() => ({}));
-    if (r.status === 401) throw new Stop("passcode");
-    if (r.status === 424 || (r.status === 503 && /not set up|missing/i.test(data.error || ""))) throw new Error(data.error);
+    if (r.status === 403 || r.status === 424 || (r.status === 503 && /not set up|missing/i.test(data.error || ""))) throw new Error(data.error);
     if ([429, 500, 502, 503, 504].includes(r.status)) {
       const s = data.retryAfter || 10 * (attempt + 1);
       if (r.status === 429 && s > MAX_WAIT_S) throw new Stop("quota");
@@ -206,8 +213,8 @@ export async function start(id) {
   } catch (e) {
     item.status = "paused";
     const reason = e instanceof Stop ? e.message : "error";
-    item.convert.error = reason === "cancelled" ? "" : reason === "quota" ? "Today’s free Gemini quota is used up. Resume later: it resets at midnight Pacific time."
-      : reason === "passcode" ? "Enter your passcode to convert books." : e.message || "Something went wrong.";
+    item.convert.error = reason === "cancelled" ? "" : reason === "quota" ? `Today’s free Gemini quota is used up. Resume after ${quotaResetTime()}, when it resets.`
+      : e.message || "Something went wrong.";
     await store.putItem(item);
     job.stage = reason === "cancelled" ? "paused" : "error";
     job.error = item.convert.error;

@@ -18,8 +18,7 @@
     "fg": "#F0ECE4",
     "motif": "factory",
     "tag": "Business"
-   },
-   "access": "private"
+   }
   },
   {
    "id": "a-study-in-scarlet",
@@ -38,8 +37,7 @@
     "fg": "#F6E7D6",
     "motif": "lens",
     "tag": "Mystery"
-   },
-   "access": "public"
+   }
   },
   {
    "id": "pride-and-prejudice",

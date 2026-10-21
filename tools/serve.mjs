@@ -1,5 +1,5 @@
 // Local stand-in for Vercel: serves web/public and runs web/api/*.js handlers. For tests only.
-// Usage: BOOKREEL_PASSCODE=... node tools/serve.mjs [port]
+// Usage: node tools/serve.mjs [port]
 // Offline test mode (no Gemini or Gutenberg): GEMINI_MOCK=1 CATALOG_FIXTURES=tools/fixtures BOOK_FIXTURES=tools/fixtures
 import http from "node:http";
 import fs from "node:fs";

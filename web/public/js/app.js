@@ -45,7 +45,6 @@ document.addEventListener("visibilitychange", () => { if (document.visibilitySta
 
 let INDEX = { books: [] };
 const BOOKS = {};
-const PRIVATE_LOCKED = new Set();
 let dataReady = null;
 
 async function loadData() {
@@ -57,15 +56,12 @@ async function loadData() {
 }
 
 async function loadBook(meta) {
-  const url = meta.access === "private" ? `/api/pack?id=${encodeURIComponent(meta.id)}` : `/books/${meta.file}`;
   try {
-    const r = await fetch(url, { credentials: "same-origin", cache: "no-cache" });
-    if (r.status === 401 || r.status === 403) { PRIVATE_LOCKED.add(meta.id); return; }
+    const r = await fetch(`/books/${meta.file}`, { cache: "no-cache" });
     if (!r.ok) return;
     const book = await r.json();
     book.chapters.forEach((c, i) => c.posts.forEach((p, j) => { if (!p.id) p.id = `${i + 1}-${j + 1}`; }));
     BOOKS[meta.id] = book;
-    PRIVATE_LOCKED.delete(meta.id);
   } catch (e) { /* offline and not cached */ }
 }
 
@@ -254,7 +250,7 @@ function libraryScreen() {
     ${continueCard()}
     <div id="grid">${bookGrid()}</div>
     ${D.shelf()}
-    <p class="fine">Free classics are open to everyone. The Goal is private: it opens only with your passcode. Books you download and convert stay on this phone.</p>
+    <p class="fine">Books you download and convert stay on this phone.</p>
   </div>`;
 }
 function bookGrid() {
@@ -263,9 +259,8 @@ function bookGrid() {
   const books = filteredBooks().filter((b) => b.status === "ready" || !mine.has(b.title.toLowerCase()));
   const cards = books.map((m) => {
     const ready = m.status === "ready";
-    const locked = PRIVATE_LOCKED.has(m.id);
-    const tag = !ready ? "Coming soon" : locked ? "Private" : m.access === "local" ? "Yours" : m.cover.tag;
-    return `<button class="bcard" data-act="book" data-id="${m.id}">${cover(m)}<span class="btag">${locked ? icon("lock", { size: 11 }) : ""}${up(tag)}</span>
+    const tag = !ready ? "Coming soon" : m.access === "local" ? "Yours" : m.cover.tag;
+    return `<button class="bcard" data-act="book" data-id="${m.id}">${cover(m)}<span class="btag">${up(tag)}</span>
       <span class="bhook">${esc(m.hook)}</span><span class="bmeta">${ready ? `20 ch · ${m.minutes} min` : "Coming soon"}</span></button>`;
   }).join("");
   return `<div class="row-h"><h2>START WITH A HOOK</h2><span>${books.length} books</span></div>
@@ -295,9 +290,8 @@ function bookScreen(id) {
   const book = BOOKS[id];
   if (!meta) return `<div class="pad16 center muted">Loading…</div>`;
   if (!book) {
-    if (PRIVATE_LOCKED.has(id)) setTimeout(() => openSheet({ kind: "passcode", id }), 0);
     return `<div class="pad16"><div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button><span>${esc(meta.title)}</span></div>
-      <div class="center muted" style="padding:48px 0">${PRIVATE_LOCKED.has(id) ? "This book is private. Enter your passcode to open it." : "Loading…"}</div></div>`;
+      <div class="center muted" style="padding:48px 0">Loading…</div></div>`;
   }
   const n = book.chapters.length;
   const done = R.completedCount(S, id);
@@ -352,7 +346,6 @@ function tile(book, c, next, notDone) {
 function readerShell(r) {
   const book = BOOKS[r.id];
   if (!book) {
-    if (PRIVATE_LOCKED.has(r.id)) setTimeout(() => openSheet({ kind: "passcode", id: r.id }), 0);
     return `<div class="reader"><div class="center" style="padding:80px 20px;color:#F0ECE4">Loading…</div></div>`;
   }
   const n = book.chapters.length;
@@ -732,7 +725,7 @@ function profileScreen() {
     ${installPrompt ? `<button class="rowbtn" data-act="install">${icon("download", { size: 20 })}<span>Install Bookreel on this phone</span></button>` : ""}
     <p class="muted small">For full-screen reading, open the browser menu and choose “Add to Home screen”. Your progress stays in this browser on this phone.</p>
     <div class="lbl muted sec">ABOUT</div>
-    <p class="muted small">Bookreel ${VERSION}. The Goal is private to you and opens only with your passcode; please don’t share it. A Study in Scarlet and the other classics are in the public domain.</p>
+    <p class="muted small">Bookreel ${VERSION}. The Goal is a personal copy for you. A Study in Scarlet and the other classics are in the public domain.</p>
     <button class="rowbtn" data-act="how">${icon("info", { size: 20 })}<span>How Bookreel works</span></button>
     <button class="rowbtn danger" data-act="reset">${icon("close", { size: 20 })}<span>Reset reading progress</span></button></div>`;
 }
@@ -821,34 +814,7 @@ function sheetBody(s) {
     case "reset":
       return `${sTitle("Start over", "Reset progress?")}<p>This clears chapters read, answers, saved posts, streak and XP in this browser. Settings stay. It can’t be undone.</p>
         <button class="btn primary wide" data-act="reset-yes">Reset everything</button><button class="btn secondary wide" data-act="sheet-close">Cancel</button>`;
-    case "passcode": {
-      const m = metaOf(s.id);
-      return `${sTitle("Private book", m ? m.title : "Private")}
-        <p>${esc(m ? m.title : "This book")} is a private copy for you. Enter your passcode once and this phone remembers it.</p>
-        <form class="pass" data-form="pass" data-id="${esc(s.id)}"><input name="code" type="password" inputmode="text" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode" required>
-        <div class="pass-err" role="alert">${s.error ? esc(s.error) : ""}</div>
-        <button class="btn primary wide" type="submit">${s.busy ? "Checking…" : "Unlock"}</button></form>
-        <button class="btn secondary wide" data-act="sheet-close">Not now</button>`;
-    }
     default: return D.sheetBody(s);
-  }
-}
-
-async function submitPasscode(id, code) {
-  sheet = { kind: "passcode", id, busy: true };
-  renderSheet();
-  try {
-    const r = await fetch("/api/unlock", { method: "POST", headers: { "content-type": "application/json" }, credentials: "same-origin", body: JSON.stringify({ code }) });
-    if (!r.ok) { sheet = { kind: "passcode", id, error: "That passcode didn’t work. Check it and try again." }; return renderSheet(); }
-    await loadBook(metaOf(id));
-    if (!BOOKS[id]) { sheet = { kind: "passcode", id, error: "Unlocked, but the book didn’t load. Check your connection." }; return renderSheet(); }
-    closeSheet({ silent: true });
-    toast("Unlocked on this phone");
-    if (route.name === "book" || route.name === "read") replace(location.hash);
-    else go(`#/book/${id}`);
-  } catch (e) {
-    sheet = { kind: "passcode", id, error: "Couldn’t reach the server. Check your connection." };
-    renderSheet();
   }
 }
 
@@ -858,7 +824,6 @@ function openBook(id) {
   const m = metaOf(id);
   if (!m) return;
   if (m.status !== "ready") return openSheet({ kind: "soon", id });
-  if (PRIVATE_LOCKED.has(id)) return openSheet({ kind: "passcode", id });
   go(`#/book/${id}`);
 }
 
@@ -942,14 +907,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("submit", (e) => {
-  if (D.onSubmit(e)) return;
-  const f = e.target.closest("[data-form=pass]");
-  if (!f) return;
-  e.preventDefault();
-  const code = new FormData(f).get("code");
-  if (code) submitPasscode(f.dataset.id, String(code).trim());
-});
 
 document.addEventListener("input", (e) => {
   if (D.onInput(e)) return;
@@ -972,7 +929,6 @@ dataReady = loadData().then(async () => {
     await D.init({
       route: () => route, render, go, replace, toast, openSheet, closeSheet, sheet: () => sheet, BOOKS, INDEX: () => INDEX,
       setMode: (id, m) => setMode(id, m === "daily" ? R.DAILY : R.BINGE, true),
-      onUnlocked: () => Promise.all(INDEX.books.filter((b) => b.access === "private" && b.status === "ready").map(loadBook)),
     });
   } catch (e) { console.warn("Discover could not start", e); }
   render();

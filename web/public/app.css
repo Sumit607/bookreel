@@ -216,9 +216,6 @@ body.immersive #app { background: var(--reader); }
 .how span { font: 400 14.5px/1.45 var(--f-body); color: var(--muted); }
 .traits.light span { background: var(--surface2); border-color: transparent; color: var(--fg); }
 .traits.light { justify-content: center; }
-.pass { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
-.pass input { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface2); color: var(--fg); padding: 0 14px; font: 400 16px var(--f-ui); }
-.pass-err { min-height: 18px; font: 400 13px var(--f-ui); color: var(--tag-red); }
 #toast { position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: min(420px, calc(100% - 32px)); background: var(--fg); color: var(--surface); font: 500 13px/1.35 var(--f-ui); padding: 10px 14px; border-radius: 10px; z-index: 30; text-align: center; }
 
 /* ------------------------------------------------------------ reader */

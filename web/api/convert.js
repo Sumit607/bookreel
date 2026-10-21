@@ -1,18 +1,19 @@
 // Turns a downloaded book into a Bookreel, one request per step so each stays well inside the time limit:
-//   GET                                  → { ready, unlocked }   (is conversion set up, is this browser unlocked)
+//   GET                                  → { ready }   (is a Gemini key set up)
 //   POST { step: "plan", title, authors, parts[20] }            → { plan, model }
 //   POST { step: "chapter", n, title, authors, plan, text, prevCliff } → { chapter, extraCharacters, fixed, problems, model }
-// Only browsers holding the passcode cookie may convert, so nobody else can spend the free Gemini quota.
-const { token, safeEqual, cookies, send, readJson } = require("./_lib.js");
+// No passcode: the app has one reader. Requests from other websites are refused, so no other page can spend the quota.
+const { send, readJson } = require("./_lib.js");
 const { generateJSON } = require("./_gemini.js");
 const F = require("./_bookfmt.js");
 
 const MAX_PLAN_WORDS = 95000;
 const MAX_PART_WORDS = 30000;
 
-function unlocked(req) {
-  const secret = process.env.BOOKREEL_PASSCODE;
-  return !!secret && safeEqual(cookies(req).br_key || "", token(secret));
+function fromThisSite(req) {
+  const origin = req.headers.origin;
+  if (!origin) return true;
+  try { return new URL(origin).host === (req.headers["x-forwarded-host"] || req.headers.host); } catch (e) { return false; }
 }
 
 function capWords(text, max) {
@@ -70,11 +71,10 @@ async function chapter(body) {
 
 module.exports = async (req, res) => {
   if (req.method === "GET") {
-    return send(res, 200, { ready: !!process.env.GEMINI_API_KEY || process.env.GEMINI_MOCK === "1", unlocked: unlocked(req) });
+    return send(res, 200, { ready: !!process.env.GEMINI_API_KEY || process.env.GEMINI_MOCK === "1" });
   }
   if (req.method !== "POST") return send(res, 405, { error: "GET or POST only" }, { Allow: "GET, POST" });
-  if (!process.env.BOOKREEL_PASSCODE) return send(res, 503, { error: "Conversion is not set up." });
-  if (!unlocked(req)) return send(res, 401, { error: "Passcode needed" });
+  if (!fromThisSite(req)) return send(res, 403, { error: "Only the Bookreel app can convert books." });
   const body = await readJson(req);
   try {
     const [status, out] = body.step === "plan" ? await plan(body) : body.step === "chapter" ? await chapter(body) : [400, { error: "Unknown step" }];

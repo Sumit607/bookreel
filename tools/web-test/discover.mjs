@@ -1,14 +1,14 @@
 // End-to-end test of Discover and Convert at phone size: browse and search free books, download one, convert it
-// (passcode gate, a rate-limit wait, live progress), read the result, reload, import a PDF, remove a download.
+// (no passcode, a rate-limit wait, live progress), read the result, reload, import a PDF, remove a download.
 // Offline mode (default) expects the local server started with GEMINI_MOCK=1 GEMINI_MOCK_429=1 CATALOG_FIXTURES and
 // BOOK_FIXTURES pointing at tools/fixtures. With --live it runs against the real site and real Gemini (slow).
 //
-// Usage: node discover.mjs <baseUrl> <passcode> <outDir> [--live] [--gid=84]
+// Usage: node discover.mjs <baseUrl> <outDir> [--live] [--gid=84]
 import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 
-const [BASE, PASS, OUT] = process.argv.slice(2);
+const [BASE, OUT] = process.argv.slice(2);
 const LIVE = process.argv.includes("--live");
 const GID = (process.argv.find((a) => a.startsWith("--gid=")) || "--gid=84").slice(6);
 const SHOTS = path.join(OUT, "shots");
@@ -31,7 +31,7 @@ const ctx = await browser.newContext({
 const page = await ctx.newPage();
 page.on("pageerror", (e) => results.consoleErrors.push("pageerror: " + e.message));
 page.on("console", (m) => {
-  // 401 = locked private book before the passcode; cover images can't load offline.
+  // Cover images can't load offline.
   if (m.type() === "error" && !/status of 401|ERR_|net::|Failed to load resource/.test(m.text())) results.consoleErrors.push(m.text());
 });
 const shot = (name) => page.screenshot({ path: path.join(SHOTS, name + ".png") });
@@ -88,14 +88,10 @@ await shot("05-saved");
 // ------------------------------------------------------------------ convert
 await tap('[data-act="convert"]');
 check(await visible("Read it all now", 5000), "convert sheet explains the format and asks when to read");
-check(await waitFor(async () => (await page.locator("[data-form=unlock-convert]").count()) === 1, 5000), "convert sheet asks for the passcode first");
+check(await page.locator('input[type="password"]').count() === 0, "convert sheet asks for no passcode");
 await shot("06-convert-sheet");
-await page.locator("[data-form=unlock-convert] input").fill("wrong-code");
-await tap("[data-form=unlock-convert] button[type=submit]");
-check(await visible("didn’t work", 8000), "wrong passcode is refused");
-await page.locator("[data-form=unlock-convert] input").fill(PASS);
-await tap("[data-form=unlock-convert] button[type=submit]");
-check(await waitFor(async () => (await hash()).startsWith("#/convert/"), 10000), "right passcode starts converting");
+await tap('[data-act="convert-go"]');
+check(await waitFor(async () => (await hash()).startsWith("#/convert/"), 10000), "Start converting begins straight away");
 check(await visible("CONVERTING", 10000), "converting screen shows live progress");
 if (!LIVE) check(await visible("waiting", 15000), "a free-quota pause is shown and waited out");
 await page.waitForTimeout(1500);

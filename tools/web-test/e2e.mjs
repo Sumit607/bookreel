@@ -1,14 +1,14 @@
 // End-to-end test of the Bookreel web app at phone size (412 × 915, touch).
 // Reads every post of every chapter of every ready book like a reader would: taps, a swipe, polls, a guess,
-// saves, resume after a reload, the daily-release flow, locked chapters, the passcode gate, notebook,
+// saves, resume after a reload, the daily-release flow, locked chapters, every book opening without a passcode, notebook,
 // profile and dark theme. Writes screenshots and summary.json to OUT. Exits non-zero on any failure.
 //
-// Usage: node e2e.mjs <baseUrl> <passcode> <outDir> [--quick]
+// Usage: node e2e.mjs <baseUrl> <outDir> [--quick]
 import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 
-const [BASE, PASS, OUT] = process.argv.slice(2);
+const [BASE, OUT] = process.argv.slice(2);
 const QUICK = process.argv.includes("--quick");
 const SHOTS = path.join(OUT, "shots");
 fs.mkdirSync(SHOTS, { recursive: true });
@@ -126,19 +126,13 @@ await shot("00-library");
 
 const index = await page.evaluate(() => window.__bookreel.index());
 const ready = index.books.filter((b) => b.status === "ready");
-log(`ready books: ${ready.map((b) => b.id + (b.access === "private" ? "*" : "")).join(", ")}`);
+log(`ready books: ${ready.map((b) => b.id).join(", ")}`);
 
-// Passcode gate for private books
-for (const b of ready.filter((x) => x.access === "private")) {
+// No passcodes: every ready book, The Goal included, opens straight to its book page.
+for (const b of ready) {
   await page.locator(`[data-act="book"][data-id="${b.id}"]`).tap();
-  check(await visible("Enter your passcode once", 4000), `${b.id}: passcode sheet appears`);
-  await shot(`01-${b.id}-passcode`);
-  await page.fill('input[name="code"]', "wrong-code");
-  await page.locator('.pass button[type="submit"]').tap();
-  check(await visible("didn’t work", 5000), `${b.id}: wrong passcode is refused`);
-  await page.fill('input[name="code"]', PASS);
-  await page.locator('.pass button[type="submit"]').tap();
-  check(await visible("Start Chapter 1", 8000), `${b.id}: right passcode opens the book page`);
+  check(await visible("Start Chapter 1", 8000), `${b.id}: opens without a passcode`);
+  check(await page.locator('input[type="password"]').count() === 0, `${b.id}: no passcode field anywhere`);
   await page.locator('[data-act="back"]').tap();
   await page.waitForTimeout(300);
 }
