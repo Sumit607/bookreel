@@ -17,10 +17,31 @@ function version(name) {
   return m ? parseFloat(m[1]) : 0;
 }
 
+/** The key as pasted into Vercel, forgiving spaces, line breaks, quotes or a "GEMINI_API_KEY=" prefix. */
+function cleanKey(raw) {
+  return String(raw || "").trim().replace(/^(export\s+)?[A-Z_]*KEY\s*=\s*/i, "").replace(/^["'`]|["'`]$/g, "").replace(/\s+/g, "");
+}
+
+/** What Google said about a refused key (its message never contains the key), plus the key's shape. */
+function keyProblem(text, key) {
+  let msg = "", reason = "";
+  try {
+    const err = JSON.parse(text).error || {};
+    msg = String(err.message || "").slice(0, 200);
+    reason = ((err.details || []).find((d) => d.reason) || {}).reason || err.status || "";
+  } catch (e) { msg = String(text || "").slice(0, 120); }
+  const shape = /^AIza[\w-]{35}$/.test(key) ? "looks like a Gemini key" : `does not look like a Gemini key (${key.length} characters, should be 39 starting with AIza)`;
+  return `Google rejected the Gemini API key: ${msg || "no reason given"}${reason ? ` [${reason}]` : ""}. The saved key ${shape}.`;
+}
+
 async function listModels(key) {
   if (cache.models && Date.now() - cache.at < 6 * 3600 * 1000) return cache.models;
   const res = await fetch(`${BASE}/models?pageSize=200`, { headers: { "x-goog-api-key": key } });
-  if (res.status === 400 || res.status === 401 || res.status === 403) throw new GeminiError("Google rejected the Gemini API key. Check it in Vercel settings.", 424);
+  if (res.status === 400 || res.status === 401 || res.status === 403) {
+    const problem = keyProblem(await res.text(), key);
+    console.error("gemini key", res.status, problem);
+    throw new GeminiError(problem, 424);
+  }
   if (!res.ok) throw new GeminiError(`Gemini model list failed (${res.status})`, 502, 10);
   const data = await res.json();
   cache = { at: Date.now(), models: data.models || [] };
@@ -63,7 +84,7 @@ function parseJson(text) {
  */
 async function generateJSON({ kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000 }) {
   if (process.env.GEMINI_MOCK === "1") return require("./_mock.js").generate({ kind, system, prompt });
-  const key = process.env.GEMINI_API_KEY;
+  const key = cleanKey(process.env.GEMINI_API_KEY);
   if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
   const model = await pickModel(kind, key);
   const body = (withSchema) => JSON.stringify({
