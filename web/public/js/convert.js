@@ -15,10 +15,12 @@ export const wordCount = (t) => (t.match(/\S+/g) || []).length;
 
 // ------------------------------------------------------------------ splitting
 
-const HEAD = /^(chapter|letter|book|part|stave|canto|act|section|volume|epilogue|prologue)\b[\s.:—-]*([ivxlcdm]+|\d+|[a-z]+(-[a-z]+)?)?\b|^[IVXLC]{1,7}\.?$/i;
+const ORD = "first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth";
+const HEAD = new RegExp(`^(chapter|letter|book|part|stave|canto|act|section|volume|epilogue|prologue)\\b[\\s.:—-]*([ivxlcdm]+|\\d+|[a-z]+(-[a-z]+)?)?\\b|^[IVXLC]{1,7}\\.?$|^(the\\s+)?(${ORD})\\s+(book|part|chapter|letter|canto|act|volume)\\b`, "i");
 
 /** Cuts a book into 20 consecutive parts of similar length, preferring the book's own chapter breaks.
- *  A long preface or introduction (a translator's, say) gets at most 2 of the 20 parts, so it can't crowd out the book. */
+ *  An introduction (a translator's, say) gets 1 part, or 2 when it is long, so it can't crowd out the book, and
+ *  back matter (appendix, glossary, notes, index) is left out. */
 export function splitBook(text) {
   // A table of contents (a block of short heading lines) would confuse the cut points and the first hook: drop it.
   const isContents = (block) => {
@@ -34,20 +36,46 @@ export function splitBook(text) {
     for (const s of sentences) { cur += s; if (wordCount(cur) >= 150) { paras.push(cur.trim()); cur = ""; } }
     if (cur.trim()) paras.push(cur.trim());
   }
+  paras = withoutBackMatter(withoutContentsList(paras));
   const heads = headings(paras);
   const total = paras.reduce((a, p) => a + wordCount(p), 0);
   const firstMain = heads.find((i) => MAIN.test(paras[i]));
   if (firstMain > 0 && paras.slice(0, firstMain).some((p) => p.length <= 90 && FRONT.test(p))) {
     const front = paras.slice(0, firstMain).reduce((a, p) => a + wordCount(p), 0);
-    if (front > total * 0.12) {
-      return [...cutInto(paras.slice(0, firstMain), 2), ...cutInto(paras.slice(firstMain), 18)];
-    }
+    const n = front > total * 0.12 ? 2 : front >= total * 0.025 ? 1 : 0;
+    if (n) return [...cutInto(paras.slice(0, firstMain), n), ...cutInto(paras.slice(firstMain), 20 - n)];
   }
   return cutInto(paras, 20);
 }
 
+/** Drops a contents list written as one short line per paragraph near the start (6 or more in a row). */
+function withoutContentsList(paras) {
+  for (let i = 0; i < Math.min(paras.length, 80); i++) {
+    let j = i;
+    while (j < paras.length && paras[j].length <= 40 && !/[.!?]$/.test(paras[j])) j++;
+    if (j - i >= 6) return [...paras.slice(0, i), ...paras.slice(j - 1)]; // the run's last line heads what follows
+  }
+  return paras;
+}
+
+/** Drops an appendix, glossary, notes or index at the end: it would take whole chapters and has no story or ideas. */
+function withoutBackMatter(paras) {
+  const wc = paras.map(wordCount);
+  const total = wc.reduce((a, b) => a + b, 0);
+  let before = 0;
+  for (let i = 0; i < paras.length; i++) {
+    if (before >= total * 0.6 && paras[i].length <= 60 && BACK.test(paras[i])) {
+      const after = total - before;
+      if (after >= 100 && after <= total * 0.35) return paras.slice(0, i);
+    }
+    before += wc[i];
+  }
+  return paras;
+}
+
 /** Main-text chapter headings (not "Preface"), and front-matter headings. */
-const MAIN = /^(chapter|book|part|stave|canto|letter)\b[\s.:—-]*(the\s+)?([ivxlcdm]+|\d+|one|first)\b|^[IVXLC]{1,7}\.?(\s|$)/i;
+const MAIN = /^(chapter|book|part|stave|canto|letter)\b[\s.:—-]*(the\s+)?([ivxlcdm]+|\d+|one|first)\b|^[IVXLC]{1,7}\.?(\s|$)|^(the\s+)?first\s+(book|part|chapter|letter|canto)\b/i;
+const BACK = /^(the\s+)?(appendix|appendices|glossary|index|notes|endnotes|footnotes|bibliography|transcriber'?s? notes?)\b/i;
 const FRONT = /^(the\s+)?(preface|introduction|introductory|foreword|prefatory|translator|editor|biographical|a note|note on)/i;
 
 /** Indexes of paragraphs that are real headings: short heading-like lines followed by real text (skips a contents list). */
