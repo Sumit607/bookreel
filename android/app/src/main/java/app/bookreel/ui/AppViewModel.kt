@@ -50,7 +50,9 @@ sealed interface Sheet {
 class AppViewModel(private val app: BookreelApp) : ViewModel() {
     private val store = app.store
     val state: StateFlow<UserState> = store.state
-    val index get() = app.repo.index
+    /** The library list. Starts as the bundled one; replaced when the website has new or changed books. */
+    var index by mutableStateOf(app.repo.index)
+        private set
     val books = mutableStateMapOf<String, LoadedBook>()
 
     var stack by mutableStateOf(listOf<Screen>(Screen.Library))
@@ -67,11 +69,50 @@ class AppViewModel(private val app: BookreelApp) : ViewModel() {
 
     init {
         // Parse book packs off the main thread right away; the library renders from the index meanwhile.
+        // Then ask the website for books added since this APK was built (in this order, so a book
+        // parsed from the old copy never overwrites a fresh download).
         viewModelScope.launch {
             val loaded = withContext(Dispatchers.Default) {
-                app.repo.index.books.filter { it.status == "ready" }.mapNotNull { app.repo.book(it.id) }
+                index.books.filter { it.status == "ready" }.mapNotNull { app.repo.book(it.id) }
             }
             loaded.forEach { books[it.id] = it }
+            booksLoaded = true
+            refreshBooks(force = true)
+        }
+    }
+
+    private var booksLoaded = false
+    private var syncing = false
+    private var lastSyncAt = 0L
+
+    /**
+     * Asks the website for new or changed books: once at launch, then whenever the app comes back
+     * to the front, at most every [SYNC_EVERY_MS]. Call on the main thread.
+     */
+    fun refreshBooks(force: Boolean = false) {
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (!booksLoaded || syncing || (!force && now - lastSyncAt < SYNC_EVERY_MS)) return
+        syncing = true
+        lastSyncAt = now
+        viewModelScope.launch {
+            try { syncBooks() } finally { syncing = false }
+        }
+    }
+
+    private suspend fun syncBooks() {
+        val result = withContext(Dispatchers.IO) { app.repo.sync() } ?: return
+        val wasReady = index.books.filter { it.status == "ready" }.map { it.id }.toSet()
+        val fresh = withContext(Dispatchers.Default) {
+            result.index.books
+                .filter { it.status == "ready" && (it.id in result.changed || it.id !in books) }
+                .mapNotNull { app.repo.book(it.id) }
+        }
+        fresh.forEach { books[it.id] = it }
+        index = result.index
+        val added = result.index.books.filter { it.status == "ready" && it.id !in wasReady }
+        when {
+            added.size == 1 -> showToast("New in your library: ${added[0].title}")
+            added.size > 1 -> showToast("${added.size} new books in your library")
         }
     }
 
@@ -261,6 +302,9 @@ class AppViewModel(private val app: BookreelApp) : ViewModel() {
     }
 
     companion object {
+        /** How often coming back to the app checks the website for new books. */
+        const val SYNC_EVERY_MS = 10 * 60_000L
+
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as BookreelApp

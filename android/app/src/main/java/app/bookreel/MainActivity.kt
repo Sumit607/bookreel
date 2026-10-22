@@ -19,6 +19,11 @@ class MainActivity : ComponentActivity() {
         setContent { BookreelRoot(vm) }
     }
 
+    override fun onStart() {
+        super.onStart()
+        vm.refreshBooks()
+    }
+
     override fun onStop() {
         super.onStop()
         (application as BookreelApp).store.flush()
