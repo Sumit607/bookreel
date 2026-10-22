@@ -18,6 +18,8 @@ android {
         targetSdk = 35
         versionCode = ciRun
         versionName = "0.1.$ciRun"
+        // The app checks this folder on the website for books added after the APK was built.
+        buildConfigField("String", "BOOKS_URL", "\"https://bookreel-sand.vercel.app/books/\"")
     }
 
     signingConfigs {

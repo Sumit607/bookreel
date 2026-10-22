@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Only to fetch new books from bookreel-sand.vercel.app/books/; reading works offline. -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".BookreelApp"
