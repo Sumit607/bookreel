@@ -1,0 +1,133 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "check": "the last native release (0.1.11) installs"
+    },
+    {
+      "ok": true,
+      "check": "the shell installs over the native app (same signing key, higher version)"
+    },
+    {
+      "ok": true,
+      "check": "the page inside the app can be inspected"
+    },
+    {
+      "ok": true,
+      "check": "the library loads from the website inside the app"
+    },
+    {
+      "ok": true,
+      "check": "the web app finds the Android bridge"
+    },
+    {
+      "ok": true,
+      "check": "ready books in the app: the-goal, a-study-in-scarlet, the-art-of-war"
+    },
+    {
+      "ok": true,
+      "check": "the native app's finished chapter came over"
+    },
+    {
+      "ok": true,
+      "check": "the native app's saved post came over"
+    },
+    {
+      "ok": true,
+      "check": "the library offers to continue The Goal"
+    },
+    {
+      "ok": true,
+      "check": "the old progress file is retired, so it is taken over only once"
+    },
+    {
+      "ok": true,
+      "check": "tapping The Art of War opens its book page"
+    },
+    {
+      "ok": true,
+      "check": "chapter 1 opens on post 1"
+    },
+    {
+      "ok": true,
+      "check": "share opens Android's share sheet (com.android.intentresolver/com.android.intentresolver.ChooserActivityLauncher)"
+    },
+    {
+      "ok": true,
+      "check": "back closes the share sheet and returns to the post"
+    },
+    {
+      "ok": true,
+      "check": "chapter 1 complete screen"
+    },
+    {
+      "ok": true,
+      "check": "the next chapter opens from the book page"
+    },
+    {
+      "ok": true,
+      "check": "back from the reader goes to the book page (#/book/the-art-of-war)"
+    },
+    {
+      "ok": true,
+      "check": "back from the book page goes to the library ()"
+    },
+    {
+      "ok": true,
+      "check": "back on the library leaves the app"
+    },
+    {
+      "ok": true,
+      "check": "reopening returns to the library"
+    },
+    {
+      "ok": true,
+      "check": "the page schedules a chapter notification (on)"
+    },
+    {
+      "ok": true,
+      "check": "the chapter notification appears"
+    },
+    {
+      "ok": true,
+      "check": "tapping it opens the book in the app"
+    },
+    {
+      "ok": true,
+      "check": "the profile says updates arrive on their own"
+    },
+    {
+      "ok": true,
+      "check": "the profile shows chapter notifications"
+    },
+    {
+      "ok": true,
+      "check": "the app opens offline after the first start"
+    },
+    {
+      "ok": true,
+      "check": "a book opens offline"
+    },
+    {
+      "ok": true,
+      "check": "a first start without internet says so"
+    },
+    {
+      "ok": true,
+      "check": "'Try again' loads the library once online"
+    },
+    {
+      "ok": true,
+      "check": "no crashes in the crash log"
+    }
+  ],
+  "failures": [],
+  "notes": [],
+  "metrics": {
+    "version": "1.0.14",
+    "cold_start_ms": 1820,
+    "memory_pss_kb": 55669,
+    "apk_kb": 119,
+    "seconds": 129
+  }
+}
