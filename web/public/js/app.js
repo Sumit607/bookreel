@@ -13,12 +13,20 @@ const toastEl = document.getElementById("toast");
 const now = () => Date.now();
 const up = (s) => esc(String(s ?? "").toUpperCase());
 
+// The Android app is a thin shell around this site, like Khabri's: every change here reaches the phone
+// without a reinstall. The shell adds window.BookreelAndroid for what a page can't do on its own:
+// the back button, the share sheet, chapter notifications, status bar colours and moving old progress over.
+const NATIVE = typeof window.BookreelAndroid === "object" && window.BookreelAndroid ? window.BookreelAndroid : null;
+function nativeCall(fn, ...args) {
+  try { return NATIVE && typeof NATIVE[fn] === "function" ? NATIVE[fn](...args) : undefined; } catch (e) { return undefined; }
+}
+
 // ------------------------------------------------------------------ state
 
 let S = loadState();
 function loadState() {
   try {
-    const raw = localStorage.getItem(STORE_KEY);
+    const raw = localStorage.getItem(STORE_KEY) || adoptAppProgress();
     if (raw) {
       const s = JSON.parse(raw);
       const base = R.emptyState();
@@ -26,6 +34,17 @@ function loadState() {
     }
   } catch (e) { /* private window or blocked storage: start fresh */ }
   return R.emptyState();
+}
+/** First start inside the Android shell: take over the progress the earlier, fully native app saved. */
+function adoptAppProgress() {
+  const old = nativeCall("oldProgress");
+  if (!old) return null;
+  try {
+    JSON.parse(old);
+    localStorage.setItem(STORE_KEY, old);
+  } catch (e) { return null; }
+  nativeCall("oldProgressDone");
+  return old;
 }
 let saveTimer = 0;
 function persist() {
@@ -95,7 +114,10 @@ motionQuery.addEventListener?.("change", applyPrefs);
 
 function setThemeColor(immersive) {
   const m = document.querySelector('meta[name="theme-color"]');
-  if (m) m.content = immersive ? "#0B0D10" : document.documentElement.dataset.theme === "dark" ? "#111418" : "#FBFBFC";
+  const dark = immersive || document.documentElement.dataset.theme === "dark";
+  const color = immersive ? "#0B0D10" : dark ? "#111418" : "#FBFBFC";
+  if (m) m.content = color;
+  nativeCall("setBars", color, dark);
 }
 
 // ------------------------------------------------------------------ routing
@@ -189,6 +211,7 @@ function render() {
   const scr = app.querySelector(".screen");
   if (scr) scr.scrollTop = routeKey === lastKey ? prevScroll : 0;
   lastKey = routeKey;
+  maybeReload();
 }
 
 function bottomNav() {
@@ -558,6 +581,7 @@ function mountReader(r) {
   async function share() {
     const p = posts[cur];
     const text = `${p.t}: from Chapter ${ch} of ${book.title} on Bookreel.\n\n${chapter.hook}`;
+    if (NATIVE) return void nativeCall("share", book.title, text, location.origin);
     try {
       if (navigator.share) await navigator.share({ title: book.title, text, url: location.origin });
       else { await navigator.clipboard.writeText(text); toast("Copied to share"); }
@@ -638,7 +662,7 @@ function completeScreen(r) {
       <div class="next-m"><div class="lbl">UP NEXT</div><h3 class="hl">${up(next.title)}</h3><p>${esc(next.hook)}</p></div>
       <div class="next-b"><button class="btn primary wide" data-act="readnow">Read Chapter ${next.n} now</button>
         ${scheduled
-          ? `<div class="btn ghost wide static">Unlocks ${esc(R.timeLabel(reminder))}</div><button class="link-btn" data-act="ics">${icon("calendar", { size: 16 })} Add a calendar reminder</button>`
+          ? `<div class="btn ghost wide static">Unlocks ${esc(R.timeLabel(reminder))}</div>${releaseNote()}`
           : `<button class="btn ghost wide" data-act="tomorrow">Release it to me tomorrow at ${R.hourLabel(S.settings.releaseHour)}</button>`}</div></div>`
     : `<div class="badge-earned">${icon("medal", { size: 40 })}<h3>BOOK BADGE EARNED</h3><p>You read all ${n} chapters of ${esc(book.title)}. Your saved posts are waiting in the Notebook.</p></div>`;
   return `<div class="complete">
@@ -651,12 +675,36 @@ function completeScreen(r) {
     <button class="btn ghost wide" data-act="tobook">Back to the book</button></div>`;
 }
 
+/** Under "Unlocks …": a notification in the Android app, a calendar reminder in the browser. */
+function releaseNote() {
+  if (!NATIVE) return `<button class="link-btn" data-act="ics">${icon("calendar", { size: 16 })} Add a calendar reminder</button>`;
+  if (nativeCall("notifications") === "on") return `<p class="muted small center">You'll get a notification when it unlocks.</p>`;
+  return `<button class="link-btn" data-act="notify-settings">${icon("bell", { size: 16 })} Turn on notifications to hear when it unlocks</button>`;
+}
+
+/** Asks the Android app to notify when chapter n of a book unlocks (one alarm per book). */
+function scheduleNative(bookId, at, n) {
+  const book = BOOKS[bookId];
+  const chapter = book && book.chapters[n - 1];
+  if (!NATIVE || !chapter) return;
+  nativeCall("scheduleRelease", bookId, String(at), `Chapter ${n} of ${book.title} is ready`, chapter.hook || "Open Bookreel to keep reading.", `#/read/${bookId}/${n}`);
+}
+
+/** Re-arms the phone's alarms from the saved state (after an app update, or progress moved over). */
+function resyncReleases() {
+  if (!NATIVE) return;
+  for (const [bookId, at] of Object.entries(S.reminders || {})) {
+    if (at > now() && R.mode(S, bookId) === R.DAILY && BOOKS[bookId]) scheduleNative(bookId, at, nextChapter(bookId));
+  }
+}
+
 function releaseTomorrow(bookId, ch) {
   const book = BOOKS[bookId];
   const done = S.completions[R.key(bookId, ch)];
   if (!book || !done) return;
   const at = R.releaseAt(done.at, S.settings.releaseHour);
   update((s) => ({ ...s, modes: { ...s.modes, [bookId]: R.DAILY }, reminders: { ...s.reminders, [bookId]: at } }));
+  scheduleNative(bookId, at, ch + 1);
   toast(`Chapter ${ch + 1} unlocks ${R.timeLabel(at)}`);
   render();
 }
@@ -704,6 +752,12 @@ function notebookScreen() {
 let installPrompt = null;
 addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installPrompt = e; if (route.name === "profile") render(); });
 
+function notifyRow() {
+  const on = nativeCall("notifications") === "on";
+  return `<div class="setrow"><span><b class="fw">Chapter notifications</b><small>${on ? "On: a notification when a daily chapter unlocks" : "Off: turn on to hear when a daily chapter unlocks"}</small></span>
+    ${on ? "" : `<button class="btn ghost" data-act="notify-settings">Turn on</button>`}</div>`;
+}
+
 function profileScreen() {
   const ready = Object.values(BOOKS);
   const chaptersDone = Object.keys(S.completions).length;
@@ -712,7 +766,7 @@ function profileScreen() {
   const seg = (name, opts, cur) => `<div class="seg">${opts.map(([v, l]) => `<button class="${String(v) === String(cur) ? "on" : ""}" data-act="set" data-k="${name}" data-v="${v}">${l}</button>`).join("")}</div>`;
   const ts = S.settings.textScale < 0.95 ? 0.9 : S.settings.textScale > 1.1 ? 1.15 : 1;
   return `<div class="pad16 prof">
-    <div class="p-top"><span class="p-av">${icon("person", { size: 30 })}</span><div><h1 class="big">READER</h1><div class="muted small">Guest · progress saved in this browser</div></div></div>
+    <div class="p-top"><span class="p-av">${icon("person", { size: 30 })}</span><div><h1 class="big">READER</h1><div class="muted small">Guest · progress saved ${NATIVE ? "on this phone" : "in this browser"}</div></div></div>
     <div class="p-stats"><div><b>${R.displayedStreak(S, now())}</b><span>streak</span></div><div><b>${S.bestStreak}</b><span>best</span></div><div><b>${R.totalXp(S)}</b><span>XP</span></div><div><b>${chaptersDone}</b><span>chapters</span></div><div><b>${booksDone}</b><span>books</span></div></div>
     <div class="lbl muted sec">BADGES</div>
     <div class="badges">${badges.map((b) => `<div class="bdg${b.earned ? " on" : ""}">${icon(b.earned ? "medal" : "lock", { size: 26 })}<div><b>${esc(b.title)}</b><span>${esc(b.detail)}</span></div></div>`).join("")}</div>
@@ -722,10 +776,10 @@ function profileScreen() {
     <div class="setrow"><span>Daily release time</span>${seg("releaseHour", [[19, "7 PM"], [20, "8 PM"], [21, "9 PM"]], S.settings.releaseHour)}</div>
     <div class="setrow"><span><b class="fw">Reduce motion</b><small>Turns off card and stamp animations</small></span>
       <button class="switch${S.settings.reduceMotion ? " on" : ""}" role="switch" aria-checked="${!!S.settings.reduceMotion}" aria-label="Reduce motion" data-act="rm"><i></i></button></div>
-    ${installPrompt ? `<button class="rowbtn" data-act="install">${icon("download", { size: 20 })}<span>Install Bookreel on this phone</span></button>` : ""}
-    <p class="muted small">For full-screen reading, open the browser menu and choose “Add to Home screen”. Your progress stays in this browser on this phone.</p>
+    ${NATIVE ? notifyRow() : `${installPrompt ? `<button class="rowbtn" data-act="install">${icon("download", { size: 20 })}<span>Install Bookreel on this phone</span></button>` : ""}
+    <p class="muted small">For full-screen reading, open the browser menu and choose “Add to Home screen”. Your progress stays in this browser on this phone.</p>`}
     <div class="lbl muted sec">ABOUT</div>
-    <p class="muted small">Bookreel ${VERSION}. The Goal is a personal copy for you. A Study in Scarlet and the other classics are in the public domain.</p>
+    <p class="muted small">Bookreel ${VERSION}${NATIVE ? `, Android app ${esc(nativeCall("version") || "")}. New books and app updates arrive on their own; there is nothing to reinstall` : ""}. The Goal is a personal copy for you. A Study in Scarlet and the other classics are in the public domain.</p>
     <button class="rowbtn" data-act="how">${icon("info", { size: 20 })}<span>How Bookreel works</span></button>
     <button class="rowbtn danger" data-act="reset">${icon("close", { size: 20 })}<span>Reset reading progress</span></button></div>`;
 }
@@ -839,6 +893,7 @@ function openChapter(bookId, ch, post = null, fromSheet = false) {
 
 function setMode(bookId, m, silent = false) {
   update((s) => ({ ...s, modes: { ...s.modes, [bookId]: m } }));
+  if (m === R.BINGE) nativeCall("cancelRelease", bookId);
   if (!silent) toast(m === R.DAILY ? `Daily mode: one chapter a day at ${R.hourLabel(S.settings.releaseHour)}` : "Binge mode: next chapter opens right away");
 }
 
@@ -873,10 +928,12 @@ document.addEventListener("click", (e) => {
     case "readnow": {
       const next = route.ch + 1;
       update((s) => ({ ...s, modes: { ...s.modes, [route.id]: R.BINGE } }));
+      nativeCall("cancelRelease", route.id);
       return openChapter(route.id, next, 0);
     }
     case "tomorrow": return releaseTomorrow(route.id, route.ch);
     case "ics": return downloadIcs(route.id, route.ch);
+    case "notify-settings": return void nativeCall("openNotificationSettings");
     case "tobook": return replace(`#/book/${route.id}`);
     case "openpost": return openChapter(d.id, +d.ch, +d.i, true);
     case "set": {
@@ -888,6 +945,7 @@ document.addEventListener("click", (e) => {
     case "install": if (installPrompt) { installPrompt.prompt(); installPrompt = null; } return;
     case "reset": return openSheet({ kind: "reset" });
     case "reset-yes": {
+      Object.keys(S.reminders || {}).forEach((id) => nativeCall("cancelRelease", id));
       const keep = S.settings;
       S = R.emptyState(keep);
       persist();
@@ -932,7 +990,9 @@ dataReady = loadData().then(async () => {
     });
   } catch (e) { console.warn("Discover could not start", e); }
   render();
+  resyncReleases();
   document.documentElement.classList.add("ready");
+  try { if (sessionStorage.getItem("bookreel-updated")) { sessionStorage.removeItem("bookreel-updated"); toast("Bookreel updated"); } } catch (e) { /* no session storage */ }
   document.fonts?.ready.then(() => fitHeadlines(app));
 });
 
@@ -940,5 +1000,42 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
   addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }
 
+// Updates arrive on their own: look for a new version whenever the app comes back to the front, and once
+// it has taken over, reload quietly on the library (never in the middle of a chapter).
+const hadController = !!(navigator.serviceWorker && navigator.serviceWorker.controller);
+let updateReady = false;
+let lastUpdateCheck = Date.now();
+navigator.serviceWorker?.addEventListener?.("controllerchange", () => {
+  if (!hadController) return; // the first install, not an update
+  updateReady = true;
+  maybeReload();
+});
+function maybeReload() {
+  if (!updateReady || route.name !== "library" || sheet || document.visibilityState !== "visible") return;
+  updateReady = false;
+  persist();
+  try { sessionStorage.setItem("bookreel-updated", "1"); } catch (e) { /* no session storage */ }
+  location.reload();
+}
+function onFront() {
+  if (Date.now() - lastUpdateCheck > 10 * 60 * 1000) {
+    lastUpdateCheck = Date.now();
+    navigator.serviceWorker?.getRegistration?.().then((r) => r && r.update()).catch(() => {});
+  }
+  maybeReload();
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") onFront(); });
+addEventListener("bookreel-resume", onFront);
+addEventListener("bookreel-notify", () => { if (route.name === "done" || route.name === "profile") render(); });
+
+// Called by the Android shell: its back button, and notifications that open a chapter.
+window.bookreelBack = () => {
+  if (sheet) { closeSheet(); return true; }
+  if (route.name === "library") return false;
+  back();
+  return true;
+};
+window.bookreelOpen = (hash) => { if (typeof hash === "string" && /^#\/[\w\/?=.-]*$/.test(hash)) go(hash); };
+
 // Exposed for tests.
-window.__bookreel = { get state() { return S; }, books: BOOKS, index: () => INDEX, version: VERSION, ready: () => dataReady, discover: D };
+window.__bookreel = { get state() { return S; }, books: BOOKS, index: () => INDEX, version: VERSION, ready: () => dataReady, discover: D, native: !!NATIVE };

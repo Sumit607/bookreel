@@ -15,7 +15,7 @@ import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "android", "app", "src", "main", "assets", "books")
+SRC = os.path.join(ROOT, "content", "books")
 WEB = os.path.join(ROOT, "web")
 PUB_BOOKS = os.path.join(WEB, "public", "books")
 

@@ -1,0 +1,29 @@
+name: Book content check
+
+# Every ready book must follow the Bookreel rules (20 chapters x 10 posts, hook first, cliffhanger last,
+# one or two interactive posts, ...), and the web app, which the Android app opens, must serve the same packs.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "web/public/books/**"
+      - "tools/import_bookreel.py"
+      - "tools/build_web.py"
+      - ".github/workflows/content.yml"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Every ready book follows the rules
+        run: python3 tools/import_bookreel.py --check-all
+      - name: The web app serves the same books
+        run: |
+          python3 tools/build_web.py
+          git diff --exit-code -- web/public/books web/public/sw.js

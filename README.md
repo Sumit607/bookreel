@@ -1,29 +1,38 @@
 # Bookreel
 
-An Android app that turns a book into 20 chapters of 10 swipeable posts, read like a feed.
+An app that turns a book into 20 chapters of 10 swipeable posts, read like a feed. It is a web app at
+bookreel-sand.vercel.app, and the Android app is a thin shell around it (like Khabri's), so every change
+to the site, new books included, reaches the phone without reinstalling.
 Plan, requirements and roadmap: see the "Bookreel PRD & Build Plan" doc.
 
 ## What's here
 
 | Folder | What it is |
 | --- | --- |
-| `android/` | The app: Kotlin + Jetpack Compose, single activity, local-first state |
+| `web/` | The app itself: static PWA in `web/public/`, Discover and Convert functions in `web/api/` |
+| `android/` | The Android shell: one activity with a WebView on bookreel-sand.vercel.app, plus the back button, share sheet, chapter notifications, PDF picker and the hand-over of progress from the earlier native app (`window.BookreelAndroid`) |
+| `content/books/` | The book packs (JSON) and `index.json`; `tools/build_web.py` copies them into `web/public/books/` |
 | `content/src/` | Book packs written as Python sources; `build.py` turns them into JSON and validates the format |
 | `content/schema/` | Book pack schema notes |
-| `tools/e2e.py` | End-to-end test: installs the APK on an emulator, reads every post, checks resume, notifications, notebook, profile |
-| `.github/workflows/android.yml` | CI: unit + content tests, R8 release APK, emulator test, results to the `ci-results` branch, APK to Releases |
+| `tools/web-test/` | Browser tests of the web app: `e2e.mjs` (every post of every book), `discover.mjs`, `shell.mjs` (the app inside the Android shell, bridge stubbed) |
+| `tools/e2e.py` | Emulator test of the shell against the live site: installs over the last native release and takes over its progress, real taps, back button, share, notification, offline |
+| `.github/workflows/android.yml` | CI for the shell: unit tests, R8 release APK, emulator test, results to the `ci-results` branch, APK to Releases |
+| `.github/workflows/content.yml` | CI for books: every ready pack follows the 20 × 10 rules and the web app serves the same files |
 
 ## Getting the APK
 
 Open **https://bookreel-sand.vercel.app/apk** on the phone: it always downloads the newest tested APK
-(allow "Install unknown apps" for your browser once). Every push that changes the app or its books builds
-and tests it; only a fully green run publishes a Release (`bookreel-v0.1.<run>.apk`, plus `bookreel.apk`,
-which is what the link fetches).
+(allow "Install unknown apps" for your browser once). It is needed once: books and app changes come from the
+website. A new APK is only built when the shell in `android/` changes; only a fully green run publishes a
+Release (`bookreel-v1.0.<run>.apk`, plus `bookreel.apk`, which is what the link fetches). Versions 0.1.x were
+the earlier fully native app; 1.x installs over it and takes over its reading progress.
 
 ## Building locally
 
 ```
 python3 content/src/build.py          # regenerate every book pack and validate it (or pass a book id)
+python3 tools/import_bookreel.py --check-all   # check every ready pack in content/books
+python3 tools/build_web.py            # copy them into the web app
 cd android && ./gradlew assembleRelease
 ```
 

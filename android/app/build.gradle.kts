@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 // versionCode comes from the CI run number so every build installs over the last one.
@@ -17,9 +15,8 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = ciRun
-        versionName = "0.1.$ciRun"
-        // The app checks this folder on the website for books added after the APK was built.
-        buildConfigField("String", "BOOKS_URL", "\"https://bookreel-sand.vercel.app/books/\"")
+        // 1.x: the thin shell around the web app (0.1.x was the fully native app).
+        versionName = "1.0.$ciRun"
     }
 
     signingConfigs {
@@ -54,7 +51,6 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        compose = true
         buildConfig = true
     }
     packaging {
@@ -67,21 +63,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.profileinstaller)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.graphics)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.coroutines.android)
-    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.androidx.activity.ktx)
 
     testImplementation(libs.junit)
-    testImplementation(libs.kotlinx.serialization.json)
 }

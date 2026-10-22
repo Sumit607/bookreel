@@ -7,7 +7,7 @@
 - Keeps the converted text as it is; fixes are made in the pack afterwards and checked again with --check-only.
 - Gives every post its id ("<chapter>-<post>"), sets chapter minutes from the reading length, and the rights.
 - Checks the pack against the same rules as the Android ContentTest (and the fields each post type needs),
-  then writes android/app/src/main/assets/books/<id>.json and marks the book ready in index.json.
+  then writes content/books/<id>.json and marks the book ready in index.json.
 Run python3 tools/build_web.py afterwards to copy it to the web app.
 """
 import argparse
@@ -18,7 +18,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BOOKS = os.path.join(ROOT, "android", "app", "src", "main", "assets", "books")
+BOOKS = os.path.join(ROOT, "content", "books")
 KNOWN_ART = {"parking", "board", "hill", "clock", "skyline", "trail", "dice", "house", "machine", "stamp", "drum", "bars", "chain",
              "lens", "fog", "door", "desert", "countdown", "pills", "ring", "cab", "lab", "peaks"}
 # Fields each post type must have for the Android app to parse it (data classes without defaults).
@@ -132,10 +132,34 @@ def dump_index(index):
     return "\n".join(lines + ["  ]", "}"]) + "\n"
 
 
+def check_all():
+    """Every ready book in content/books/index.json must have a pack that passes check()."""
+    with open(os.path.join(BOOKS, "index.json"), encoding="utf-8") as f:
+        index = json.load(f)
+    bad = 0
+    for b in index["books"]:
+        if b.get("status") != "ready":
+            continue
+        try:
+            with open(os.path.join(BOOKS, b["file"]), encoding="utf-8") as f:
+                pack = json.load(f)
+            problems = check(pack)
+            if pack.get("id") != b["id"]:
+                problems.append(f"pack id is {pack.get('id')}, index.json says {b['id']}")
+        except (OSError, KeyError, ValueError) as e:
+            problems = [f"cannot read the pack: {e}"]
+        for p in problems:
+            print(f"PROBLEM {b['id']}: {p}")
+        print(f"{b['id']}: {len(problems)} problems")
+        bad += bool(problems)
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("src")
-    ap.add_argument("book_id")
+    ap.add_argument("src", nargs="?")
+    ap.add_argument("book_id", nargs="?")
+    ap.add_argument("--check-all", action="store_true", help="check every ready book in content/books and stop")
     ap.add_argument("--source", default="")
     ap.add_argument("--year", type=int)
     ap.add_argument("--authors", default="")
@@ -143,6 +167,10 @@ def main():
     ap.add_argument("--title", default="")
     ap.add_argument("--check-only", action="store_true")
     a = ap.parse_args()
+    if a.check_all:
+        return check_all()
+    if not a.src or not a.book_id:
+        ap.error("src and book_id are required unless --check-all is given")
     with open(a.src, encoding="utf-8") as f:
         pack = json.load(f)
     if a.check_only:

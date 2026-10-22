@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the book packs in android/app/src/main/assets/books/ from the chapter sources and validates them.
+"""Builds the book packs in content/books/ from the chapter sources and validates them.
 
 Run: python3 content/src/build.py [book-id ...]   (no ids = every book)
 Then: python3 tools/build_web.py
@@ -13,7 +13,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-OUT_DIR = os.path.join(HERE, "..", "..", "android", "app", "src", "main", "assets", "books")
+OUT_DIR = os.path.join(HERE, "..", "books")
 BOOKS = {
     "the-goal": ("the_goal_meta", ["ch01_03", "ch04_07", "ch08_11", "ch12_15", "ch16_20"]),
     "a-study-in-scarlet": ("scarlet_meta", ["scarlet_01_04", "scarlet_05_08", "scarlet_09_12", "scarlet_13_16", "scarlet_17_20"]),

@@ -31,6 +31,7 @@ const PATHS = {
   compass: "M12 3a9 9 0 1 0 .01 0zM15.5 8.5l-2 5-5 2 2-5z",
   file: "M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V7zM14 3v4h4M12 11v6M9 14h6",
   clock: "M12 3a9 9 0 1 0 .01 0zM12 7.5V12l3 2",
+  bell: "M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15zM10 20.5a2 2 0 0 0 4 0",
 };
 const FILLED = new Set(["play"]);
 

@@ -1,6 +1,7 @@
 name: Android build and test
 
-# Builds and tests the APK when the Android app or its bundled books change, or by hand from the Actions tab.
+# Builds and tests the APK when the Android shell changes, or by hand from the Actions tab. The app opens
+# bookreel-sand.vercel.app, so books and web app changes reach phones without a new APK (see MainActivity).
 # Each green run publishes a Release; bookreel-sand.vercel.app/apk always points at the newest one.
 on:
   push:
@@ -34,7 +35,7 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Unit and content tests
+      - name: Unit tests
         id: unit
         continue-on-error: true
         working-directory: android
@@ -61,7 +62,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install test helpers
-        run: python -m pip install --quiet pillow
+        run: python -m pip install --quiet pillow websocket-client
 
       - name: End-to-end test on an Android 15 emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -100,7 +101,7 @@ jobs:
       - name: Fail the run if unit or content tests failed
         if: steps.unit.outcome == 'failure'
         run: |
-          echo "Unit or content tests failed; see out/unit-tests.log on the ci-results branch"
+          echo "Unit tests failed; see out/unit-tests.log on the ci-results branch"
           exit 1
 
       - name: Attach the APK to a GitHub Release
@@ -113,5 +114,5 @@ jobs:
           cp android/app/build/outputs/apk/release/app-release.apk bookreel.apk
           gh release create "$TAG" "bookreel-${TAG}.apk" bookreel.apk \
             --title "Bookreel ${TAG}" \
-            --notes "Tested build from CI run ${GITHUB_RUN_NUMBER}. Install on Android 8.0 or newer. Contains The Goal for private testing only." \
+            --notes "Tested build from CI run ${GITHUB_RUN_NUMBER}. Install on Android 8.0 or newer. The app opens bookreel-sand.vercel.app, so new books and app changes arrive without reinstalling." \
             --latest
