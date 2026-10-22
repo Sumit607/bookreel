@@ -1,19 +1,10 @@
-// Turns a saved book into a Bookreel by calling /api/convert step by step: one plan, then 20 chapters.
-// Progress is saved after every chapter, so a closed tab or a used-up free quota just pauses the job; Resume
-// picks up at the next chapter. The app subscribes with onJob() to redraw while it runs.
+// Turns a saved book into a Bookreel in the cloud: the app cuts the book into 20 parts and sends them to /api/jobs;
+// Supabase and the Vercel worker write the chapters while the app is closed; the app collects the finished pack.
+// The app subscribes with onJob() to redraw while a job runs, and onReady() when a Bookreel arrives.
 import * as store from "./store.js";
 
-const PALETTE = [
-  ["#6B5B3A", "#3A3020", "#F6EBD2"], ["#1F3A3A", "#0E1E1E", "#CFF2E8"], ["#7E1D22", "#3F0C10", "#F6E7D6"], ["#2B2440", "#121018", "#F6C976"],
-  ["#59606A", "#2C3440", "#F0ECE4"], ["#A8232C", "#4A0C12", "#FFF3EC"], ["#1A1830", "#0B0A18", "#F6C976"], ["#C9A24A", "#7A5E1F", "#1A1306"],
-  ["#22324A", "#0E141C", "#F4A23C"], ["#6E5A2E", "#3E321A", "#FFF1D0"], ["#2E3A30", "#141C16", "#E9F2DF"], ["#8C2F39", "#3F1419", "#FFEDEE"],
-  ["#E0A15A", "#9A5B22", "#1E140A"], ["#8FB8DE", "#4E7A5C", "#0F1A14"], ["#5A3E6B", "#2A1D33", "#F4EAF8"], ["#3A2B1F", "#1C140D", "#E9D9C2"],
-  ["#1F3B57", "#0E1C2A", "#E6EEF6"], ["#241A1E", "#120D10", "#E2B65A"], ["#2E9C5A", "#14512D", "#06190D"], ["#17191C", "#3A2410", "#F4A23C"],
-];
 const COVERS = ["#7E1D22", "#173B3F", "#1F3B57", "#6E5A2E", "#2B2440", "#8C2F39", "#2E3A30", "#22324A"];
 export const MIN_WORDS = 3000;
-const PACE_MS = 4000; // stay under the free tier's requests-per-minute limit
-const MAX_WAIT_S = 300; // longer than this means the daily quota is used up: pause instead of waiting
 
 export function hash(s) {
   let h = 2166136261;
@@ -134,28 +125,21 @@ function pickHeads(heads, cum, size, total, n = 20) {
   return cuts;
 }
 
-// ------------------------------------------------------------------ job
+// ------------------------------------------------------------------ cloud jobs
 
-let job = null;
+// The book goes to the cloud once, in 20 parts; the worker writes it there while the app is closed, and the app
+// collects the finished Bookreel the next time it looks. statuses: item id → the server's status of its job.
+const statuses = new Map();
 const listeners = new Set();
-export const currentJob = () => job;
+const readyHandlers = new Set();
+let pollTimer = 0;
+const POLL_MS = 5000;
+
+export const statusOf = (itemId) => statuses.get(itemId) || null;
 export function onJob(fn) { listeners.add(fn); return () => listeners.delete(fn); }
-function emit() { listeners.forEach((fn) => { try { fn(job); } catch (e) { /* a listener failed; keep going */ } }); }
-
-class Stop extends Error {}
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-async function waitFor(seconds) {
-  job.waitUntil = Date.now() + seconds * 1000;
-  emit();
-  while (Date.now() < job.waitUntil) {
-    if (job.cancelled) throw new Stop("cancelled");
-    await sleep(1000);
-    emit(); // lets the screen count down
-  }
-  job.waitUntil = 0;
-  emit();
-}
+/** fn(item, pack) when a Bookreel has been collected from the cloud. */
+export function onReady(fn) { readyHandlers.add(fn); return () => readyHandlers.delete(fn); }
+function emit() { listeners.forEach((fn) => { try { fn(); } catch (e) { /* a listener failed; keep going */ } }); }
 
 /** Local clock time of the next midnight in California, when Gemini's free daily quota resets (12:30 or 1:30 pm in India). */
 export function quotaResetTime(from = new Date()) {
@@ -165,137 +149,127 @@ export function quotaResetTime(from = new Date()) {
   return new Date(t).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
-async function call(body) {
-  for (let attempt = 0; attempt < 6; attempt++) {
-    if (job.cancelled) throw new Stop("cancelled");
-    let r;
-    try {
-      r = await fetch("/api/convert", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-    } catch (e) {
-      await waitFor(5 * (attempt + 1));
-      continue;
-    }
-    if (r.ok) return r.json();
-    const data = await r.json().catch(() => ({}));
-    if (r.status === 403 || r.status === 424 || (r.status === 503 && /not set up|missing/i.test(data.error || ""))) throw new Error(data.error);
-    if ([429, 500, 502, 503, 504].includes(r.status)) {
-      const s = data.retryAfter || 10 * (attempt + 1);
-      if (r.status === 429 && s > MAX_WAIT_S) throw new Stop("quota");
-      await waitFor(Math.min(s + 1, MAX_WAIT_S));
-      continue;
-    }
-    throw new Error(data.error || `The server said ${r.status}.`);
-  }
-  throw new Error("Gemini kept refusing. Try again later.");
+async function api(body) {
+  const r = await fetch("/api/jobs", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || `The server said ${r.status}.`);
+  return data;
 }
 
-let wakeLock = null;
-async function keepAwake(on) {
-  try {
-    if (on && "wakeLock" in navigator && !wakeLock) wakeLock = await navigator.wakeLock.request("screen");
-    if (!on && wakeLock) { await wakeLock.release(); wakeLock = null; }
-  } catch (e) { wakeLock = null; }
-}
-if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && job && job.running) keepAwake(true); });
+export const isActive = (st) => !!st && ["queued", "working", "waiting"].includes(st.status);
 
-/** Starts or resumes converting a saved item. Resolves when it finishes, pauses or fails. */
-export async function start(id) {
-  if (job && job.running) return;
+/** Sends a saved book to the cloud converter. A book that is already a Bookreel keeps it until the new one is ready. */
+export async function start(id, { allowLite = false } = {}) {
   const item = await store.getItem(id);
   const text = await store.getText(id);
   if (!item || !text) throw new Error("This book is no longer saved on this phone.");
   const parts = splitBook(text);
-  item.status = "converting";
-  item.convert = item.convert || { chapters: [], extras: [] };
-  item.convert.error = "";
+  const source = item.source === "gutenberg" ? { kind: "gutenberg", gid: item.gid } : { kind: "file" };
+  const r = await api({ action: "create", itemId: id, title: item.title, authors: item.authors || [], source, parts, allowLite });
+  const remaking = item.status === "ready";
+  item.job = { id: r.id, startedAt: Date.now() };
+  item.remaking = remaking;
+  if (!remaking) item.status = "converting";
+  delete item.convert; // progress from the old in-app converter
   await store.putItem(item);
-  const done = item.convert.chapters.filter(Boolean).length;
-  job = { id, running: true, cancelled: false, stage: item.convert.plan ? "write" : "plan", n: done, total: 20, waitUntil: 0, error: "", lastHook: null, startedAt: Date.now(), chapterMs: [] };
+  statuses.set(id, { id: r.id, item_id: id, status: "queued", stage: "plan", done: 0, has_plan: false, eta: 21 * 40 + 60, wait_until: new Date().toISOString() });
   emit();
-  keepAwake(true);
-  const meta = { title: item.title, authors: item.authors };
+  poll(1500);
+}
+
+async function forJob(id) {
+  const item = await store.getItem(id);
+  if (!item || !item.job) throw new Error("This book is not converting.");
+  return item;
+}
+
+/** Stops the cloud job. Chapters already written are dropped; a remake leaves the old Bookreel in place. */
+export async function cancel(id) {
+  const item = await forJob(id);
+  await api({ action: "cancel", id: item.job.id }).catch(() => {});
+  delete item.job;
+  item.remaking = false;
+  if (item.status !== "ready") item.status = "saved";
+  await store.putItem(item);
+  statuses.delete(id);
+  emit();
+}
+
+/** Stop waiting for the better model's daily quota and finish with Flash-Lite. */
+export async function finishWithLite(id) {
+  const item = await forJob(id);
+  await api({ action: "lite", id: item.job.id });
+  const st = statuses.get(id);
+  if (st) Object.assign(st, { status: "queued", wait_reason: null, allow_lite: true, wait_until: new Date().toISOString() });
+  emit();
+  poll(1500);
+}
+
+export async function retry(id) {
+  const item = await forJob(id);
+  await api({ action: "retry", id: item.job.id });
+  poll(1500);
+}
+
+/** Checks every converting book; collects finished ones. Polls while something is converting and the app is visible. */
+export function poll(delay = 0) {
+  clearTimeout(pollTimer);
+  pollTimer = setTimeout(checkNow, delay);
+}
+
+async function checkNow() {
+  let items = [];
+  try { items = (await store.allItems()).filter((i) => i.job && i.job.id); } catch (e) { return; }
+  if (!items.length) return;
   try {
-    if (!item.convert.plan) {
-      const r = await call({ step: "plan", ...meta, parts });
-      item.convert.plan = r.plan;
-      item.convert.planModel = r.model;
-      await store.putItem(item);
+    const r = await fetch(`/api/jobs?ids=${items.map((i) => i.job.id).join(",")}`, { credentials: "same-origin", cache: "no-store" });
+    if (!r.ok) throw new Error(`status ${r.status}`);
+    const { jobs } = await r.json();
+    const byJob = new Map(jobs.map((j) => [j.id, j]));
+    for (const item of items) {
+      const j = byJob.get(item.job.id);
+      if (!j) continue;
+      statuses.set(item.id, j);
+      if (j.status === "done") await collect(item, j);
     }
-    for (let n = 1; n <= 20; n++) {
-      if (item.convert.chapters[n - 1]) continue;
-      job.stage = "write"; job.n = n - 1; emit();
-      const t0 = Date.now();
-      const prev = item.convert.chapters[n - 2];
-      const r = await call({ step: "chapter", n, ...meta, plan: item.convert.plan, text: parts[n - 1], prevCliff: prev ? prev.posts[prev.posts.length - 1].text : "" });
-      item.convert.chapters[n - 1] = r.chapter;
-      for (const c of r.extraCharacters || []) if (!item.convert.extras.some((x) => x.id === c.id)) item.convert.extras.push(c);
-      item.convert.model = r.model;
-      await store.putItem(item);
-      job.n = n; job.lastHook = { n, ...r.chapter.posts[0] }; job.chapterMs.push(Date.now() - t0); emit();
-      if (n < 20) await sleep(PACE_MS);
-      if (job.cancelled) throw new Stop("cancelled");
-    }
-    job.stage = "check"; emit();
-    const pack = assemble(item);
-    await store.putPack(id, pack);
-    item.status = "ready";
-    item.readyAt = Date.now();
-    await store.putItem(item);
-    job.stage = "done";
-  } catch (e) {
-    item.status = "paused";
-    const reason = e instanceof Stop ? e.message : "error";
-    item.convert.error = reason === "cancelled" ? "" : reason === "quota" ? `Today’s free Gemini quota is used up. Resume after ${quotaResetTime()}, when it resets.`
-      : e.message || "Something went wrong.";
-    await store.putItem(item);
-    job.stage = reason === "cancelled" ? "paused" : "error";
-    job.error = item.convert.error;
-    job.reason = reason;
-  } finally {
-    job.running = false;
-    keepAwake(false);
-    emit();
-  }
+  } catch (e) { /* offline or the server is busy: try again later */ }
+  emit();
+  if ([...statuses.values()].some(isActive) && (typeof document === "undefined" || document.visibilityState === "visible")) poll(POLL_MS);
 }
 
-export function cancel() { if (job && job.running) { job.cancelled = true; emit(); } }
-
-/** Seconds left, estimated from the chapters written so far (or a typical pace before the first one lands). */
-export function etaSeconds() {
-  if (!job || !job.running) return 0;
-  const per = job.chapterMs.length ? job.chapterMs.reduce((a, b) => a + b, 0) / job.chapterMs.length + PACE_MS : 25000;
-  const left = 20 - job.n + (job.stage === "plan" ? 1 : 0);
-  return Math.round((left * per) / 1000);
+async function collect(item, j) {
+  const r = await fetch(`/api/jobs?result=${encodeURIComponent(j.id)}`, { credentials: "same-origin", cache: "no-store" });
+  if (!r.ok) return;
+  const { pack } = await r.json();
+  if (!pack || !Array.isArray(pack.chapters) || pack.chapters.length !== 20) return;
+  pack.id = item.id;
+  await store.putPack(item.id, pack);
+  item.status = "ready";
+  item.readyAt = Date.now();
+  item.madeWith = pack.madeWith || null;
+  item.remaking = false;
+  delete item.job;
+  await store.putItem(item);
+  statuses.set(item.id, { ...j, status: "collected" });
+  readyHandlers.forEach((fn) => { try { fn(item, pack); } catch (e) { /* keep going */ } });
 }
 
-// ------------------------------------------------------------------ assembling the pack
+if (typeof document !== "undefined") {
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") poll(300); });
+  addEventListener("bookreel-resume", () => poll(300));
+}
 
-/** Builds the finished book pack from the plan and the 20 chapters, and drops guess loops that never paid off. */
-export function assemble(item) {
-  const plan = item.convert.plan;
-  const offset = hash(item.id) % PALETTE.length;
-  const chapters = item.convert.chapters.map((c, i) => {
-    const [bg, bg2, fg] = PALETTE[(i + offset) % PALETTE.length];
-    return { n: i + 1, title: c.title, hook: c.hook, bg, bg2, fg, minutes: 3, recap: c.recap, posts: c.posts.map((p) => ({ ...p })) };
-  });
-  const payoffAt = new Map();
-  chapters.forEach((c) => c.posts.forEach((p) => { if (p.type === "idea" && p.payoffLoopId) payoffAt.set(p.payoffLoopId, c.n); }));
-  const askAt = new Map();
-  chapters.forEach((c) => c.posts.forEach((p) => {
-    if (p.type !== "guess") return;
-    if ((payoffAt.get(p.loopId) || 0) > c.n && !askAt.has(p.loopId)) { askAt.set(p.loopId, c.n); return; }
-    p.type = "poll"; delete p.loopId; p.hint = "Pick one to see what actually happened.";
-  }));
-  chapters.forEach((c) => c.posts.forEach((p) => { if (p.type === "idea" && p.payoffLoopId && !((askAt.get(p.payoffLoopId) || 99) < c.n)) delete p.payoffLoopId; }));
-  const characters = [...plan.characters];
-  for (const x of item.convert.extras || []) if (!characters.some((c) => c.id === x.id)) characters.push(x);
-  return {
-    schemaVersion: 1, id: item.id, packVersion: 1, title: item.title, authors: item.authors, category: plan.category, blurb: plan.blurb,
-    ...(plan.narrator ? { narrator: plan.narrator } : {}),
-    rights: item.source === "gutenberg" ? { status: "public-domain", source: `Project Gutenberg #${item.gid}` } : { status: "personal", source: "Your own file, kept on this phone" },
-    madeWith: { plan: item.convert.planModel || "", chapters: item.convert.model || "", at: Date.now() },
-    characters, chapters,
-  };
+/** Seconds until the converting book should be ready (from the server's estimate). */
+export function etaSeconds(id) {
+  const st = statuses.get(id);
+  if (!isActive(st)) return 0;
+  return st.eta || 0;
+}
+
+/** A Bookreel made before the cloud writer (on the phone, with Flash-Lite): worth making again. */
+export function madeWithOldWriter(item, pack) {
+  const m = (pack && pack.madeWith) || item.madeWith || {};
+  return !(pack && pack.packVersion >= 2) || !!m.someChaptersLite || /lite/.test(String(m.chapters || ""));
 }
 
 /** The library card for a finished Bookreel. */

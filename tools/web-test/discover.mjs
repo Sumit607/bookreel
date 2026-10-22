@@ -1,6 +1,7 @@
-// End-to-end test of Discover and Convert at phone size: browse and search free books, download one, convert it
-// (no passcode, a rate-limit wait, live progress), read the result, reload, import a PDF, remove a download.
-// Offline mode (default) expects the local server started with GEMINI_MOCK=1 GEMINI_MOCK_429=1 CATALOG_FIXTURES and
+// End-to-end test of Discover and Convert at phone size: browse and search free books, download one, convert it in
+// the cloud (no passcode, live progress, the app closed halfway and reopened to collect the result), read it, reload,
+// import a PDF, remove a download.
+// Offline mode (default) expects the local server started with GEMINI_MOCK=1 BOOKREEL_DB_MOCK=1 CATALOG_FIXTURES and
 // BOOK_FIXTURES pointing at tools/fixtures. With --live it runs against the real site and real Gemini (slow).
 //
 // Usage: node discover.mjs <baseUrl> <outDir> [--live] [--gid=84]
@@ -28,18 +29,21 @@ const ctx = await browser.newContext({
   viewport: { width: 412, height: 915 }, deviceScaleFactor: 1.75, isMobile: true, hasTouch: true,
   userAgent: "Mozilla/5.0 (Linux; Android 15; V2502) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Mobile Safari/537.36",
 });
-const page = await ctx.newPage();
-page.on("pageerror", (e) => results.consoleErrors.push("pageerror: " + e.message));
-page.on("console", (m) => {
-  // Cover images can't load offline.
-  if (m.type() === "error" && !/status of 401|ERR_|net::|Failed to load resource/.test(m.text())) results.consoleErrors.push(m.text());
-});
+let page = await ctx.newPage();
+function watch(p) {
+  p.on("pageerror", (e) => results.consoleErrors.push("pageerror: " + e.message));
+  p.on("console", (m) => {
+    // Cover images can't load offline.
+    if (m.type() === "error" && !/status of 401|ERR_|net::|Failed to load resource/.test(m.text())) results.consoleErrors.push(m.text());
+  });
+}
+watch(page);
 const shot = (name) => page.screenshot({ path: path.join(SHOTS, name + ".png") });
 const visible = (t, timeout = 5000) => page.getByText(t).first().waitFor({ state: "visible", timeout }).then(() => true).catch(() => false);
 const hash = () => page.evaluate(() => location.hash);
 async function waitFor(fn, ms = 6000) {
   const end = Date.now() + ms;
-  while (Date.now() < end) { if (await fn()) return true; await page.waitForTimeout(120); }
+  while (Date.now() < end) { if (await fn()) return true; await new Promise((r) => setTimeout(r, 120)); }
   return false;
 }
 async function tap(sel) {
@@ -90,14 +94,26 @@ await tap('[data-act="convert"]');
 check(await visible("Read it all now", 5000), "convert sheet explains the format and asks when to read");
 check(await page.locator('input[type="password"]').count() === 0, "convert sheet asks for no passcode");
 await shot("06-convert-sheet");
+check(await visible("You can close Bookreel while it works", 3000), "the sheet says the app can be closed");
 await tap('[data-act="convert-go"]');
 check(await waitFor(async () => (await hash()).startsWith("#/convert/"), 10000), "Start converting begins straight away");
-check(await visible("CONVERTING", 10000), "converting screen shows live progress");
-if (!LIVE) check(await visible("waiting", 15000), "a free-quota pause is shown and waited out");
-await page.waitForTimeout(1500);
-await shot("07-converting");
+check(await visible("CONVERTING IN THE CLOUD", 10000), "converting screen says it runs in the cloud");
+check(await visible("You can close Bookreel", 10000), "and that the app can be closed");
 const t3 = Date.now();
-const done = await waitFor(async () => (await page.locator(".stamp", { hasText: "READY" }).count()) > 0, LIVE ? 25 * 60000 : 120000);
+const progressed = await waitFor(async () => (await page.evaluate(() => { const s = window.__bookreel.discover.jobStatus("pg-${GID}"); return s ? s.done : 0; }).catch(() => 0)) >= 1 || (await page.locator(".conv-hook").count()) > 0, LIVE ? 10 * 60000 : 60000);
+check(progressed, "chapters arrive while the app is open");
+await shot("07-converting");
+
+// Close the app halfway: the cloud keeps writing, and the reopened app collects the finished Bookreel.
+await page.close();
+await new Promise((r) => setTimeout(r, LIVE ? 60000 : 6000));
+page = await ctx.newPage();
+watch(page);
+await page.goto(BASE + "/", { waitUntil: "load" });
+const collected = await waitFor(async () => (await page.evaluate((i) => !!(window.__bookreel && window.__bookreel.books[i]), `pg-${GID}`).catch(() => false)), LIVE ? 25 * 60000 : 120000);
+check(collected, "the reopened app collects the Bookreel the cloud finished");
+await page.evaluate((i) => { location.hash = `#/convert/${i}`; }, `pg-${GID}`);
+const done = await waitFor(async () => (await page.locator(".stamp", { hasText: "READY" }).count()) > 0, 15000);
 check(done, "conversion finishes with READY");
 results.metrics.convertSeconds = Math.round((Date.now() - t3) / 1000);
 await shot("08-ready");

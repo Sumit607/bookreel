@@ -48,18 +48,36 @@ async function listModels(key) {
   return cache.models;
 }
 
-/** Newest usable Flash ("flash") or Flash-Lite ("lite") model; stable releases beat previews. */
-async function pickModel(kind, key) {
+/**
+ * The models to try, best first: Flash models (newest, stable before preview), then Flash-Lite when allowed.
+ * On the free tier each Flash model has its own small daily quota, so a used-up model just hands over to the next.
+ */
+async function ladder({ tier = "best", allowLite = false }, key) {
+  if (process.env.GEMINI_MOCK === "1") return tier === "lite" ? ["mock-lite"] : ["mock-flash-2", "mock-flash-1", ...(allowLite ? ["mock-lite"] : [])];
   const models = (await listModels(key)).filter((m) => {
     const n = m.name || "";
     return /^models\/gemini-\d/.test(n) && /flash/.test(n) && (m.supportedGenerationMethods || []).includes("generateContent")
-      && !/(image|tts|audio|live|embedding|exp|8b|thinking)/.test(n);
-  });
-  const want = models.filter((m) => (kind === "lite") === /lite/.test(m.name));
-  const pool = want.length ? want : models;
-  if (!pool.length) throw new GeminiError("No Gemini Flash model is available for this key.", 502);
-  pool.sort((a, b) => version(b.name) - version(a.name) || /preview/.test(a.name) - /preview/.test(b.name) || a.name.length - b.name.length);
-  return pool[0].name.replace(/^models\//, "");
+      && !/(image|tts|audio|live|embedding|exp|8b|thinking|computer)/.test(n);
+  }).map((m) => m.name.replace(/^models\//, ""));
+  const order = (list) => list.sort((a, b) => version(b) - version(a) || /preview/.test(a) - /preview/.test(b) || a.length - b.length);
+  const flash = order(models.filter((n) => !/lite/.test(n)));
+  const lite = order(models.filter((n) => /lite/.test(n)));
+  const out = tier === "lite" ? lite : [...flash, ...(allowLite ? lite : [])];
+  if (!out.length) throw new GeminiError("No Gemini Flash model is available for this key.", 502);
+  return out;
+}
+
+/** Newest usable model of a kind ("flash" or "lite"). */
+async function pickModel(kind, key) {
+  return (await ladder({ tier: kind === "lite" ? "lite" : "best", allowLite: false }, key))[0];
+}
+
+/** Next midnight in California, when Google resets the free daily quotas (plus a minute). */
+function quotaReset(now = Date.now()) {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hourCycle: "h23", hour: "2-digit", minute: "2-digit", second: "2-digit" })
+    .formatToParts(new Date(now)).map((p) => [p.type, p.value]));
+  const into = (+parts.hour % 24) * 3600 + +parts.minute * 60 + +parts.second;
+  return now + (86400 - into) * 1000 + 60000;
 }
 
 function retrySeconds(body) {
@@ -71,6 +89,11 @@ function retrySeconds(body) {
   return 30;
 }
 
+/** A 429 that means "this model's quota for today is gone" rather than "slow down for a minute". */
+function isDaily(body) {
+  return /PerDay/i.test(body) || retrySeconds(body) > 3600;
+}
+
 function parseJson(text) {
   try { return JSON.parse(text); } catch (e) { /* fall through */ }
   const a = text.indexOf("{"), b = text.lastIndexOf("}");
@@ -78,21 +101,24 @@ function parseJson(text) {
   throw new GeminiError("Gemini returned text that is not valid JSON.", 502);
 }
 
-/**
- * One JSON request. kind: "flash" | "lite". Returns { data, model, usage }.
- * Throws GeminiError with status 429 (+ retryAfter seconds) when the free quota says wait.
- */
-async function generateJSON({ kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000 }) {
-  if (process.env.GEMINI_MOCK === "1") return require("./_mock.js").generate({ kind, system, prompt });
-  const key = cleanKey(process.env.GEMINI_API_KEY);
-  if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
-  const model = await pickModel(kind, key);
+const lastCall = new Map();
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+/** Free tier: about 5 requests a minute for Flash, 10 for Flash-Lite. Space calls to one model out. */
+async function pace(model) {
+  const gap = /lite/.test(model) ? 6500 : 12500;
+  const wait = (lastCall.get(model) || 0) + gap - Date.now();
+  if (wait > 0 && process.env.GEMINI_MOCK !== "1") await sleep(wait);
+  lastCall.set(model, Date.now());
+}
+
+async function callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs }) {
   const body = (withSchema) => JSON.stringify({
     systemInstruction: { parts: [{ text: system }] },
     contents: [{ role: "user", parts: [{ text: prompt }] }],
     generationConfig: { responseMimeType: "application/json", ...(withSchema && schema ? { responseSchema: schema } : {}), temperature, maxOutputTokens },
   });
   for (const withSchema of [true, false]) {
+    await pace(model);
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), timeoutMs);
     let res, text;
@@ -108,17 +134,47 @@ async function generateJSON({ kind, system, prompt, schema, maxOutputTokens = 16
     } finally {
       clearTimeout(timer);
     }
-    if (res.status === 429) throw new GeminiError("The free Gemini quota needs a short break.", 429, retrySeconds(text));
+    if (res.status === 429) { const e = new GeminiError("The free Gemini quota needs a short break.", 429, retrySeconds(text)); e.daily = isDaily(text); throw e; }
     if (res.status === 503 || res.status === 500) throw new GeminiError("Gemini is busy right now.", 503, 20);
+    if (res.status === 404) { const e = new GeminiError(`Model ${model} is not available.`, 404); e.skip = true; throw e; }
     if (res.status === 400 && withSchema && /schema/i.test(text)) continue; // retry once without the schema
     if (!res.ok) throw new GeminiError(`Gemini error ${res.status}: ${text.slice(0, 200)}`, 502);
     const data = JSON.parse(text);
     const cand = (data.candidates || [])[0] || {};
     const out = ((cand.content || {}).parts || []).filter((p) => !p.thought).map((p) => p.text || "").join("");
     if (!out) throw new GeminiError(`Gemini returned nothing (${cand.finishReason || "no reason given"}).`, 502, 5);
-    return { data: parseJson(out), model, usage: data.usageMetadata || {} };
+    return { data: parseJson(out), usage: data.usageMetadata || {} };
   }
   throw new GeminiError("Gemini rejected the request.", 502);
 }
 
-module.exports = { generateJSON, GeminiError, pickModel };
+/**
+ * One JSON request down the model ladder. Returns { data, model, usage }.
+ * quota: { exhausted: { model: untilMs }, mark(model, untilMs) } shared by every job, so a model whose daily
+ * quota is gone is skipped until it resets. When every allowed model is used up, throws a 429 GeminiError with
+ * daily = true and resetAt; a per-minute limit throws a 429 with retryAfter seconds.
+ */
+async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000 }) {
+  if (kind) { tier = kind === "lite" ? "lite" : "best"; allowLite = allowLite || kind === "flash"; }
+  const mock = process.env.GEMINI_MOCK === "1";
+  const key = mock ? "mock" : cleanKey(process.env.GEMINI_API_KEY);
+  if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
+  const now = Date.now();
+  const models = (await ladder({ tier, allowLite }, key)).filter((m) => !(quota && quota.exhausted && quota.exhausted[m] > now));
+  for (const model of models) {
+    try {
+      const r = mock ? await require("./_mock.js").generate({ model, system, prompt }) : await callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs });
+      return { data: r.data, model, usage: r.usage || {} };
+    } catch (e) {
+      if (e.status === 429 && e.daily) { if (quota) await quota.mark(model, quotaReset()); continue; }
+      if (e.skip) continue;
+      throw e;
+    }
+  }
+  const err = new GeminiError("Today's free Gemini quota for the better models is used up.", 429, Math.ceil((quotaReset() - Date.now()) / 1000));
+  err.daily = true;
+  err.resetAt = quotaReset();
+  throw err;
+}
+
+module.exports = { generateJSON, GeminiError, pickModel, ladder, quotaReset };

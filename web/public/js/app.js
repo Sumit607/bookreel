@@ -993,6 +993,7 @@ dataReady = loadData().then(async () => {
     await D.init({
       route: () => route, render, go, replace, toast, openSheet, closeSheet, sheet: () => sheet, BOOKS, INDEX: () => INDEX,
       setMode: (id, m) => setMode(id, m === "daily" ? R.DAILY : R.BINGE, true),
+      native: nativeCall,
     });
   } catch (e) { console.warn("Discover could not start", e); }
   render();

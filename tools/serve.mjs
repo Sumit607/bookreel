@@ -1,6 +1,6 @@
 // Local stand-in for Vercel: serves web/public and runs web/api/*.js handlers. For tests only.
 // Usage: node tools/serve.mjs [port]
-// Offline test mode (no Gemini or Gutenberg): GEMINI_MOCK=1 CATALOG_FIXTURES=tools/fixtures BOOK_FIXTURES=tools/fixtures
+// Offline test mode (no Gemini, Gutenberg or Supabase): GEMINI_MOCK=1 BOOKREEL_DB_MOCK=1 CATALOG_FIXTURES=tools/fixtures BOOK_FIXTURES=tools/fixtures
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
@@ -29,3 +29,16 @@ http.createServer(async (req, res) => {
   if (p.endsWith("sw.js")) res.setHeader("Cache-Control", "no-cache");
   fs.createReadStream(p).pipe(res);
 }).listen(port, () => console.log(`serving web/ on http://localhost:${port}`));
+
+// Stand-in for Supabase's pg_cron: with the in-memory job store, run the cloud worker every 1.5 s.
+if (process.env.BOOKREEL_DB_MOCK === "1") {
+  const worker = require(path.join(ROOT, "api", "worker.js"));
+  let busy = false;
+  setInterval(async () => {
+    if (busy) return;
+    busy = true;
+    const res = { statusCode: 200, setHeader() {}, end() {} };
+    try { await worker({ method: "POST", headers: { "x-bookreel-token": "mock-token" }, url: "/api/worker" }, res); } catch (e) { console.error("worker", e); }
+    busy = false;
+  }, 1500);
+}

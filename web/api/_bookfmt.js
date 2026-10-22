@@ -27,27 +27,47 @@ const CHAR_COLORS = ["#7E1D22", "#2F5F8A", "#6B5B3A", "#3E5F2F", "#7A4F8F", "#A0
 
 // ------------------------------------------------------------------ prompts
 
+const KINDS = ["story", "ideas"];
+const EXAMPLES = require("./_examples.js");
+const BANNED = ["delve", "tapestry", "testament to", "timeless wisdom", "profound", "journey", "embark", "unlock", "dive into", "explore the",
+  "in this chapter", "in this part", "in this section", "turn the page", "the next chapter", "stay tuned", "await", "secrets of", "little did",
+  "a reminder that", "serves as", "it is important to", "navigate", "realm", "intricate", "multifaceted", "underscores"];
+
 const PLAN_SYSTEM = `You plan Bookreel adaptations. Bookreel retells a whole book as exactly 20 chapters of 10 short swipeable posts, like an Instagram carousel that people finish an hour at a time.
 You get the text of a public-domain book (or the reader's own file), already cut into 20 consecutive parts. Plan one Bookreel chapter per part, in the same order.
 Rules:
 - Be faithful. Never invent events, people, places or facts. Retell in your own words.
+- kind: "story" for novels, plays, memoirs and narrative history or biography (things happen to people); "ideas" for philosophy, essays, reflections, letters of advice, sermons, strategy, science and self-help (the book argues or teaches). Pick the one that fits most of the book.
 - Chapter n covers PART n and nothing else. Title and summarise each chapter after what that part really contains; use the book's own chapter names only for a part that really is that chapter. A translator's or editor's preface or introduction is planned as what it is (who wrote it, what it tells).
-- Non-fiction (treatises, essays, history, science) works the same way: summary = the part's main ideas, examples and stories; characters = the author and the real people the text discusses; loops = questions the text itself answers later.
-- chapters: exactly 20, n = 1..20. title: 1-4 words, evocative, no numbers. hook: one line of at most 22 words that makes someone want to read that chapter, without giving away its ending. summary: 2-4 plain sentences of what actually happens in that part, with names.
-- characters: the 5-14 people (or animals, creatures) that matter most. id: one short lowercase ascii word, unique. name: as in the book. short: what posts call them (1-2 words). role: at most 6 words. bio: at most 35 words, no spoilers beyond their first chapter. traits: 2-3 tags of 1-3 words. firstChapter: the Bookreel chapter (1-20) where they first appear.
+- chapters: exactly 20, n = 1..20. title: 1-4 words, evocative, no numbers, different for every chapter. hook: one line of at most 22 words that makes someone want to read that chapter, without giving away its ending. summary: 2-4 plain sentences of what that part actually contains, with names.
+- focus: for "ideas" books, the one or two central ideas of the part, at most 15 words, each part a different angle; for stories, the turning point of the part.
+- quotes: 2-3 short lines from that part worth quoting, copied word for word from the text (5-25 words each, no ellipses). Prefer lines that are vivid, surprising or famous.
+- characters: the 1-14 people (or animals, creatures) that matter most. For "ideas" books: the author and the real people the text discusses or addresses. id: one short lowercase ascii word, unique. name: as in the book. short: what posts call them (1-2 words). role: at most 6 words. bio: at most 35 words, no spoilers beyond their first chapter. traits: 2-3 tags of 1-3 words. firstChapter: the Bookreel chapter (1-20) where they first appear.
 - narrator: the id of the first-person narrator if the book is told in the first person, otherwise "".
-- category: one of ${CATEGORIES.join(", ")}. blurb: one sentence of at most 28 words for the book card, no spoilers.
-- loops: 2-4 "guess loops": a question the reader guesses in an earlier chapter that a later chapter answers (who did it, what a clue means, whether someone survives). loopId: one short lowercase word. askChapter < payoffChapter. question: at most 20 words. Only questions the book really answers.`;
+- category: one of ${CATEGORIES.join(", ")}. blurb: one sentence of at most 28 words for the book card, no spoilers, concrete (what is at stake, or what you will get from it).
+- loops: 0-4 "guess loops": a question the reader guesses in an earlier chapter that a later chapter answers (who did it, what a clue means, what the author concludes). loopId: one short lowercase word. askChapter < payoffChapter. question: at most 20 words. Only questions the book really answers.`;
 
-const CHAPTER_SYSTEM = `You write one chapter of a Bookreel: a faithful retelling of one part of a book as exactly 10 short posts that someone swipes through on a phone.
-Write in plain, vivid English, mostly present tense, short sentences. Use your own words; quote at most a short famous line. Never invent events, people or facts that are not in the text you are given. Keep names exactly as in the character list.
-Who said what matters: a chat message must come from the person who says it (or clearly means it) in the text. Text in [square brackets] is notes by a translator or commentator; credit anything you take from a note to that note's author, never to the main author or another character. If the text has no real dialogue, use scenes, ideas, myths, lists or a poll instead of inventing a conversation.
-Non-fiction works the same way: posts 2-9 present this part's ideas, examples and stories in order, and a poll can ask what the reader would do in the author's situation.
+const SHARED_RULES = `You write one chapter of a Bookreel: one part of a book retold as exactly 10 short posts that someone swipes through on a phone. The reader should feel they are reading the best possible version of this part: vivid, specific and true to the book.
+Voice: plain, vivid English, mostly present tense, short sentences. Use your own words except for quotes. Every post carries something concrete: a name, a place, an object, a number, an example or the author's exact words. Never write vague praise or filler (${BANNED.slice(0, 12).join(", ")} and the like), never describe "the text" or "this part" from outside, never start two posts the same way.
+Faithful: never invent events, people, places, dialogue or facts that are not in the text you are given. Keep names exactly as in the character list.
+Quotes: a quote is copied word for word from THIS PART's text and put in curly quotes “like this”. Never put quote marks around your own paraphrase.
+Who said what matters: a chat message must come from the person who says it (or clearly means it) in the text. Text in [square brackets] is notes by a translator or commentator; credit anything you take from a note to that note's author. If the text has no real dialogue, use other post types instead of inventing a conversation.`;
 
-The 10 posts, in order:
-1. Post 1 is type "hook": kicker = place or time (at most 6 words), head = the punchy line (at most 14 words), sub = one more line (at most 22 words), art = one illustration key from the list below, artText = optional caption in CAPITALS (at most 4 words, or the two-part form the art needs).
-2. Posts 2 to 9 tell this part of the story in order, mixing post types. Include exactly 1 or 2 interactive posts (poll, guess, crossoff) - never 0, never 3. Never use the same type twice in a row, except scene.
-3. Post 10 is type "cliffhanger": text = at most 60 words that end on a question, threat or reveal that pulls into the next chapter. In the final chapter it is the ending instead and its t is "The end".
+const PLAYBOOK = {
+  story: `This book is a STORY. Posts 2 to 9 tell this part's events in order, as a sequence of beats, each post one beat: a scene, a conversation, a turn, a decision. Show, don't summarise: what people do and say, what they see, what is at stake. Use chats only for real dialogue, a character post when someone important first appears, a twist for a sudden turn, a poll or guess at a real decision point.`,
+  ideas: `This book is a book of IDEAS. Build the chapter around the part's central idea (the plan's focus) so the reader finishes with one thought they can use today.
+- Use the author's own words: 2 or 3 short exact quotes from this part (the plan suggests some), at least one in the hook or an idea post.
+- Explain each idea in plain modern words, as you'd explain it to a smart friend, with an example.
+- One post (a scene labelled "Try it today" or "In real life") applies the idea to an ordinary modern moment: a rude email, traffic, a missed promotion, scrolling at midnight. It is clearly your illustration, never presented as something the author said.
+- Where it helps, say what the author was facing when writing, using only facts from the text or the plan.
+- Interactive posts make the reader think: a poll that puts them in a situation and reveals the author's answer, or a crossoff of wrong answers.
+- Do not walk through the text sentence by sentence; pick the strongest ideas and make them land.`,
+};
+
+const POST_SPEC = `The 10 posts, in order:
+1. Post 1 is type "hook": kicker = place or time (at most 6 words), head = the punchy line (at most 14 words; a short exact quote works well), sub = one more line (at most 22 words), art = one illustration key from the list below, artText = optional caption in CAPITALS (at most 4 words, or the two-part form the art needs).
+2. Posts 2 to 9 mix post types: at least 5 different types in the chapter. Include exactly 1 or 2 interactive posts (poll, guess, crossoff), never 0, never 3. Never the same type twice in a row, except scene.
+3. Post 10 is type "cliffhanger": text = at most 60 words ending on a question, threat or reveal from this part that pulls the reader on. Never say "next chapter", "turn the page" or "find out". In the final chapter it is the ending instead and its t is "The end".
 Every post has t: a 1-4 word title. No post may be longer than 85 words in total.
 
 Post types and their fields:
@@ -55,10 +75,10 @@ Post types and their fields:
 - chat: label, msgs = 3-7 messages {who: a character id from the list, text: at most 25 words}. Paraphrase real dialogue from the text.
 - character: charId = a character id from the list. Use when someone important appears for the first time (at most one per chapter).
 - twist: head (at most 10 words), text (at most 50 words), status (like "Lucy · Missing", at most 5 words). For a sudden turn.
-- poll: label, q (at most 25 words, a "what would you do" or "what happens next" question), options = 2-3 {text at most 10 words, feedback at most 18 words}, reveal (what really happened, at most 45 words).
+- poll: label, q (at most 25 words, a "what would you do" or "what happens next" question), options = 2-3 {text at most 10 words, feedback at most 18 words}, reveal (what really happened or what the author says, at most 45 words).
 - guess: like poll plus loopId. ONLY use it when told to open a guess loop in this chapter; its reveal says the answer comes in a later chapter.
 - crossoff: title (a question), items = 3-6 {text at most 6 words, why at most 18 words} that are wrong and get crossed off, answer (the right one, at most 5 words).
-- myth: myth (a common misconception about this book or its subject, at most 20 words), truth (at most 40 words).
+- myth: myth (a common misconception about this book, its author or its subject, at most 20 words), truth (at most 40 words).
 - idea: label, head (at most 10 words), sub (at most 40 words), theme "sodium" or "steel", payoffLoopId when it answers a guess loop (ONLY when told to).
 - list: style "check" with h and items = 3-7 {text at most 10 words, state "ok", "warn" or "no"} plus text (at most 30 words); or style "receipt" with h, items = 3-7 {text, value at most 4 words}, total (at most 4 words) and text.
 - compare: label, h, leftTitle, left (2-4 short items), rightTitle, right (2-4 short items), text (at most 35 words).
@@ -66,7 +86,9 @@ Post types and their fields:
 Illustration keys for the hook (pick the closest mood; "stamp" if nothing fits):
 ${ART_KEYS.map((k) => `- ${k}: ${ART[k]}`).join("\n")}
 
-Also return: title (the planned chapter title), hook (the chapter's one-line teaser, at most 22 words), recap = exactly 3 lines of at most 16 words each that sum up what happened.`;
+Also return: title (the planned chapter title), hook (the chapter's one-line teaser, at most 22 words), recap = exactly 3 lines of at most 16 words each that sum up the part.`;
+
+const CHAPTER_SYSTEM = { story: `${SHARED_RULES}\n\n${PLAYBOOK.story}\n\n${POST_SPEC}`, ideas: `${SHARED_RULES}\n\n${PLAYBOOK.ideas}\n\n${POST_SPEC}` };
 
 // ------------------------------------------------------------------ response schemas (Gemini OpenAPI subset)
 
@@ -74,12 +96,12 @@ const S = { type: "STRING" };
 const planSchema = {
   type: "OBJECT",
   properties: {
-    blurb: S, category: { type: "STRING", enum: CATEGORIES }, narrator: S,
+    kind: { type: "STRING", enum: KINDS }, blurb: S, category: { type: "STRING", enum: CATEGORIES }, narrator: S,
     characters: { type: "ARRAY", items: { type: "OBJECT", properties: { id: S, name: S, short: S, role: S, bio: S, traits: { type: "ARRAY", items: S }, firstChapter: { type: "INTEGER" } }, required: ["id", "name", "short", "role", "bio", "firstChapter"] } },
-    chapters: { type: "ARRAY", items: { type: "OBJECT", properties: { n: { type: "INTEGER" }, title: S, hook: S, summary: S }, required: ["n", "title", "hook", "summary"] } },
+    chapters: { type: "ARRAY", items: { type: "OBJECT", properties: { n: { type: "INTEGER" }, title: S, hook: S, summary: S, focus: S, quotes: { type: "ARRAY", items: S } }, required: ["n", "title", "hook", "summary", "focus"] } },
     loops: { type: "ARRAY", items: { type: "OBJECT", properties: { loopId: S, askChapter: { type: "INTEGER" }, payoffChapter: { type: "INTEGER" }, question: S }, required: ["loopId", "askChapter", "payoffChapter", "question"] } },
   },
-  required: ["blurb", "category", "narrator", "characters", "chapters", "loops"],
+  required: ["kind", "blurb", "category", "narrator", "characters", "chapters", "loops"],
 };
 const item = { type: "OBJECT", properties: { text: S, why: S, state: { type: "STRING", enum: ["ok", "warn", "no"] }, value: S } };
 const postSchema = {
@@ -161,7 +183,8 @@ function normalizePlan(raw, partCount = 20) {
   const chapters = [];
   for (let n = 1; n <= partCount; n++) {
     const c = byN.get(n) || {};
-    chapters.push({ n, title: str(c.title, 40) || `Part ${n}`, hook: str(c.hook, 200), summary: str(c.summary, 900) });
+    const quotes = (Array.isArray(c.quotes) ? c.quotes : []).map((q) => str(q, 220).replace(/^["“”']+|["“”']+$/g, "")).filter((q) => words(q) >= 4).slice(0, 3);
+    chapters.push({ n, title: str(c.title, 40) || `Part ${n}`, hook: str(c.hook, 200), summary: str(c.summary, 900), focus: str(c.focus, 160), quotes });
   }
   const loopIds = new Set();
   const loops = (Array.isArray(plan.loops) ? plan.loops : []).map((l) => ({
@@ -172,6 +195,7 @@ function normalizePlan(raw, partCount = 20) {
   const usable = loops.filter((l) => !asked.has(l.askChapter) && asked.add(l.askChapter));
   const narrator = characters.some((c) => c.id === slug(plan.narrator)) ? slug(plan.narrator) : "";
   return {
+    kind: KINDS.includes(plan.kind) ? plan.kind : "story",
     blurb: str(plan.blurb, 220), category: CATEGORIES.includes(plan.category) ? plan.category : "Classic",
     narrator, characters, chapters, loops: usable,
   };
@@ -378,14 +402,79 @@ function chapterPrompt({ title, authors, plan, n, text, prevCliff, ask, payoff, 
   const chars = plan.characters.map((c) => `- ${c.id}: ${c.name} (${c.role || "character"}), first appears in chapter ${c.firstChapter}`).join("\n");
   const outline = plan.chapters.map((c) => `${c.n}. ${c.title}: ${c.summary}`).join("\n");
   const me = plan.chapters[n - 1];
-  let task = `Write Bookreel chapter ${n} of ${plan.chapters.length}: "${me.title}". Planned teaser: ${me.hook}\nWhat happens: ${me.summary}`;
+  let task = `Write Bookreel chapter ${n} of ${plan.chapters.length}: "${me.title}". Planned teaser: ${me.hook}\nWhat this part contains: ${me.summary}`;
+  if (me.focus) task += `\n${plan.kind === "ideas" ? "Central idea" : "Turning point"}: ${me.focus}`;
+  if (me.quotes && me.quotes.length) task += `\nLines worth quoting (check them against the text): ${me.quotes.map((q) => `“${q}”`).join(" / ")}`;
   if (ask) task += `\nOPEN guess loop "${ask.loopId}" in this chapter with ONE guess post (loopId "${ask.loopId}") asking: ${ask.question} Its answer comes in chapter ${ask.payoffChapter}, so do not reveal it.`;
   if (payoff) task += `\nANSWER guess loop "${payoff.loopId}" (${payoff.question}) with ONE idea post whose payoffLoopId is "${payoff.loopId}".`;
   if (n === plan.chapters.length) task += `\nThis is the final chapter: post 10 is the ending, with t "The end".`;
   if (prevCliff) task += `\nThe previous chapter ended on: ${prevCliff}`;
   if (plan.narrator) task += `\nThe book is narrated in the first person by "${plan.narrator}"; in chats that character's messages appear on the right.`;
-  if (retry && retry.length) task += `\nYour previous answer had these problems; fix them: ${retry.join("; ")}.`;
-  return `Book: ${title}${authors && authors.length ? ` by ${authors.join(", ")}` : ""}\n\nCharacters (use these ids):\n${chars}\n\nWhole-book outline:\n${outline}\n\n${task}\n\n=== THE TEXT OF THIS PART ===\n${text}`;
+  if (retry && retry.length) task += `\nYour previous answer had these problems; fix them all: ${retry.join("; ")}.`;
+  const ex = EXAMPLES[plan.kind === "ideas" ? "ideas" : "story"];
+  const example = `=== EXAMPLE OF THE QUALITY WE WANT (a chapter from a different book: ${ex.book}; characters ${ex.characters.join(", ")}). Match its specificity, variety and voice. Never reuse its content. ===\n${JSON.stringify(ex.chapter)}`;
+  return `Book: ${title}${authors && authors.length ? ` by ${authors.join(", ")}` : ""}\n\nCharacters (use these ids):\n${chars}\n\nWhole-book outline:\n${outline}\n\n${example}\n\n${task}\n\n=== THE TEXT OF THIS PART ===\n${text}`;
+}
+
+// ------------------------------------------------------------------ quality
+
+/** Letters and digits only, for comparing a quote with the text it came from. */
+const flat = (s) => String(s || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+
+/** The quoted passages in a post (“curly” or "straight" quotes of 4+ words). */
+function quotesIn(p) {
+  const fields = [p.head, p.sub, p.text, p.truth, p.myth, p.reveal, p.foot, ...(p.msgs || []).map((m) => m.text), ...(p.items || []).map((i) => `${i.text} ${i.why || ""}`)];
+  const out = [];
+  for (const f of fields) for (const m of String(f || "").matchAll(/[“"]([^”"]{12,400})[”"]/g)) if (words(m[1]) >= 4) out.push(m[1]);
+  return out;
+}
+
+/**
+ * Things a reader would notice: filler words, quotes that are not in the text, a cliffhanger that only says
+ * "next chapter", sameness. Returns { notes: [...], misquotes: [...] }; the writer gets the notes on a retry.
+ */
+function qualityNotes(chapter, { kind, text }) {
+  const notes = [];
+  const posts = chapter.posts;
+  const all = posts.map((p) => readingText(p) + " " + [p.reveal, p.truth, p.foot, p.text].filter(Boolean).join(" ")).join(" ").toLowerCase();
+  const hit = BANNED.filter((w) => new RegExp(`\\b${w.replace(/ /g, "\\s+")}`, "i").test(all));
+  if (hit.length) notes.push(`replace vague or filler wording (${hit.slice(0, 5).map((w) => `"${w}"`).join(", ")}) with something concrete from the text`);
+  const cliff = posts[posts.length - 1];
+  if (cliff && /\b(next chapter|turn the page|find out|stay tuned|to be continued|await)/i.test(cliff.text || "")) notes.push("post 10 must end on a question, threat or reveal from this part, not by announcing the next chapter");
+  const hook = posts[0];
+  if (hook && words(hook.head) > 16) notes.push("the hook's head is too long: at most 14 punchy words");
+  const types = new Set(posts.slice(1, 9).map((p) => p.type));
+  if (types.size < 4) notes.push(`posts 2-9 use only ${types.size} post types; use at least 5 different types`);
+  const starts = {};
+  posts.forEach((p) => { const w = (readingText(p).match(/[A-Za-z’']+/) || [""])[0].toLowerCase(); if (w && !/^(the|a|an)$/.test(w)) starts[w] = (starts[w] || 0) + 1; });
+  const same = Object.entries(starts).filter(([, c]) => c >= 3).map(([w]) => w);
+  if (same.length) notes.push(`${same.map((w) => `"${w}"`).join(", ")} starts 3 or more posts; vary how posts open`);
+  const misquotes = [];
+  if (text) {
+    const source = flat(text);
+    for (const p of posts) for (const q of quotesIn(p)) if (!source.includes(flat(q))) misquotes.push({ post: p.id, quote: q });
+    if (misquotes.length) notes.push(`these are in quote marks but are not word for word in the text: ${misquotes.slice(0, 3).map((m) => `“${m.quote.slice(0, 60)}”`).join("; ")}. Copy quotes exactly, or drop the quote marks`);
+  }
+  if (kind === "ideas") {
+    const real = posts.reduce((a, p) => a + quotesIn(p).filter((q) => !text || flat(text).includes(flat(q))).length, 0);
+    if (real < 2) notes.push("quote the author's exact words from this part at least twice, in curly quotes");
+    if (!posts.some((p) => /try it|in real life|today/i.test(`${p.label || ""} ${p.t || ""}`))) notes.push('add one post labelled "Try it today" that applies the idea to an ordinary modern moment');
+  }
+  return { notes, misquotes };
+}
+
+/** Quote marks around words that are not in the text are removed, so a paraphrase never poses as a quote. */
+function unquoteMisquotes(chapter, misquotes) {
+  if (!misquotes.length) return 0;
+  const bad = new Set(misquotes.map((m) => m.quote));
+  let n = 0;
+  const fix = (s) => (typeof s === "string" ? s.replace(/[“"]([^”"]{12,400})[”"]/g, (all, q) => (bad.has(q) ? (n++, q) : all)) : s);
+  for (const p of chapter.posts) {
+    for (const f of ["head", "sub", "text", "truth", "myth", "reveal", "foot"]) if (p[f]) p[f] = fix(p[f]);
+    (p.msgs || []).forEach((m) => { m.text = fix(m.text); });
+    (p.items || []).forEach((i) => { i.text = fix(i.text); if (i.why) i.why = fix(i.why); });
+  }
+  return n;
 }
 
 // ------------------------------------------------------------------ book assembly (also used by the app)
@@ -397,7 +486,45 @@ function coverFor(category, hash) {
   return { bg, fg, motif, tag: category };
 }
 
+function hash(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+
+/**
+ * The finished book pack from a plan and its 20 chapters (the same shape as the app's hand-made books).
+ * Guess loops that never pay off become polls; payoffs whose question was never asked lose the link.
+ */
+function assemblePack({ itemId, title, authors, source, plan, chapters: written, extras, models }) {
+  const offset = hash(String(itemId)) % PALETTE.length;
+  const chapters = written.map((c, i) => {
+    const [bg, bg2, fg] = PALETTE[(i + offset) % PALETTE.length];
+    return { n: i + 1, title: c.title, hook: c.hook, bg, bg2, fg, minutes: 3, recap: c.recap, posts: c.posts.map((p) => ({ ...p })) };
+  });
+  const payoffAt = new Map();
+  chapters.forEach((c) => c.posts.forEach((p) => { if (p.type === "idea" && p.payoffLoopId) payoffAt.set(p.payoffLoopId, c.n); }));
+  const askAt = new Map();
+  chapters.forEach((c) => c.posts.forEach((p) => {
+    if (p.type !== "guess") return;
+    if ((payoffAt.get(p.loopId) || 0) > c.n && !askAt.has(p.loopId)) { askAt.set(p.loopId, c.n); return; }
+    p.type = "poll"; delete p.loopId; p.hint = "Pick one to see what actually happened.";
+  }));
+  chapters.forEach((c) => c.posts.forEach((p) => { if (p.type === "idea" && p.payoffLoopId && !((askAt.get(p.payoffLoopId) || 99) < c.n)) delete p.payoffLoopId; }));
+  const characters = [...plan.characters];
+  for (const x of extras || []) if (!characters.some((c) => c.id === x.id)) characters.push(x);
+  const gutenberg = source && source.kind === "gutenberg";
+  return {
+    schemaVersion: 1, id: itemId, packVersion: 2, title, authors, category: plan.category, blurb: plan.blurb,
+    ...(plan.narrator ? { narrator: plan.narrator } : {}),
+    rights: gutenberg ? { status: "public-domain", source: `Project Gutenberg #${source.gid}` } : { status: "personal", source: "Your own file" },
+    madeWith: { ...models, at: Date.now() },
+    characters, chapters,
+  };
+}
+
 module.exports = {
-  ART_KEYS, TYPES, PALETTE, PLAN_SYSTEM, CHAPTER_SYSTEM, planSchema, chapterSchema,
+  ART_KEYS, TYPES, KINDS, PALETTE, PLAN_SYSTEM, CHAPTER_SYSTEM, planSchema, chapterSchema,
   normalizePlan, normalizeChapter, planPrompt, chapterPrompt, readingText, coverFor, words,
+  qualityNotes, unquoteMisquotes, assemblePack,
 };

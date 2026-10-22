@@ -55,13 +55,22 @@ repo on every push to `main` (project root `web/`).
 
 - `web/public/` is served as static files, books included; `web/api/` holds the Discover and Convert functions.
 - There are no passcodes: the app has one reader, and every book opens directly.
-- **Discover and Convert:** `/api/catalog` (Project Gutenberg's own OPDS catalogue: search, topics, book details), `/api/book` (a book's plain
-  text, licence header removed) and `/api/convert` (plan + one call per chapter on the Gemini free tier, checked against
-  the 20 × 10 rules). Downloads and finished Bookreels live in the phone's IndexedDB; nothing is uploaded. Converting
-  needs the `GEMINI_API_KEY` environment variable on Vercel (a key from its own AI Studio project, so the quota is
-  not shared with other apps) and refuses requests from other websites.
-- Offline test of Discover/Convert: start the server with `GEMINI_MOCK=1 GEMINI_MOCK_429=1 CATALOG_FIXTURES=tools/fixtures
-  BOOK_FIXTURES=tools/fixtures`, then `node tools/web-test/discover.mjs http://localhost:4173 out`.
+- **Discover:** `/api/catalog` (Project Gutenberg's own OPDS catalogue: search, topics, book details) and `/api/book` (a book's
+  plain text, licence header removed). Downloads live in the phone's IndexedDB.
+- **Convert, in the cloud:** the app cuts a book into 20 parts and sends them to `/api/jobs`. The job waits in the free
+  Supabase project **bookreel** (schema `bookreel`, see `db/bookreel.sql`); pg_cron calls `/api/worker` every minute while
+  a job is due, and the worker plans the book, writes one chapter at a time and assembles the pack (`web/api/_pipeline.js`),
+  so the app can be closed. The app collects the finished Bookreel next time it is open (and the Android app notifies).
+  Writing uses Gemini's best free Flash model first and moves down the ladder when a model's daily quota runs out
+  (`web/api/_gemini.js`); when every Flash model is used up the job waits for the reset, unless the reader taps
+  "Finish now with Flash-Lite". Each chapter is checked (`qualityNotes` in `web/api/_bookfmt.js`: quotes must be word for
+  word in the text, no filler, variety, a real cliffhanger) and rewritten once if it falls short. Prompts follow two
+  playbooks, story and ideas, with an example chapter each (`web/api/_examples.js`).
+  Vercel needs `GEMINI_API_KEY`, `BOOKREEL_DB_URL`, `BOOKREEL_DB_KEY` (anon key) and `BOOKREEL_TOKEN` (also in
+  `bookreel.settings`); a daily Vercel cron pings the database so the free project does not pause.
+- Offline tests: start the server with `GEMINI_MOCK=1 BOOKREEL_DB_MOCK=1 CATALOG_FIXTURES=tools/fixtures
+  BOOK_FIXTURES=tools/fixtures` (it runs the worker every 1.5 s), then `node tools/web-test/discover.mjs http://localhost:4173 out`;
+  add `GEMINI_MOCK_DAYQUOTA=1` and run `quota.mjs` for the quota pause.
 - After changing content: `python3 content/src/build.py && python3 tools/build_web.py`.
 - Test locally: `node tools/serve.mjs 4173`, then
   `cd tools/web-test && npm install && node e2e.mjs http://localhost:4173 out`.

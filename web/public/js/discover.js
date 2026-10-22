@@ -23,14 +23,45 @@ export async function init(ctx) {
   app = ctx;
   C.onJob(() => {
     refreshItems().then(() => {
+      syncNotices();
       const r = app.route().name;
       if (r === "discover") refreshResults();
-      else if (["convert", "gb", "mine", "library"].includes(r)) app.render();
+      else if (["convert", "gb", "mine", "library"].includes(r) && !app.sheet()) app.render();
     });
+  });
+  C.onReady(async (item) => {
+    await refreshItems();
+    await addToLibrary(items.get(item.id) || item);
+    native("cancelRelease", noticeKey(item.id));
+    notified.delete(item.id);
+    app.toast(`Your Bookreel of ${item.title} is ready`);
+    if (!app.sheet()) app.render();
   });
   await refreshItems();
   // Finished Bookreels join the library like any other book.
   for (const item of items.values()) if (item.status === "ready") await addToLibrary(item);
+  C.poll(0); // collect anything the cloud finished while the app was closed
+}
+
+const native = (...a) => (app && app.native ? app.native(...a) : undefined);
+const noticeKey = (id) => `convert-${id}`;
+const notified = new Map(); // item id → when its "ready" notification is set for
+
+/** In the Android app: a notification when a cloud conversion should be done, moved when the estimate moves. */
+function syncNotices() {
+  for (const item of items.values()) {
+    const st = C.statusOf(item.id);
+    if (C.isActive(st)) {
+      const at = Date.now() + (st.eta || 600) * 1000 + 2 * 60000;
+      const prev = notified.get(item.id);
+      if (prev && Math.abs(prev - at) < 5 * 60000) continue;
+      notified.set(item.id, at);
+      native("scheduleRelease", noticeKey(item.id), String(at), `${item.title}: your Bookreel should be ready`, "Tap to open it in Bookreel.", `#/convert/${item.id}`);
+    } else if (notified.has(item.id) && st && st.status !== "collected") {
+      native("cancelRelease", noticeKey(item.id));
+      notified.delete(item.id);
+    }
+  }
 }
 
 async function refreshItems() {
@@ -48,7 +79,7 @@ async function addToLibrary(item) {
 }
 
 async function loadStatus() {
-  try { status = await (await fetch("/api/convert", { credentials: "same-origin", cache: "no-store" })).json(); } catch (e) { status = { ready: null }; }
+  try { status = await (await fetch("/api/jobs", { credentials: "same-origin", cache: "no-store" })).json(); } catch (e) { status = { ready: null }; }
   return status;
 }
 
@@ -90,8 +121,8 @@ function drawnCover(title, key, extra = "") {
 
 function badgeFor(id) {
   const item = items.get(id);
-  const job = C.currentJob();
-  if (job && job.running && job.id === id) return `<span class="dbadge busy">${job.n} / 20</span>`;
+  const st = C.statusOf(id);
+  if (C.isActive(st)) return `<span class="dbadge busy">${st.done} / 20</span>`;
   if (!item) return "";
   if (item.status === "ready") return `<span class="dbadge ready">BOOKREEL</span>`;
   return `<span class="dbadge">SAVED</span>`;
@@ -177,8 +208,7 @@ export function mineScreen(id) {
 
 function actions(id, { gid, title }) {
   const item = items.get(id);
-  const job = C.currentJob();
-  const running = job && job.running && job.id === id;
+  const st = C.statusOf(id);
   if (downloading.has(id)) return `<button class="btn primary wide" disabled>${icon("download", { size: 18 })} Downloading…</button>`;
   if (!item) {
     return `<button class="btn primary wide big-btn" data-act="download" data-gid="${gid}">${icon("download", { size: 20 })} DOWNLOAD FREE</button>
@@ -186,12 +216,17 @@ function actions(id, { gid, title }) {
   }
   const saved = `<div class="gb-saved">${icon("check", { size: 15 })} Saved on this phone · ${compactCount(item.words)} words</div>`;
   const remove = `<button class="link-btn danger" data-act="remove" data-id="${id}">Remove from this phone</button>`;
-  if (item.status === "ready") return `${saved}<button class="btn primary wide big-btn" data-act="open-book" data-id="${id}">READ THE BOOKREEL</button>${remove}`;
-  if (running) return `${saved}<button class="btn primary wide big-btn" data-act="view-convert" data-id="${id}">CONVERTING · ${job.n} OF 20</button>`;
-  const done = item.convert ? item.convert.chapters.filter(Boolean).length : 0;
-  if (item.status === "paused" || done) {
-    return `${saved}${item.convert?.error ? `<div class="gb-err">${esc(item.convert.error)}</div>` : ""}
-      <button class="btn primary wide big-btn" data-act="convert" data-id="${id}">RESUME · ${done} OF 20 DONE</button>${remove}`;
+  const converting = C.isActive(st) || (item.job && !st);
+  if (item.status === "ready") {
+    const remake = converting
+      ? `<button class="link-btn" data-act="view-convert" data-id="${id}">${icon("clock", { size: 16 })} Remaking in the cloud · ${st ? st.done : 0} of 20</button>`
+      : C.madeWithOldWriter(item, app.BOOKS[id]) ? `<button class="link-btn" data-act="convert" data-id="${id}">${icon("compass", { size: 16 })} Make it again with the better writer</button>` : "";
+    return `${saved}<button class="btn primary wide big-btn" data-act="open-book" data-id="${id}">READ THE BOOKREEL</button>${remake}${remove}`;
+  }
+  if (converting) return `${saved}<button class="btn primary wide big-btn" data-act="view-convert" data-id="${id}">CONVERTING · ${st ? st.done : 0} OF 20</button>`;
+  if (st && st.status === "failed") {
+    return `${saved}<div class="gb-err">${esc(st.last_error || "The conversion stopped.")}</div>
+      <button class="btn primary wide big-btn" data-act="convert-retry" data-id="${id}">TRY AGAIN</button>${remove}`;
   }
   return `${saved}<button class="btn primary wide big-btn" data-act="convert" data-id="${id}">MAKE IT A BOOKREEL</button>${remove}`;
 }
@@ -201,40 +236,47 @@ function actions(id, { gid, title }) {
 export function convertScreen(id) {
   const item = items.get(id);
   if (!item) return `<div class="pad16"><div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button></div><div class="center muted" style="padding:48px 0">This book is no longer on this phone.</div></div>`;
-  if (item.status === "ready" && app.BOOKS[id]) return readyView(item);
-  const job = C.currentJob();
-  const live = job && job.id === id ? job : null;
-  const running = !!(live && live.running);
-  const plan = item.convert && item.convert.plan;
-  const done = item.convert ? item.convert.chapters.filter(Boolean).length : 0;
-  const n = running ? live.n : done;
+  const st = C.statusOf(id);
+  const active = C.isActive(st) || (!!item.job && !st);
+  if (item.status === "ready" && app.BOOKS[id] && !active) return readyView(item);
+  const n = st ? st.done : 0;
+  const hasPlan = !!(st && st.has_plan);
+  const failed = st && st.status === "failed";
   const step = (state, num, title, sub) => `<li class="st ${state}"><span class="st-dot">${state === "done" ? icon("check", { size: 14 }) : num}</span><span class="st-m"><b>${title}</b>${sub ? `<span>${sub}</span>` : ""}</span></li>`;
-  const planState = plan ? "done" : running && live.stage === "plan" ? "now" : "todo";
-  const writeState = done >= 20 ? "done" : plan && (running || done) ? "now" : "todo";
-  const checkState = item.status === "ready" ? "done" : running && live.stage === "check" ? "now" : "todo";
-  const hook = live && live.lastHook ? live.lastHook : done ? { n: done, ...item.convert.chapters[done - 1].posts[0] } : null;
-  let foot;
-  if (running && live.waitUntil > Date.now()) foot = `${icon("clock", { size: 16 })} Free Gemini quota: waiting ${Math.ceil((live.waitUntil - Date.now()) / 1000)} s, then carrying on`;
-  else if (running) { const s = C.etaSeconds(); foot = `${icon("clock", { size: 16 })} ${s > 90 ? `About ${Math.round(s / 60)} minutes left` : "Almost there"} · keep Bookreel open`; }
-  else if (item.convert && item.convert.error) foot = `<span class="err">${esc(item.convert.error)}</span>`;
-  else foot = done ? `Paused after chapter ${done}. Your progress is saved.` : "Not started yet.";
+  const planState = hasPlan ? "done" : active ? "now" : "todo";
+  const writeState = n >= 20 ? "done" : hasPlan && active ? "now" : "todo";
+  const checkState = st && (st.status === "collected" || st.status === "done") ? "done" : n >= 20 && active ? "now" : "todo";
+  const hook = st && st.last_hook ? st.last_hook : null;
+  const waitMs = st && st.status === "waiting" ? Date.parse(st.wait_until) - Date.now() : 0;
+  const mins = Math.max(1, Math.round(C.etaSeconds(id) / 60));
+  const where = native("version") ? "You can close Bookreel: it carries on in the cloud and tells you when it’s ready." : "You can close Bookreel: it carries on in the cloud. Open the app later to collect it.";
+  let foot = "", extra = "";
+  if (!st && item.job) foot = `${icon("clock", { size: 16 })} Checking on it…`;
+  else if (failed) { foot = `<span class="err">${esc(st.last_error || "The conversion stopped.")}</span>`; extra = `<button class="btn primary wide" data-act="convert-retry" data-id="${id}">Try again</button>`; }
+  else if (st && st.status === "waiting" && st.wait_reason === "quota" && waitMs > 0) {
+    foot = `${icon("clock", { size: 16 })} Paused: today’s free quota for Gemini’s best writer is used up. It resets at ${esc(new Date(st.wait_until).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }))} and the conversion carries on by itself.`;
+    extra = `<button class="btn secondary wide" data-act="convert-lite" data-id="${id}">Finish now with Flash-Lite (simpler writing)</button>`;
+  } else if (st && st.status === "waiting" && waitMs > 0) foot = `${icon("clock", { size: 16 })} A short pause for Gemini’s limits, then it carries on. ${where}`;
+  else if (active) foot = `${icon("clock", { size: 16 })} About ${mins} minute${mins === 1 ? "" : "s"} left. ${where}`;
+  else foot = "Not started yet.";
+  const title = item.status === "ready" ? "MAKING IT AGAIN" : active ? "CONVERTING IN THE CLOUD" : failed ? "STOPPED" : "READY TO CONVERT";
   return `<div class="pad16 conv">
-    <div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button><span class="lbl muted">${running ? "Converting" : "Make it a Bookreel"}</span></div>
-    <div class="conv-head">${drawnCover(item.title, item.gid || item.id)}<div><div class="lbl conv-k">${running ? "CONVERTING" : done ? "PAUSED" : "READY TO CONVERT"}</div><h1 class="conv-t hl">${up(item.title)}</h1></div></div>
+    <div class="topbar"><button class="icon-btn" data-act="back" aria-label="Back">${icon("back")}</button><span class="lbl muted">${active ? "Converting" : "Make it a Bookreel"}</span></div>
+    <div class="conv-head">${drawnCover(item.title, item.gid || item.id)}<div><div class="lbl conv-k">${title}</div><h1 class="conv-t hl">${up(item.title)}</h1></div></div>
     <ol class="steps">
       ${step("done", 1, "Read the whole book", `${compactCount(item.words)} words`)}
-      ${step(planState, 2, "Plan 20 chapters", plan ? `${plan.characters.length} characters · ${plan.loops.length} guess loops` : running ? "Reading it through…" : "")}
+      ${step(planState, 2, "Plan 20 chapters", hasPlan ? "Done" : active ? "Reading it through…" : "")}
       ${step(writeState, 3, "Write the posts", `${n} of 20 chapters`)}
-      ${step(checkState, 4, "Check every post", "Length, order, names, the 20 × 10 rules")}
-      ${step(item.status === "ready" ? "done" : "todo", 5, "Ready to read", "")}
+      ${step(checkState, 4, "Check every post", "Quotes against the text, length, order, the 20 × 10 rules")}
+      ${step(st && st.status === "collected" ? "done" : "todo", 5, "Ready to read", "")}
     </ol>
     <div class="conv-bar" role="progressbar" aria-label="Chapters written" aria-valuemin="0" aria-valuemax="20" aria-valuenow="${n}"><i style="width:${(n / 20) * 100}%"></i></div>
     ${hook ? `<div class="lbl muted" style="margin-top:16px">Just written · chapter ${hook.n} hook</div>
       <div class="conv-hook"><span class="lbl">${up(`Chapter ${String(hook.n).padStart(2, "0")} of 20 · ${hook.kicker || ""}`)}</span><b class="hl">${up(hook.head)}</b><i>${esc(hook.sub || "")}</i></div>` : ""}
     <div class="conv-foot">${foot}</div>
-    ${running
-      ? `<button class="btn secondary wide" data-act="convert-cancel">Pause</button>`
-      : `<button class="btn primary wide" data-act="convert" data-id="${id}">${done ? `Resume from chapter ${done + 1}` : "Start converting"}</button>`}
+    ${extra}
+    ${active ? `<button class="btn secondary wide" data-act="convert-cancel" data-id="${id}">Stop converting</button>`
+      : !failed ? `<button class="btn primary wide" data-act="convert" data-id="${id}">Start converting</button>` : ""}
   </div>`;
 }
 
@@ -255,14 +297,17 @@ export function shelf() {
   if (!list.length) {
     return `<button class="disc-promo" data-nav="#/discover">${icon("compass", { size: 26 })}<span><b>75,000+ free books</b><span>Download any classic and make it a Bookreel.</span></span>${icon("arrow", { size: 18 })}</button>`;
   }
-  const job = C.currentJob();
   const rows = list.map((item) => {
-    const running = job && job.running && job.id === item.id;
-    const done = item.convert ? item.convert.chapters.filter(Boolean).length : 0;
+    const st = C.statusOf(item.id);
+    const converting = C.isActive(st) || (item.job && !st);
+    const n = st ? st.done : 0;
     let line, btn;
-    if (item.status === "ready") { line = `<span class="ok">Bookreel ready · 20 chapters</span>`; btn = `<button class="sbtn" data-act="open-book" data-id="${item.id}">Read</button>`; }
-    else if (running) { line = `<span class="busy">Converting · chapter ${Math.min(job.n + 1, 20)} of 20</span><span class="sbar"><i style="width:${(job.n / 20) * 100}%"></i></span>`; btn = `<button class="sbtn ghost" data-act="view-convert" data-id="${item.id}">View</button>`; }
-    else if (done) { line = `<span class="busy">Paused · ${done} of 20 written</span>`; btn = `<button class="sbtn" data-act="convert" data-id="${item.id}">Resume</button>`; }
+    if (item.status === "ready") { line = `<span class="ok">Bookreel ready · 20 chapters${converting ? " · remaking" : ""}</span>`; btn = `<button class="sbtn" data-act="open-book" data-id="${item.id}">Read</button>`; }
+    else if (converting) {
+      const paused = st && st.status === "waiting" && st.wait_reason === "quota";
+      line = `<span class="busy">${paused ? `Paused for Gemini’s quota · ${n} of 20` : `Converting in the cloud · ${n} of 20`}</span><span class="sbar"><i style="width:${(n / 20) * 100}%"></i></span>`;
+      btn = `<button class="sbtn ghost" data-act="view-convert" data-id="${item.id}">View</button>`;
+    } else if (st && st.status === "failed") { line = `<span class="busy">Conversion stopped</span>`; btn = `<button class="sbtn" data-act="view-convert" data-id="${item.id}">View</button>`; }
     else { line = `<span class="ok">Saved on this phone</span>`; btn = `<button class="sbtn" data-act="convert" data-id="${item.id}">Make it a Bookreel</button>`; }
     const open = item.source === "gutenberg" ? `#/gb/${item.gid}` : `#/mine/${item.id}`;
     return `<div class="srow"><a class="srow-c" href="${open}" data-nav="${open}">${drawnCover(item.title, item.gid || item.id)}</a>
@@ -286,16 +331,18 @@ export function sheetBody(s) {
   if (!item) return "";
   const notReady = status.ready === false;
   const bars = (n, cls) => `<div class="cv-bars">${Array.from({ length: n }, (_, i) => `<i class="${cls(i)}"></i>`).join("")}</div>`;
-  const minutes = Math.max(5, Math.round((20 * 24 + 40) / 60));
-  return `<div class="lbl muted">MAKE IT A BOOKREEL</div><h2 class="s-title hl">${up(`${item.title.split(/[;:]/)[0]} in 20 chapters`)}</h2>
+  const minutes = Math.max(10, Math.round((21 * 40 + 60) / 60));
+  const again = item.status === "ready";
+  return `<div class="lbl muted">${again ? "MAKE IT AGAIN" : "MAKE IT A BOOKREEL"}</div><h2 class="s-title hl">${up(`${item.title.split(/[;:]/)[0]} in 20 chapters`)}</h2>
+    ${again ? `<p>Your current Bookreel stays readable until the new one is ready, then the new one replaces it. Your reading progress is kept.</p>` : ""}
     <p>Bookreel reads the whole book and retells it as 200 short posts, in its own words, with the twists in the right order.</p>
     <div class="lbl muted">20 chapters</div>${bars(20, () => "c")}
     <div class="cv-every"><div class="lbl muted">Every chapter</div>${bars(10, (i) => (i === 0 ? "h" : i === 4 ? "p" : i === 9 ? "x" : ""))}<div class="cv-legend"><span>Hook</span><span>Poll or guess</span><span>Cliffhanger</span></div></div>
     <fieldset class="cv-mode"><legend class="lbl muted">When it’s ready</legend>
       <label class="${s.mode !== "daily" ? "on" : ""}"><input type="radio" name="cvmode" value="binge" ${s.mode !== "daily" ? "checked" : ""}> Read it all now</label>
       <label class="${s.mode === "daily" ? "on" : ""}"><input type="radio" name="cvmode" value="daily" ${s.mode === "daily" ? "checked" : ""}> One a day</label></fieldset>
-    <p class="cv-time">${icon("clock", { size: 16 })} About ${minutes}–${minutes + 5} minutes. Keep Bookreel open while it works.</p>
-    <p class="muted mono">The text is sent to Google’s Gemini to write the posts. The finished Bookreel stays on this phone.</p>
+    <p class="cv-time">${icon("clock", { size: 16 })} About ${minutes}–${minutes + 10} minutes, in the cloud. You can close Bookreel while it works.</p>
+    <p class="muted mono">The book is sent to Bookreel’s cloud and to Google’s Gemini, which writes the posts. The finished Bookreel comes back to this phone.</p>
     ${notReady ? `<div class="gb-err">Converting isn’t switched on yet: the Gemini key hasn’t been added.</div>` : ""}
     <button class="btn primary wide" data-act="convert-go" data-id="${esc(s.id)}" ${notReady ? "disabled" : ""}>Start converting</button>
     <button class="btn secondary wide" data-act="sheet-close">Not now</button>`;
@@ -414,15 +461,15 @@ async function openConvertSheet(id) {
 
 async function go(id, mode) {
   app.closeSheet({ silent: true });
-  app.setMode(id, mode === "daily" ? "daily" : "binge");
+  app.setMode(id, mode === "daily" ? "daily" : "binge", true);
   app.go(`#/convert/${id}`);
-  await C.start(id);
-  await refreshItems();
-  const item = items.get(id);
-  if (item && item.status === "ready") {
-    await addToLibrary(item);
-    app.toast("Your Bookreel is ready");
+  try {
+    await C.start(id);
+    app.toast("Converting in the cloud. You can close Bookreel.");
+  } catch (e) {
+    app.toast(e.message || "Couldn’t start converting.");
   }
+  await refreshItems();
   app.render();
 }
 
@@ -443,20 +490,20 @@ export function onAct(act, d) {
     case "pick-file": document.getElementById("filepick")?.click(); return true;
     case "download": download(d.gid); return true;
     case "convert": {
-      const job = C.currentJob();
-      if (job && job.running && job.id !== d.id) { app.toast("Another book is converting. One at a time."); return true; }
-      if (job && job.running) { app.go(`#/convert/${d.id}`); return true; }
+      if (C.isActive(C.statusOf(d.id))) { app.go(`#/convert/${d.id}`); return true; }
       openConvertSheet(d.id); return true;
     }
     case "convert-go": go(d.id, document.querySelector("input[name=cvmode]:checked")?.value); return true;
-    case "convert-cancel": C.cancel(); return true;
+    case "convert-cancel": C.cancel(d.id).then(() => { native("cancelRelease", noticeKey(d.id)); notified.delete(d.id); app.toast("Stopped"); }).catch((e) => app.toast(e.message)); return true;
+    case "convert-lite": C.finishWithLite(d.id).then(() => app.toast("Carrying on with Flash-Lite")).catch((e) => app.toast(e.message)); return true;
+    case "convert-retry": C.retry(d.id).then(() => app.toast("Trying again")).catch((e) => app.toast(e.message)); return true;
     case "view-convert": app.go(`#/convert/${d.id}`); return true;
     case "open-book": app.go(`#/book/${d.id}`); return true;
     case "remove": app.openSheet({ kind: "remove", id: d.id }); return true;
     case "remove-yes": {
-      const job = C.currentJob();
-      if (job && job.running && job.id === d.id) { app.toast("Pause the conversion first."); return true; }
-      store.removeAll(d.id).then(async () => {
+      const stop = C.isActive(C.statusOf(d.id)) ? C.cancel(d.id).catch(() => {}) : Promise.resolve();
+      native("cancelRelease", noticeKey(d.id));
+      stop.then(() => store.removeAll(d.id)).then(async () => {
         delete app.BOOKS[d.id];
         const list = app.INDEX().books;
         const i = list.findIndex((b) => b.id === d.id);
@@ -493,3 +540,4 @@ export function onChange(e) {
 }
 
 export const hasItems = () => items.size > 0;
+export const jobStatus = (id) => C.statusOf(id);
