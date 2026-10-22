@@ -89,6 +89,15 @@ function retrySeconds(body) {
   return 30;
 }
 
+/** Which quotas a 429 names, with their limits, e.g. "GenerateRequestsPerDayPerProjectPerModel-FreeTier=20". */
+function quotaIds(body) {
+  try {
+    const details = (JSON.parse(body).error || {}).details || [];
+    const v = details.flatMap((d) => d.violations || []);
+    return v.map((x) => `${x.quotaId || x.quotaMetric}${x.quotaValue ? `=${x.quotaValue}` : ""}`).join(", ") || body.slice(0, 200);
+  } catch (e) { return String(body).slice(0, 200); }
+}
+
 /** A 429 that means "this model's quota for today is gone" rather than "slow down for a minute". */
 function isDaily(body) {
   return /PerDay/i.test(body) || retrySeconds(body) > 3600;
@@ -134,7 +143,13 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
     } finally {
       clearTimeout(timer);
     }
-    if (res.status === 429) { const e = new GeminiError("The free Gemini quota needs a short break.", 429, retrySeconds(text)); e.daily = isDaily(text); throw e; }
+    if (res.status === 429) {
+      const e = new GeminiError("The free Gemini quota needs a short break.", 429, retrySeconds(text));
+      e.daily = isDaily(text);
+      e.detail = quotaIds(text);
+      console.error("gemini", model, 429, e.daily ? "daily" : "per-minute", e.detail);
+      throw e;
+    }
     if (res.status === 503 || res.status === 500) {
       const e = new GeminiError("Gemini is busy right now.", 503, 20);
       e.detail = text.slice(0, 300).replace(/\s+/g, " ");
@@ -176,7 +191,13 @@ async function generateJSON({ tier = "best", allowLite = false, quota = null, ki
       if (e.status === 429 && e.daily) { if (quota) await quota.mark(model, quotaReset()); continue; }
       if (e.skip) continue;
       // Overloaded or slow: the next model in the ladder may well answer.
-      if (e.status === 503 || e.status === 500 || e.status === 504) { console.error("gemini", model, e.status, e.message, e.detail || "", `prompt ${prompt.length} chars`); busy = e; continue; }
+      if (e.status === 503 || e.status === 500 || e.status === 504) {
+        console.error("gemini", model, e.status, e.message, e.detail || "", `prompt ${prompt.length} chars`);
+        // One more model may answer; more than that just spends the small daily allowances on refusals.
+        if (busy) throw e;
+        busy = e;
+        continue;
+      }
       throw e;
     }
   }
@@ -187,4 +208,4 @@ async function generateJSON({ tier = "best", allowLite = false, quota = null, ki
   throw err;
 }
 
-module.exports = { generateJSON, GeminiError, pickModel, ladder, quotaReset };
+module.exports = { generateJSON, GeminiError, pickModel, ladder, quotaReset, callModel, cleanKey };

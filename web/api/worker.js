@@ -7,21 +7,18 @@ const { runStep } = require("./_pipeline.js");
 const START_STEPS_FOR_MS = 100000; // start another step only this early (a step can take ~150 s)
 const RETRY_UNTIL_MS = 160000; // a second attempt at a chapter only this early
 
-/** Diagnostics (same token): a tiny request to every model on the ladder, to see which ones answer right now. */
+/** Diagnostics (same token): one tiny request to each model on the ladder, with what Google answers. Costs one request per model. */
 async function probe() {
-  const { ladder, generateJSON } = require("./_gemini.js");
-  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  const { ladder, callModel, cleanKey } = require("./_gemini.js");
+  const key = cleanKey(process.env.GEMINI_API_KEY);
   const out = {};
   for (const model of await ladder({ tier: "best", allowLite: true }, key)) {
     const t = Date.now();
     try {
-      const quota = { exhausted: {}, async mark() {} };
-      const all = await ladder({ tier: "best", allowLite: true }, key);
-      for (const m of all) if (m !== model) quota.exhausted[m] = Date.now() + 60000;
-      const r = await generateJSON({ tier: "best", allowLite: true, quota, system: "Answer in JSON.", prompt: 'Return {"ok": true}.', maxOutputTokens: 200, timeoutMs: 20000 });
-      out[model] = `ok in ${Date.now() - t} ms (${r.model})`;
+      await callModel(model, key, { system: "Answer in JSON.", prompt: 'Return {"ok": true}.', maxOutputTokens: 200, temperature: 0, timeoutMs: 20000 });
+      out[model] = `ok in ${Date.now() - t} ms`;
     } catch (e) {
-      out[model] = `${e.status || ""} ${e.message}${e.daily ? " (daily quota)" : ""}`;
+      out[model] = `${e.status || ""} ${e.daily ? "daily " : ""}${e.detail || e.message}`;
     }
   }
   return out;

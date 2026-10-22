@@ -97,11 +97,11 @@ async function runStep(job, quota, { canRetry = () => true, deadline = 0 } = {})
     if (e.status === 429) return { status: "waiting", wait_until: new Date(now + Math.max(5, e.retryAfter || 30) * 1000).toISOString(), wait_reason: "rate" };
     const attempts = (job.attempts || 0) + 1;
     const busy = e.status === 503 || e.status === 504;
-    // Google's free tier says "high demand" for minutes or hours at busy times: keep trying, more slowly, for about a day.
-    if (e.status === 424 || e.fatal || attempts >= (busy ? 60 : 5)) {
+    // Google's free tier says "high demand" for minutes or hours at busy times: keep trying, slowly, for about a day.
+    if (e.status === 424 || e.fatal || attempts >= (busy ? 80 : 5)) {
       return { status: "failed", attempts, last_error: e.message || "Conversion failed.", wait_reason: null };
     }
-    const delay = busy ? Math.min(600, 60 * 2 ** Math.min(attempts - 1, 4)) : 20 * attempts;
+    const delay = busy ? Math.min(1200, 120 * 2 ** Math.min(attempts - 1, 3)) : 20 * attempts; // busy: 2, 4, 8, 16, 20 min
     return { status: "waiting", attempts, wait_until: new Date(now + delay * 1000).toISOString(), wait_reason: busy ? "busy" : "retry", last_error: e.message || "" };
   }
 }
