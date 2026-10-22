@@ -78,10 +78,13 @@ const ANSWERS = {
   "the-goal:8:4": ["Put Herbie in front", "That’s Alex’s call", "chapter 8 poll answers"],
   "a-study-in-scarlet:1:5": ["Find cheaper rooms in London", "That’s Watson’s choice", "Scarlet poll shows feedback after an answer"],
   "a-study-in-scarlet:2:5": ["He read it in Watson’s face", "Hold that thought", "Scarlet guess shows feedback after an answer"],
+  "the-art-of-war:3:5": ["Calculate in the temple", "Many calculations lead to victory", "Art of War poll shows feedback after an answer"],
+  "the-art-of-war:19:7": ["The converted spy", "Hold that thought", "Art of War guess shows feedback after an answer"],
 };
 // Guess loops: the payoff post shows the reader's earlier answer.
 const PAYOFFS = {
   "a-study-in-scarlet:4:6": ["Your guess earlier: He read it in Watson’s face", "Scarlet payoff in chapter 4 shows the chapter 2 guess"],
+  "the-art-of-war:20:4": ["Your guess earlier: The converted spy", "Art of War payoff in chapter 20 shows the chapter 19 guess"],
 };
 
 async function readChapter(bookId, ch, total, { saves = [], first = 1 } = {}) {

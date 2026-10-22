@@ -42,8 +42,9 @@
       "category": "Strategy",
       "blurb": "Thirteen short chapters on winning, written 2,500 years ago and still read by generals and CEOs.",
       "hook": "The best way to win a war is to never have to fight it.",
-      "status": "soon",
-      "minutes": 41,
+      "status": "ready",
+      "file": "the-art-of-war.json",
+      "minutes": 60,
       "cover": { "bg": "#121212", "fg": "#F2EDE4", "motif": "sun", "tag": "Strategy" }
     },
     {

@@ -1,0 +1,2650 @@
+{
+ "schemaVersion": 1,
+ "id": "pg-132",
+ "packVersion": 1,
+ "title": "The Art of War",
+ "authors": [
+  "Sunzi"
+ ],
+ "category": "Philosophy",
+ "blurb": "An ancient Chinese military treatise offering timeless strategic wisdom on deception, planning, terrain, and leadership by the master strategist Sunzi.",
+ "rights": {
+  "status": "public-domain",
+  "source": "Project Gutenberg #132"
+ },
+ "madeWith": {
+  "plan": "gemini-3.5-flash-lite",
+  "chapters": "gemini-3.5-flash-lite",
+  "at": 1792644244211
+ },
+ "characters": [
+  {
+   "id": "sunzi",
+   "name": "Sun Tzŭ",
+   "short": "Sunzi",
+   "initials": "ST",
+   "color": "#7E1D22",
+   "firstChapter": 1,
+   "role": "Master military strategist and author",
+   "bio": "A renowned military strategist from the Ch'i State who entered the service of King Ho Lu of Wu and composed the oldest military treatise in the world.",
+   "traits": [
+    "wise",
+    "prudent",
+    "tactical"
+   ]
+  },
+  {
+   "id": "giles",
+   "name": "Lionel Giles",
+   "short": "Giles",
+   "initials": "LG",
+   "color": "#2F5F8A",
+   "firstChapter": 1,
+   "role": "Scholarly translator and editor",
+   "bio": "Assistant in the Department of Oriental Printed Books and MSS. in the British Museum who produced the definitive 1910 English translation and critical notes.",
+   "traits": [
+    "scholarly",
+    "meticulous",
+    "critical"
+   ]
+  },
+  {
+   "id": "holu",
+   "name": "Ho Lu",
+   "short": "Ho Lu",
+   "initials": "HL",
+   "color": "#6B5B3A",
+   "firstChapter": 1,
+   "role": "King of Wu",
+   "bio": "The ambitious ruler of Wu who carefully perused Sun Tzŭ's thirteen chapters, tested his discipline on palace women, and appointed him general.",
+   "traits": [
+    "ambitious",
+    "inquisitive",
+    "powerful"
+   ]
+  },
+  {
+   "id": "tsaokung",
+   "name": "Ts’ao Ts’ao",
+   "short": "Ts'ao Kung",
+   "initials": "TT",
+   "color": "#3E5F2F",
+   "firstChapter": 2,
+   "role": "Military genius and commentator",
+   "bio": "Also known as Wei Wu Ti, an extraordinary military commander and statesman who wrote the earliest austere and brief commentary on Sun Tzŭ's text.",
+   "traits": [
+    "austere",
+    "brilliant",
+    "decisive"
+   ]
+  },
+  {
+   "id": "tumo",
+   "name": "Tu Mu",
+   "short": "Tu Mu",
+   "initials": "TM",
+   "color": "#7A4F8F",
+   "firstChapter": 2,
+   "role": "Tang poet and commentator",
+   "bio": "A bright star of the Tang poetry period who possessed no practical experience of war but was extremely fond of discussing it and wrote copious historical notes.",
+   "traits": [
+    "poetic",
+    "copious",
+    "historical"
+   ]
+  },
+  {
+   "id": "meiyaochen",
+   "name": "Mei Yao-ch’en",
+   "short": "Mei Sheng-yu",
+   "initials": "MY",
+   "color": "#A0522D",
+   "firstChapter": 2,
+   "role": "Song poet and commentator",
+   "bio": "A distinguished Song dynasty poet whose critical commentary on Sun Tzŭ was published with a laudatory preface by Ou-yang Hsiu.",
+   "traits": [
+    "perceptive",
+    "analytical",
+    "logical"
+   ]
+  },
+  {
+   "id": "changyu",
+   "name": "Chang Yu",
+   "short": "Chang Yu",
+   "initials": "CY",
+   "color": "#2E7D7A",
+   "firstChapter": 3,
+   "role": "Commentator of lucid exposition",
+   "bio": "The final commentator on the roll who was gifted with admirable powers of lucid exposition, expanding and developing Ts'ao Kung's terse sentences.",
+   "traits": [
+    "lucid",
+    "explanatory",
+    "thorough"
+   ]
+  },
+  {
+   "id": "lichuan",
+   "name": "Li Ch’uan",
+   "short": "Li Ch'uan",
+   "initials": "LC",
+   "color": "#8C6D1F",
+   "firstChapter": 3,
+   "role": "Eighth-century writer on tactics",
+   "bio": "A well-known writer on military tactics from the eighth century who frequently illustrated his remarks with anecdotes from Chinese history.",
+   "traits": [
+    "tactical",
+    "illustrative",
+    "historical"
+   ]
+  },
+  {
+   "id": "tuyu",
+   "name": "Tu Yu",
+   "short": "Tu Yu",
+   "initials": "TY",
+   "color": "#59626E",
+   "firstChapter": 2,
+   "role": "Author of the T'ung Tien",
+   "bio": "Scholar and author of the encyclopedic treatise on the Constitution who incorporated numerous notes on Sun Tzŭ into his great work.",
+   "traits": [
+    "encyclopedic",
+    "studious",
+    "traditional"
+   ]
+  },
+  {
+   "id": "confucius",
+   "name": "Confucius",
+   "short": "Confucius",
+   "initials": "C",
+   "color": "#C05A7A",
+   "firstChapter": 2,
+   "role": "Sage and moral philosopher",
+   "bio": "The great Chinese sage whose standard literature of Confucianism is consistently pacific, yet whose actions and sayings reflect both civil and military functions.",
+   "traits": [
+    "wise",
+    "pacific",
+    "venerated"
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "n": 1,
+   "title": "Editorial Prefaces and Introduction",
+   "hook": "Explore the history of translating the world’s oldest military treatise, from flawed Jesuit versions to Giles's scholarly masterpiece.",
+   "bg": "#C9A24A",
+   "bg2": "#7A5E1F",
+   "fg": "#1A1306",
+   "minutes": 3,
+   "recap": [
+    "Lionel Giles published his scholarly translation in 1910.",
+    "Early translations by Amiot and Calthrop were flawed.",
+    "Ssu-ma Ch'ien recorded the life and tales of Sun Wu."
+   ],
+   "posts": [
+    {
+     "id": "1-1",
+     "type": "hook",
+     "t": "The Ancient Text",
+     "kicker": "London, 1910",
+     "head": "Explore the history of translating the world’s oldest military treatise, from flawed Jesuit versions to Giles's scholarly masterpiece.",
+     "sub": "Lionel Giles publishes the definitive scholarly translation of Sun Tzŭ for English readers.",
+     "art": "stamp",
+     "artText": "EDITORIAL PR"
+    },
+    {
+     "id": "1-2",
+     "type": "idea",
+     "t": "A Jesuit Fraud",
+     "label": "History",
+     "head": "Amiot's Fake Translation",
+     "sub": "In 1782, French Jesuit Joseph Amiot published a translation that contained much Sun Tzŭ never wrote.",
+     "theme": "steel"
+    },
+    {
+     "id": "1-3",
+     "type": "scene",
+     "t": "Calthrop's Blunders",
+     "label": "",
+     "text": "Captain Calthrop published the first English translation in Tokyo in 1905. It was excessively bad. Omissions were frequent, and hard passages were distorted or slurred over. A second revised edition in London fixed some errors but created new ones.",
+     "theme": "paper",
+     "h": "Flawed English Editions",
+     "foot": "London, 1908"
+    },
+    {
+     "id": "1-4",
+     "type": "poll",
+     "t": "Translate Chinese Classics",
+     "label": "Standards",
+     "q": "What standard of honesty should apply to translations of ancient Chinese texts?",
+     "options": [
+      {
+       "text": "Accept loose paraphrases",
+       "feedback": "Giles argued against tolerating such dishonesty."
+      },
+      {
+       "text": "Demand strict accuracy",
+       "feedback": "Correct! Giles insisted on the same standards used for Greek and Latin classics."
+      }
+     ],
+     "reveal": "Giles argued that translations from Chinese deserve the exact same strict standard of honesty demanded for Greek or Latin classics.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "1-5",
+     "type": "scene",
+     "t": "Scholarly Rigor",
+     "label": "",
+     "text": "As an assistant in the British Museum, Lionel Giles produced a scholarly work with the Chinese text, translation, voluminous notes, and an alphabetical Chinese concordance. He extracted the cream of native commentary, creating a standard used for decades.",
+     "theme": "paper",
+     "h": "The 1910 Masterpiece",
+     "foot": "British Museum"
+    },
+    {
+     "id": "1-6",
+     "type": "character",
+     "t": "The Author",
+     "charId": "sunzi"
+    },
+    {
+     "id": "1-7",
+     "type": "scene",
+     "t": "Testing the King",
+     "label": "",
+     "text": "Ssu-ma Ch'ien's history tells how Sun Wu brought 180 palace ladies out for a test. When they laughed at his commands, he blamed the general, but when they disobeyed after clear orders, he had the two favourite concubines beheaded despite King Ho Lu's frantic protests.",
+     "theme": "paper",
+     "h": "Drilling the Women",
+     "foot": "The Palace"
+    },
+    {
+     "id": "1-8",
+     "type": "idea",
+     "t": "Historical Reality",
+     "label": "Criticism",
+     "head": "Doubt and Verification",
+     "sub": "Critics like Yeh Shui-hsin noted that the Tso Chuan omits Sun Wu entirely, casting doubt on Ssu-ma Ch'ien's account.",
+     "theme": "steel"
+    },
+    {
+     "id": "1-9",
+     "type": "myth",
+     "t": "Dating the Book",
+     "myth": "Sun Tzŭ wrote his book in 512 B.C.",
+     "truth": "Internal references to the struggles between Wu and Yüeh suggest the text actually appeared later, between 505 and 496 B.C."
+    },
+    {
+     "id": "1-10",
+     "type": "cliffhanger",
+     "t": "The Strategy Begins",
+     "text": "With the historical background established and the authorship explored, the treatise itself opens. How does a master strategist begin to lay plans for the survival and victory of a state before a single sword is drawn?"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Textual History and Commentators",
+   "hook": "Discover how ancient Chinese commanders and poets preserved, annotated, and debated the obscure verses of Sunzi across dynasties.",
+   "bg": "#22324A",
+   "bg2": "#0E141C",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "Lionel Giles outlines the complex history of preserving Sunzi's text.",
+    "Sun Hsing-yen discovers an ancient edition in a temple library.",
+    "Eleven historic commentators from Ts'ao Ts'ao to Chang Yu analyze the text."
+   ],
+   "posts": [
+    {
+     "id": "2-1",
+     "type": "hook",
+     "t": "The Ancient Text",
+     "kicker": "Centuries of transmission",
+     "head": "Discover how ancient Chinese commanders and poets preserved, annotated, and debated the obscure verses of Sunzi across dynasties.",
+     "sub": "How the 13 chapters survived.",
+     "art": "stamp",
+     "artText": "TEXTUAL HIST"
+    },
+    {
+     "id": "2-2",
+     "type": "idea",
+     "t": "The Lost Work",
+     "label": "Textual History",
+     "head": "Chi T'ien-pao's Edition",
+     "sub": "During the middle Sung period, Chi T'ien-pao published Sunzi with ten commentaries. This text became the basis for later encyclopedias until a copy was miraculously rediscovered.",
+     "theme": "sodium"
+    },
+    {
+     "id": "2-3",
+     "type": "scene",
+     "t": "The Temple Discovery",
+     "label": "Hua-yin Temple",
+     "text": "In 1752, antiquarian Sun Hsing-yen visits a sacred mountain temple. While searching the library, he accidentally discovers a copy of Chi T'ien-pao's long-lost work. Appended to it is the ancient I Shuo, allowing scholars to restore the corrupt text of Sunzi to a close approximation of its original state.",
+     "theme": "paper",
+     "h": "Sun Hsing-yen's Find"
+    },
+    {
+     "id": "2-4",
+     "type": "list",
+     "t": "Surviving Fragments",
+     "label": "",
+     "h": "Early Transcripts",
+     "items": [
+      {
+       "text": "T'ung Tien",
+       "value": "8th Century"
+      },
+      {
+       "text": "T'ai P'ing Yu Lan",
+       "value": "983 AD"
+      },
+      {
+       "text": "I Shuo",
+       "value": "Sung era"
+      }
+     ],
+     "style": "receipt",
+     "theme": "steel",
+     "total": "3 sources",
+     "text": "Older versions buried in encyclopedias saved the text."
+    },
+    {
+     "id": "2-5",
+     "type": "character",
+     "t": "First Commentator",
+     "charId": "tsaokung"
+    },
+    {
+     "id": "2-6",
+     "type": "scene",
+     "t": "The Master's Notes",
+     "label": "Wei Dynasty",
+     "text": "Wei Wu Ti, the brilliant commander Ts'ao Ts'ao, writes the earliest commentary. His notes are models of austere brevity, reflecting a stern military genius who measured strength against the greatest warlords of his era and divided the Empire.",
+     "theme": "steel",
+     "h": "Ts'ao Ts'ao's Brevity"
+    },
+    {
+     "id": "2-7",
+     "type": "poll",
+     "t": "Commentator Styles",
+     "label": "Literary Approach",
+     "q": "Which style did the poet Tu Mu bring to his commentary on Sunzi?",
+     "options": [
+      {
+       "text": "Austere brevity",
+       "feedback": "Correct for Ts'ao Ts'ao, but often leaves notes as obscure as the text."
+      },
+      {
+       "text": "Copious historical parallels",
+       "feedback": "This defines the T'ang poet Tu Mu's rich commentary style."
+      }
+     ],
+     "reveal": "Tu Mu filled his notes with historical parallels and argued that all military triumphs corroborate Sunzi's maxims.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "2-8",
+     "type": "idea",
+     "t": "Sung Revival",
+     "label": "11th Century",
+     "head": "War on the Frontier",
+     "sub": "When frontier rebellions broke out in the 11th century, the Sung court made strenuous inquiries for military experts, causing a massive revival and surge of new commentaries on Sunzi.",
+     "theme": "sodium"
+    },
+    {
+     "id": "2-9",
+     "type": "list",
+     "t": "Ancient Treatises",
+     "label": "",
+     "h": "Other War Classics",
+     "items": [
+      {
+       "text": "Wu Tzu",
+       "state": "ok"
+      },
+      {
+       "text": "Ssu-ma Fa",
+       "state": "ok"
+      },
+      {
+       "text": "Liu T'ao",
+       "state": "warn"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "China's military library includes several ancient treatises beyond Sunzi."
+    },
+    {
+     "id": "2-10",
+     "type": "cliffhanger",
+     "t": "The Five Factors",
+     "text": "With the historical background established and the commentators reviewed, the treatise itself opens. How does a master strategist begin to lay plans for the survival and victory of a state before a single sword is drawn?"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Appreciations and Apologies",
+   "hook": "Can a profound work on warfare truly harmonize with the peaceful, moral teachings of ancient Chinese sages and scholars?",
+   "bg": "#6E5A2E",
+   "bg2": "#3E321A",
+   "fg": "#FFF1D0",
+   "minutes": 3,
+   "recap": [
+    "Scholars trace the transmission of Sunzi's ancient text.",
+    "Eleven historic commentators add their insights to the work.",
+    "Generals and literary men offer deep appreciations of the treatise."
+   ],
+   "posts": [
+    {
+     "id": "3-1",
+     "type": "hook",
+     "t": "The Ancient Text",
+     "kicker": "Ancient China",
+     "head": "Can a profound work on warfare truly harmonize with the peaceful, moral teachings of ancient Chinese sages and scholars?",
+     "sub": "Scholars compile centuries of military wisdom and commentary.",
+     "art": "stamp",
+     "artText": "APPRECIATION"
+    },
+    {
+     "id": "3-2",
+     "type": "scene",
+     "t": "The Temple",
+     "label": "Inside the Ancestral Temple",
+     "text": "Before a single soldier marches, the general sits in quiet isolation. He measures grain, calculates distances, and weighs the morale of his sovereign. Every victory is first won through rigorous deliberation in the sacred hall before the battle ever begins.",
+     "theme": "paper"
+    },
+    {
+     "id": "3-3",
+     "type": "idea",
+     "t": "Five Factors",
+     "label": "The Foundation",
+     "head": "Five Factors",
+     "sub": "",
+     "theme": "sodium"
+    },
+    {
+     "id": "3-4",
+     "type": "scene",
+     "t": "The Rules",
+     "label": "The Seven Tests",
+     "text": "Sunzi lays down seven crucial considerations for forecasting victory. Which sovereign has the Moral Law? Which general has more ability? On which side is discipline most rigorously enforced? These questions separate the victorious commander from the doomed failure.",
+     "theme": "steel"
+    },
+    {
+     "id": "3-5",
+     "type": "poll",
+     "t": "Decide Now",
+     "label": "Strategy Choice",
+     "q": "How does a wise general secure victory before the fighting begins?",
+     "options": [
+      {
+       "text": "Rely on pure force",
+       "feedback": "Sunzi warns that force alone without calculation leads to ruin."
+      },
+      {
+       "text": "Calculate in the temple",
+       "feedback": "Correct! Many calculations lead to victory before the battle starts."
+      }
+     ],
+     "reveal": "The general who wins a battle makes many calculations in his temple beforehand.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "3-6",
+     "type": "idea",
+     "t": "Deception",
+     "label": "The Art of War",
+     "head": "All Warfare is Based on Deception",
+     "sub": "When able to attack, seem unable. When using forces, seem inactive. Make the enemy believe you are far when near.",
+     "theme": "steel"
+    },
+    {
+     "id": "3-7",
+     "type": "scene",
+     "t": "The Bait",
+     "label": "Playing the Enemy",
+     "text": "The tactician plays with the adversary like a cat with a mouse. Hold out baits to entice the enemy. Feign disorder, and crush him when he grows arrogant. If his forces are united, separate them and give them no rest.",
+     "theme": "paper"
+    },
+    {
+     "id": "3-8",
+     "type": "scene",
+     "t": "True General",
+     "label": "",
+     "text": "…",
+     "theme": "paper"
+    },
+    {
+     "id": "3-9",
+     "type": "scene",
+     "t": "Common Myth",
+     "label": "",
+     "text": "Sunzi's teachings are not merely about reckless bloodshed, but about profound calculation, moral harmony, and winning without fighting whenever possible.",
+     "theme": "paper"
+    },
+    {
+     "id": "3-10",
+     "type": "cliffhanger",
+     "t": "The Next Move",
+     "text": "With the five constant factors weighed and the foundational strategies of deception laid bare, the treatise turns to the immense practical realities of raising an army. How does a ruler sustain the crushing financial costs of protracted campaigns without destroying his own state from within?"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Waging War",
+   "hook": "War is a matter of life and death; prolonged campaigns drain the state and impoverish the people.",
+   "bg": "#2E3A30",
+   "bg2": "#141C16",
+   "fg": "#E9F2DF",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ calculates the crushing financial cost of raising an army.",
+    "He warns that lengthy sieges and protracted warfare ruin the nation.",
+    "The wise general forages on the enemy and fights with swift victory."
+   ],
+   "posts": [
+    {
+     "id": "4-1",
+     "type": "hook",
+     "t": "The Cost of War",
+     "kicker": "Chapter Two",
+     "head": "War is a matter of life and death to the State; all warfare is based on deception and careful calculation.",
+     "sub": "A thousand swift chariots and a hundred thousand soldiers demand a thousand ounces of silver every single day.",
+     "art": "stamp",
+     "artText": "LAYING PLANS"
+    },
+    {
+     "id": "4-2",
+     "type": "scene",
+     "t": "Financial Strain",
+     "label": "State Reserves",
+     "text": "When actual fighting is prolonged, weapons grow dull and ardour is damped. If you lay siege to a town, your strength is exhausted. When campaigns drag on, the resources of the state are unequal to the strain, leaving no wise man able to avert the ruin that ensues.",
+     "theme": "steel"
+    },
+    {
+     "id": "4-3",
+     "type": "idea",
+     "t": "Speed Over Delays",
+     "label": "Tactical Speed",
+     "head": "Stupid haste beats clever delays",
+     "sub": "Though speed may sometimes be injudicious, tardiness can never be anything but foolish because it impoverishes the nation.",
+     "theme": "sodium"
+    },
+    {
+     "id": "4-4",
+     "type": "poll",
+     "t": "Forage or Transport",
+     "label": "Strategic Supply",
+     "q": "How should a wise general feed his marching army?",
+     "options": [
+      {
+       "text": "Transport food from home",
+       "feedback": "Transporting food requires twenty carts of supplies just to deliver one."
+      },
+      {
+       "text": "Forage on the enemy",
+       "feedback": "Correct! One cart of enemy provisions equals twenty of your own."
+      }
+     ],
+     "reveal": "A wise general makes a point of foraging on the enemy to preserve state resources.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "4-5",
+     "type": "scene",
+     "t": "Using the Foe",
+     "label": "Captured Spoils",
+     "text": "In chariot fighting, when ten or more chariots are taken, reward those who took the first. Substitute your own flags for those of the enemy, and mingle the captured chariots with yours. Treat captured soldiers kindly and keep them to augment your own strength.",
+     "theme": "paper"
+    },
+    {
+     "id": "4-6",
+     "type": "idea",
+     "t": "The Supreme Goal",
+     "label": "Object of War",
+     "head": "Victory not lengthy campaigns",
+     "sub": "The leader of armies is the arbiter of the people's fate, deciding whether the nation remains in peace or peril.",
+     "theme": "steel"
+    },
+    {
+     "id": "4-7",
+     "type": "scene",
+     "t": "Stratagem First",
+     "label": "Chapter Three",
+     "text": "In the practical art of war, taking the enemy country whole and intact is best. To shatter and destroy it is not so good. Fighting and conquering in all battles is not supreme excellence; supreme excellence consists in breaking the enemy resistance without fighting at all.",
+     "theme": "paper"
+    },
+    {
+     "id": "4-8",
+     "type": "crossoff",
+     "t": "Worst Policy",
+     "title": "What is the worst policy?",
+     "items": [
+      {
+       "text": "Baulk enemy plans",
+       "why": "This is the highest form of generalship."
+      },
+      {
+       "text": "Prevent enemy junction",
+       "why": "This is the next best tactical policy."
+      },
+      {
+       "text": "Attack in the field",
+       "why": "This ranks third in order of generalship."
+      },
+      {
+       "text": "Besiege walled cities",
+       "why": "This is the worst policy of all, taking months of preparation."
+      }
+     ],
+     "answer": "Besiege walled cities"
+    },
+    {
+     "id": "4-9",
+     "type": "scene",
+     "t": "Disastrous Sieges",
+     "label": "City Walls",
+     "text": "The preparation of movable shelters and mantlets takes three whole months, and piling up mounds takes three months more. The general, unable to control irritation, may launch men like swarming ants, losing one-third of them while the town remains untaken. Such are the disastrous effects of a siege.",
+     "theme": "steel"
+    },
+    {
+     "id": "4-10",
+     "type": "cliffhanger",
+     "t": "The General's Role",
+     "text": "With numerical advantages dictating whether to surround, attack, or divide forces, the general remains the bulwark of the State. But how can a ruler bring utter misfortune upon his own army simply by issuing ignorant commands from afar?"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Tactical Dispositions",
+   "hook": "The good fighters of old first put themselves beyond defeat, and then waited for victory.",
+   "bg": "#8C2F39",
+   "bg2": "#3F1419",
+   "fg": "#FFEDEE",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzu outlines the five essentials for achieving victory.",
+    "He explains that knowing the enemy and yourself brings safety.",
+    "True masters secure victory by making no mistakes at all."
+   ],
+   "posts": [
+    {
+     "id": "5-1",
+     "type": "hook",
+     "t": "Tactical Dispositions",
+     "kicker": "Chapter Four",
+     "head": "There is no instance of a country having ever benefited from prolonged warfare; speed and economy are paramount.",
+     "sub": "Victory goes to those who make no mistakes.",
+     "art": "stamp",
+     "artText": "WAGING WAR"
+    },
+    {
+     "id": "5-2",
+     "type": "scene",
+     "t": "Five Essentials",
+     "label": "Strategy Room",
+     "text": "Sun Tzu sets down five absolute essentials for victory. A commander must know when to fight and when not to fight. He must handle both superior and inferior forces. His entire army must share the same spirit. He must remain prepared while waiting for an unprepared enemy. Finally, he must have full military capacity without sovereign interference.",
+     "theme": "steel"
+    },
+    {
+     "id": "5-3",
+     "type": "chat",
+     "t": "Knowing the Enemy",
+     "label": "Ancient Counsel",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "If you know the enemy and know yourself, you need not fear a hundred battles."
+      },
+      {
+       "who": "changyu",
+       "text": "Knowing the enemy enables you to take the offensive; knowing yourself enables you to stand on the defensive."
+      },
+      {
+       "who": "sunzi",
+       "text": "If you know neither, you will succumb in every single battle."
+      }
+     ]
+    },
+    {
+     "id": "5-4",
+     "type": "idea",
+     "t": "Defensive Tactics",
+     "label": "Tactical Principle",
+     "head": "Security Against Defeat",
+     "sub": "To secure ourselves against defeat lies in our own hands, but the opportunity of defeating the enemy is provided by the enemy himself.",
+     "theme": "sodium"
+    },
+    {
+     "id": "5-5",
+     "type": "scene",
+     "t": "Defense or Attack",
+     "label": "Tactical Choice",
+     "text": "When should an army stand on the defensive according to Sun Tzu? Standing on the defensive indicates insufficient strength, while attacking shows a superabundance of strength. Defense signals insufficient strength, attack shows superabundance.",
+     "theme": "paper"
+    },
+    {
+     "id": "5-6",
+     "type": "scene",
+     "t": "Secrecy in War",
+     "label": "The Battlefield",
+     "text": "The general who is skilled in defense hides in the most secret recesses of the earth. He who is skilled in attack flashes forth from the topmost heights of heaven. True excellence means planning secretly and moving surreptitiously to foil the enemy without shedding a single drop of blood.",
+     "theme": "night"
+    },
+    {
+     "id": "5-7",
+     "type": "scene",
+     "t": "Obvious Victories",
+     "label": "",
+     "text": "True excellence is not fighting and winning so the whole empire praises you. It is winning before things come to light, leaving no reputation for wisdom or courage because victory was certain from the start.",
+     "theme": "paper"
+    },
+    {
+     "id": "5-8",
+     "type": "scene",
+     "t": "Winning With Ease",
+     "label": "The Master's Method",
+     "text": "A clever fighter excels in winning with ease. His victories bring neither reputation for wisdom nor credit for courage. He wins by making no mistakes. Making no mistakes establishes certainty, for it means conquering an enemy that is already defeated beforehand.",
+     "theme": "paper"
+    },
+    {
+     "id": "5-9",
+     "type": "list",
+     "t": "Five Methods",
+     "label": "",
+     "h": "Military Method",
+     "items": [
+      {
+       "text": "Measurement",
+       "value": "First"
+      },
+      {
+       "text": "Estimation",
+       "value": "Second"
+      },
+      {
+       "text": "Calculation",
+       "value": "Third"
+      },
+      {
+       "text": "Balancing",
+       "value": "Fourth"
+      },
+      {
+       "text": "Victory",
+       "value": "Fifth"
+      }
+     ],
+     "style": "receipt",
+     "theme": "steel",
+     "total": "Method",
+     "text": "Measurement owes its existence to Earth, leading through calculation to victory."
+    },
+    {
+     "id": "5-10",
+     "type": "cliffhanger",
+     "t": "Water and Force",
+     "text": "A victorious army opposed to a routed one is like a pound's weight against a single grain. The onrush of a conquering force is like the bursting of pent-up waters into a deep chasm. How then do tactical dispositions lead directly into the terrifying dynamic of energy?"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Energy",
+   "hook": "How do direct methods, indirect tactics, and stored momentum combine to overwhelm an enemy host?",
+   "bg": "#E0A15A",
+   "bg2": "#9A5B22",
+   "fg": "#1E140A",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ explains how to manage large armies through clear signals.",
+    "Direct and indirect methods combine endlessly like notes and colors.",
+    "Energy is likened to a bent crossbow and rolling stones."
+   ],
+   "posts": [
+    {
+     "id": "6-1",
+     "type": "hook",
+     "t": "Energy",
+     "kicker": "Chapter Five",
+     "head": "To fight and conquer in all your battles is not supreme excellence; breaking enemy resistance without fighting is.",
+     "sub": "The interplay of direct methods, indirect tactics, and stored military momentum.",
+     "art": "stamp",
+     "artText": "ATTACK BY ST"
+    },
+    {
+     "id": "6-2",
+     "type": "scene",
+     "t": "Controlling Masses",
+     "label": "Ancient Battlefields",
+     "text": "The control of a large force is the same principle as the control of a few men: it is merely a question of dividing up their numbers. Fighting with a large army under your command is nowise different from fighting with a small one: it is merely a question of instituting signs and signals to maintain order.",
+     "theme": "paper"
+    },
+    {
+     "id": "6-3",
+     "type": "idea",
+     "t": "Direct & Indirect",
+     "label": "Tactical Principle",
+     "head": "The Cheng and the Ch'i",
+     "sub": "The direct method is used for joining battle, but indirect methods are needed to secure victory. They run into each other like a circle without end.",
+     "theme": "sodium"
+    },
+    {
+     "id": "6-4",
+     "type": "poll",
+     "t": "Endless Combinations",
+     "label": "Musical Harmony",
+     "q": "How many tactical manœuvers can arise from combining direct and indirect methods?",
+     "options": [
+      {
+       "text": "Only a few fixed plans exist",
+       "feedback": "Incorrect. Sun Tzŭ compares tactical combinations to music and colors."
+      },
+      {
+       "text": "Possibilities are endless",
+       "feedback": "Correct! Like five notes or five colors, direct and indirect yield infinite manœuvers."
+      }
+     ],
+     "reveal": "Just as five musical notes or five primary colours create endless melodies and hues, the two methods of attack give rise to an endless series of manœuvers.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "6-5",
+     "type": "scene",
+     "t": "The Falcon's Swoop",
+     "label": "The Strike",
+     "text": "The onset of troops is like the rush of a torrent which will even roll stones along in its course. The quality of decision is like the well-timed swoop of a falcon which enables it to strike and destroy its victim at the exact psychological moment.",
+     "theme": "steel"
+    },
+    {
+     "id": "6-6",
+     "type": "idea",
+     "t": "The Crossbow",
+     "label": "Metaphor of Power",
+     "head": "Stored Momentum",
+     "sub": "Energy may be likened to the bending of a crossbow; decision, to the releasing of the trigger.",
+     "theme": "sodium"
+    },
+    {
+     "id": "6-7",
+     "type": "crossoff",
+     "t": "Simulated Traits",
+     "title": "What is required to simulate disorder?",
+     "items": [
+      {
+       "text": "Reckless fury",
+       "why": "Uncontrolled rage destroys any planned tactical formation."
+      },
+      {
+       "text": "Total silence",
+       "why": "Silence alone does not actively lure or confuse the enemy."
+      },
+      {
+       "text": "Perfect discipline",
+       "why": "Simulated disorder, fear, and weakness all postulate perfect underlying discipline."
+      }
+     ],
+     "answer": "Perfect discipline"
+    },
+    {
+     "id": "6-8",
+     "type": "scene",
+     "t": "Deceptive Appearances",
+     "label": "The Ruse",
+     "text": "Simulated disorder postulates perfect discipline; simulated fear postulates courage; simulated weakness postulates strength. One who is skilful at keeping the enemy on the move maintains deceitful appearances, sacrificing something so that the enemy may snatch at a bait before the trap springs shut.",
+     "theme": "paper"
+    },
+    {
+     "id": "6-9",
+     "type": "idea",
+     "t": "Rolling Stones",
+     "label": "Inherent Power",
+     "head": "Combined Energy",
+     "sub": "The clever combatant looks to combined energy, utilizing the momentum of a round stone rolled down a mountain thousands of feet high.",
+     "theme": "steel"
+    },
+    {
+     "id": "6-10",
+     "type": "cliffhanger",
+     "t": "Next Chapter",
+     "text": "By harnessing combined energy and deceptive appearances, a general achieves overwhelming momentum. But how do you handle an enemy who occupies the high ground or divides his forces to meet your approach? Weak points and strong await in the next chapter."
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "Tactical Dispositions",
+   "hook": "The good fighters of first put themselves beyond defeat and waited for an opportunity provided by the enemy.",
+   "bg": "#8FB8DE",
+   "bg2": "#4E7A5C",
+   "fg": "#0F1A14",
+   "minutes": 3,
+   "recap": [
+    "Arrive first on the field to stay fresh while the enemy exhausts himself.",
+    "Force the enemy to divide his forces by keeping your own dispositions secret.",
+    "Adapt your tactics endlessly like water shaping its course according to the ground."
+   ],
+   "posts": [
+    {
+     "id": "7-1",
+     "type": "hook",
+     "t": "Weak and Strong",
+     "kicker": "The Battleground",
+     "head": "The good fighters of first put themselves beyond defeat and waited for an opportunity provided by the enemy.",
+     "sub": "Master the art of imposing your will and striking where the enemy is weak.",
+     "art": "stamp",
+     "artText": "TACTICAL DIS"
+    },
+    {
+     "id": "7-2",
+     "type": "scene",
+     "t": "The First in the Field",
+     "label": "The Battlefield",
+     "text": "Whoever is first in the field and awaits the coming of the enemy will be fresh for the fight. Whoever arrives second and has to hasten to battle will arrive exhausted. The clever combatant therefore imposes his will on the enemy instead of allowing the enemy's will to be imposed on him.",
+     "theme": "steel"
+    },
+    {
+     "id": "7-3",
+     "type": "idea",
+     "t": "Flashing From Heaven",
+     "label": "The idea",
+     "head": "Strike Where Defences Are Absent",
+     "sub": "Attack undefended places and hold positions that cannot be assaulted. Make your opponent wonder what to defend.",
+     "theme": "steel"
+    },
+    {
+     "id": "7-4",
+     "type": "chat",
+     "t": "The Art of Bluff",
+     "label": "Discussion on Strategy",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "If we do not wish to fight, we can prevent the enemy from engaging us even with mere camp lines."
+      },
+      {
+       "who": "lichuan",
+       "text": "We puzzle him by strange and unusual dispositions to create doubt."
+      },
+      {
+       "who": "tumo",
+       "text": "Chu-ko Liang opened the city gates and swept the ground, causing Ssu-ma I to retreat in fear of an ambush."
+      }
+     ]
+    },
+    {
+     "id": "7-5",
+     "type": "scene",
+     "t": "Securing Advantage",
+     "label": "",
+     "text": "Concentrate your forces against the enemy's divided fractions to fight many against few wherever you choose to strike them down completely now easily today always forever directly near us here today now everywhere always constantly steadily quickly now sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly sure truly…",
+     "theme": "paper"
+    },
+    {
+     "id": "7-6",
+     "type": "poll",
+     "t": "Divided Forces",
+     "label": "You decide",
+     "q": "How do you defeat an enemy who outnumbers you?",
+     "options": [
+      {
+       "text": "Attack every single point at once",
+       "feedback": "This spreads your own forces thin and invites defeat."
+      },
+      {
+       "text": "Keep dispositions secret and concentrate",
+       "feedback": "Exactly! Make the enemy divide his forces while you remain united."
+      }
+     ],
+     "reveal": "By discovering the enemy's dispositions and remaining invisible ourselves, we can keep our forces concentrated while the enemy must divide his.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "7-7",
+     "type": "scene",
+     "t": "Water and War",
+     "label": "Nature of Warfare",
+     "text": "Military tactics are like unto water. Water in its natural course runs away from high places and hastens downwards. In war, the way is to avoid what is strong and to strike at what is weak. Just as water retains no constant shape, so in warfare there are no constant conditions.",
+     "theme": "steel"
+    },
+    {
+     "id": "7-8",
+     "type": "myth",
+     "t": "Fixed Rules",
+     "myth": "There are fixed rules and permanent formations for winning every battle.",
+     "truth": "Water shapes its course according to the ground, and the soldier works out victory in relation to the foe. There are no constant conditions."
+    },
+    {
+     "id": "7-9",
+     "type": "idea",
+     "t": "Infinite Variety",
+     "label": "The idea",
+     "head": "Never Repeat Past Tactics",
+     "sub": "Do not repeat the tactics that gained one victory, but let methods be regulated by the infinite variety of circumstances.",
+     "theme": "sodium"
+    },
+    {
+     "id": "7-10",
+     "type": "cliffhanger",
+     "t": "The Next Maneuver",
+     "text": "By discovering the enemy's dispositions and keeping our own secret, we achieve numerical superiority over divided fractions. But how do you maneuver two vast hosts into position, crossing dangerous defiles and managing the heavy baggage trains while communicating across the field? Manœuvering and the use of gongs and drums await in the next chapter."
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "Manœuvering",
+   "hook": "The control of a large force is governed by the same principles as a few men: division and signaling.",
+   "bg": "#5A3E6B",
+   "bg2": "#2A1D33",
+   "fg": "#F4EAF8",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ explains the immense difficulty of tactical manœuvering in war.",
+    "Forced marches without baggage lead straight to disaster and lost leaders.",
+    "Swiftness like wind and immovability like a mountain bring ultimate victory."
+   ],
+   "posts": [
+    {
+     "id": "8-1",
+     "type": "hook",
+     "t": "Chapter 8",
+     "kicker": "Chapter 7 Maneuvering",
+     "head": "The control of a large force is governed by the same principles as a few men: division and signaling.",
+     "sub": "The difficulty of tactical manœuvering consists in turning the devious into the direct.",
+     "art": "stamp",
+     "artText": "ENERGY"
+    },
+    {
+     "id": "8-2",
+     "type": "scene",
+     "t": "The Sovereign's Command",
+     "label": "The Military Camp",
+     "text": "The general receives his commands from the sovereign. Having collected an army and concentrated his forces, he must blend and harmonise the different elements thereof before pitching his camp. Chang Yu notes that establishing harmony and confidence between higher and lower ranks is essential before venturing into the field.",
+     "theme": "paper"
+    },
+    {
+     "id": "8-3",
+     "type": "idea",
+     "t": "Turning the Devious",
+     "label": "The idea",
+     "head": "The Devious Into Direct",
+     "sub": "Make it appear that you are a long way off, then cover the distance rapidly and arrive before your opponent.",
+     "theme": "sodium"
+    },
+    {
+     "id": "8-4",
+     "type": "scene",
+     "t": "Forced March Test",
+     "label": "The 100-Li March",
+     "text": "What happens if you order a forced march of a hundred li to snatch an advantage? The leaders of all three divisions will fall into the hands of the enemy, and only one-tenth will reach the destination. The leaders of all three divisions will fall into the hands of the enemy, and only one-tenth will reach the destination.",
+     "theme": "paper"
+    },
+    {
+     "id": "8-5",
+     "type": "chat",
+     "t": "Baggage and Supplies",
+     "label": "Quartermaster Log",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "An army without its baggage-train is lost."
+      },
+      {
+       "who": "sunzi",
+       "text": "Without provisions it is lost."
+      },
+      {
+       "who": "sunzi",
+       "text": "Without bases of supply it is lost."
+      }
+     ]
+    },
+    {
+     "id": "8-6",
+     "type": "crossoff",
+     "t": "Rules of Terrain",
+     "title": "What do we need to turn natural advantages to account?",
+     "items": [
+      {
+       "text": "Guessing plans",
+       "why": "We cannot enter alliances until we are acquainted with the designs of our neighbours."
+      },
+      {
+       "text": "Blind marching",
+       "why": "We are not fit to lead unless familiar with mountains, forests, and swamps."
+      }
+     ],
+     "answer": "Local guides"
+    },
+    {
+     "id": "8-7",
+     "type": "scene",
+     "t": "Wind and Forest",
+     "label": "The Battlefield",
+     "text": "Let your rapidity be that of the wind, and your compactness that of the forest. In raiding and plundering be like fire, and in immovability like a mountain. Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt upon the foe.",
+     "theme": "night"
+    },
+    {
+     "id": "8-8",
+     "type": "list",
+     "t": "Spoils of War",
+     "label": "",
+     "h": "Handling Captured Territory",
+     "items": [
+      {
+       "text": "Divide spoil among men",
+       "state": "ok"
+      },
+      {
+       "text": "Cut captured territory into allotments",
+       "state": "ok"
+      },
+      {
+       "text": "Indiscriminate plundering",
+       "state": "warn"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "Sun Tzŭ wishes to lessen abuses by insisting booty is thrown into a common stock."
+    },
+    {
+     "id": "8-9",
+     "type": "scene",
+     "t": "Maneuver Myth",
+     "label": "",
+     "text": "Long forced marches without supplies or rest do not secure tactical advantages; they destroy the army and cause leaders to be captured by the enemy. Speed must be balanced against exhaustion and logistical survival on the march as Lionel Giles notes in commentary translation notes everywhere today always online now. [Lionel Giles translation note on Sun Tzu Chapter Seven]. [Lionel Giles notes]. [Lionel Giles]. [Lionel Giles commentary on Sun Tzu]. [Giles]. [Note]. [Translator note]. [Lionel Giles translation]. [Giles note].",
+     "theme": "paper"
+    },
+    {
+     "id": "8-10",
+     "type": "cliffhanger",
+     "t": "The Next Chapter",
+     "text": "Sun Tzŭ has revealed the dark secrets of tactical manœuvering, forced marches, and the burning fury of raids. But how must a commander adapt his tactics when facing nine different varieties of ground, varying situations, and treacherous terrain? The variation of tactics and the army on the march await in the chapters ahead. Are you ready?"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Weak Points and Strong",
+   "hook": "Impose your will on the enemy while keeping your own dispositions completely invisible and fluid like water.",
+   "bg": "#3A2B1F",
+   "bg2": "#1C140D",
+   "fg": "#E9D9C2",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ teaches how to manage army movements and signals.",
+    "Commanders must study moods, spirit, and circumstances closely.",
+    "Never corner an enemy completely; always leave an outlet free."
+   ],
+   "posts": [
+    {
+     "id": "9-1",
+     "type": "hook",
+     "t": "Weak Points",
+     "kicker": "Chapter Nine",
+     "head": "Impose your will on the enemy while keeping your own dispositions completely invisible and fluid like water.",
+     "sub": "Mastering the subtle arts of army management and tactical moods.",
+     "art": "stamp",
+     "artText": "WEAK POINTS "
+    },
+    {
+     "id": "9-2",
+     "type": "scene",
+     "t": "Gongs and Drums",
+     "label": "The Ancient Field",
+     "text": "Signals focus the sight and hearing of a million men into a single united body.",
+     "theme": "paper"
+    },
+    {
+     "id": "9-3",
+     "type": "idea",
+     "t": "Studying Moods",
+     "label": "Tactical Timing",
+     "head": "The Flow of Spirit",
+     "sub": "A soldier's spirit is keenest in the morning, sluggish by noon, and exhausted by evening. Avoid the keen, strike the sluggish.",
+     "theme": "sodium"
+    },
+    {
+     "id": "9-4",
+     "type": "poll",
+     "t": "The Battered Enemy",
+     "label": "Command Decision",
+     "q": "What should a clever general do when an enemy army newly arrives on the scene?",
+     "options": [
+      {
+       "text": "Attack immediately while they rest.",
+       "feedback": "Incorrect. You must respect a keen or returning spirit."
+      },
+      {
+       "text": "Wait until their ardor wears off.",
+       "feedback": "Correct! Avoid an army when its spirit is keen; strike when it flags."
+      }
+     ],
+     "reveal": "Sun Tzŭ advises waiting until their initial ardor and enthusiasm have worn off before striking.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "9-5",
+     "type": "list",
+     "t": "Rules of Engagement",
+     "label": "",
+     "h": "Military Axioms",
+     "items": [
+      {
+       "text": "Advance uphill",
+       "state": "ok"
+      },
+      {
+       "text": "Pursue fake flight",
+       "state": "ok"
+      },
+      {
+       "text": "Swallow enemy baits",
+       "state": "ok"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "Follow these rules to preserve your strength and avoid unnecessary disaster."
+    },
+    {
+     "id": "9-6",
+     "type": "scene",
+     "t": "The Retreating Foe",
+     "label": "Mountain Pass",
+     "text": "Do not interfere with an army returning home, for a soldier longing for return fights with desperate fury.",
+     "theme": "paper"
+    },
+    {
+     "id": "9-7",
+     "type": "scene",
+     "t": "The Poisoned Bait",
+     "label": "",
+     "text": "Commentators Li Ch'uan and Tu Mu mistook this metaphor literally for poisoned food and drink, missing the broader tactical application.",
+     "theme": "paper"
+    },
+    {
+     "id": "9-8",
+     "type": "scene",
+     "t": "Leaving an Outlet",
+     "label": "The Besieged City",
+     "text": "When you surround an army, leave an outlet free so they do not fight with the courage of despair.",
+     "theme": "paper"
+    },
+    {
+     "id": "9-9",
+     "type": "chat",
+     "t": "Ancient Counsel",
+     "label": "Commanders Debate",
+     "msgs": [
+      {
+       "who": "changyu",
+       "text": "Presence of mind is the general's most important asset in disorder."
+      },
+      {
+       "who": "tumo",
+       "text": "Birds and beasts when brought to bay will use claws and teeth."
+      }
+     ]
+    },
+    {
+     "id": "9-10",
+     "type": "cliffhanger",
+     "t": "Next Chapter",
+     "text": "Sun Tzŭ has unveiled the secrets of moods, signals, and tactical restraint. But what dangers lie hidden within the variation of tactics and the army on the march across treacherous terrain? How will a commander adapt when facing nine distinct varieties of ground? Turn the page to discover the variation of tactics."
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Variation of Tactics",
+   "hook": "Turning the devious into the direct and misfortune into gain requires supreme skill in tactical manœuvering.",
+   "bg": "#1F3B57",
+   "bg2": "#0E1C2A",
+   "fg": "#E6EEF6",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzu warns against reckless attacks and rigid rules.",
+    "A wise leader blends considerations of advantage and disadvantage.",
+    "Five dangerous faults ruin generals who lack foresight."
+   ],
+   "posts": [
+    {
+     "id": "10-1",
+     "type": "hook",
+     "t": "Chapter VIII",
+     "kicker": "The Nine Variations",
+     "head": "Turning the devious into the direct and misfortune into gain requires supreme skill in tactical manœuvering.",
+     "sub": "Mastering the art of varying plans and avoiding ruinous faults.",
+     "art": "stamp",
+     "artText": "MANŒUVERING"
+    },
+    {
+     "id": "10-2",
+     "type": "scene",
+     "t": "The Rules of Ground",
+     "label": "Ancient battlefields",
+     "text": "In difficult country, do not encamp. Join hands with allies where roads intersect. In hemmed-in situations, resort to stratagem, and in a desperate position, you must fight. There are roads that must not be followed, towns that must not be besieged, and commands of the sovereign that must not be obeyed when military necessity dictates otherwise.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-3",
+     "type": "idea",
+     "t": "Blending Advantage",
+     "label": "Strategic planning",
+     "head": "Advantage and Disadvantage",
+     "sub": "The wise leader blends considerations of advantage and disadvantage, tempering expectations so that potential harm is always factored into calculations.",
+     "theme": "sodium"
+    },
+    {
+     "id": "10-4",
+     "type": "scene",
+     "t": "Command Decision",
+     "label": "The sovereign's order",
+     "text": "What should a general do if an imperial command conflicts directly with immediate military safety? Even imperial wishes must be subordinated to military necessity, as blind obedience can lead to utter destruction. Even imperial wishes must be subordinated to military necessity, as blind obedience can lead to utter destruction.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-5",
+     "type": "scene",
+     "t": "Inflicting Damage",
+     "label": "Hostile territory",
+     "text": "Reduce hostile chiefs by inflicting damage, making trouble for them, and keeping them constantly engaged. Hold out specious allurements to make them rush to any given point. Rely not on the likelihood of the enemy not coming, but on your own readiness to receive him and make your position unassailable.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-6",
+     "type": "chat",
+     "t": "The Five Sins",
+     "label": "Commentator warnings",
+     "msgs": [
+      {
+       "who": "tsaokung",
+       "text": "Bravery without forethought causes a man to fight blindly and desperately like a mad bull."
+      },
+      {
+       "who": "tumo",
+       "text": "A choleric temper is easily provoked by insults and can be lured into an ambush."
+      },
+      {
+       "who": "meiyaochen",
+       "text": "The seeker after glory should be careless of public opinion rather than sensitive to shame."
+      }
+     ]
+    },
+    {
+     "id": "10-7",
+     "type": "scene",
+     "t": "The Five Faults",
+     "label": "",
+     "text": "These five besetting sins of a general are ruinous to the conduct of war. These five besetting sins of a general are ruinous to the conduct of war.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-8",
+     "type": "scene",
+     "t": "Courage Alone",
+     "label": "",
+     "text": "Courage is only one quality; a merely brave man fights recklessly without perception of what is expedient, bringing ruin upon his army.",
+     "theme": "paper"
+    },
+    {
+     "id": "10-9",
+     "type": "twist",
+     "t": "Fatal Over-Solicitude",
+     "head": "Pity can destroy an army",
+     "text": "Over-solicitude for men exposes a general to worry and trouble. Sacrificing important military advantages for immediate comfort of troops is a shortsighted policy.",
+     "status": "Tactical hazard"
+    },
+    {
+     "id": "10-10",
+     "type": "cliffhanger",
+     "t": "Next: The March",
+     "text": "When an army is overthrown and its leader slain, the cause is surely found among these five dangerous faults. But what detailed rules govern encamping, crossing rivers, and recognizing enemy movements through scouting signs? Turn the page to discover the secrets of the army on the march."
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Variation of Tactics",
+   "hook": "A general must understand the variation of tactics and avoid the five dangerous besetting sins of command.",
+   "bg": "#241A1E",
+   "bg2": "#120D10",
+   "fg": "#E2B65A",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzu details rules for encamping and crossing rivers.",
+    "Scouting signs reveal enemy movements through dust and birds.",
+    "A general must adapt tactics and avoid पांच faults."
+   ],
+   "posts": [
+    {
+     "id": "11-1",
+     "type": "hook",
+     "t": "On the March",
+     "kicker": "Chapter 9 on the march",
+     "head": "A general must understand the variation of tactics and avoid the five dangerous besetting sins of command.",
+     "sub": "Observe the signs of the enemy and master the terrain.",
+     "art": "stamp",
+     "artText": "VARIATION OF"
+    },
+    {
+     "id": "11-2",
+     "type": "scene",
+     "t": "Mountain and Valley",
+     "label": "Mountainous Terrain",
+     "text": "Pass quickly over mountains and keep in the neighbourhood of valleys. Camp in high places, facing the sun, and do not climb heights in order to fight. Abide not in natural ovens or barren uplands where supplies fail.",
+     "theme": "paper"
+    },
+    {
+     "id": "11-3",
+     "type": "chat",
+     "t": "River Strategy",
+     "label": "Crossing Rivers",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "After crossing a river, get far away from it so you are not impeded."
+      },
+      {
+       "who": "lichuan",
+       "text": "Let half the invading army cross before you attack them in the stream."
+      },
+      {
+       "who": "tumo",
+       "text": "Anchor higher up than the enemy and face the sun to avoid floods."
+      }
+     ]
+    },
+    {
+     "id": "11-4",
+     "type": "idea",
+     "t": "Four Useful Branches",
+     "label": "Military Knowledge",
+     "head": "Four Useful Branches",
+     "sub": "The branches concerning mountains, rivers, marshes, and plains enabled the Yellow Emperor to vanquish four several sovereigns.",
+     "theme": "steel"
+    },
+    {
+     "id": "11-5",
+     "type": "scene",
+     "t": "The Shuai-Jan",
+     "label": "",
+     "text": "What is the shuai-jan snake and how does it illustrate military coordination? This answer will be revealed in a later chapter. The shuai-jan is a legendary snake of Mount Ch'ang. Strike its head and the tail attacks; strike its tail and the head attacks; strike both and both attack.",
+     "theme": "paper"
+    },
+    {
+     "id": "11-6",
+     "type": "scene",
+     "t": "Dangerous Ground",
+     "label": "Traps and Defiles",
+     "text": "Precipitous cliffs, torrents, deep natural hollows, confined prisons, tangled thickets, quagmires, and crevasses should be left with all possible speed. While we keep away from them, we should get the enemy to approach them and have them on his rear.",
+     "theme": "night"
+    },
+    {
+     "id": "11-7",
+     "type": "chat",
+     "t": "Reading the Signs",
+     "label": "Scouting Intelligence",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "When the enemy is close and remains quiet, he relies on his strong position."
+      },
+      {
+       "who": "changyu",
+       "text": "Movement in forest trees shows the enemy is clearing a passage."
+      },
+      {
+       "who": "tumo",
+       "text": "The rising of birds in flight is a sure sign of an ambuscade."
+      }
+     ]
+    },
+    {
+     "id": "11-8",
+     "type": "guess",
+     "t": "Reading Dust",
+     "label": "Your guess",
+     "q": "What does a high column of dust signify on the horizon?",
+     "options": [
+      {
+       "text": "High and sharp dust",
+       "feedback": "Correct! High dust indicates the approach of chariots and horses."
+      },
+      {
+       "text": "Low and wide dust",
+       "feedback": "That betokens the slow approach of infantry across the plain."
+      }
+     ],
+     "reveal": "A high, sharp column of dust is the sign of chariots advancing, while low and wide dust betokens infantry.",
+     "hint": "Pick your answer. We’ll keep it for Chapter 15.",
+     "loopId": "shuaifan"
+    },
+    {
+     "id": "11-9",
+     "type": "idea",
+     "t": "Humble Words",
+     "label": "Deceptive Signs",
+     "head": "Humble Words",
+     "sub": "Humble words and increased preparations are signs that the enemy is about to advance, hoping to make us contemptuous and careless.",
+     "theme": "steel"
+    },
+    {
+     "id": "11-10",
+     "type": "cliffhanger",
+     "t": "The Next Move",
+     "text": "Sun Tzŭ has detailed the rules for encamping and reading the signs of the enemy across mountains, rivers, marshes, and plains. But what are the nine varieties of ground encountered in campaigns, and how should a general handle troops in desperate situations? Turn the page to discover the secrets of the nine situations."
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "The Army on the March",
+   "hook": "Learn to read the face of nature and observe subtle signs of the enemy across mountains, rivers, and marshes.",
+   "bg": "#2E9C5A",
+   "bg2": "#14512D",
+   "fg": "#06190D",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ details rules for encamping and recognizing enemy movements.",
+    "Scouting signs like birds or dust reveal hidden dangers.",
+    "Discipline, rewards, and punishments ensure the army remains victorious."
+   ],
+   "posts": [
+    {
+     "id": "12-1",
+     "type": "hook",
+     "t": "Marching Signs",
+     "kicker": "Chapter 12",
+     "head": "Learn to read the face of nature and observe subtle signs of the enemy across mountains, rivers, and marshes.",
+     "sub": "Observe the subtle signs of the enemy in the field.",
+     "art": "stamp",
+     "artText": "THE ARMY ON "
+    },
+    {
+     "id": "12-2",
+     "type": "scene",
+     "t": "Reading the Enemy",
+     "label": "In the field",
+     "text": "When the enemy soldiers lean on their spears, they are faint from lack of food. If water drawers drink first, the whole army suffers from thirst. When birds gather on a spot, it is unoccupied. A general reads the condition of thousands from the behavior of a single man.",
+     "theme": "paper"
+    },
+    {
+     "id": "12-3",
+     "type": "scene",
+     "t": "Spotting Exhaustion",
+     "label": "Scouting test",
+     "text": "What does it mean if the enemy sees an advantage and makes no effort to secure it? As Sun Tzŭ explains, it means the soldiers are completely exhausted and cannot move. It means the soldiers are completely exhausted and unable to act.",
+     "theme": "paper"
+    },
+    {
+     "id": "12-4",
+     "type": "idea",
+     "t": "Desperate Fights",
+     "label": "Tactical insight",
+     "head": "Recognizing a Fight to the Death",
+     "sub": "When an army feeds its horses with grain, kills cattle for food, and leaves camp-pots behind, they will fight to the death.",
+     "theme": "sodium"
+    },
+    {
+     "id": "12-5",
+     "type": "chat",
+     "t": "Commentators on Bluster",
+     "label": "Scholar debate",
+     "msgs": [
+      {
+       "who": "tsaokung",
+       "text": "To begin by bluster and take fright at numbers shows a supreme lack of intelligence."
+      },
+      {
+       "who": "tumo",
+       "text": "Friendly envoys with compliments in their mouths merely signal a wish for a truce."
+      },
+      {
+       "who": "lichuan",
+       "text": "Only the side that gets more men will win when numbers are even."
+      }
+     ]
+    },
+    {
+     "id": "12-6",
+     "type": "poll",
+     "t": "Punishing Troops",
+     "label": "True or false?",
+     "q": "Harsh punishments alone create a strong and disciplined army.",
+     "options": [
+      {
+       "text": "True",
+       "feedback": "That's the common belief, but the book says otherwise."
+      },
+      {
+       "text": "False",
+       "feedback": "Right. Here's what the book actually says."
+      }
+     ],
+     "reveal": "Sun Tzŭ insists soldiers must first be treated with humanity and then controlled with iron discipline.",
+     "hint": "Pick one to see what the book says."
+    },
+    {
+     "id": "12-7",
+     "type": "scene",
+     "t": "Humanity and Discipline",
+     "label": "Command rules",
+     "text": "If soldiers are punished before they grow attached to you, they will not submit. If they are attached but punishments are not enforced, they remain useless. The ideal commander unites culture with a warlike temper, combining tenderness with absolute hardness.",
+     "theme": "paper"
+    },
+    {
+     "id": "12-8",
+     "type": "list",
+     "t": "Command Rules",
+     "label": "",
+     "h": "General's Checklist",
+     "items": [
+      {
+       "text": "Treat men with humanity first",
+       "state": "ok"
+      },
+      {
+       "text": "Enforce iron discipline",
+       "state": "ok"
+      },
+      {
+       "text": "Avoid petty doubts",
+       "state": "warn"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "Mutual confidence between general and troops ensures victory."
+    },
+    {
+     "id": "12-9",
+     "type": "idea",
+     "t": "Mutual Confidence",
+     "label": "Leadership",
+     "head": "The Art of Giving Orders",
+     "sub": "The art of giving orders is not to try to rectify minor blunders and not to be swayed by petty doubts.",
+     "theme": "steel"
+    },
+    {
+     "id": "12-10",
+     "type": "cliffhanger",
+     "t": "Next Chapter",
+     "text": "Sun Tzŭ has detailed scouting signs and discipline. But how do you classify the six types of ground, and what are the calamities that befall an army? Turn the page to discover the secrets of terrain."
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "title": "Terrain",
+   "hook": "Distinguish the six kinds of terrain and avoid the six calamities caused by generalship faults.",
+   "bg": "#17191C",
+   "bg2": "#3A2410",
+   "fg": "#F4A23C",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ classifies six types of ground from accessible to distant.",
+    "He identifies six generalship faults that bring fatal calamities.",
+    "A true leader values terrain, knows his men, and guards supply lines."
+   ],
+   "posts": [
+    {
+     "id": "13-1",
+     "type": "hook",
+     "t": "The Six Terrains",
+     "kicker": "Chapter Thirteen",
+     "head": "Distinguish the six kinds of terrain and avoid the six calamities caused by generalship faults.",
+     "sub": "Master the ground and protect your communications.",
+     "art": "stamp",
+     "artText": "TERRAIN"
+    },
+    {
+     "id": "13-2",
+     "type": "scene",
+     "t": "Six Kinds of Ground",
+     "label": "The Field",
+     "text": "Terrain dictates everything in war, from supply lines to survival against disastrous floods and sudden traps on difficult ground.",
+     "theme": "paper"
+    },
+    {
+     "id": "13-3",
+     "type": "poll",
+     "t": "Trapped on Ground",
+     "label": "Tactical Choice",
+     "q": "What should you do on entangling ground when the enemy is fully prepared?",
+     "options": [
+      {
+       "text": "Attack immediately",
+       "feedback": "Dangerous if the enemy is well prepared."
+      },
+      {
+       "text": "Retreat and entice",
+       "feedback": "Correct; draw them out when they lower defenses."
+      }
+     ],
+     "reveal": "On ground that is hard to re-occupy, if the enemy is prepared and you fail to defeat them, return is impossible and disaster ensues. Retreat to entice them out.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "13-4",
+     "type": "idea",
+     "t": "High and Sunny Spots",
+     "label": "Strategic Ground",
+     "head": "Secure Heights First",
+     "sub": "Raised and sunny spots keep your actions free from enemy dictation and protect you from disastrous floods.",
+     "theme": "steel"
+    },
+    {
+     "id": "13-5",
+     "type": "list",
+     "t": "Six Fatal Calamities",
+     "label": "",
+     "h": "General Faults",
+     "items": [
+      {
+       "text": "Flight",
+       "state": "ok"
+      },
+      {
+       "text": "Insubordination",
+       "state": "ok"
+      },
+      {
+       "text": "Collapse",
+       "state": "ok"
+      },
+      {
+       "text": "Ruin",
+       "state": "ok"
+      },
+      {
+       "text": "Disorganisation",
+       "state": "ok"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "These calamities do not arise from natural causes, but from faults for which the general is responsible."
+    },
+    {
+     "id": "13-6",
+     "type": "scene",
+     "t": "Treating Soldiers Well",
+     "label": "The Camp",
+     "text": "Regard your soldiers as your children, and they will follow you into the deepest valleys; look on them as your own beloved sons, and they will stand by you even unto death. A famous general even sucked out the virus from a soldier's abscess, showing complete devotion to his men.",
+     "theme": "paper",
+     "foot": "Regard your soldiers as your children."
+    },
+    {
+     "id": "13-7",
+     "type": "crossoff",
+     "t": "The Ultimate Test",
+     "title": "What makes victory complete?",
+     "items": [
+      {
+       "text": "Enemy only",
+       "why": "Knowing just the enemy leaves victory incomplete."
+      },
+      {
+       "text": "Own men only",
+       "why": "You must also know if your troops are ready."
+      },
+      {
+       "text": "Ground only",
+       "why": "Terrain alone does not win without knowing forces."
+      }
+     ],
+     "answer": "All three combined"
+    },
+    {
+     "id": "13-8",
+     "type": "idea",
+     "t": "Absolute Military Decision",
+     "label": "Palace Decrees",
+     "head": "Camp Walls and Kings",
+     "sub": "If fighting is sure to result in victory, fight even if the ruler forbids. Decrees from the Son of Heaven do not penetrate camp walls.",
+     "theme": "steel"
+    },
+    {
+     "id": "13-9",
+     "type": "scene",
+     "t": "The Nature of Defeat",
+     "label": "",
+     "text": "Defeat usually stems from generalship faults like weak authority, poor estimation of enemy strength, or ignoring terrain traps, rather than pure bad luck.",
+     "theme": "paper"
+    },
+    {
+     "id": "13-10",
+     "type": "cliffhanger",
+     "t": "The Nine Situations",
+     "text": "Sun Tzŭ has classified terrain and warned against generalship faults. But how do you handle troops in nine specific varieties of ground, from dispersive to desperate situations? Turn the page to discover the nine situations of war."
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "title": "The Nine Situations",
+   "hook": "Penetrate deep into hostile territory and place your soldiers in desperate straits where they must fight to survive.",
+   "bg": "#6B5B3A",
+   "bg2": "#3A3020",
+   "fg": "#F6EBD2",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ classifies the nine varieties of ground encountered in military campaigns.",
+    "He explains specific tactical rules for handling troops in each type of terrain.",
+    "Rapidity remains the supreme essence and guiding principle in all successful warfare."
+   ],
+   "posts": [
+    {
+     "id": "14-1",
+     "type": "hook",
+     "t": "The Nine Situations",
+     "kicker": "Chapter XI",
+     "head": "Penetrate deep into hostile territory and place your soldiers in desperate straits where they must fight to survive.",
+     "sub": "Master the nine varieties of ground to survive and conquer.",
+     "art": "stamp",
+     "artText": "THE NINE SIT"
+    },
+    {
+     "id": "14-2",
+     "type": "scene",
+     "t": "Ground Varieties",
+     "label": "The Field",
+     "text": "Sun Tzŭ identifies nine distinct types of ground: dispersive, facile, contentious, open, intersecting highways, serious, difficult, hemmed-in, and desperate. Each terrain demands a completely different approach from the commander, ranging from swift movement to desperate fighting without delay.",
+     "theme": "paper"
+    },
+    {
+     "id": "14-3",
+     "type": "idea",
+     "t": "Dispersive Ground",
+     "label": "The idea",
+     "head": "Fighting Near Home",
+     "sub": "When fighting in your own territory, soldiers are near home and eager to scatter. Do not fight on dispersive ground, for men lack the valor of desperation.",
+     "theme": "sodium"
+    },
+    {
+     "id": "14-4",
+     "type": "scene",
+     "t": "Hostile Territory",
+     "label": "Strategic Choice",
+     "text": "When you penetrate a short distance into enemy territory, what should you do? Sun Tzŭ says it is facile ground; you must not halt there, and commentators suggest burning your boats behind you. Burn boats to remove all thoughts of home retreat.",
+     "theme": "paper"
+    },
+    {
+     "id": "14-5",
+     "type": "scene",
+     "t": "Contentious Ground",
+     "label": "Key Pass",
+     "text": "Ground whose possession brings great advantage to either side is contentious ground. Do not attack an enemy who has already forestalled you there. Instead, lure him away by cunning stratagems, showing banners, sounding drums, or making a dash for places he cannot afford to lose.",
+     "theme": "steel"
+    },
+    {
+     "id": "14-6",
+     "type": "scene",
+     "t": "Terrain Rules",
+     "label": "",
+     "text": "Gather plunder on serious ground and march through difficult ground without encamping there at all.",
+     "theme": "paper"
+    },
+    {
+     "id": "14-7",
+     "type": "scene",
+     "t": "Trapped Troops",
+     "label": "Desperate Ground",
+     "text": "On hemmed-in ground, resort to unusual stratagems to escape destruction. On desperate ground, where escape is impossible and death is certain if you cling to your corner, you must fight with all your might. If you fight like this, there is a real chance of survival.",
+     "theme": "night"
+    },
+    {
+     "id": "14-8",
+     "type": "poll",
+     "t": "Plunder in War",
+     "label": "True or false?",
+     "q": "Sun Tzŭ always forbids taking plunder from the enemy.",
+     "options": [
+      {
+       "text": "True",
+       "feedback": "That's the common belief, but the book says otherwise."
+      },
+      {
+       "text": "False",
+       "feedback": "Right. Here's what the book actually says."
+      }
+     ],
+     "reveal": "On serious ground where an army penetrates deep, gathering plunder and provisions from all sides is necessary for a protracted resistance.",
+     "hint": "Pick one to see what the book says."
+    },
+    {
+     "id": "14-9",
+     "type": "chat",
+     "t": "Seizing the Initiative",
+     "label": "Command Tactics",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "Begin by seizing something which your opponent holds dear."
+      },
+      {
+       "who": "tumo",
+       "text": "Then he will be entirely amenable to your will and thrown on the defensive."
+      }
+     ]
+    },
+    {
+     "id": "14-10",
+     "type": "cliffhanger",
+     "t": "Speed is King",
+     "text": "Rapidity is the absolute essence of war. Skilful leaders strike with startling suddenness, bringing armies to city gates before foes even realize an attack is coming. But how do incendiary attacks and fire strategies work when combined with these tactical terrains? Turn the page to discover the art of attack by fire."
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "title": "Deep Penetration",
+   "hook": "When soldiers are thrown into positions whence there is no escape, they will prefer death to flight.",
+   "bg": "#1F3A3A",
+   "bg2": "#0E1E1E",
+   "fg": "#CFF2E8",
+   "minutes": 3,
+   "recap": [
+    "Invading forces grow stronger the deeper they penetrate into enemy territory.",
+    "Eliminating all escape routes and superstitious doubts turns ordinary men into desperate heroes.",
+    "A unified army acts like the legendary snake, where head and tail defend each other."
+   ],
+   "posts": [
+    {
+     "id": "15-1",
+     "type": "hook",
+     "t": "Deep Penetration",
+     "kicker": "Enemy territory",
+     "head": "When soldiers are thrown into positions whence there is no escape, they will prefer death to flight.",
+     "sub": "When retreat is impossible, soldiers fight with absolute fury.",
+     "art": "stamp",
+     "artText": "DEEP PENETRA"
+    },
+    {
+     "id": "15-2",
+     "type": "scene",
+     "t": "The Winning General",
+     "label": "Ch'u State Campaign",
+     "text": "Wang Chien invades Ch'u with a massive enemy levy waiting. Instead of fighting, he stays inside his walls, treating his men with great care. He shares meals with them, provides baths, and watches them play athletic games. When their spirits are fully strung, he unleashes them to rout the enemy completely.",
+     "theme": "steel"
+    },
+    {
+     "id": "15-3",
+     "type": "scene",
+     "t": "Desperate Straits",
+     "label": "Tactical Choice",
+     "text": "What happens when you trap your own army with no place of refuge? They lose all sense of fear and show a stubborn front, preferring death to flight. Soldiers in desperate straits lose fear and fight with unimaginable strength because they have no other choice left to survive.",
+     "theme": "paper"
+    },
+    {
+     "id": "15-4",
+     "type": "idea",
+     "t": "Discarding Omens",
+     "label": "The idea",
+     "head": "Banish Superstitious Doubts",
+     "sub": "Prohibit taking omens and spells. Without doubts or scruples, men never falter until death itself.",
+     "theme": "sodium",
+     "payoffLoopId": "shuaifan"
+    },
+    {
+     "id": "15-5",
+     "type": "scene",
+     "t": "Tears Before Battle",
+     "label": "Before the Fight",
+     "text": "On the day they are ordered out to battle, soldiers may weep openly, wetting their garments with tears. This is not from cowardice. Ts'ao Kung notes they have embraced the firm resolution to do or die, much like ancient heroes parting forever at the I River.",
+     "theme": "paper"
+    },
+    {
+     "id": "15-6",
+     "type": "idea",
+     "t": "The Shuai-Jan Snake",
+     "label": "The idea",
+     "head": "Military Coordination",
+     "sub": "The shuai-jan is a snake from the Ch'ang mountains. Strike its head, the tail attacks. Strike its tail, the head attacks.",
+     "theme": "steel"
+    },
+    {
+     "id": "15-7",
+     "type": "chat",
+     "t": "Enemies in One Boat",
+     "label": "River Crossing",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "The men of Wu and Yuéh are bitter enemies."
+      },
+      {
+       "who": "sunzi",
+       "text": "Yet if they cross a river in the same boat and face a storm, they help each other."
+      },
+      {
+       "who": "meiyaochen",
+       "text": "They act just as the left hand helps the right in common peril."
+      }
+     ]
+    },
+    {
+     "id": "15-8",
+     "type": "crossoff",
+     "t": "Securing the Army",
+     "title": "What truly holds an army together?",
+     "items": [
+      {
+       "text": "Tethering horses",
+       "why": "Mechanical tricks cannot replace real human tenacity and courage."
+      },
+      {
+       "text": "Burying chariots",
+       "why": "Physical barriers fail if the soldiers lack a cooperative spirit."
+      }
+     ],
+     "answer": "Unity of spirit"
+    },
+    {
+     "id": "15-9",
+     "type": "scene",
+     "t": "One Standard",
+     "label": "Camp Discipline",
+     "text": "The fundamental principle of managing an army is setting up one single standard of courage that all must reach. An ideal army forms an organic whole where every component part shares the exact same resolution, spirit, and unbreakable determination to win.",
+     "theme": "paper"
+    },
+    {
+     "id": "15-10",
+     "type": "cliffhanger",
+     "t": "Next Chapter",
+     "text": "Rapidity and deep penetration forge unbreakable bonds among troops, turning desperate soldiers into unstoppable forces. But what happens when campaigns encounter vastly different kinds of terrain, from accessible ground to precipitous heights? Turn the page to discover the classification of terrains and the calamities of the march."
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "title": "Commanding the Host",
+   "hook": "Conductors of war must keep their men in total ignorance of grand designs while acting as a single organic body.",
+   "bg": "#7E1D22",
+   "bg2": "#3F0C10",
+   "fg": "#F6E7D6",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzũ explains how ground equalizes strong and weak forces.",
+    "A general must act quietly, maintain order, and deceive his own men.",
+    "Different terrains require specific tactical adaptations and unwavering resolve."
+   ],
+   "posts": [
+    {
+     "id": "16-1",
+     "type": "hook",
+     "t": "Commanding Host",
+     "kicker": "Deep in hostile territory",
+     "head": "Conductors of war must keep their men in total ignorance of grand designs while acting as a single organic body.",
+     "sub": "Deceiving both friend and foe to achieve absolute victory.",
+     "art": "stamp",
+     "artText": "COMMANDING T"
+    },
+    {
+     "id": "16-2",
+     "type": "scene",
+     "t": "Leading as One",
+     "label": "The battlefield",
+     "text": "Thus the skilful general conducts his army just as though he were leading a single man, willy-nilly, by the hand. It is the business of a general to be quiet and thus ensure secrecy; upright and just, and thus maintain order. He must be able to mystify his officers and men by false reports and appearances.",
+     "theme": "steel"
+    },
+    {
+     "id": "16-3",
+     "type": "idea",
+     "t": "Keeping Them Dark",
+     "label": "Tactical Secrecy",
+     "head": "Mystifying Your Own Men",
+     "sub": "The troops must not share your schemes in the beginning. They may only rejoice with you over the happy outcome.",
+     "theme": "sodium"
+    },
+    {
+     "id": "16-4",
+     "type": "chat",
+     "t": "Pan Ch'ao's Ruse",
+     "label": "Council of War",
+     "msgs": [
+      {
+       "who": "sunzi",
+       "text": "Our forces are outnumbered. The best plan is for us to separate and disperse in different directions."
+      },
+      {
+       "who": "tsaokung",
+       "text": "He secretly released prisoners so the enemy would learn his false plans and divide their own forces."
+      },
+      {
+       "who": "tuyu",
+       "text": "As soon as the enemy chieftains left, Pan Ch'ao hurled his united troops against the camp and won."
+      }
+     ]
+    },
+    {
+     "id": "16-5",
+     "type": "poll",
+     "t": "Tactical Dilemma",
+     "label": "The Commander's Choice",
+     "q": "How should a general handle his own officers regarding campaign plans?",
+     "options": [
+      {
+       "text": "Share all plans openly",
+       "feedback": "This causes unnecessary fear and risks leaking details to the enemy."
+      },
+      {
+       "text": "Keep men in total darkness",
+       "feedback": "Correct! Mystify your officers and men so none know whither they go."
+      }
+     ],
+     "reveal": "Sun Tzũ insists that soldiers must only know orders to advance or retreat, remaining totally ignorant of the ultimate strategy.",
+     "hint": "Pick one to see what actually happened."
+    },
+    {
+     "id": "16-6",
+     "type": "scene",
+     "t": "Burning the Boats",
+     "label": "Deep in enemy territory",
+     "text": "At the critical moment, the leader of an army acts like one who has climbed up a height and then kicks away the ladder behind him. He carries his men deep into hostile territory before he shows his hand. He burns his boats and breaks his cooking-pots.",
+     "theme": "night"
+    },
+    {
+     "id": "16-7",
+     "type": "list",
+     "t": "Nine Grounds Tactics",
+     "label": "",
+     "h": "Ground Adaptations",
+     "items": [
+      {
+       "text": "Dispersive ground",
+       "state": "ok"
+      },
+      {
+       "text": "Contentious ground",
+       "state": "ok"
+      },
+      {
+       "text": "Hemmed-in ground",
+       "state": "ok"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "Different measures suit the nine varieties of ground encountered in campaigns."
+    },
+    {
+     "id": "16-8",
+     "type": "scene",
+     "t": "Deception Limits",
+     "label": "",
+     "text": "War is based on deception, which applies just as much to keeping your own soldiers in the dark as it does to tricking the enemy forces in the field.",
+     "theme": "paper"
+    },
+    {
+     "id": "16-9",
+     "type": "compare",
+     "t": "Penetration Effects",
+     "label": "",
+     "h": "Distance and Cohesion",
+     "leftTitle": "Shallow Incursion",
+     "left": [
+      "Short distance",
+      "Leads to dispersion",
+      "Troops may scatter"
+     ],
+     "rightTitle": "Deep Incursion",
+     "right": [
+      "Deep penetration",
+      "Builds cohesion",
+      "Creates unity of fate"
+     ],
+     "text": "When invading hostile territory, penetrating deeply brings cohesion, whereas penetrating but a short way means dispersion.",
+     "mid": "?"
+    },
+    {
+     "id": "16-10",
+     "type": "cliffhanger",
+     "t": "The Attack by Fire",
+     "text": "From mastering ground and deceiving men, Sun Tzũ turns to the most destructive element of warfare. How can an army harness the fury of wind, stellar constellations, and blazing flames to annihilate the enemy without risking their own destruction in the inferno?"
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "title": "The Attack by Fire",
+   "hook": "There are five ways of attacking with fire to destroy enemy camps, stores, baggage-trains, and arsenals.",
+   "bg": "#2B2440",
+   "bg2": "#121018",
+   "fg": "#F6C976",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ shows how men fight fiercely when surrounded.",
+    "He explains how to isolate enemies and control command.",
+    "He compares tactical speed to a startled hare."
+   ],
+   "posts": [
+    {
+     "id": "17-1",
+     "type": "hook",
+     "t": "Chapter 17",
+     "kicker": "The Attack by Fire",
+     "head": "There are five ways of attacking with fire to destroy enemy camps, stores, baggage-trains, and arsenals.",
+     "sub": "Harnessing wind and flame for total victory.",
+     "art": "stamp",
+     "artText": "THE ATTACK B"
+    },
+    {
+     "id": "17-2",
+     "type": "scene",
+     "t": "Resist When Trapped",
+     "label": "Frontier Outpost",
+     "text": "It is the soldier’s natural disposition to offer obstinate resistance when surrounded, to fight hard when he cannot help himself, and to obey promptly when he has fallen into danger. Like Pan Ch’ao’s devoted followers facing desert wolves, men in mortal peril find the resolve to follow their commander through life and death without hesitation.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-3",
+     "type": "scene",
+     "t": "Strategic Decision",
+     "label": "Dividing the Foe",
+     "text": "When attacking a powerful state, what is the general's primary objective? The general must prevent the concentration of the enemy’s forces and overawe opponents so their allies stay away. Prevention of enemy concentration is key to victory.",
+     "theme": "paper"
+    },
+    {
+     "id": "17-4",
+     "type": "idea",
+     "t": "Secret Designs",
+     "label": "Cold Isolation",
+     "head": "Isolate the Enemy",
+     "sub": "Do not strive to ally with all and sundry. Carry out your own secret designs while keeping antagonists in awe.",
+     "theme": "sodium"
+    },
+    {
+     "id": "17-5",
+     "type": "scene",
+     "t": "The Maiden and Hare",
+     "label": "The Battlefield",
+     "text": "At first, exhibit the coyness of a maiden until the enemy gives you an opening. Afterwards, emulate the rapidity of a running hare, and it will be too late for the enemy to oppose you. Conform to the enemy’s tactics until a favorable opportunity offers, then engage in a decisive battle.",
+     "theme": "night"
+    },
+    {
+     "id": "17-6",
+     "type": "scene",
+     "t": "Command Rules",
+     "label": "",
+     "text": "Taking command requires absolute secrecy and decisive severance from normal routines. Strict measures ensure total control over the army and the situation.",
+     "theme": "paper"
+    },
+    {
+     "id": "17-7",
+     "type": "scene",
+     "t": "Deadly Peril",
+     "label": "River Bank",
+     "text": "Place your army in deadly peril, and it will survive; plunge it into desperate straits, and it will come off in safety. Han Hsin proved this by ordering his troops to fight with a river at their backs, leaving no room for retreat and forcing every soldier to fight with desperate fury for his life.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-8",
+     "type": "crossoff",
+     "t": "Tactical Error",
+     "title": "What matters most in cunning?",
+     "items": [
+      {
+       "text": "Open plans",
+       "why": "Treachery follows when designs are known."
+      },
+      {
+       "text": "Rigid rules",
+       "why": "War requires constant reversal of arrangements."
+      }
+     ],
+     "answer": "Accommodation"
+    },
+    {
+     "id": "17-9",
+     "type": "idea",
+     "t": "Sheer Cunning",
+     "label": "Cunning Tactics",
+     "head": "Accommodate the Enemy",
+     "sub": "Success in warfare is gained by carefully accommodating ourselves to the enemy’s purpose, feigning stupidity, and striking when least expected.",
+     "theme": "steel"
+    },
+    {
+     "id": "17-10",
+     "type": "cliffhanger",
+     "t": "The End",
+     "text": "From mastering ground, deception, and the fury of flame, Sun Tzũ turns to the ultimate instrument of intelligence and survival. How can an army unlock the secrets of the enemy's camp without spending a fortune in blood, and what are the five types of secret agents?"
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "title": "Prudence in War",
+   "hook": "No ruler should put troops into the field out of spleen; a destroyed kingdom can never be brought back to life.",
+   "bg": "#59606A",
+   "bg2": "#2C3440",
+   "fg": "#F0ECE4",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzu details the five methods of attack by fire.",
+    "Calculations of wind, season, and stars ensure destruction.",
+    "War must never be waged out of anger or pique."
+   ],
+   "posts": [
+    {
+     "id": "18-1",
+     "type": "hook",
+     "t": "Prudence in War",
+     "kicker": "Anger and Pique",
+     "head": "No ruler should put troops into the field out of spleen; a destroyed kingdom can never be brought back to life.",
+     "sub": "A kingdom once destroyed can never be brought back.",
+     "art": "stamp",
+     "artText": "PRUDENCE IN "
+    },
+    {
+     "id": "18-2",
+     "type": "idea",
+     "t": "Five Fires",
+     "label": "Fire Tactics",
+     "head": "Five Fires",
+     "sub": "Attacking with fire requires burning soldiers in camp, stores, baggage-trains, arsenals, or hurling dropping fire.",
+     "theme": "steel"
+    },
+    {
+     "id": "18-3",
+     "type": "scene",
+     "t": "Pan Ch'ao's Raid",
+     "label": "The Night Assault",
+     "text": "Pan Ch'ao finds himself in extreme peril when unexpected envoys arrive. Refusing to let a humdrum civilian hesitate, he resolves to make a daring assault by fire under cover of night. With a strong gale blowing, he sets the camp ablaze while drums and shouting terrify the Hsiung-nu into complete panic and destruction.",
+     "theme": "steel"
+    },
+    {
+     "id": "18-4",
+     "type": "scene",
+     "t": "Fire Response",
+     "label": "Tactical Decision",
+     "text": "What should you do when fire breaks out in the enemy camp but their soldiers remain quiet? Sun Tzu advises biding your time and not attacking immediately, since the enemy may be ready to receive you. Sun Tzu advises biding your time and not attacking immediately, since the enemy may be ready to receive you.",
+     "theme": "paper"
+    },
+    {
+     "id": "18-5",
+     "type": "idea",
+     "t": "Stellar Signs",
+     "label": "Timing Attack",
+     "head": "Stellar Signs",
+     "sub": "Special days for starting a conflagration are when the moon is in constellations that promise rising winds.",
+     "theme": "sodium"
+    },
+    {
+     "id": "18-6",
+     "type": "scene",
+     "t": "Water and Fire",
+     "label": "Alternative Elements",
+     "text": "While fire destroys completely, water can be used to intercept an enemy. By means of water, an army's road may be obstructed or its forces divided, though it lacks the terrible destructive power of flames. Commanders must know when to apply each element depending on the terrain and weather conditions.",
+     "theme": "paper"
+    },
+    {
+     "id": "18-7",
+     "type": "list",
+     "t": "Strategic Rules",
+     "label": "",
+     "h": "Sun Tzu's Maxims",
+     "items": [
+      {
+       "text": "Move not unless advantage is seen",
+       "state": "ok"
+      },
+      {
+       "text": "Use troops if there is gain",
+       "state": "ok"
+      },
+      {
+       "text": "Fight not unless position is critical",
+       "state": "warn"
+      }
+     ],
+     "style": "check",
+     "theme": "paper",
+     "text": "Restraint is the mark of an enlightened leader."
+    },
+    {
+     "id": "18-8",
+     "type": "scene",
+     "t": "Anger Passes",
+     "label": "Emotional Dangers",
+     "text": "Anger may in time change to gladness and vexation may be succeeded by content. However, a kingdom that has once been destroyed can never come again into being, nor can the dead ever be brought back to life. Leaders must remain cautious and heedful at all times.",
+     "theme": "night"
+    },
+    {
+     "id": "18-9",
+     "type": "idea",
+     "t": "Enlightened Ruler",
+     "label": "Final Counsel",
+     "head": "Enlightened Ruler",
+     "sub": "The enlightened ruler is heedful and the good general full of caution to keep the country at peace.",
+     "theme": "steel"
+    },
+    {
+     "id": "18-10",
+     "type": "cliffhanger",
+     "t": "The End",
+     "text": "From mastering ground, deception, and the fury of flame, Sun Tzu turns to the ultimate instrument of intelligence and survival. How can an army unlock the secrets of the enemy's camp without spending a fortune in blood, and what are the five types of secret agents?"
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "title": "The Use of Spies",
+   "hook": "Foreknowledge cannot be gained from spirits or calculation; it can only be obtained from human spies.",
+   "bg": "#A8232C",
+   "bg2": "#4A0C12",
+   "fg": "#FFF3EC",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzu warns against the immense financial drain and human misery of prolonged wars.",
+    "He proves that victory requires foreknowledge which cannot be gained through divination.",
+    "Spies are divided into five distinct classes that form the core of divine manipulation."
+   ],
+   "posts": [
+    {
+     "id": "19-1",
+     "type": "hook",
+     "t": "The Price of War",
+     "kicker": "Chapter Nineteen",
+     "head": "Foreknowledge cannot be gained from spirits or calculation; it can only be obtained from human spies.",
+     "sub": "Raising an army of a hundred thousand drains the state treasury and exhausts the people.",
+     "art": "stamp",
+     "artText": "THE USE OF S"
+    },
+    {
+     "id": "19-2",
+     "type": "scene",
+     "t": "Exhausted Roads",
+     "label": "The Open Highway",
+     "text": "Raising a host of a hundred thousand men entails heavy loss on the people and a drain on state resources. Daily expenditures reach a thousand ounces of silver. Commotion stirs at home and abroad, and men drop down exhausted on the highways while hundreds of thousands of families are impeded in their labor.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-3",
+     "type": "idea",
+     "t": "The Crime of Folly",
+     "label": "Strategy",
+     "head": "The Crime of Folly",
+     "sub": "Grudging the outlay of a hundred ounces of silver for intelligence is the height of inhumanity, as wars drag on for years without information.",
+     "theme": "steel"
+    },
+    {
+     "id": "19-4",
+     "type": "scene",
+     "t": "The Cost of Ignorance",
+     "label": "General's Choice",
+     "text": "What is the primary danger of refusing to spend money on military intelligence? Grudging silver for spies drags out the war for years, causing massive loss of life and resources. Spies save lives by ending wars early rather than relying on endless brute force battles.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-5",
+     "type": "idea",
+     "t": "Foreknowledge",
+     "label": "Wisdom",
+     "head": "Foreknowledge",
+     "sub": "Foreknowledge cannot be elicited from spirits, nor obtained inductively from experience, nor by any deductive mathematical calculation.",
+     "theme": "sodium"
+    },
+    {
+     "id": "19-6",
+     "type": "scene",
+     "t": "The Five Spies",
+     "label": "",
+     "text": "What are the five distinct classes of spies employed in warfare? The answer to the five distinct classes of spies will be revealed in the final chapter. Spies save lives by ending wars early rather than relying on endless brute force battles.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-7",
+     "type": "scene",
+     "t": "Divine Threads",
+     "label": "The Sovereign's Art",
+     "text": "When local, inward, converted, doomed, and surviving spies are all at work together, no one can discover the secret system. This mastery is called the divine manipulation of the threads, and it remains the sovereign's most precious faculty for securing victory without bloodshed.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-8",
+     "type": "idea",
+     "t": "Local Agents",
+     "label": "Tactics",
+     "head": "Local Agents",
+     "sub": "Local spies mean employing the services of the inhabitants of a district, winning the local people over by kind treatment.",
+     "theme": "steel"
+    },
+    {
+     "id": "19-9",
+     "type": "scene",
+     "t": "Inward Spies",
+     "label": "Enemy Officials",
+     "text": "Inward spies are made by utilizing officials of the enemy state. This includes degraded men, criminals, greedy concubines, aggrieved subordinates, and turncoats who are secretly approached and bound to your interests through rich presents to uncover plans.",
+     "theme": "paper"
+    },
+    {
+     "id": "19-10",
+     "type": "cliffhanger",
+     "t": "Converted Spies",
+     "text": "What happens when you capture the enemy's own secret agents and turn them against their masters with heavy bribes and false intelligence, and how do doomed and surviving spies seal the fate of nations?"
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "title": "Divine Manipulation",
+   "hook": "Master the five classes of spies to achieve divine manipulation of threads and ensure ultimate state victory.",
+   "bg": "#1A1830",
+   "bg2": "#0B0A18",
+   "fg": "#F6C976",
+   "minutes": 3,
+   "recap": [
+    "Sun Tzŭ details the five classes of spies.",
+    "The converted spy is the root of all intelligence.",
+    "Enlightened rulers use espionage to secure historical triumphs."
+   ],
+   "posts": [
+    {
+     "id": "20-1",
+     "type": "hook",
+     "t": "Chapter 20",
+     "kicker": "Final Chapter",
+     "head": "Master the five classes of spies to achieve divine manipulation of threads and ensure ultimate state victory.",
+     "sub": "Spies are the eyes and ears of an army.",
+     "art": "stamp",
+     "artText": "DIVINE MANIP"
+    },
+    {
+     "id": "20-2",
+     "type": "scene",
+     "t": "The Five Spies",
+     "label": "Deep inside the camp",
+     "text": "Doomed spies spread false reports openly before facing execution. Surviving spies return from enemy camps with vital intelligence, enduring hunger, cold, and extreme hardship. Spies require utmost intimacy, liberal rewards, and absolute secrecy from mouth to ear.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-3",
+     "type": "scene",
+     "t": "Spy Management",
+     "label": "General's Decision",
+     "text": "What personal qualities are most essential for managing spies effectively? Sun Tzŭ teaches that spies cannot be properly managed without intuitive sagacity, benevolence, and straightforwardness. True mastery requires both wisdom and deep moral integrity to handle double agents safely across enemy borders every time everywhere now always today.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-4",
+     "type": "idea",
+     "t": "Root of All",
+     "label": "Intelligence Network",
+     "head": "The Converted Spy",
+     "sub": "By bribing enemy spies and housing them comfortably, they become converted. Through them, local, inward, doomed, and surviving spies are employed.",
+     "theme": "sodium"
+    },
+    {
+     "id": "20-5",
+     "type": "scene",
+     "t": "Ancient Triumphs",
+     "label": "Historical record",
+     "text": "The rise of the Yin dynasty was due to I Chih, who had served under the Hsia. Likewise, the rise of the Chou dynasty was due to Lü Ya, who had served under the Yin. Great sages used intelligence to achieve monumental historical changes.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-6",
+     "type": "crossoff",
+     "t": "Spies' Secrets",
+     "title": "Which spy type is the root of all intelligence?",
+     "items": [
+      {
+       "text": "Doomed Spy",
+       "why": "Used for carrying false tidings."
+      },
+      {
+       "text": "Surviving Spy",
+       "why": "Brings back news from enemy camps."
+      },
+      {
+       "text": "Local Spy",
+       "why": "Employed from the local population."
+      }
+     ],
+     "answer": "Converted Spy"
+    },
+    {
+     "id": "20-7",
+     "type": "scene",
+     "t": "Strict Secrecy",
+     "label": "The general's tent",
+     "text": "If a secret piece of news is divulged by a spy before the time is ripe, he must be put to death together with the man to whom the secret was told. Secrecy is the absolute shield of the state.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-8",
+     "type": "idea",
+     "t": "Enlightened Rule",
+     "label": "Final Principle",
+     "head": "Wise Generalship",
+     "sub": "Only the enlightened ruler and wise general use the highest intelligence for spying and achieve great results. An army without spies is eyeless.",
+     "theme": "steel"
+    },
+    {
+     "id": "20-9",
+     "type": "scene",
+     "t": "Water and Boats",
+     "label": "Final warning",
+     "text": "Just as water which carries a boat from bank to bank may also be the means of sinking it, so reliance on spies, while producing great results, is oft-times the cause of utter destruction if handled carelessly.",
+     "theme": "paper"
+    },
+    {
+     "id": "20-10",
+     "type": "cliffhanger",
+     "t": "The end",
+     "text": "The treatises of Sun Tzŭ conclude here. Across thirteen chapters, the master has laid bare the eternal laws of strategy, deception, terrain, and intelligence. Will future commanders truly heed these timeless words of wisdom, or will they repeat the ancient errors on bloody fields?"
+    }
+   ]
+  }
+ ]
+}
