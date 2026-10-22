@@ -57,5 +57,8 @@ object BookSync {
 @Serializable
 data class SyncMeta(val app: Int = 0, val etags: Map<String, String> = emptyMap())
 
+/** One download: the text (null for "not modified") and the ETag to send next time. */
+class Fetched(val text: String?, val etag: String?)
+
 /** The outcome of one sync: the library to show now and the books whose packs changed. */
 class SyncResult(val index: BookIndex, val changed: Set<String>)

@@ -12,20 +12,32 @@ import java.net.URL
  * [sync] then fetches the website's library (bookreel-sand.vercel.app/books/) so books added
  * after this APK was built appear without reinstalling. Each pack is parsed once.
  */
-class BookRepository(private val context: Context) {
+class BookRepository(
+    /** Where downloaded packs, the website's list and their ETags are kept. */
+    private val dir: File,
+    /** The files bundled in the APK under assets/books/. */
+    private val bundledFiles: BundledFiles,
+    /** Fetches a file from the website's books folder. */
+    private val download: (name: String, etag: String?) -> Fetched?,
+    /** The app build; downloads saved under another build are dropped. */
+    private val appVersion: Int,
+) {
+    constructor(context: Context) : this(
+        File(context.filesDir, "books"), AssetFiles(context), { name, etag -> httpGet(BuildConfig.BOOKS_URL + name, etag) }, BuildConfig.VERSION_CODE,
+    )
+
     private val json = Json { ignoreUnknownKeys = true; isLenient = true }
     private val cache = HashMap<String, LoadedBook>()
-    private val dir = File(context.filesDir, "books")
     private val metaFile = File(dir, "sync.json")
 
-    private val bundled: BookIndex by lazy { json.decodeFromString(BookIndex.serializer(), asset("index.json")!!) }
+    private val bundled: BookIndex by lazy { json.decodeFromString(BookIndex.serializer(), bundledFiles.read("index.json")!!) }
 
     @Volatile private var current: BookIndex? = null
 
     /** Runs once, before anything is read: a newer APK carries newer bundled packs, so downloads
      *  saved under an older build are dropped (the next sync fetches anything newer again). */
     private val fresh: Boolean by lazy {
-        if (readMeta().app != BuildConfig.VERSION_CODE) dir.listFiles()?.forEach { it.delete() }
+        if (readMeta().app != appVersion) dir.listFiles()?.forEach { it.delete() }
         true
     }
 
@@ -54,7 +66,7 @@ class BookRepository(private val context: Context) {
             dir.mkdirs()
             val etags = readMeta().etags.toMutableMap()
             val savedList = File(dir, "index.json")
-            val list = fetch("index.json", etags["index.json"]?.takeIf { savedList.exists() }) ?: return null
+            val list = download("index.json", etags["index.json"]?.takeIf { savedList.exists() }) ?: return null
             val remoteText = list.text ?: savedList.readText()
             val remote = json.decodeFromString(BookIndex.serializer(), remoteText)
             val changed = mutableSetOf<String>()
@@ -62,7 +74,7 @@ class BookRepository(private val context: Context) {
                 val file = m.file ?: continue
                 if (m.status != "ready" || !BookSync.safeFile(file)) continue
                 val saved = File(dir, file)
-                val got = fetch(file, etags[file]?.takeIf { saved.exists() }) ?: continue
+                val got = download(file, etags[file]?.takeIf { saved.exists() }) ?: continue
                 val text = got.text ?: continue // 304: the saved copy is current
                 if (BookSync.problem(json, m.id, text) != null) continue
                 if (text != packText(file)) changed += m.id
@@ -75,7 +87,7 @@ class BookRepository(private val context: Context) {
                 val tag = list.etag
                 if (tag != null) etags["index.json"] = tag else etags.remove("index.json")
             }
-            writeAtomic(metaFile, json.encodeToString(SyncMeta.serializer(), SyncMeta(BuildConfig.VERSION_CODE, etags)))
+            writeAtomic(metaFile, json.encodeToString(SyncMeta.serializer(), SyncMeta(appVersion, etags)))
 
             val next = loadIndex()
             synchronized(cache) { changed.forEach { cache.remove(it) } }
@@ -92,21 +104,15 @@ class BookRepository(private val context: Context) {
         val remote = File(dir, "index.json").takeIf { it.exists() }?.let {
             try { json.decodeFromString(BookIndex.serializer(), it.readText()) } catch (e: Exception) { null }
         }
-        return BookSync.merge(bundled, remote) { file -> File(dir, file).exists() || assetExists(file) }
+        return BookSync.merge(bundled, remote) { file -> File(dir, file).exists() || bundledFiles.has(file) }
     }
 
     /** A downloaded copy wins over the bundled one; downloads are cleared whenever the app is updated. */
     private fun packText(file: String): String? {
         val saved = File(dir, file)
         if (saved.exists()) return try { saved.readText() } catch (e: Exception) { null }
-        return asset(file)
+        return bundledFiles.read(file)
     }
-
-    private fun asset(name: String): String? =
-        try { context.assets.open("books/$name").use { it.readBytes().decodeToString() } } catch (e: Exception) { null }
-
-    private fun assetExists(name: String): Boolean =
-        try { context.assets.open("books/$name").close(); true } catch (e: Exception) { false }
 
     private fun readMeta(): SyncMeta =
         try { json.decodeFromString(SyncMeta.serializer(), metaFile.readText()) } catch (e: Exception) { SyncMeta() }
@@ -120,38 +126,48 @@ class BookRepository(private val context: Context) {
         }
     }
 
-    // ---------- network ----------
-
-    private class Fetched(val text: String?, val etag: String?)
-
-    /** GET a file from the website. A 304 gives text = null. Null on any failure. */
-    private fun fetch(name: String, etag: String?): Fetched? = try {
-        val c = URL(BuildConfig.BOOKS_URL + name).openConnection() as HttpURLConnection
-        try {
-            c.connectTimeout = 8_000
-            c.readTimeout = 20_000
-            c.setRequestProperty("Accept", "application/json")
-            if (etag != null) c.setRequestProperty("If-None-Match", etag)
-            when (c.responseCode) {
-                HttpURLConnection.HTTP_NOT_MODIFIED -> Fetched(null, etag)
-                HttpURLConnection.HTTP_OK -> {
-                    val bytes = c.inputStream.use { it.readBytes() }
-                    if (bytes.size > BookSync.MAX_PACK_CHARS * 2) null else Fetched(bytes.decodeToString(), c.getHeaderField("ETag"))
-                }
-                else -> null
-            }
-        } finally {
-            c.disconnect()
-        }
-    } catch (e: Exception) {
-        null
-    }
-
     companion object {
+        /** GET a URL, sending the saved ETag. A 304 gives text = null; any failure gives null. */
+        fun httpGet(url: String, etag: String?): Fetched? = try {
+            val c = URL(url).openConnection() as HttpURLConnection
+            try {
+                c.connectTimeout = 8_000
+                c.readTimeout = 20_000
+                c.setRequestProperty("Accept", "application/json")
+                if (etag != null) c.setRequestProperty("If-None-Match", etag)
+                when (c.responseCode) {
+                    HttpURLConnection.HTTP_NOT_MODIFIED -> Fetched(null, etag)
+                    HttpURLConnection.HTTP_OK -> {
+                        val bytes = c.inputStream.use { it.readBytes() }
+                        if (bytes.size > BookSync.MAX_PACK_CHARS * 2) null else Fetched(bytes.decodeToString(), c.getHeaderField("ETag"))
+                    }
+                    else -> null
+                }
+            } finally {
+                c.disconnect()
+            }
+        } catch (e: Exception) {
+            null
+        }
+
         fun parse(json: Json, text: String): LoadedBook {
             val book = json.decodeFromString(Book.serializer(), text)
             val posts = book.chapters.map { ch -> ch.posts.map { PostDecoder.decode(json, it) } }
             return LoadedBook(book, posts)
         }
     }
+}
+
+/** Read access to the files bundled with the app. */
+interface BundledFiles {
+    fun read(name: String): String?
+    fun has(name: String): Boolean
+}
+
+private class AssetFiles(private val context: Context) : BundledFiles {
+    override fun read(name: String): String? =
+        try { context.assets.open("books/$name").use { it.readBytes().decodeToString() } } catch (e: Exception) { null }
+
+    override fun has(name: String): Boolean =
+        try { context.assets.open("books/$name").close(); true } catch (e: Exception) { false }
 }
