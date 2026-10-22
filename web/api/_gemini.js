@@ -173,13 +173,15 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
  * quota is gone is skipped until it resets. When every allowed model is used up, throws a 429 GeminiError with
  * daily = true and resetAt; a per-minute limit throws a 429 with retryAfter seconds.
  */
-async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0 }) {
+async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0, rotate = 0 }) {
   if (kind) { tier = kind === "lite" ? "lite" : "best"; allowLite = allowLite || kind === "flash"; }
   const mock = process.env.GEMINI_MOCK === "1";
   const key = mock ? "mock" : cleanKey(process.env.GEMINI_API_KEY);
   if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
   const now = Date.now();
-  const models = (await ladder({ tier, allowLite }, key)).filter((m) => !(quota && quota.exhausted && quota.exhausted[m] > now));
+  let models = (await ladder({ tier, allowLite }, key)).filter((m) => !(quota && quota.exhausted && quota.exhausted[m] > now));
+  // After a "busy" answer the next try starts with the next model, so retries spread over the models' daily allowances.
+  if (rotate && models.length > 1) models = [...models.slice(rotate % models.length), ...models.slice(0, rotate % models.length)];
   let busy = null;
   for (const model of models) {
     const left = deadline ? deadline - Date.now() - 5000 : Infinity;
@@ -193,10 +195,9 @@ async function generateJSON({ tier = "best", allowLite = false, quota = null, ki
       // Overloaded or slow: the next model in the ladder may well answer.
       if (e.status === 503 || e.status === 500 || e.status === 504) {
         console.error("gemini", model, e.status, e.message, e.detail || "", `prompt ${prompt.length} chars`);
-        // One more model may answer; more than that just spends the small daily allowances on refusals.
-        if (busy) throw e;
-        busy = e;
-        continue;
+        // Refusals count against the small daily allowances (20 requests per model on the free tier), so a busy
+        // model ends this try; the next try, a few minutes later, starts with another model.
+        throw e;
       }
       throw e;
     }
