@@ -3,7 +3,9 @@
 const { generateJSON } = require("./_gemini.js");
 const F = require("./_bookfmt.js");
 
-const MAX_PLAN_WORDS = 60000; // the plan needs the gist of each part, and a smaller request is answered more reliably
+// The plan needs the gist and a few quotable lines of each part; the chapter writer reads every part in full.
+// Free-tier Gemini often answers very long requests with "high demand" while short ones go through.
+const MAX_PLAN_WORDS = 24000;
 const MAX_PART_WORDS = 30000;
 
 function capWords(text, max) {
