@@ -135,7 +135,11 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
       clearTimeout(timer);
     }
     if (res.status === 429) { const e = new GeminiError("The free Gemini quota needs a short break.", 429, retrySeconds(text)); e.daily = isDaily(text); throw e; }
-    if (res.status === 503 || res.status === 500) throw new GeminiError("Gemini is busy right now.", 503, 20);
+    if (res.status === 503 || res.status === 500) {
+      const e = new GeminiError("Gemini is busy right now.", 503, 20);
+      e.detail = text.slice(0, 300).replace(/\s+/g, " ");
+      throw e;
+    }
     if (res.status === 404) { const e = new GeminiError(`Model ${model} is not available.`, 404); e.skip = true; throw e; }
     if (res.status === 400 && withSchema && /schema/i.test(text)) continue; // retry once without the schema
     if (!res.ok) throw new GeminiError(`Gemini error ${res.status}: ${text.slice(0, 200)}`, 502);
@@ -172,7 +176,7 @@ async function generateJSON({ tier = "best", allowLite = false, quota = null, ki
       if (e.status === 429 && e.daily) { if (quota) await quota.mark(model, quotaReset()); continue; }
       if (e.skip) continue;
       // Overloaded or slow: the next model in the ladder may well answer.
-      if (e.status === 503 || e.status === 500 || e.status === 504) { console.error("gemini", model, e.status, e.message); busy = e; continue; }
+      if (e.status === 503 || e.status === 500 || e.status === 504) { console.error("gemini", model, e.status, e.message, e.detail || "", `prompt ${prompt.length} chars`); busy = e; continue; }
       throw e;
     }
   }

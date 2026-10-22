@@ -3,7 +3,7 @@
 const { generateJSON } = require("./_gemini.js");
 const F = require("./_bookfmt.js");
 
-const MAX_PLAN_WORDS = 95000;
+const MAX_PLAN_WORDS = 60000; // the plan needs the gist of each part, and a smaller request is answered more reliably
 const MAX_PART_WORDS = 30000;
 
 function capWords(text, max) {
