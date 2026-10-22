@@ -145,6 +145,9 @@ const pdfPath = path.join(OUT, "sample.pdf");
 }
 await page.evaluate(() => { location.hash = "#/discover"; });
 await page.locator("#filepick").waitFor({ state: "attached", timeout: 8000 });
+// Discover draws again when its list arrives, which replaces the file input: wait for that first.
+await page.waitForLoadState("networkidle").catch(() => {});
+await page.waitForTimeout(800);
 await page.locator("#filepick").setInputFiles(pdfPath);
 check(await waitFor(async () => (await hash()).startsWith("#/mine/"), 20000), "a PDF can be added and opens its own page");
 check(await visible("Saved on this phone", 8000), "the PDF is saved on the phone");

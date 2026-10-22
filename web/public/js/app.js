@@ -122,7 +122,11 @@ function setThemeColor(immersive) {
 
 // ------------------------------------------------------------------ routing
 
+// How many screens the app itself has opened on top of where it started, so "back" knows whether
+// there is a screen of ours to return to. Setting location.hash also fires popstate in browsers;
+// ownNav marks those so only real back steps count down.
 let depth = 0;
+let ownNav = false;
 function parseRoute() {
   const h = location.hash.replace(/^#/, "") || "/";
   const [path, qs] = h.split("?");
@@ -145,6 +149,7 @@ function go(hash) {
   if (sheet) { closeSheet({ silent: true }); history.replaceState(null, "", hash); depth++; return render(); }
   if (location.hash === hash) return render();
   depth++;
+  ownNav = true;
   location.hash = hash;
 }
 function replace(hash) {
@@ -163,11 +168,12 @@ function queueRender() {
   requestAnimationFrame(() => { renderQueued = false; render(); });
 }
 addEventListener("popstate", (e) => {
+  if (ownNav) return; // our own go(), not a step back
   if (sheet && !(e.state && e.state.sheet)) { sheet = null; hideSheet(); return; }
   depth = Math.max(0, depth - 1);
   queueRender();
 });
-addEventListener("hashchange", queueRender);
+addEventListener("hashchange", () => { ownNav = false; queueRender(); });
 
 // ------------------------------------------------------------------ toast
 

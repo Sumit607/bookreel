@@ -118,6 +118,11 @@ try {
   await page.locator('[data-act="book"][data-id="the-art-of-war"]').tap();
   check(await visible("Start Chapter 1", 6000), "The Art of War opens");
   check(await nativeBack() === true && await waitFor(async () => (await route()) === "#/", 3000), "back from a book page returns to the library");
+  await page.locator('[data-act="book"][data-id="the-art-of-war"]').tap();
+  await page.locator('[data-act="start"]').tap();
+  check(await waitFor(async () => (await counter()) === 1, 6000), "reader opens from the book page");
+  check(await nativeBack() === true && await waitFor(async () => (await route()) === "#/book/the-art-of-war", 3000), "back from the reader returns to the book page");
+  check(await nativeBack() === true && await waitFor(async () => (await route()) === "#/", 3000), "and back again to the library");
   await page.locator('.bnav [data-nav="#/profile"]').tap();
   await page.locator('[data-act="how"]').tap();
   check(await page.locator("#sheet .sheet").isVisible(), "a sheet opens");

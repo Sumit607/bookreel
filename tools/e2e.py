@@ -408,9 +408,10 @@ def main():
     page.tap("document.querySelector('[data-act=start]')")
     check(page.wait(COUNTER + " >= 1", 10), "the next chapter opens from the book page")
     key(4)
-    check(page.wait("location.hash.startsWith('#/book/')", 5), "back from the reader goes to the book page")
+    check(page.wait("location.hash.startsWith('#/book/')", 5), f"back from the reader goes to the book page ({page.js('location.hash')})")
     key(4)
-    check(page.wait("location.hash === '' || location.hash === '#/'", 5), "back from the book page goes to the library")
+    check(page.wait("location.hash === '' || location.hash === '#/'", 5) and PKG in focused(),
+          f"back from the book page goes to the library ({page.js('location.hash')})")
     key(4)
     time.sleep(1.5)
     check(PKG not in focused(), "back on the library leaves the app")
