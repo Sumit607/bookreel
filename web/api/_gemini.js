@@ -154,23 +154,29 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
  * quota is gone is skipped until it resets. When every allowed model is used up, throws a 429 GeminiError with
  * daily = true and resetAt; a per-minute limit throws a 429 with retryAfter seconds.
  */
-async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000 }) {
+async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0 }) {
   if (kind) { tier = kind === "lite" ? "lite" : "best"; allowLite = allowLite || kind === "flash"; }
   const mock = process.env.GEMINI_MOCK === "1";
   const key = mock ? "mock" : cleanKey(process.env.GEMINI_API_KEY);
   if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
   const now = Date.now();
   const models = (await ladder({ tier, allowLite }, key)).filter((m) => !(quota && quota.exhausted && quota.exhausted[m] > now));
+  let busy = null;
   for (const model of models) {
+    const left = deadline ? deadline - Date.now() - 5000 : Infinity;
+    if (left < 30000) { busy = busy || new GeminiError("Gemini took too long to answer.", 504, 5); break; }
     try {
-      const r = mock ? await require("./_mock.js").generate({ model, system, prompt }) : await callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs });
+      const r = mock ? await require("./_mock.js").generate({ model, system, prompt }) : await callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs: Math.min(timeoutMs, left) });
       return { data: r.data, model, usage: r.usage || {} };
     } catch (e) {
       if (e.status === 429 && e.daily) { if (quota) await quota.mark(model, quotaReset()); continue; }
       if (e.skip) continue;
+      // Overloaded or slow: the next model in the ladder may well answer.
+      if (e.status === 503 || e.status === 500 || e.status === 504) { console.error("gemini", model, e.status, e.message); busy = e; continue; }
       throw e;
     }
   }
+  if (busy) throw busy;
   const err = new GeminiError("Today's free Gemini quota for the better models is used up.", 429, Math.ceil((quotaReset() - Date.now()) / 1000));
   err.daily = true;
   err.resetAt = quotaReset();

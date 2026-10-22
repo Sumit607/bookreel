@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     while (Date.now() - t0 < START_STEPS_FOR_MS) {
       const job = await rpc("claim", { lease: 290 });
       if (!job) break;
-      const patch = await runStep(job, quota, { canRetry: () => Date.now() - t0 < RETRY_UNTIL_MS });
+      const patch = await runStep(job, quota, { canRetry: () => Date.now() - t0 < RETRY_UNTIL_MS, deadline: t0 + 285000 });
       await rpc("save", { id: job.id, patch });
       done.push(`${job.stage}${job.n ? ` ${job.n}` : ""}: ${patch.status}${patch.wait_reason ? ` (${patch.wait_reason})` : ""}`);
       if (patch.status === "waiting" && patch.wait_reason === "quota") break;

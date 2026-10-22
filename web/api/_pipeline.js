@@ -13,14 +13,14 @@ function capWords(text, max) {
   return `${w.slice(0, head).join(" ")}\n\n[… part of the middle is left out …]\n\n${w.slice(w.length - (max - head)).join(" ")}`;
 }
 
-async function planStep(job, quota) {
+async function planStep(job, quota, deadline) {
   const parts = Array.isArray(job.parts) ? job.parts.map((p) => String(p || "")) : [];
   if (parts.length !== 20) throw Object.assign(new Error("The book was not cut into 20 parts."), { fatal: true });
   const total = parts.reduce((a, p) => a + F.words(p), 0);
   const trimmed = total > MAX_PLAN_WORDS ? parts.map((p) => capWords(p, Math.floor(MAX_PLAN_WORDS / 20))) : parts;
   const r = await generateJSON({
     tier: "best", allowLite: job.allow_lite, quota, system: F.PLAN_SYSTEM, schema: F.planSchema,
-    prompt: F.planPrompt({ title: job.title, authors: job.authors, parts: trimmed }), maxOutputTokens: 20000, temperature: 0.3, timeoutMs: 150000,
+    prompt: F.planPrompt({ title: job.title, authors: job.authors, parts: trimmed }), maxOutputTokens: 20000, temperature: 0.3, timeoutMs: 140000, deadline,
   });
   const plan = F.normalizePlan(r.data, 20);
   if (!plan.characters.length || plan.chapters.filter((c) => !c.summary).length > 4) throw new Error("The plan came back incomplete.");
@@ -30,7 +30,7 @@ async function planStep(job, quota) {
 /** Lower is better: problems that break the format count most, then quality notes. */
 const score = (got) => got.hard.length * 10 + got.notes.length;
 
-async function writeStep(job, quota, { canRetry }) {
+async function writeStep(job, quota, { canRetry, deadline }) {
   const n = job.n;
   const plan = job.plan;
   const ask = plan.loops.find((l) => l.askChapter === n) || null;
@@ -42,7 +42,7 @@ async function writeStep(job, quota, { canRetry }) {
   for (let attempt = 0; attempt < 2; attempt++) {
     const r = await generateJSON({
       tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: F.chapterSchema,
-      maxOutputTokens: 16384, temperature: 0.6, timeoutMs: 90000,
+      maxOutputTokens: 16384, temperature: 0.6, timeoutMs: 90000, deadline,
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
     });
     const got = F.normalizeChapter(r.data, ctx);
@@ -82,10 +82,10 @@ function finishStep(job) {
  * Runs the job's next step and returns what to save. Failures become a wait (quota, rate limit, busy) or,
  * after repeated errors, a failed job with a plain reason.
  */
-async function runStep(job, quota, { canRetry = () => true } = {}) {
+async function runStep(job, quota, { canRetry = () => true, deadline = 0 } = {}) {
   try {
-    if (job.stage === "plan") return await planStep(job, quota);
-    if (job.stage === "write") return await writeStep(job, quota, { canRetry });
+    if (job.stage === "plan") return await planStep(job, quota, deadline);
+    if (job.stage === "write") return await writeStep(job, quota, { canRetry, deadline });
     return finishStep(job);
   } catch (e) {
     const now = Date.now();
