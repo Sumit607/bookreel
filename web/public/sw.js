@@ -1,6 +1,6 @@
 // Offline support: the app shell is served from cache and refreshed in the background;
 // book packs and pages go to the network first and fall back to the cache when offline.
-const VERSION = "bookreel-c9a5d07701";
+const VERSION = "bookreel-37eba99753";
 const SHELL = [
   "/", "/app.css", "/js/app.js", "/js/cards.js", "/js/art.js", "/js/rules.js", "/js/util.js", "/js/discover.js", "/js/convert.js", "/js/store.js", "/manifest.webmanifest",
   "/fonts/display_black.woff2", "/fonts/display_extrabold.woff2", "/fonts/literata_regular.woff2", "/fonts/literata_italic.woff2",

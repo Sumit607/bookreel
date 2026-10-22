@@ -50,18 +50,19 @@ async function chapter(body) {
   const p = { ...planIn, characters: Array.isArray(body.plan && body.plan.characters) ? planIn.characters.map((c, i) => ({ ...c, color: body.plan.characters[i].color || c.color })) : planIn.characters };
   const ask = p.loops.find((l) => l.askChapter === n) || null;
   const payoff = p.loops.find((l) => l.payoffChapter === n) || null;
-  const ctx = { n, total: 20, plan: p.chapters[n - 1], characters: p.characters, ask, payoff };
+  const prevCliff = String(body.prevCliff || "").slice(0, 600);
+  const ctx = { n, total: 20, plan: p.chapters[n - 1], characters: p.characters, ask, payoff, prevCliff };
   const text = capWords(body.text, MAX_PART_WORDS);
   let retry = [], out = null, model = "";
   for (let attempt = 0; attempt < 2; attempt++) {
     const r = await generateJSON({
       kind: "lite", system: F.CHAPTER_SYSTEM, schema: F.chapterSchema, maxOutputTokens: 12000, temperature: 0.5, timeoutMs: 110000,
-      prompt: F.chapterPrompt({ title: body.title, authors: body.authors, plan: p, n, text, prevCliff: String(body.prevCliff || "").slice(0, 600), ask, payoff, retry }),
+      prompt: F.chapterPrompt({ title: body.title, authors: body.authors, plan: p, n, text, prevCliff, ask, payoff, retry }),
     });
-    model = r.model;
-    out = F.normalizeChapter(r.data, ctx);
+    const got = F.normalizeChapter(r.data, ctx);
+    if (!out || got.hard.length <= out.hard.length) { out = got; model = r.model; } // keep the better attempt
     if (!out.hard.length) break;
-    retry = out.hard;
+    retry = got.hard;
   }
   const posts = out.chapter.posts;
   const usable = posts.length === 10 && posts[0].type === "hook" && posts[9].type === "cliffhanger";

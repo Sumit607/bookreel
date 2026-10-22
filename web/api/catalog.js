@@ -22,15 +22,22 @@ function lines(s) {
 const oneLine = (s) => lines(s).join(" ");
 const cover = (id) => `${SITE}/cache/epub/${id}/pg${id}.cover.medium.jpg`;
 
-/** "Shelley, Mary Wollstonecraft, 1797-1851" → { name: "Mary Wollstonecraft Shelley", birth: 1797, death: 1851 } */
+/** "Shelley, Mary Wollstonecraft, 1797-1851" → { name: "Mary Wollstonecraft Shelley", birth: 1797, death: 1851 }.
+ *  Also "Sunzi, active 6th century B.C." → "Sunzi" and "Marcus Aurelius, Emperor of Rome, 121-180" → "Marcus Aurelius". */
 function person(raw) {
-  const s = raw.trim();
-  const years = s.match(/,\s*(\d{1,4})?\??\s*(BCE)?\s*-\s*(\d{1,4})?\??\s*(BCE)?\s*$/);
-  const base = (years ? s.slice(0, years.index) : s).replace(/\s*\([^)]*\)/g, "");
-  const parts = base.split(",").map((x) => x.trim()).filter(Boolean);
-  const name = parts.length === 2 ? `${parts[1]} ${parts[0]}` : base;
-  const year = (n, bce) => (n ? (bce ? -n : +n) : null);
-  return { name, birth: years ? year(years[1], years[2]) : null, death: years ? year(years[3], years[4]) : null };
+  let parts = raw.split(",").map((x) => x.replace(/\s*\([^)]*\)/g, "").trim()).filter(Boolean);
+  let birth = null, death = null;
+  const isDate = (x) => /\d|\bcentury\b|^active\b|^fl\.|^approximately\b|\bB\.?C\.?E?\b/i.test(x);
+  while (parts.length > 1 && isDate(parts[parts.length - 1])) {
+    const d = parts.pop().match(/^(\d{1,4})?\??\s*(BCE|B\.C\.)?\s*-\s*(\d{1,4})?\??\s*(BCE|B\.C\.)?$/i);
+    if (d && birth === null && death === null) {
+      birth = d[1] ? (d[2] ? -d[1] : +d[1]) : null;
+      death = d[3] ? (d[4] ? -d[3] : +d[3]) : null;
+    }
+  }
+  const title = parts.length === 2 && /\b(of|the|emperor|king|queen|saint|pope|earl|lord|lady|duke|baron)\b/i.test(parts[1]);
+  const name = parts.length === 2 && !title ? `${parts[1]} ${parts[0]}` : parts[0] || raw.trim();
+  return { name, birth, death };
 }
 
 async function get(url, fixture) {

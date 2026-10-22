@@ -18,7 +18,7 @@ function names(text) {
 }
 
 function plan(prompt) {
-  const parts = prompt.split(/=== PART \d+ OF \d+ ===\n/).slice(1);
+  const parts = prompt.split(/=== PART \d+ OF \d+[^\n]*===\n/).slice(1);
   const who = names(prompt);
   return {
     blurb: "A test book, planned by the stand-in writer.",
@@ -44,11 +44,11 @@ function chapter(prompt) {
     ask
       ? { type: "guess", t: "Your guess", label: "Your guess", q: "What is the secret?", options: [{ text: "Something old", feedback: "Hold that thought." }, { text: "Something new", feedback: "Hold that thought." }], reveal: "The answer comes later.", loopId: ask }
       : { type: "poll", t: "You decide", label: "You decide", q: "What would you do next?", options: [{ text: "Go on", feedback: "Brave." }, { text: "Turn back", feedback: "Careful." }], reveal: s[6] || s[0] },
-    { type: "scene", t: "Then", label: "Later", text: s[7] || s[0], theme: "night" },
-    { type: "idea", t: "The point", label: pay ? "The answer" : "The idea", head: "What it means", sub: s[8] || s[0], theme: "sodium", ...(pay ? { payoffLoopId: pay } : {}) },
+    { type: "scene", t: "Then", label: "Later", text: `${s[7] || s[0]} ${s[3] || ""}`.trim(), theme: "night" },
+    { type: "idea", t: "The point", label: pay ? "The answer" : "The idea", head: "What it means", sub: `${s[8] || s[0]}`, theme: "sodium", ...(pay ? { payoffLoopId: pay } : {}) },
     { type: "twist", t: "A turn", head: "Then everything changes.", text: s[9] || s[0], status: "Story · Turning" },
     { type: "list", t: "So far", style: "check", h: "Where things stand", items: [{ text: "Someone arrived", state: "ok" }, { text: "Something is wrong", state: "warn" }, { text: "Nobody is safe", state: "no" }], text: "" },
-    { type: "scene", t: "Meanwhile", label: "Elsewhere", text: s[10] || s[0], theme: "steel" },
+    { type: "scene", t: "Meanwhile", label: "Elsewhere", text: `${s[10] || s[0]} ${s[9] || ""}`.trim(), theme: "steel" },
     { type: "cliffhanger", t: "To be continued", text: s[11] || "And then the door opened." },
   ];
   return { title: `Part ${n}`, hook: s[0].slice(0, 120), recap: [s[0].slice(0, 90), (s[1] || s[0]).slice(0, 90), (s[2] || s[0]).slice(0, 90)], posts };

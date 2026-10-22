@@ -31,6 +31,8 @@ const PLAN_SYSTEM = `You plan Bookreel adaptations. Bookreel retells a whole boo
 You get the text of a public-domain book (or the reader's own file), already cut into 20 consecutive parts. Plan one Bookreel chapter per part, in the same order.
 Rules:
 - Be faithful. Never invent events, people, places or facts. Retell in your own words.
+- Chapter n covers PART n and nothing else. Title and summarise each chapter after what that part really contains; use the book's own chapter names only for a part that really is that chapter. A translator's or editor's preface or introduction is planned as what it is (who wrote it, what it tells).
+- Non-fiction (treatises, essays, history, science) works the same way: summary = the part's main ideas, examples and stories; characters = the author and the real people the text discusses; loops = questions the text itself answers later.
 - chapters: exactly 20, n = 1..20. title: 1-4 words, evocative, no numbers. hook: one line of at most 22 words that makes someone want to read that chapter, without giving away its ending. summary: 2-4 plain sentences of what actually happens in that part, with names.
 - characters: the 5-14 people (or animals, creatures) that matter most. id: one short lowercase ascii word, unique. name: as in the book. short: what posts call them (1-2 words). role: at most 6 words. bio: at most 35 words, no spoilers beyond their first chapter. traits: 2-3 tags of 1-3 words. firstChapter: the Bookreel chapter (1-20) where they first appear.
 - narrator: the id of the first-person narrator if the book is told in the first person, otherwise "".
@@ -39,6 +41,8 @@ Rules:
 
 const CHAPTER_SYSTEM = `You write one chapter of a Bookreel: a faithful retelling of one part of a book as exactly 10 short posts that someone swipes through on a phone.
 Write in plain, vivid English, mostly present tense, short sentences. Use your own words; quote at most a short famous line. Never invent events, people or facts that are not in the text you are given. Keep names exactly as in the character list.
+Who said what matters: a chat message must come from the person who says it (or clearly means it) in the text. Text in [square brackets] is notes by a translator or commentator; credit anything you take from a note to that note's author, never to the main author or another character. If the text has no real dialogue, use scenes, ideas, myths, lists or a poll instead of inventing a conversation.
+Non-fiction works the same way: posts 2-9 present this part's ideas, examples and stories in order, and a poll can ask what the reader would do in the author's situation.
 
 The 10 posts, in order:
 1. Post 1 is type "hook": kicker = place or time (at most 6 words), head = the punchy line (at most 14 words), sub = one more line (at most 22 words), art = one illustration key from the list below, artText = optional caption in CAPITALS (at most 4 words, or the two-part form the art needs).
@@ -47,7 +51,7 @@ The 10 posts, in order:
 Every post has t: a 1-4 word title. No post may be longer than 85 words in total.
 
 Post types and their fields:
-- scene: label (where/when, at most 6 words), h (optional 2-5 word heading), text (40-70 words), foot (optional short line), theme: "paper" (default), "night" (dark or night scenes), "steel", or "flash" (flashbacks).
+- scene: label (where/when, at most 6 words), h (optional 2-5 word heading), text (40-70 words; never a single line), foot (optional short line), theme: "paper" (default), "night" (dark or night scenes), "steel", or "flash" (flashbacks).
 - chat: label, msgs = 3-7 messages {who: a character id from the list, text: at most 25 words}. Paraphrase real dialogue from the text.
 - character: charId = a character id from the list. Use when someone important appears for the first time (at most one per chapter).
 - twist: head (at most 10 words), text (at most 50 words), status (like "Lucy · Missing", at most 5 words). For a sudden turn.
@@ -189,6 +193,13 @@ function speakerFor(who, chars, extra) {
   return k;
 }
 
+/** A myth post as a poll: "true or false?" with the truth as the reveal. */
+function mythAsPoll(p) {
+  return { type: "poll", t: p.t || "True or false?", label: "True or false?", q: trimWords(p.myth, 25), options: [
+    { text: "True", feedback: "That's the common belief, but the book says otherwise." }, { text: "False", feedback: "Right. Here's what the book actually says." },
+  ], reveal: str(p.truth, 400), hint: "Pick one to see what the book says." };
+}
+
 function asScene(p, why) {
   const text = [p.head, p.text, p.sub, p.q, p.reveal, p.truth, p.myth].map((x) => str(x, 600)).filter(Boolean).join(" ");
   return { type: "scene", t: str(p.t, 40) || "Meanwhile", label: str(p.label, 60) || "", text: trimWords(text || why || "…", 80), theme: "paper" };
@@ -303,7 +314,6 @@ function normalizeChapter(raw, ctx) {
   if (last && last.type !== "cliffhanger") hard.push("post 10 must be the cliffhanger");
   // interactive count: 1-2
   let inter = posts.filter((p) => INTERACTIVE.has(p.type));
-  if (inter.length === 0) hard.push("include 1 or 2 interactive posts (poll, guess or crossoff)");
   while (inter.length > 2) { const p = inter.pop(); posts[posts.indexOf(p)] = asScene(p); fixed.push("too many interactive posts"); }
   // a guess must exist where a loop opens; a payoff idea where one closes
   if (ctx.ask && !posts.some((p) => p.type === "guess")) {
@@ -321,6 +331,19 @@ function normalizeChapter(raw, ctx) {
       fixed.push(`reordered post ${i + 1}`);
     }
   }
+  // a chapter with no interactive post: a myth becomes a true-or-false poll
+  if (!posts.some((p) => INTERACTIVE.has(p.type))) {
+    const i = posts.findIndex((p, k) => p.type === "myth" && k > 0 && k < posts.length - 1 && posts[k - 1].type !== "poll" && (posts[k + 1] || {}).type !== "poll");
+    if (i > 0) { posts[i] = mythAsPoll(posts[i]); fixed.push("myth became a true-or-false poll"); }
+    else hard.push("include 1 or 2 interactive posts (poll, guess or crossoff)");
+  }
+  // thin posts: one-line scenes, ideas without a line under the head
+  posts.forEach((p, i) => {
+    if (p.type === "scene" && words(p.text) < 15) hard.push(`post ${i + 1} is a one-line scene; scenes need 40-70 words of text`);
+    if (p.type === "idea" && words(p.sub) < 6) hard.push(`post ${i + 1} (idea) needs a sub of 10-40 words`);
+  });
+  const cliff = posts[posts.length - 1];
+  if (ctx.prevCliff && cliff && cliff.type === "cliffhanger" && str(cliff.text).toLowerCase() === str(ctx.prevCliff).toLowerCase()) hard.push("post 10 repeats the previous chapter's cliffhanger; write a new one");
   // length limit
   posts.forEach((p) => {
     if (words(readingText(p)) <= 85) return;
@@ -341,9 +364,14 @@ function normalizeChapter(raw, ctx) {
 
 // ------------------------------------------------------------------ prompts with data
 
+/** The first words of a part, so the planner sees where each part begins. */
+function opening(text) {
+  return String(text || "").replace(/\s+/g, " ").trim().slice(0, 70).replace(/"/g, "'");
+}
+
 function planPrompt({ title, authors, parts }) {
   return `Book: ${title}${authors && authors.length ? ` by ${authors.join(", ")}` : ""}\n\n` +
-    parts.map((p, i) => `=== PART ${i + 1} OF ${parts.length} ===\n${p}`).join("\n\n");
+    parts.map((p, i) => `=== PART ${i + 1} OF ${parts.length} (starts: "${opening(p)}") ===\n${p}`).join("\n\n");
 }
 
 function chapterPrompt({ title, authors, plan, n, text, prevCliff, ask, payoff, retry }) {

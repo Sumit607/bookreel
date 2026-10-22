@@ -26,7 +26,8 @@ export const wordCount = (t) => (t.match(/\S+/g) || []).length;
 
 const HEAD = /^(chapter|letter|book|part|stave|canto|act|section|volume|epilogue|prologue)\b[\s.:—-]*([ivxlcdm]+|\d+|[a-z]+(-[a-z]+)?)?\b|^[IVXLC]{1,7}\.?$/i;
 
-/** Cuts a book into 20 consecutive parts of similar length, preferring the book's own chapter breaks. */
+/** Cuts a book into 20 consecutive parts of similar length, preferring the book's own chapter breaks.
+ *  A long preface or introduction (a translator's, say) gets at most 2 of the 20 parts, so it can't crowd out the book. */
 export function splitBook(text) {
   // A table of contents (a block of short heading lines) would confuse the cut points and the first hook: drop it.
   const isContents = (block) => {
@@ -42,12 +43,25 @@ export function splitBook(text) {
     for (const s of sentences) { cur += s; if (wordCount(cur) >= 150) { paras.push(cur.trim()); cur = ""; } }
     if (cur.trim()) paras.push(cur.trim());
   }
+  const heads = headings(paras);
+  const total = paras.reduce((a, p) => a + wordCount(p), 0);
+  const firstMain = heads.find((i) => MAIN.test(paras[i]));
+  if (firstMain > 0 && paras.slice(0, firstMain).some((p) => p.length <= 90 && FRONT.test(p))) {
+    const front = paras.slice(0, firstMain).reduce((a, p) => a + wordCount(p), 0);
+    if (front > total * 0.12) {
+      return [...cutInto(paras.slice(0, firstMain), 2), ...cutInto(paras.slice(firstMain), 18)];
+    }
+  }
+  return cutInto(paras, 20);
+}
+
+/** Main-text chapter headings (not "Preface"), and front-matter headings. */
+const MAIN = /^(chapter|book|part|stave|canto|letter)\b[\s.:—-]*(the\s+)?([ivxlcdm]+|\d+|one|first)\b|^[IVXLC]{1,7}\.?(\s|$)/i;
+const FRONT = /^(the\s+)?(preface|introduction|introductory|foreword|prefatory|translator|editor|biographical|a note|note on)/i;
+
+/** Indexes of paragraphs that are real headings: short heading-like lines followed by real text (skips a contents list). */
+function headings(paras) {
   const wc = paras.map(wordCount);
-  const cum = [0];
-  wc.forEach((w, i) => cum.push(cum[i] + w));
-  const total = cum[cum.length - 1];
-  const size = total / 20;
-  // real chapter headings: short lines that look like headings and are followed by real text (skips a contents list)
   const heads = [];
   paras.forEach((p, i) => {
     if (p.length > 90 || !HEAD.test(p)) return;
@@ -55,36 +69,54 @@ export function splitBook(text) {
     for (let j = i + 1; j < paras.length && !(paras[j].length <= 90 && HEAD.test(paras[j])); j++) after += wc[j];
     if (after >= 150) heads.push(i);
   });
-  const best = pickHeads(heads, cum, size, total);
-  if (best) return [0, ...best, paras.length].slice(0, 21).map((c, k, a) => (k < 20 ? paras.slice(c, a[k + 1]).join("\n\n") : null)).filter((x) => x !== null);
+  return heads;
+}
+
+/** Cuts paragraphs into n consecutive parts of similar length, at headings where they fall close to an even cut. */
+function cutInto(paras, n) {
+  if (n <= 1) return [paras.join("\n\n")];
+  if (paras.length < n) {
+    const out = paras.slice();
+    while (out.length < n) out.push(out[out.length - 1] || "");
+    return out;
+  }
+  const wc = paras.map(wordCount);
+  const cum = [0];
+  wc.forEach((w, i) => cum.push(cum[i] + w));
+  const total = cum[cum.length - 1];
+  const size = total / n;
+  const heads = headings(paras);
+  const best = pickHeads(heads, cum, size, total, n);
+  if (best) return [0, ...best, paras.length].slice(0, n + 1).map((c, k, a) => (k < n ? paras.slice(c, a[k + 1]).join("\n\n") : null)).filter((x) => x !== null);
   const cuts = [0];
-  for (let k = 1; k < 20; k++) {
+  for (let k = 1; k < n; k++) {
     const want = k * size;
     const last = cuts[cuts.length - 1];
-    const maxIdx = paras.length - (20 - k);
-    let best = -1;
-    for (const h of heads) if (h > last && h <= maxIdx && Math.abs(cum[h] - want) <= 0.35 * size && (best < 0 || Math.abs(cum[h] - want) < Math.abs(cum[best] - want))) best = h;
-    if (best < 0) {
-      best = last + 1;
-      while (best < maxIdx && cum[best] < want) best++;
+    const maxIdx = paras.length - (n - k);
+    let pick = -1;
+    for (const h of heads) if (h > last && h <= maxIdx && Math.abs(cum[h] - want) <= 0.35 * size && (pick < 0 || Math.abs(cum[h] - want) < Math.abs(cum[pick] - want))) pick = h;
+    if (pick < 0) {
+      pick = last + 1;
+      while (pick < maxIdx && cum[pick] < want) pick++;
     }
-    cuts.push(Math.min(Math.max(best, last + 1), maxIdx));
+    cuts.push(Math.min(Math.max(pick, last + 1), maxIdx));
   }
   cuts.push(paras.length);
   const parts = [];
-  for (let k = 0; k < 20; k++) parts.push(paras.slice(cuts[k], cuts[k + 1]).join("\n\n"));
+  for (let k = 0; k < n; k++) parts.push(paras.slice(cuts[k], cuts[k + 1]).join("\n\n"));
   return parts;
 }
 
-/** With 19+ real chapter headings, choose the 19 that cut the book into the most even parts (dynamic programming). */
-function pickHeads(heads, cum, size, total) {
+/** With n-1 or more real chapter headings, choose the n-1 that cut the text into the most even parts (dynamic programming). */
+function pickHeads(heads, cum, size, total, n = 20) {
   const H = heads.filter((h) => h > 0);
   const m = H.length;
-  if (m < 19) return null;
+  const cutsWanted = n - 1;
+  if (m < cutsWanted) return null;
   const sq = (x) => x * x;
   let prev = H.map((h) => sq(cum[h] - size));
   const back = [new Array(m).fill(-1)];
-  for (let k = 2; k <= 19; k++) {
+  for (let k = 2; k <= cutsWanted; k++) {
     const cur = new Array(m).fill(Infinity), bk = new Array(m).fill(-1);
     let best = Infinity, bestIdx = -1;
     for (let j = 0; j < m; j++) {
@@ -98,7 +130,7 @@ function pickHeads(heads, cum, size, total) {
   prev.forEach((c, i) => { const v = c + sq(total - cum[H[i]] - size); if (v < min) { min = v; j = i; } });
   if (j < 0) return null;
   const cuts = [];
-  for (let k = 19; k >= 1; k--) { cuts.unshift(H[j]); j = back[k - 1][j]; }
+  for (let k = cutsWanted; k >= 1; k--) { cuts.unshift(H[j]); j = back[k - 1][j]; }
   return cuts;
 }
 
