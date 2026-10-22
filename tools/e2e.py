@@ -75,12 +75,37 @@ def screen_size():
 
 
 def tap(x, y):
+    clear_anr()
     adb("shell", "input", "tap", str(int(x)), str(int(y)))
 
 
 def key(code):
+    clear_anr()
     adb("shell", "input", "keyevent", str(code))
     time.sleep(1)
+
+
+def focus_line():
+    m = re.search(r"mCurrentFocus=(.*)", adb("shell", "dumpsys", "window"))
+    return m.group(1) if m else ""
+
+
+def clear_anr():
+    """The emulator sometimes shows "Pixel Launcher isn't responding" over everything: choose Wait."""
+    for _ in range(3):
+        if "Not Responding" not in focus_line():
+            return
+        root = dump()
+        nodes = [(n.get("text", ""), bounds(n.get("bounds"))) for n in root.iter("node")] if root is not None else []
+        title = next((t for t, _ in nodes if "responding" in t), "a system dialog")
+        results["notes"].append(f"dismissed: {title}")
+        log(f"dismissing a system dialog: {title}")
+        b = next((b for t, b in nodes if t == "Wait" and b), None)
+        if b:
+            adb("shell", "input", "tap", str((b[0] + b[2]) // 2), str((b[1] + b[3]) // 2))
+        else:
+            adb("shell", "input", "keyevent", "4")
+        time.sleep(1.5)
 
 
 # ------------------------------------------------------------------ native screens (uiautomator)
@@ -120,6 +145,7 @@ def find_native(text, root=None):
 def wait_native(text, wait=20):
     end = time.time() + wait
     while time.time() < end:
+        clear_anr()
         b = find_native(text)
         if b:
             return b
@@ -128,8 +154,8 @@ def wait_native(text, wait=20):
 
 
 def focused():
-    out = adb("shell", "dumpsys", "window")
-    m = re.search(r"mCurrentFocus=Window\{[^}]*\s(\S+)\}", out)
+    clear_anr()
+    m = re.search(r"Window\{[^}]*\s(\S+)\}", focus_line())
     return m.group(1) if m else ""
 
 
@@ -259,16 +285,22 @@ def origin():
     """The WebView's top-left corner on screen, looked up once per start (it sits below the status bar)."""
     global ORIGIN
     if ORIGIN is None:
-        ORIGIN = webview_origin()
+        o = webview_origin()
+        if o == (0, 0):
+            return o  # not found this time (a dialog on top?): look again next time
+        ORIGIN = o
     return ORIGIN
 
 
 def cold_start():
     global ORIGIN
     ORIGIN = None
+    clear_anr()
     adb("shell", "am", "force-stop", PKG)
     time.sleep(1)
     out = adb("shell", "am", "start", "-W", "-n", ACT, timeout=90)
+    time.sleep(1)
+    clear_anr()
     m = re.search(r"TotalTime:\s*(\d+)", out)
     return int(m.group(1)) if m else None
 
@@ -339,6 +371,7 @@ def main():
     global W, H, ORIGIN
     adb("wait-for-device")
     W, H = screen_size()
+    adb("shell", "settings", "put", "global", "hide_error_dialogs", "1")  # fewer "isn't responding" dialogs
     online(True)
 
     had_old = install_old_native_app()
