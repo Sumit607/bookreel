@@ -256,7 +256,8 @@ export function convertScreen(id) {
   else if (st && st.status === "waiting" && st.wait_reason === "quota" && waitMs > 0) {
     foot = `${icon("clock", { size: 16 })} Paused: today’s free quota for Gemini’s best writer is used up. It resets at ${esc(new Date(st.wait_until).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }))} and the conversion carries on by itself.`;
     extra = `<button class="btn secondary wide" data-act="convert-lite" data-id="${id}">Finish now with Flash-Lite (simpler writing)</button>`;
-  } else if (st && st.status === "waiting" && waitMs > 0) foot = `${icon("clock", { size: 16 })} A short pause for Gemini’s limits, then it carries on. ${where}`;
+  } else if (st && st.status === "waiting" && st.wait_reason === "busy") foot = `${icon("clock", { size: 16 })} Google’s free Gemini models are busy right now. Bookreel keeps trying in the cloud. ${where}`;
+  else if (st && st.status === "waiting" && waitMs > 0) foot = `${icon("clock", { size: 16 })} A short pause for Gemini’s limits, then it carries on. ${where}`;
   else if (active) foot = `${icon("clock", { size: 16 })} About ${mins} minute${mins === 1 ? "" : "s"} left. ${where}`;
   else foot = "Not started yet.";
   const title = item.status === "ready" ? "MAKING IT AGAIN" : active ? "CONVERTING IN THE CLOUD" : failed ? "STOPPED" : "READY TO CONVERT";
