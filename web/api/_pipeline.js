@@ -22,7 +22,7 @@ async function planStep(job, quota, deadline) {
   const trimmed = total > MAX_PLAN_WORDS ? parts.map((p) => capWords(p, Math.floor(MAX_PLAN_WORDS / 20))) : parts;
   const r = await generateJSON({
     tier: "best", allowLite: job.allow_lite, quota, system: F.PLAN_SYSTEM, schema: F.planSchema,
-    prompt: F.planPrompt({ title: job.title, authors: job.authors, parts: trimmed }), maxOutputTokens: 20000, temperature: 0.3, timeoutMs: 140000, deadline, rotate: job.attempts || 0,
+    prompt: F.planPrompt({ title: job.title, authors: job.authors, parts: trimmed }), maxOutputTokens: 32768, temperature: 0.3, timeoutMs: 140000, deadline, rotate: job.attempts || 0,
   });
   const plan = F.normalizePlan(r.data, 20);
   if (!plan.characters.length || plan.chapters.filter((c) => !c.summary).length > 4) throw new Error("The plan came back incomplete.");
@@ -44,7 +44,7 @@ async function writeStep(job, quota, { canRetry, deadline }) {
   for (let attempt = 0; attempt < 2; attempt++) {
     const r = await generateJSON({
       tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: F.chapterSchema,
-      maxOutputTokens: 16384, temperature: 0.6, timeoutMs: 90000, deadline, rotate: job.attempts || 0,
+      maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0,
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
     });
     const got = F.normalizeChapter(r.data, ctx);

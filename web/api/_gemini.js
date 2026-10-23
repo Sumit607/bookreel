@@ -161,8 +161,16 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
     const data = JSON.parse(text);
     const cand = (data.candidates || [])[0] || {};
     const out = ((cand.content || {}).parts || []).filter((p) => !p.thought).map((p) => p.text || "").join("");
+    const usage = data.usageMetadata || {};
     if (!out) throw new GeminiError(`Gemini returned nothing (${cand.finishReason || "no reason given"}).`, 502, 5);
-    return { data: parseJson(out), usage: data.usageMetadata || {} };
+    try {
+      return { data: parseJson(out), usage };
+    } catch (e) {
+      // Usually the answer was cut off: thinking and the JSON share the output budget.
+      const why = `${cand.finishReason || "?"}, ${out.length} chars, ${usage.thoughtsTokenCount || 0} thinking tokens`;
+      console.error("gemini", model, "bad JSON", why, JSON.stringify(out.slice(-160)));
+      throw new GeminiError(`Gemini's answer was not complete JSON (${why}).`, 502, 5);
+    }
   }
   throw new GeminiError("Gemini rejected the request.", 502);
 }
