@@ -50,7 +50,7 @@ Rules:
 const SHARED_RULES = `You write one chapter of a Bookreel: one part of a book retold as exactly 10 short posts that someone swipes through on a phone. The reader should feel they are reading the best possible version of this part: vivid, specific and true to the book.
 Voice: plain, vivid English, mostly present tense, short sentences. Use your own words except for quotes. Every post carries something concrete: a name, a place, an object, a number, an example or the author's exact words. Never write vague praise or filler (${BANNED.slice(0, 12).join(", ")} and the like), never describe "the text" or "this part" from outside, never start two posts the same way.
 Faithful: never invent events, people, places, dialogue or facts that are not in the text you are given. Keep names exactly as in the character list.
-Quotes: a quote is copied word for word from THIS PART's text and put in curly quotes “like this”. Never put quote marks around your own paraphrase.
+Quotes: a quote is copied word for word from THIS PART's text and put in curly quotes “like this”. To leave words out of the middle, mark the cut with … (never cut silently). Never put quote marks around your own paraphrase.
 Who said what matters: a chat message must come from the person who says it (or clearly means it) in the text. Text in [square brackets] is notes by a translator or commentator; credit anything you take from a note to that note's author. If the text has no real dialogue, use other post types instead of inventing a conversation.`;
 
 const PLAYBOOK = {
@@ -433,6 +433,23 @@ function chapterPrompt({ title, authors, plan, n, text, prevCliff, ask, payoff, 
 /** Letters and digits only, for comparing a quote with the text it came from. */
 const flat = (s) => String(s || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
 
+/**
+ * Whether a quote is the author's own words. A quote may leave words out where it says so with "…" or "...":
+ * each piece must then be in the text, in order, and each piece of more than one word.
+ */
+function inText(q, source) {
+  const pieces = String(q).split(/\s*(?:\.{3}|…)\s*/).map(flat).filter(Boolean);
+  if (!pieces.length) return true;
+  if (pieces.length > 1 && pieces.some((x) => !x.includes(" "))) return false;
+  let at = 0;
+  for (const x of pieces) {
+    const i = source.indexOf(x, at);
+    if (i < 0) return false;
+    at = i + x.length;
+  }
+  return true;
+}
+
 /** The quoted passages in a post (“curly” or "straight" quotes of 4+ words). */
 function quotesIn(p) {
   const fields = [p.head, p.sub, p.text, p.truth, p.myth, p.reveal, p.foot, ...(p.msgs || []).map((m) => m.text), ...(p.items || []).map((i) => `${i.text} ${i.why || ""}`)];
@@ -464,11 +481,12 @@ function qualityNotes(chapter, { kind, text }) {
   const misquotes = [];
   if (text) {
     const source = flat(text);
-    for (const p of posts) for (const q of quotesIn(p)) if (!source.includes(flat(q))) misquotes.push({ post: p.id, quote: q });
+    for (const p of posts) for (const q of quotesIn(p)) if (!inText(q, source)) misquotes.push({ post: p.id, quote: q });
     if (misquotes.length) notes.push(`these are in quote marks but are not word for word in the text: ${misquotes.slice(0, 3).map((m) => `“${m.quote.slice(0, 60)}”`).join("; ")}. Copy quotes exactly, or drop the quote marks`);
   }
   if (kind === "ideas") {
-    const real = posts.reduce((a, p) => a + quotesIn(p).filter((q) => !text || flat(text).includes(flat(q))).length, 0);
+    const source = flat(text);
+    const real = posts.reduce((a, p) => a + quotesIn(p).filter((q) => !text || inText(q, source)).length, 0);
     if (real < 2) notes.push("quote the author's exact words from this part at least twice, in curly quotes");
     if (!posts.some((p) => /try it|in real life|today/i.test(`${p.label || ""} ${p.t || ""}`))) notes.push('add one post labelled "Try it today" that applies the idea to an ordinary modern moment');
   }
