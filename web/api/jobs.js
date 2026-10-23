@@ -10,7 +10,9 @@ const { send, readJson } = require("./_lib.js");
 const { rpc, configured } = require("./_store.js");
 const { MAX_PART_WORDS } = require("./_pipeline.js");
 
-const STEP_SECONDS = 40; // a chapter with a Flash model, including the pause the free tier needs
+// A chapter takes about 40 s when Gemini answers at once, but the free Flash models often say "high demand" first:
+// on the first live book a chapter took about 3.5 minutes on average, so estimates use that.
+const STEP_SECONDS = 210;
 
 function fromThisSite(req) {
   const origin = req.headers.origin;

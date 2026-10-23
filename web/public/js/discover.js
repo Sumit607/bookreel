@@ -332,7 +332,6 @@ export function sheetBody(s) {
   if (!item) return "";
   const notReady = status.ready === false;
   const bars = (n, cls) => `<div class="cv-bars">${Array.from({ length: n }, (_, i) => `<i class="${cls(i)}"></i>`).join("")}</div>`;
-  const minutes = Math.max(10, Math.round((21 * 40 + 60) / 60));
   const again = item.status === "ready";
   return `<div class="lbl muted">${again ? "MAKE IT AGAIN" : "MAKE IT A BOOKREEL"}</div><h2 class="s-title hl">${up(`${item.title.split(/[;:]/)[0]} in 20 chapters`)}</h2>
     ${again ? `<p>Your current Bookreel stays readable until the new one is ready, then the new one replaces it. Your reading progress is kept.</p>` : ""}
@@ -342,7 +341,7 @@ export function sheetBody(s) {
     <fieldset class="cv-mode"><legend class="lbl muted">When it’s ready</legend>
       <label class="${s.mode !== "daily" ? "on" : ""}"><input type="radio" name="cvmode" value="binge" ${s.mode !== "daily" ? "checked" : ""}> Read it all now</label>
       <label class="${s.mode === "daily" ? "on" : ""}"><input type="radio" name="cvmode" value="daily" ${s.mode === "daily" ? "checked" : ""}> One a day</label></fieldset>
-    <p class="cv-time">${icon("clock", { size: 16 })} About ${minutes}–${minutes + 10} minutes, in the cloud. You can close Bookreel while it works.</p>
+    <p class="cv-time">${icon("clock", { size: 16 })} Usually an hour or so, in the cloud; Google’s free Gemini allows about one book a day. You can close Bookreel while it works.</p>
     <p class="muted mono">The book is sent to Bookreel’s cloud and to Google’s Gemini, which writes the posts. The finished Bookreel comes back to this phone.</p>
     ${notReady ? `<div class="gb-err">Converting isn’t switched on yet: the Gemini key hasn’t been added.</div>` : ""}
     <button class="btn primary wide" data-act="convert-go" data-id="${esc(s.id)}" ${notReady ? "disabled" : ""}>Start converting</button>

@@ -200,7 +200,7 @@ export async function start(id, { allowLite = false } = {}) {
   if (!remaking) item.status = "converting";
   delete item.convert; // progress from the old in-app converter
   await store.putItem(item);
-  statuses.set(id, { id: r.id, item_id: id, status: "queued", stage: "plan", done: 0, has_plan: false, eta: 21 * 40 + 60, wait_until: new Date().toISOString() });
+  statuses.set(id, { id: r.id, item_id: id, status: "queued", stage: "plan", done: 0, has_plan: false, eta: 21 * 210 + 60, wait_until: new Date().toISOString() });
   emit();
   poll(1500);
 }
