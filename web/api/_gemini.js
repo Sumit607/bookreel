@@ -181,13 +181,15 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
  * quota is gone is skipped until it resets. When every allowed model is used up, throws a 429 GeminiError with
  * daily = true and resetAt; a per-minute limit throws a 429 with retryAfter seconds.
  */
-async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0, rotate = 0 }) {
+async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0, rotate = 0, prefer = "" }) {
   if (kind) { tier = kind === "lite" ? "lite" : "best"; allowLite = allowLite || kind === "flash"; }
   const mock = process.env.GEMINI_MOCK === "1";
   const key = mock ? "mock" : cleanKey(process.env.GEMINI_API_KEY);
   if (!key) throw new GeminiError("Conversion is not set up yet: the Gemini API key is missing.", 503);
   const now = Date.now();
   let models = (await ladder({ tier, allowLite }, key)).filter((m) => !(quota && quota.exhausted && quota.exhausted[m] > now));
+  // Start with the model that answered last time (it is evidently not overloaded), then the rest best first.
+  if (prefer && models.includes(prefer)) models = [prefer, ...models.filter((m) => m !== prefer)];
   // After a "busy" answer the next try starts with the next model, so retries spread over the models' daily allowances.
   if (rotate && models.length > 1) models = [...models.slice(rotate % models.length), ...models.slice(0, rotate % models.length)];
   let busy = null;

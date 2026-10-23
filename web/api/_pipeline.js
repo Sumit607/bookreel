@@ -7,6 +7,7 @@ const F = require("./_bookfmt.js");
 // Free-tier Gemini often answers very long requests with "high demand" while short ones go through.
 const MAX_PLAN_WORDS = 24000;
 const MAX_PART_WORDS = 30000;
+const BUSY_QUICK_TRIES = 5; // about the number of Flash models a free key can use
 
 function capWords(text, max) {
   const w = String(text || "").split(/\s+/);
@@ -46,7 +47,7 @@ async function writeStep(job, quota, { canRetry, deadline }) {
       // No response schema: with one, Gemini 3.x leaves out optional fields (a scene without its text, an idea
       // without its line). The system prompt and the example chapter define the shape instead.
       tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: null,
-      maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0,
+      maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0, prefer: (job.models || {}).write || (job.models || {}).plan || "",
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
     });
     const got = F.normalizeChapter(r.data, ctx);
@@ -104,7 +105,9 @@ async function runStep(job, quota, { canRetry = () => true, deadline = 0 } = {})
     if (e.status === 424 || e.fatal || attempts >= (busy ? 80 : 5)) {
       return { status: "failed", attempts, last_error: e.message || "Conversion failed.", wait_reason: null };
     }
-    const delay = busy ? Math.min(1200, 120 * 2 ** Math.min(attempts - 1, 3)) : 20 * attempts; // busy: 2, 4, 8, 16, 20 min
+    // Busy: each try goes to the next model in the ladder, and the models are busy separately, so the first few tries
+    // come a minute apart; once every model has said no, wait longer (4, 8, 16, then 20 min).
+    const delay = busy ? (attempts < BUSY_QUICK_TRIES ? 60 : Math.min(1200, 240 * 2 ** Math.min(attempts - BUSY_QUICK_TRIES, 3))) : 20 * attempts;
     return { status: "waiting", attempts, wait_until: new Date(now + delay * 1000).toISOString(), wait_reason: busy ? "busy" : "retry", last_error: e.message || "" };
   }
 }
