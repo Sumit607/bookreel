@@ -43,7 +43,9 @@ async function writeStep(job, quota, { canRetry, deadline }) {
   let best = null, retry = [];
   for (let attempt = 0; attempt < 2; attempt++) {
     const r = await generateJSON({
-      tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: F.chapterSchema,
+      // No response schema: with one, Gemini 3.x leaves out optional fields (a scene without its text, an idea
+      // without its line). The system prompt and the example chapter define the shape instead.
+      tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: null,
       maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0,
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
     });
@@ -56,8 +58,9 @@ async function writeStep(job, quota, { canRetry, deadline }) {
     retry = [...got.hard, ...got.notes];
   }
   const posts = best.chapter.posts;
-  if (!(posts.length === 10 && posts[0].type === "hook" && posts[9].type === "cliffhanger")) {
-    throw new Error(`Chapter ${n} did not come out right (${best.hard.join("; ")}).`);
+  if (!(posts.length === 10 && posts[0].type === "hook" && posts[9].type === "cliffhanger") || best.hard.length) {
+    // Never keep a chapter with empty or broken posts: the step is tried again a little later.
+    throw new Error(`Chapter ${n} did not come out right (${best.hard.slice(0, 3).join("; ")}).`);
   }
   const unquoted = F.unquoteMisquotes(best.chapter, best.misquotes);
   const extras = [...(job.extras || [])];

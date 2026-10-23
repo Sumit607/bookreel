@@ -86,7 +86,9 @@ Post types and their fields:
 Illustration keys for the hook (pick the closest mood; "stamp" if nothing fits):
 ${ART_KEYS.map((k) => `- ${k}: ${ART[k]}`).join("\n")}
 
-Also return: title (the planned chapter title), hook (the chapter's one-line teaser, at most 22 words), recap = exactly 3 lines of at most 16 words each that sum up the part.`;
+Also return: title (the planned chapter title), hook (the chapter's one-line teaser, at most 22 words), recap = exactly 3 lines of at most 16 words each that sum up the part.
+
+Answer with one JSON object and nothing else, shaped like the example chapter: {"title": "...", "hook": "...", "recap": ["...", "...", "..."], "posts": [10 objects, each with "type", "t" and every field its type needs, filled in]}.`;
 
 const CHAPTER_SYSTEM = { story: `${SHARED_RULES}\n\n${PLAYBOOK.story}\n\n${POST_SPEC}`, ideas: `${SHARED_RULES}\n\n${PLAYBOOK.ideas}\n\n${POST_SPEC}` };
 
@@ -217,6 +219,16 @@ function speakerFor(who, chars, extra) {
   return k;
 }
 
+/** A stamp caption from a title: whole words only, at most 14 characters. */
+function shortCaption(title) {
+  let out = "";
+  for (const w of String(title || "").toUpperCase().split(/\s+/).filter(Boolean)) {
+    if ((out ? out.length + 1 : 0) + w.length > 14) break;
+    out = out ? `${out} ${w}` : w;
+  }
+  return out || String(title || "").toUpperCase().slice(0, 14);
+}
+
 /** A myth post as a poll: "true or false?" with the truth as the reveal. */
 function mythAsPoll(p) {
   return { type: "poll", t: p.t || "True or false?", label: "True or false?", q: trimWords(p.myth, 25), options: [
@@ -239,7 +251,7 @@ function normalizePost(p, ctx) {
       const post = base("hook", { kicker: str(p.kicker, 60) || "Chapter " + ctx.n, head: str(p.head, 160) || ctx.plan.hook || ctx.plan.title, sub: str(p.sub, 220), art });
       const at = str(p.artText, 60).toUpperCase();
       if (at) post.artText = at;
-      else if (art === "stamp") post.artText = ctx.plan.title.toUpperCase().slice(0, 12);
+      else if (art === "stamp") post.artText = shortCaption(ctx.plan.title);
       return post;
     }
     case "scene": {
