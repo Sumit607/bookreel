@@ -120,13 +120,17 @@ async function pace(model) {
   lastCall.set(model, Date.now());
 }
 
-async function callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs }) {
+async function callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs, thinking = "" }) {
+  // thinking: "" leaves the model's default (MEDIUM on 3.x Flash); "low" makes it think less, so it answers sooner
+  // and never spends the whole output budget on thinking. Lite models think minimally anyway.
+  let think = /lite/.test(model) ? "" : thinking;
   const body = (withSchema) => JSON.stringify({
     systemInstruction: { parts: [{ text: system }] },
     contents: [{ role: "user", parts: [{ text: prompt }] }],
-    generationConfig: { responseMimeType: "application/json", ...(withSchema && schema ? { responseSchema: schema } : {}), temperature, maxOutputTokens },
+    generationConfig: { responseMimeType: "application/json", ...(withSchema && schema ? { responseSchema: schema } : {}), temperature, maxOutputTokens,
+      ...(think ? { thinkingConfig: { thinkingLevel: think } } : {}) },
   });
-  for (const withSchema of [true, false]) {
+  for (let withSchema = true, tries = 0; tries < 3; tries++) {
     await pace(model);
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), timeoutMs);
@@ -156,7 +160,12 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
       throw e;
     }
     if (res.status === 404) { const e = new GeminiError(`Model ${model} is not available.`, 404); e.skip = true; throw e; }
-    if (res.status === 400 && withSchema && /schema/i.test(text)) continue; // retry once without the schema
+    if (res.status === 400 && think && /thinking/i.test(text)) { // a model that does not take this setting
+      console.error("gemini", model, "refused thinkingLevel", think, text.slice(0, 160).replace(/\s+/g, " "));
+      think = "";
+      continue;
+    }
+    if (res.status === 400 && withSchema && schema && /schema/i.test(text)) { withSchema = false; continue; } // once without the schema
     if (!res.ok) throw new GeminiError(`Gemini error ${res.status}: ${text.slice(0, 200)}`, 502);
     const data = JSON.parse(text);
     const cand = (data.candidates || [])[0] || {};
@@ -181,7 +190,7 @@ async function callModel(model, key, { system, prompt, schema, maxOutputTokens, 
  * quota is gone is skipped until it resets. When every allowed model is used up, throws a 429 GeminiError with
  * daily = true and resetAt; a per-minute limit throws a 429 with retryAfter seconds.
  */
-async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0, rotate = 0, prefer = "" }) {
+async function generateJSON({ tier = "best", allowLite = false, quota = null, kind, system, prompt, schema, maxOutputTokens = 16384, temperature = 0.4, timeoutMs = 100000, deadline = 0, rotate = 0, prefer = "", thinking = "" }) {
   if (kind) { tier = kind === "lite" ? "lite" : "best"; allowLite = allowLite || kind === "flash"; }
   const mock = process.env.GEMINI_MOCK === "1";
   const key = mock ? "mock" : cleanKey(process.env.GEMINI_API_KEY);
@@ -197,7 +206,7 @@ async function generateJSON({ tier = "best", allowLite = false, quota = null, ki
     const left = deadline ? deadline - Date.now() - 5000 : Infinity;
     if (left < 30000) { busy = busy || new GeminiError("Gemini took too long to answer.", 504, 5); break; }
     try {
-      const r = mock ? await require("./_mock.js").generate({ model, system, prompt }) : await callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, timeoutMs: Math.min(timeoutMs, left) });
+      const r = mock ? await require("./_mock.js").generate({ model, system, prompt }) : await callModel(model, key, { system, prompt, schema, maxOutputTokens, temperature, thinking, timeoutMs: Math.min(timeoutMs, left) });
       return { data: r.data, model, usage: r.usage || {} };
     } catch (e) {
       if (e.status === 429 && e.daily) { if (quota) await quota.mark(model, quotaReset()); continue; }

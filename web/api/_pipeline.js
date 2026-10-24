@@ -48,6 +48,8 @@ async function writeStep(job, quota, { canRetry, deadline }) {
       // without its line). The system prompt and the example chapter define the shape instead.
       tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: null,
       maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0, prefer: (job.models || {}).write || (job.models || {}).plan || "",
+      // After a failed try (often a model that thought until it timed out or ran out of room), think less.
+      thinking: job.attempts ? "low" : "",
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
     });
     const got = F.normalizeChapter(r.data, ctx);
@@ -64,12 +66,13 @@ async function writeStep(job, quota, { canRetry, deadline }) {
     throw new Error(`Chapter ${n} did not come out right (${best.hard.slice(0, 3).join("; ")}).`);
   }
   const unquoted = F.unquoteMisquotes(best.chapter, best.misquotes);
+  const names = F.fixLowercaseNames(best.chapter, [...plan.characters, ...(job.extras || []), ...best.extra], text);
   const extras = [...(job.extras || [])];
   for (const c of best.extra) if (!extras.some((x) => x.id === c.id)) extras.push(c);
   const lite = /lite/.test(best.model);
   return {
     chapter: best.chapter, extras: best.extra.length ? extras : undefined, status: "queued", attempts: 0, wait_reason: null, last_error: null,
-    note: { n, model: best.model, notes: best.notes, fixed: best.fixed, unquoted },
+    note: { n, model: best.model, notes: best.notes, fixed: best.fixed, unquoted, ...(names ? { names } : {}) },
     models: { write: best.model, ...(lite ? { lite: true } : {}) },
   };
 }

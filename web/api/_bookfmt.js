@@ -507,6 +507,33 @@ function unquoteMisquotes(chapter, misquotes) {
   return n;
 }
 
+/**
+ * Gemini sometimes writes a character's id where it means the name ("marcus sits alone"). A lowercase id that is a
+ * word of that character's name is put back in capitals, unless the book itself uses that word in lowercase (an id
+ * like "mother" or "will"). Ids in who/charId fields are left alone. Returns how many words were fixed.
+ */
+function fixLowercaseNames(chapter, characters, text = "") {
+  const fixes = new Map();
+  for (const ch of characters || []) {
+    const id = String(ch.id || "");
+    if (!/^[a-z]{3,}$/.test(id)) continue;
+    const proper = `${ch.name || ""} ${ch.short || ""}`.split(/[^A-Za-z]+/).find((w) => w.toLowerCase() === id && /^[A-Z]/.test(w));
+    if (proper && !new RegExp(`\\b${id}\\b`).test(text)) fixes.set(id, proper);
+  }
+  if (!fixes.size) return 0;
+  const re = new RegExp(`\\b(${[...fixes.keys()].join("|")})\\b`, "g");
+  const keep = new Set(["type", "id", "who", "charId", "loopId", "payoffLoopId", "art", "theme", "style", "state"]);
+  let n = 0;
+  const walk = (v, key) => {
+    if (typeof v === "string") return keep.has(key) ? v : v.replace(re, (w) => (n++, fixes.get(w)));
+    if (Array.isArray(v)) return v.map((x) => walk(x, key));
+    if (v && typeof v === "object") { for (const k of Object.keys(v)) v[k] = walk(v[k], k); return v; }
+    return v;
+  };
+  walk(chapter, "");
+  return n;
+}
+
 // ------------------------------------------------------------------ book assembly (also used by the app)
 
 function coverFor(category, hash) {
@@ -556,5 +583,5 @@ function assemblePack({ itemId, title, authors, source, plan, chapters: written,
 module.exports = {
   ART_KEYS, TYPES, KINDS, PALETTE, PLAN_SYSTEM, CHAPTER_SYSTEM, planSchema, chapterSchema,
   normalizePlan, normalizeChapter, planPrompt, chapterPrompt, readingText, coverFor, words,
-  qualityNotes, unquoteMisquotes, assemblePack,
+  qualityNotes, unquoteMisquotes, fixLowercaseNames, assemblePack,
 };

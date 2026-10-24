@@ -100,7 +100,7 @@ check(await waitFor(async () => (await hash()).startsWith("#/convert/"), 10000),
 check(await visible("CONVERTING IN THE CLOUD", 10000), "converting screen says it runs in the cloud");
 check(await visible("You can close Bookreel", 10000), "and that the app can be closed");
 const t3 = Date.now();
-const progressed = await waitFor(async () => (await page.evaluate(() => { const s = window.__bookreel.discover.jobStatus("pg-${GID}"); return s ? s.done : 0; }).catch(() => 0)) >= 1 || (await page.locator(".conv-hook").count()) > 0, LIVE ? 10 * 60000 : 60000);
+const progressed = await waitFor(async () => (await page.evaluate((i) => { const s = window.__bookreel.discover.jobStatus(i); return s ? s.done : 0; }, `pg-${GID}`).catch(() => 0)) >= 1 || (await page.locator(".conv-hook").count()) > 0, LIVE ? 10 * 60000 : 60000);
 check(progressed, "chapters arrive while the app is open");
 await shot("07-converting");
 
