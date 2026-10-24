@@ -44,10 +44,11 @@ async function writeStep(job, quota, { canRetry, deadline }) {
   let best = null, retry = [];
   for (let attempt = 0; attempt < 2; attempt++) {
     const r = await generateJSON({
+      // 180 s: under load a Flash model can take over two minutes for a chapter; the worker's deadline still caps it.
       // No response schema: with one, Gemini 3.x leaves out optional fields (a scene without its text, an idea
       // without its line). The system prompt and the example chapter define the shape instead.
       tier: "best", allowLite: job.allow_lite, quota, system: F.CHAPTER_SYSTEM[plan.kind === "ideas" ? "ideas" : "story"], schema: null,
-      maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 120000, deadline, rotate: job.attempts || 0, prefer: (job.models || {}).write || (job.models || {}).plan || "",
+      maxOutputTokens: 32768, temperature: 0.6, timeoutMs: 180000, deadline, rotate: job.attempts || 0, prefer: (job.models || {}).write || (job.models || {}).plan || "",
       // After a failed try (often a model that thought until it timed out or ran out of room), think less.
       thinking: job.attempts ? "low" : "",
       prompt: F.chapterPrompt({ title: job.title, authors: job.authors, plan, n, text, prevCliff, ask, payoff, retry }),
